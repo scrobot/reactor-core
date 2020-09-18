@@ -94,7 +94,7 @@ public class FluxConcatArrayTest {
 		  .assertError(NullPointerException.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleSourceIsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -106,7 +106,7 @@ public class FluxConcatArrayTest {
 		  .assertError(NullPointerException.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scalarAndRangeBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -124,7 +124,7 @@ public class FluxConcatArrayTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorDelayed() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -168,7 +168,7 @@ public class FluxConcatArrayTest {
 		    .assertValues(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void pairWise() {
 		Flux<String> f = Flux.concat(Flux.just("test"), Flux.just("test2"))
 		                     .concatWith(Flux.just("test3"));
@@ -184,7 +184,7 @@ public class FluxConcatArrayTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void pairWise2() {
 		Flux<String> f = Mono.just("test")
 		                     .concatWith(Flux.just("test2"));
@@ -228,7 +228,7 @@ public class FluxConcatArrayTest {
 	                .verifyErrorMessage("test");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void startWith(){
 		StepVerifier.create(Flux.just(1, 2, 3).startWith(Arrays.asList(-1, 0)))
 		            .expectNext(-1, 0, 1, 2, 3)
@@ -236,7 +236,7 @@ public class FluxConcatArrayTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@org.junit.jupiter.api.Test
+	@Test
 	public void concatArrayDelayErrorWithFluxError() {
 		StepVerifier.create(
 				Flux.concatDelayError(
@@ -249,7 +249,7 @@ public class FluxConcatArrayTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@org.junit.jupiter.api.Test
+	@Test
 	public void concatArrayDelayErrorWithMonoError() {
 		StepVerifier.create(
 				Flux.concatDelayError(

@@ -158,7 +158,7 @@ public class FluxDoFirstTest {
 		assertThat(subRef.get().getClass()).isEqualTo(FluxHide.HideSubscriber.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void performsDirectSubscriberToSource_Fused() {
 		AtomicReference<Subscription> subRef = new AtomicReference<>();
 		Flux<Integer> test = Flux.just(1, 2)

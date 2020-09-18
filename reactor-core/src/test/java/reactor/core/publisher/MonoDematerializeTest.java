@@ -23,7 +23,7 @@ public class MonoDematerializeTest {
 
 	Signal<Integer> error = Signal.error(new RuntimeException("Forced failure"));
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleCompletion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -37,7 +37,7 @@ public class MonoDematerializeTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -51,7 +51,7 @@ public class MonoDematerializeTest {
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void immediateCompletion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -79,7 +79,7 @@ public class MonoDematerializeTest {
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void completeAfterSingleSignal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -99,7 +99,7 @@ public class MonoDematerializeTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorAfterSingleSignal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -113,7 +113,7 @@ public class MonoDematerializeTest {
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Disabled("use virtual time?")
 	public void neverEnding() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();

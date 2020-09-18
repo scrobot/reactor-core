@@ -77,7 +77,7 @@ public class EventLoopProcessorTest {
 		};
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMain() {
 		assertThat(test.scan(PARENT)).isNull();
 		assertThat(test.scan(TERMINATED)).isFalse();

@@ -88,7 +88,7 @@ public class Context1Test {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
@@ -112,14 +112,14 @@ public class Context1Test {
 		assertThat(c.getValue()).isEqualTo("A");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void setValue() throws Exception {
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(() -> c.setValue("BOOM"))
 				.withMessage("Does not support in-place update");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void string() throws Exception {
 		assertThat(c.toString()).isEqualTo("Context1{1=A}");
 	}
@@ -155,7 +155,7 @@ public class Context1Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 

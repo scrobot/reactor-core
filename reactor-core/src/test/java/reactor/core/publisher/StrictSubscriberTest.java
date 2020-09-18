@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StrictSubscriberTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void requestDelayed() {
 		AtomicBoolean state = new AtomicBoolean();
 		AtomicReference<Throwable> e = new AtomicReference<>();
@@ -139,7 +139,7 @@ public class StrictSubscriberTest {
 		Assert.assertFalse("Request delayed!", state.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cancelNotDelayed() {
 		AtomicBoolean state1 = new AtomicBoolean();
 		AtomicBoolean state2 = new AtomicBoolean();
@@ -174,7 +174,7 @@ public class StrictSubscriberTest {
 		Assert.assertFalse("Cancel executed before onSubscribe finished", state2.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanPostOnSubscribeSubscriber() {
 		CoreSubscriber<String> s = new LambdaSubscriber<>(null, null, null, null);
 		StrictSubscriber<String> test = new StrictSubscriber<>(s);

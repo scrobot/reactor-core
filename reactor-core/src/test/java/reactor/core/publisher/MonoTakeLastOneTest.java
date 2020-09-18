@@ -36,7 +36,7 @@ public class MonoTakeLastOneTest {
 		                                                    .hasMessage("Flux#last() didn't observe any onNext signal"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyCallableThrowsNoSuchElement() {
 		StepVerifier.create(Flux.empty()
 		                        .last())
@@ -125,7 +125,7 @@ public class MonoTakeLastOneTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void defaultUsingZip() {
 
 		UnicastProcessor<String> processor1 = UnicastProcessor.create();
@@ -153,7 +153,7 @@ public class MonoTakeLastOneTest {
 				.verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanTakeLastOneSubscriber() {
 		CoreSubscriber<String>
 				actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);

@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxDelaySequenceTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void delayFirstInterval() {
 		Supplier<Flux<Tuple2<Long, Long>>> test = () -> Flux.interval(Duration.ofMillis(50))
 	                                                    .delaySequence(Duration.ofMillis(500))
@@ -143,7 +143,7 @@ public class FluxDelaySequenceTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyErrorErrorsImmediately() {
 		Flux<Long> source = Flux.error(new IllegalStateException("boom"));
 
@@ -187,7 +187,7 @@ public class FluxDelaySequenceTest {
 		assertThat(subscriber.timeUnit).isSameAs(TimeUnit.MILLISECONDS);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void smallDelayInNanos() {
 		Duration longDelay = Duration.ofMillis(59_999);
 		long expected = longDelay.toNanos();
@@ -198,7 +198,7 @@ public class FluxDelaySequenceTest {
 		assertThat(subscriber.timeUnit).isSameAs(TimeUnit.NANOSECONDS);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextAfterCompleteDrops() {
 		TestPublisher<String> testPublisher = TestPublisher.createNoncompliant(
 				TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -214,7 +214,7 @@ public class FluxDelaySequenceTest {
 		            .hasNotDroppedErrors();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextAfterErrorDrops() {
 		TestPublisher<String> testPublisher = TestPublisher.createNoncompliant(
 				TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -246,7 +246,7 @@ public class FluxDelaySequenceTest {
 		            .hasNotDroppedErrors();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onErrorAfterCompleteDrops() {
 		TestPublisher<String> testPublisher = TestPublisher.createNoncompliant(
 				TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -262,14 +262,14 @@ public class FluxDelaySequenceTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		FluxDelaySequence<String> test = new FluxDelaySequence<>(Flux.empty(), Duration.ofSeconds(1), Schedulers.immediate());
 
 		assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.immediate());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriber() {
 		Scheduler.Worker worker = Schedulers.immediate().createWorker();
 

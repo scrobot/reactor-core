@@ -26,19 +26,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoRetryTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sourceNull() {
 		assertThrows(NullPointerException.class, () ->
 				new MonoRetry<>(null, 1));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void timesInvalid() {
 		assertThrows(IllegalArgumentException.class, () ->
 				Mono.never().retry(-1));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void zeroRetryNoError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -51,7 +51,7 @@ public class MonoRetryTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void zeroRetry() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -84,7 +84,7 @@ public class MonoRetryTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void retryInfinite() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 		AtomicInteger i = new AtomicInteger();
@@ -103,7 +103,7 @@ public class MonoRetryTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void doOnNextFails() {
 		Mono.just(1)
 		    .doOnNext(new Consumer<Integer>() {

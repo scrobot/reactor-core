@@ -25,7 +25,7 @@ public class Tuple6Test {
 	private Tuple6<Integer, Integer, Integer, Integer, Integer, Integer> full =
 			new Tuple6<>(1, 2, 3, 4, 5, 6);
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nullT6Rejected() {
 		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Tuple6<>(1, 2, 3, 4, 5, null))
@@ -71,7 +71,7 @@ public class Tuple6Test {
 				                  base.getT5(), base.getT6());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT4() {
 		Tuple6<Integer, Integer, Integer, String, Integer, Integer> base =
 				Tuples.of(100, 200, 300, "Foo", 500, 600);
@@ -128,7 +128,7 @@ public class Tuple6Test {
 		assertThat(full.get(10)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getAllValuesCorrespondToArray() {
 		Object[] array = full.toArray();
 
@@ -143,7 +143,7 @@ public class Tuple6Test {
 		assertThat(full).isEqualTo(full);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void equalityOfNullOrWrongClass() {
 		assertThat(full).isNotEqualTo(null)
 		                .isNotEqualTo("foo");

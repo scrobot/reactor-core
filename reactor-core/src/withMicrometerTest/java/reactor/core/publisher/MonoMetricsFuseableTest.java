@@ -60,7 +60,7 @@ public class MonoMetricsFuseableTest {
 
 	// === Fuseable-specific tests ===
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void queueClearEmptySizeDelegates() {
 		AssertSubscriber<Integer> testSubscriber = AssertSubscriber.create();
 		MicrometerMonoMetricsFuseableSubscriber<Integer> fuseableSubscriber =
@@ -82,7 +82,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(fuseableSubscriber.size()).as("size after clear").isEqualTo(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void queueClearEmptySizeWhenQueueSubscriptionNull() {
 		AssertSubscriber<Integer> testSubscriber = AssertSubscriber.create();
 		MicrometerMonoMetricsFuseableSubscriber<Integer> fuseableSubscriber =
@@ -126,7 +126,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(nextTimer).as("no onNext delay meter for Mono").isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void queuePollSyncTracksOnComplete() {
 		//prepare registry with mock clock
 		MockClock clock = new MockClock();
@@ -162,7 +162,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(terminationTimer.max(TimeUnit.MILLISECONDS)).as("terminate max delay").isEqualTo(323);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void queuePollError() {
 		//prepare registry with mock clock
 		MockClock clock = new MockClock();
@@ -231,7 +231,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(subRef.get()).isInstanceOf(MicrometerMonoMetricsFuseableSubscriber.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void splitMetricsOnNameFuseable() {
 		final Mono<Integer> unnamedSource = Mono.just(0).map(v -> 100 / v);
 		final Mono<Integer> namedSource = Mono.just(0).map(v -> 100 / v)

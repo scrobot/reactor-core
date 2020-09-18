@@ -72,7 +72,7 @@ public class FizzBuzzTests extends AbstractReactorTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void indexBugTest() throws InterruptedException {
 		int numOfItems = 20;
 

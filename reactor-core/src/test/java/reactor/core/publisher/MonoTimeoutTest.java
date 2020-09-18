@@ -90,7 +90,7 @@ public class MonoTimeoutTest {
 		return Mono.<Integer>never().timeout(Duration.ofMillis(500), Mono.just(-5));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void timeoutCanBeBoundWithCallback() {
 		StepVerifier.withVirtualTime(this::scenario_timeoutCanBeBoundWithCallback)
 		            .thenAwait(Duration.ofMillis(500))
@@ -123,7 +123,7 @@ public class MonoTimeoutTest {
 		            .verifyError(TimeoutException.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void timeoutDurationMessageDefault() {
 		StepVerifier.withVirtualTime(() -> Mono.never()
 		                                       .timeout(Duration.ofHours(1)))

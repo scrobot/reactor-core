@@ -62,7 +62,7 @@ public class BlockingOptionalMonoSubscriberTest {
 		assertThat(result).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void optionalError() {
 		Mono<String> source = Mono.error(new IllegalStateException("boom"));
 		assertThatExceptionOfType(IllegalStateException.class)
@@ -70,7 +70,7 @@ public class BlockingOptionalMonoSubscriberTest {
 				.withMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void timeoutOptionalValued() {
 		Optional<String> result = Mono.just("foo")
 		                              .blockOptional(Duration.ofMillis(500));

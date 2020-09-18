@@ -25,7 +25,7 @@ public class FluxGroupByLoop {
 
 	final FluxGroupByTest groupByTest = new FluxGroupByTest();
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void twoGroupsLongAsyncMergeHiddenLoop() {
 		for (int i = 0; i < 100; i++) {
 			groupByTest.twoGroupsLongAsyncMergeHidden();

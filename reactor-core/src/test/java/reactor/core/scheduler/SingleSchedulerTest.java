@@ -45,7 +45,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 		return true;
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void smokeTestDelay() {
 		for (int i = 0; i < 20; i++) {
 			Scheduler s = Schedulers.newSingle("test");
@@ -78,7 +78,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void smokeTestInterval() {
 		Scheduler s = Schedulers.newSingle("test");
 
@@ -98,7 +98,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lotsOfTasks() throws Exception {
 	    System.gc();
 	    Thread.sleep(200);
@@ -130,7 +130,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanName() {
 		Scheduler withNamedFactory = Schedulers.newSingle("scanName");
 		Scheduler withBasicFactory = Schedulers.newSingle(Thread::new);

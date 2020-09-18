@@ -49,7 +49,7 @@ public class FluxWindowBoundaryTest {
 		                     .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		AssertSubscriber<Flux<Integer>> ts = AssertSubscriber.create();
 
@@ -276,7 +276,7 @@ public class FluxWindowBoundaryTest {
 		Assertions.assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanOtherSubscriber() {
         CoreSubscriber<Flux<Integer>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxWindowBoundary.WindowBoundaryMain<Integer, Integer> main = new FluxWindowBoundary.WindowBoundaryMain<>(actual,

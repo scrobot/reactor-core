@@ -48,7 +48,7 @@ public class MonoSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableThrows() {
 		StepVerifier.create(Mono.fromCallable(() -> {
 			throw new IOException("forced failure");
@@ -65,7 +65,7 @@ public class MonoSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableNullBackpressured() {
 		StepVerifier.create(
 				Mono.fromCallable(() -> null).subscribeOn(Schedulers.single()), 0)
@@ -74,7 +74,7 @@ public class MonoSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		MonoSubscribeOnCallable<String> test = new MonoSubscribeOnCallable<>(() -> "foo", Schedulers.immediate());
 

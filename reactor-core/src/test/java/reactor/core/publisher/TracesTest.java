@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TracesTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_reactor() {
 		String stack = "\treactor.core.publisher.Flux.filter(Flux.java:4209)\n" +
 				"\treactor.core.ScannableTest.operatorChainWithDebugMode(ScannableTest.java:542)\n";
@@ -47,7 +47,7 @@ public class TracesTest {
 				.isEqualTo("Flux.filter ⇢ reactor.core.ScannableTest.operatorChainWithDebugMode(ScannableTest.java:542)");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_reactorApiOnly() {
 		String stack = "\treactor.core.publisher.Flux.filter(Flux.java:4209)\n" +
 				"\treactor.core.publisher.Flux.map(Flux.java:4209)\n";
@@ -69,7 +69,7 @@ public class TracesTest {
 				.isEqualTo("Flux.delayElements ⇢ reactor.core.ScannableTest.operatorChainWithDebugMode(ScannableTest.java:543)");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_userCodeOnly() {
 		String stack = "\treactor.core.notPublisher.Flux.filter(Flux.java:4209)\n" +
 				"\treactor.core.ScannableTest.operatorChainWithDebugMode(ScannableTest.java:542)\n";
@@ -78,7 +78,7 @@ public class TracesTest {
 				.isEqualTo("reactor.core.notPublisher.Flux.filter(Flux.java:4209)");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_reactorTest() {
 		String stack = "\treactor.core.publisher.Flux.concatMap(Flux.java:3071)\n"
 				+ "\treactor.core.publisher.Flux.concatMap(Flux.java:3036)\n"
@@ -90,7 +90,7 @@ public class TracesTest {
 				.isEqualTo("Flux.delayUntil ⇢ reactor.core.publisher.FluxTest.delayElements(FluxTest.java:22)");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_empty() {
 		String stack = "\t\n";
 
@@ -106,7 +106,7 @@ public class TracesTest {
 				.isEqualTo("Flux.concatMap(Flux.java:3071)");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_singleIsUserCode() {
 		String stack = "\treactor.notcore.publisher.Flux.concatMap(Flux.java:3071)\n";
 
@@ -114,7 +114,7 @@ public class TracesTest {
 				.isEqualTo("reactor.notcore.publisher.Flux.concatMap(Flux.java:3071)");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_severalEmptyThenValued() {
 		String stack = "    "
 				+ "\n"
@@ -129,7 +129,7 @@ public class TracesTest {
 				.isEqualTo("reactor.foo.Bar.baz3(Bar.java:789)");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void extractOperatorLine_severalEmptyThenSeveralValues() {
 		String stack = "    "
 				+ "\n"

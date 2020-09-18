@@ -63,7 +63,7 @@ public class ParallelCollectTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void failInitial() {
 		Supplier<List<Integer>> as = () -> {
 			throw new RuntimeException("test");
@@ -75,7 +75,7 @@ public class ParallelCollectTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void failCombination() {
 		StepVerifier.create(Flux.range(1, 10)
 		                        .parallel(3)
@@ -103,7 +103,7 @@ public class ParallelCollectTest {
 				.isEqualTo(source.parallelism());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelCollect<Integer, List<Integer>> test = new ParallelCollect<>(source, ArrayList::new, List::add);
@@ -112,7 +112,7 @@ public class ParallelCollectTest {
 		assertThat(test.scan(Scannable.Attr.PREFETCH)).isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriber() {
 		CoreSubscriber<List<Integer>> subscriber = new LambdaSubscriber<>(null, e -> {}, null, null);
 		ParallelCollectSubscriber<Integer, List<Integer>> test = new ParallelCollectSubscriber<>(

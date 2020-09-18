@@ -26,7 +26,7 @@ public class Tuple3Test {
 
 	private Tuple3<Integer, Integer, Integer> full = new Tuple3<>(1, 2, 3);
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nullT3Rejected() {
 		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Tuple3<>(1, 2, null))
@@ -55,7 +55,7 @@ public class Tuple3Test {
 		                  .containsExactly(base.getT1(), 3, base.getT3());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT3() {
 		Tuple3<Integer, Integer, String> base = Tuples.of(100, 200, "Foo");
 
@@ -66,7 +66,7 @@ public class Tuple3Test {
 		                  .containsExactly(base.getT1(), base.getT2(), 3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT3Null() {
 		assertThatNullPointerException().isThrownBy(() ->
 				Tuples.of(1, 2, 3)
@@ -74,12 +74,12 @@ public class Tuple3Test {
 		).withMessage("t3");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getNegativeIndex() {
 		assertThat(full.get(-1)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getTooLargeIndex() {
 		assertThat(full.get(10)).isNull();
 	}

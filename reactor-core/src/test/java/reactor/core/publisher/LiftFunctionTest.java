@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class LiftFunctionTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftMono() {
 		Mono<Integer> source = Mono.just(1)
 		                           .hide();
@@ -49,7 +49,7 @@ public class LiftFunctionTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftFlux() {
 		Flux<Integer> source = Flux.just(1)
 		                           .hide();
@@ -66,7 +66,7 @@ public class LiftFunctionTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftParallelFlux() {
 		ParallelFlux<Integer> source = Flux.just(1)
 		                                   .parallel(2)
@@ -102,7 +102,7 @@ public class LiftFunctionTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1860
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftConnectableFluxWithCancelSupport() {
 		AtomicBoolean cancelSupportInvoked = new AtomicBoolean();
 
@@ -123,7 +123,7 @@ public class LiftFunctionTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1860
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftConnectableLiftFuseableWithCancelSupport() {
 		AtomicBoolean cancelSupportInvoked = new AtomicBoolean();
 
@@ -144,7 +144,7 @@ public class LiftFunctionTest {
 	}
 
 	@Disabled("GroupedFlux is always fuseable for now")
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftGroupedFlux() {
 		Flux<GroupedFlux<String, Integer>> sourceGroups = Flux
 				.just(1)
@@ -160,7 +160,7 @@ public class LiftFunctionTest {
 		            .blockLast();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftMonoFuseable() {
 		Mono<Integer> source = Mono.just(1);
 
@@ -177,7 +177,7 @@ public class LiftFunctionTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftFluxFuseable() {
 		Flux<Integer> source = Flux.just(1);
 
@@ -194,7 +194,7 @@ public class LiftFunctionTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftParallelFluxFuseable() {
 		ParallelFlux<List<Integer>> source = Flux
 				.just(1)
@@ -213,7 +213,7 @@ public class LiftFunctionTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftConnectableFluxFuseable() {
 		ConnectableFlux<Integer> source = Flux.just(1)
 		                                      .publish()
@@ -232,7 +232,7 @@ public class LiftFunctionTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void liftGroupedFluxFuseable() {
 		Flux<GroupedFlux<String, Integer>> sourceGroups = Flux
 				.just(1)

@@ -144,7 +144,7 @@ public class FluxSampleFirstTest {
 		Assert.assertFalse("sp1 has subscribers?", sp1.hasDownstreams());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void throttlerReturnsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -197,7 +197,7 @@ public class FluxSampleFirstTest {
         Assertions.assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanOtherSubscriber() {
 		CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxSampleFirst.SampleFirstMain<Integer, Integer> main =

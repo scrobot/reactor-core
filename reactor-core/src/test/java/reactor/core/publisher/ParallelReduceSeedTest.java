@@ -56,7 +56,7 @@ public class ParallelReduceSeedTest extends ParallelOperatorTest<String, String>
 		);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void collectAsyncFused() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 		Scheduler scheduler = Schedulers.newParallel("test", 3);
@@ -76,7 +76,7 @@ public class ParallelReduceSeedTest extends ParallelOperatorTest<String, String>
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void collectAsync() {
 		Scheduler s = Schedulers.newParallel("test", 3);
 		Supplier<List<Integer>> as = () -> new ArrayList<>();
@@ -222,7 +222,7 @@ public class ParallelReduceSeedTest extends ParallelOperatorTest<String, String>
 		            .verifyErrorMessage("test");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testPrefetch() {
 		assertThat(Flux.range(1, 10)
 		               .parallel(3)
@@ -230,7 +230,7 @@ public class ParallelReduceSeedTest extends ParallelOperatorTest<String, String>
 		               .getPrefetch()).isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelism() {
 		ParallelFlux<Integer> source = Flux.just(500, 300).parallel(10);
 		ParallelReduceSeed<Integer, String> test = new ParallelReduceSeed<>(source, () -> "", (s, i) -> s + i);

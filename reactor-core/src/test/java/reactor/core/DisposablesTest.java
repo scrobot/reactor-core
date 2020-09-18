@@ -36,14 +36,14 @@ public class DisposablesTest {
 		                      .get()).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void compositeEmpty() {
 		Disposable.Composite cd = Disposables.composite();
 		assertThat(cd.size()).isZero();
 		assertThat(cd.isDisposed()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void compositeFromArray() {
 		Disposable d1 = new FakeDisposable();
 		Disposable d2 = new FakeDisposable();
@@ -53,7 +53,7 @@ public class DisposablesTest {
 		assertThat(cd.isDisposed()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void compositeFromCollection() {
 		Disposable d1 = new FakeDisposable();
 		Disposable d2 = new FakeDisposable();
@@ -86,7 +86,7 @@ public class DisposablesTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singletonIsDisposed() {
 		assertThat(Disposables.DISPOSED.isDisposed()).isTrue();
 		Disposables.DISPOSED.dispose();
@@ -94,7 +94,7 @@ public class DisposablesTest {
 		assertThat(Disposables.DISPOSED).isNotSameAs(Disposables.disposed());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void disposeRace() {
 		for (int i = 0; i < 500; i++) {
 
@@ -109,7 +109,7 @@ public class DisposablesTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void setReplace() {
 		for (int i = 0; i < 500; i++) {
 
@@ -124,7 +124,7 @@ public class DisposablesTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void setRace() {
 		for (int i = 0; i < 500; i++) {
 			TestDisposable r = new TestDisposable() {
@@ -138,7 +138,7 @@ public class DisposablesTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void setReplaceNull() {
 		TestDisposable r = new TestDisposable();
 
@@ -148,7 +148,7 @@ public class DisposablesTest {
 		assertThat(Disposables.replace(DISPOSABLE_UPDATER, r, null)).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void dispose() {
 		Disposable u = Disposables.single();
 		TestDisposable r = new TestDisposable(u);

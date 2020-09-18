@@ -154,7 +154,7 @@ public class SignalTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void subscribeStateWithContext(){
 		Context context = Context.of("foo", "bar");
 		Signal<Integer> s = Signal.subscribe(Operators.emptySubscription(), context);
@@ -188,7 +188,7 @@ public class SignalTest {
 		            .thenCancel()
 		            .verify();
 	}
-	@org.junit.jupiter.api.Test
+	@Test
 	public void completeState(){
 		Signal<Integer> s = Signal.complete();
 
@@ -289,7 +289,7 @@ public class SignalTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void subscribeState(){
 		Signal<Integer> s = Signal.subscribe(Operators.emptySubscription());
 
@@ -355,7 +355,7 @@ public class SignalTest {
 		})).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void equalsIgnoresContext() {
 		Signal<String> next1 = Signal.next("foo");
 		Signal<String> next2 = Signal.next("foo", Context.of("bar", "baz"));

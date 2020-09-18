@@ -122,7 +122,7 @@ public class FluxWithLatestFromTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void combinerReturnsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 

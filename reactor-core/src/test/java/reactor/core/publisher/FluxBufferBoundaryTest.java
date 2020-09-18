@@ -215,7 +215,7 @@ public class FluxBufferBoundaryTest
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferSupplierThrows() {
 		AssertSubscriber<List<Integer>> ts = AssertSubscriber.create();
 
@@ -308,7 +308,7 @@ public class FluxBufferBoundaryTest
 		           .buffer(Duration.ofMillis(200));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferWillSubdivideAnInputFluxTime2() {
 		StepVerifier.withVirtualTime(this::scenario_bufferWillSubdivideAnInputFluxTime2)
 		            .thenAwait(Duration.ofSeconds(10))
@@ -358,7 +358,7 @@ public class FluxBufferBoundaryTest
 		assertThat(ranges).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxEmptyBuffer() {
 //		"flux empty buffer"
 //		when:
@@ -429,7 +429,7 @@ public class FluxBufferBoundaryTest
 		assertThat(test.scan(Scannable.Attr.REQUESTED_FROM_DOWNSTREAM)).isEqualTo(2L);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnCancel() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatWith(Mono.never())

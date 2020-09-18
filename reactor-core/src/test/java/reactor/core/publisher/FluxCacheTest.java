@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxCacheTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cacheFlux() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 
@@ -53,7 +53,7 @@ public class FluxCacheTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cacheFluxTTL() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 
@@ -77,7 +77,7 @@ public class FluxCacheTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cacheFluxHistoryTTL() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 
@@ -102,7 +102,7 @@ public class FluxCacheTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cacheFluxTTL2() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 

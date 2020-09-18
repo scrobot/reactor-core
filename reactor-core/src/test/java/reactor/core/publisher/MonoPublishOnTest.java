@@ -45,7 +45,7 @@ import static reactor.core.scheduler.Schedulers.fromExecutorService;
 
 public class MonoPublishOnTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void rejectedExecutionExceptionOnDataSignalExecutor()
 			throws InterruptedException {
 
@@ -156,7 +156,7 @@ public class MonoPublishOnTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void rejectedExecutionExceptionOnDataSignalExecutorService()
 			throws InterruptedException {
 
@@ -210,7 +210,7 @@ public class MonoPublishOnTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void rejectedExecutionExceptionOnErrorSignalExecutorService()
 			throws InterruptedException {
 
@@ -307,7 +307,7 @@ public class MonoPublishOnTest {
 		executor.shutdownNow();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Disabled
 	//FIXME the behavior is not failing fast anymore, find original issue and re-evaluate
 	public void rejectedExecutionSubscribeExecutorServiceScheduler() {
@@ -345,14 +345,14 @@ public class MonoPublishOnTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		MonoPublishOn<String> test = new MonoPublishOn<>(Mono.empty(), Schedulers.immediate());
 
 		Assertions.assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.immediate());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoPublishOn.PublishOnSubscriber<String> test = new MonoPublishOn.PublishOnSubscriber<>(
@@ -380,7 +380,7 @@ public class MonoPublishOnTest {
 		Assertions.assertThat(test.scan(Scannable.Attr.ERROR)).hasMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error() {
 		StepVerifier.create(Mono.error(new RuntimeException("forced failure"))
 		                        .publishOn(Schedulers.single()))

@@ -27,18 +27,18 @@ public class QueuesOneQueueTest {
 
 	private static final int TEST_ELEMENT = 2;
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyOneQueueShouldConvertToArrayWhenPassedZeroLengthArray() {
 		assertThat(emptyOneQueue().toArray(new Integer[0])).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void oneQueueWithOneElementShouldConvertToArrayWhenPassedZeroLengthArray() {
 		assertThat(oneQueueWithTestElement(TEST_ELEMENT).toArray(new Integer[0]))
 				.containsExactly(TEST_ELEMENT);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyOneQueueShouldConvertToArrayAndPutNullMarkerAndReuseInputArrayOnWhenPassedOneLengthArray() {
 		Queue<Integer> q = emptyOneQueue();
 		//and
@@ -79,7 +79,7 @@ public class QueuesOneQueueTest {
 				.isSameAs(passedArray);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void oneQueueWithOneElementShouldConvertToArrayAndPutNullMarkerAndReuseInputArrayWhenPassedLargerArray() {
 		Queue<Integer> q = oneQueueWithTestElement(TEST_ELEMENT);
 		//and

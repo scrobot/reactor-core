@@ -36,7 +36,7 @@ public class MonoThenManyTest {
 		ts.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testThenManyFusion() {
 		Flux<Integer> test = Mono.just("A")
 		                         .thenMany(Flux.just("C", "D"))
@@ -53,7 +53,7 @@ public class MonoThenManyTest {
 		ts.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testThenManyDifferentType() {
 		Flux<String> test = Mono.just(1)
 		                        .thenMany(Flux.just("C", "D"));

@@ -210,7 +210,7 @@ public class FluxSubscribeOnTest {
 		            .verify(Duration.ofSeconds(5));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void forceNoScheduledRequests() {
 		Flux<Integer> test = Flux.<Integer>create(sink -> {
 			for (int i = 1; i < 1001; i++) {

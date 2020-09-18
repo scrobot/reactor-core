@@ -48,7 +48,7 @@ public class FluxErrorSuppliedTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void throwOnCall() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new FluxErrorSupplied<>(() -> new IllegalStateException("boom"))

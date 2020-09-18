@@ -45,7 +45,7 @@ public class MonoFirstTest {
 		                      .block());
 	}
 
-	@org.junit.jupiter.api.Test//(timeout = 5000)
+	@Test//(timeout = 5000)
 	public void all2NonEmpty() {
 		Assert.assertEquals(Integer.MIN_VALUE,
 				Mono.first(Mono.delay(Duration.ofMillis(150))

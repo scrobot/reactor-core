@@ -24,26 +24,26 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoDefaultIfEmptyTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sourceNull() {
 		assertThrows(NullPointerException.class, () ->
 				new MonoDefaultIfEmpty<>(null, 1));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void valueNull() {
 		assertThrows(NullPointerException.class, () ->
 				Mono.never().defaultIfEmpty(null));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error() {
 		StepVerifier.create(Mono.error(new RuntimeException("forced failure"))
 		                        .defaultIfEmpty("blah"))
 		            .verifyErrorMessage("forced failure");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorHide() {
 		StepVerifier.create(Mono.error(new RuntimeException("forced failure"))
 		                        .hide()
@@ -51,7 +51,7 @@ public class MonoDefaultIfEmptyTest {
 		            .verifyErrorMessage("forced failure");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nonEmpty() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -74,7 +74,7 @@ public class MonoDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nonEmptyHideBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -92,7 +92,7 @@ public class MonoDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nonEmptyBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -110,7 +110,7 @@ public class MonoDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void empty() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -122,7 +122,7 @@ public class MonoDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyHide() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -134,7 +134,7 @@ public class MonoDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -152,7 +152,7 @@ public class MonoDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyBackpressuredHide() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 

@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelFluxNameTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelism() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelFluxName<Integer> test = new ParallelFluxName<>(source, "foo", null);

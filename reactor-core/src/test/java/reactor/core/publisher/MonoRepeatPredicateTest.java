@@ -49,7 +49,7 @@ public class MonoRepeatPredicateTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nOne() {
 		StepVerifier.create(Mono.just(3)
 		                        .repeat(1, () -> true))

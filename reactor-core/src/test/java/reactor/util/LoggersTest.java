@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoggersTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void dontFallbackToJdk() throws Exception {
 		String oldValue = System.getProperty(Loggers.FALLBACK_PROPERTY);
 

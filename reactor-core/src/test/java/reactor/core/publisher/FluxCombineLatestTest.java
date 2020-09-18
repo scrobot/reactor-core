@@ -129,7 +129,7 @@ public class FluxCombineLatestTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleSourceIsMapped() {
 
 		AssertSubscriber<String> ts = AssertSubscriber.create();
@@ -155,7 +155,7 @@ public class FluxCombineLatestTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fused() {
 		DirectProcessor<Integer> dp1 = DirectProcessor.create();
 		DirectProcessor<Integer> dp2 = DirectProcessor.create();
@@ -222,7 +222,7 @@ public class FluxCombineLatestTest extends FluxOperatorTest<String, String> {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void combineLatest4() {
 		StepVerifier.create(Flux.combineLatest(Flux.just(1),
 				Flux.just(2),
@@ -233,7 +233,7 @@ public class FluxCombineLatestTest extends FluxOperatorTest<String, String> {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void combineLatest5() {
 		StepVerifier.create(Flux.combineLatest(Flux.just(1),
 				Flux.just(2),
@@ -285,7 +285,7 @@ public class FluxCombineLatestTest extends FluxOperatorTest<String, String> {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanInner() {
 		CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		FluxCombineLatest.CombineLatestCoordinator<String, Integer> main = new FluxCombineLatest.CombineLatestCoordinator<>(

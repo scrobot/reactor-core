@@ -46,21 +46,21 @@ public class MonoWhenTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void allEmptyPublisherIterable() {
 		Mono<Void> test = Mono.when(Arrays.asList(Mono.empty(), Flux.empty()));
 		StepVerifier.create(test)
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void allEmptyPublisher() {
 		Mono<Void> test = Mono.when(Mono.empty(), Flux.empty());
 		StepVerifier.create(test)
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void someEmptyPublisher() {
 		Mono<Void> test = Mono.when(Mono.just(1), Flux.empty());
 		StepVerifier.create(test)
@@ -95,7 +95,7 @@ public class MonoWhenTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noSourcePublisherDelay() {
 		Mono<Void> test = Mono.whenDelayError();
 		StepVerifier.create(test)

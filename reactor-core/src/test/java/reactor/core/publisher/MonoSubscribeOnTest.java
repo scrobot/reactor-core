@@ -50,7 +50,7 @@ public class MonoSubscribeOnTest {
 		ctb.test();
 	}*/
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void classic() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -65,7 +65,7 @@ public class MonoSubscribeOnTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void classicBackpressured() throws Exception {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -129,7 +129,7 @@ public class MonoSubscribeOnTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void classicEmpty() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -143,7 +143,7 @@ public class MonoSubscribeOnTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void classicEmptyBackpressured() throws Exception {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -157,7 +157,7 @@ public class MonoSubscribeOnTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void classicWithTimeout() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 		Mono.fromCallable(() -> {
@@ -181,7 +181,7 @@ public class MonoSubscribeOnTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableEvaluatedTheRightTime() {
 
 		AtomicInteger count = new AtomicInteger();
@@ -197,14 +197,14 @@ public class MonoSubscribeOnTest {
 		Assert.assertEquals(1, count.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		MonoSubscribeOn<String> test = new MonoSubscribeOn<>(Mono.empty(), Schedulers.immediate());
 
 		assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.immediate());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscribeOnSubscriber() {
 		Scheduler.Worker worker = Schedulers.single().createWorker();
 
@@ -240,7 +240,7 @@ public class MonoSubscribeOnTest {
 		            .verifyErrorMessage("forced failure");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorHide() {
 		StepVerifier.create(Mono.error(new RuntimeException("forced failure"))
 		                        .hide()
@@ -248,7 +248,7 @@ public class MonoSubscribeOnTest {
 		            .verifyErrorMessage("forced failure");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void disposeWorkerIfCancelledBeforeOnSubscribe() {
 		AtomicInteger disposeCount = new AtomicInteger();
 		Scheduler.Worker countingWorker = new Scheduler.Worker() {

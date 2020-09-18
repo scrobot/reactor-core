@@ -50,7 +50,7 @@ public class MonoNameTest {
 		assertThat(scannedTags.iterator()).containsExactlyInAnyOrder(tag1, tag2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperatorNullTags() throws Exception {
 		Mono<Integer> source = Mono.just(1);
 		MonoName<Integer> test = new MonoName<>(source, "foo", null);

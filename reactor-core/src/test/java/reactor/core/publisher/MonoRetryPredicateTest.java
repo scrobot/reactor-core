@@ -43,7 +43,7 @@ public class MonoRetryPredicateTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void twoRetryErrorSupplier() {
 		AtomicInteger i = new AtomicInteger();
 		AtomicBoolean bool = new AtomicBoolean(true);

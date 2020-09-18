@@ -48,7 +48,7 @@ public class ConsistentProcessorTests {
 	private Processor<String, String> processor;
 	private Processor<String, String> workProcessor;
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Disabled
 	public void testMultipleConsumersMultipleTimes() throws Exception {
 		Sender sender = new Sender();

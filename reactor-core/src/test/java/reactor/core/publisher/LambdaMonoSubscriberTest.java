@@ -81,7 +81,7 @@ public class LambdaMonoSubscriberTest {
 				testSubscription.requested, is(equalTo(-1L)));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void consumeOnSubscriptionReceivesSubscriptionAndRequests32() {
 		AtomicReference<Throwable> errorHolder = new AtomicReference<>(null);
 		AtomicReference<Subscription> subscriptionHolder = new AtomicReference<>(null);
@@ -184,7 +184,7 @@ public class LambdaMonoSubscriberTest {
 		assertThat("subscription has been cancelled", testSubscription.isCancelled, is(false));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyMonoState(){
 		assertTrue(Mono.fromDirect(s -> {
 			assertTrue(s instanceof LambdaMonoSubscriber);
@@ -242,7 +242,7 @@ public class LambdaMonoSubscriberTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noErrorHookThrowsCallbackNotImplemented() {
 		RuntimeException boom = new IllegalArgumentException("boom");
 		Assertions.assertThatExceptionOfType(RuntimeException.class)
@@ -261,7 +261,7 @@ public class LambdaMonoSubscriberTest {
 		Assertions.assertThat(cancelCount.get()).isEqualTo(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scan() {
 		LambdaMonoSubscriber<String> test = new LambdaMonoSubscriber<>(null, null, null, null);
 		Subscription parent = Operators.emptySubscription();

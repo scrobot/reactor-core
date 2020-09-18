@@ -76,7 +76,7 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -101,7 +101,7 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void skipAll() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -123,7 +123,7 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void aFluxCanBeSkippedZero(){
 		StepVerifier.create(Flux.just("test", "test2", "test3")
 		                        .skip(0)

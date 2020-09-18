@@ -51,7 +51,7 @@ public class FluxDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nonEmptyBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -117,7 +117,7 @@ public class FluxDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nonEmptyBackpressuredHide() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -153,7 +153,7 @@ public class FluxDefaultIfEmptyTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void emptyBackpressuredHide() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 

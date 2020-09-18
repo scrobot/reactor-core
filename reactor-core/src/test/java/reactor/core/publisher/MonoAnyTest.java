@@ -65,7 +65,7 @@ public class MonoAnyTest {
 		            .expectNext(true)
 		            .verifyComplete();
 	}
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error2() {
 		StepVerifier.create(Flux.range(1, 10).hasElement(-4))
 		            .expectNext(false)

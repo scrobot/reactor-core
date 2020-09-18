@@ -32,14 +32,14 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class QueuesTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityReactorUnboundedQueue() {
 		Queue q = Queues.unbounded(2).get();
 
 		assertThat(Queues.capacity(q)).isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityReactorBoundedQueue() {
 		//the bounded queue floors at 8 and rounds to the next power of 2
 
@@ -53,21 +53,21 @@ public class QueuesTest {
 				.isEqualTo(16);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityBoundedBlockingQueue() {
 		Queue q = new LinkedBlockingQueue<>(10);
 
 		assertThat(Queues.capacity(q)).isEqualTo(10);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityUnboundedBlockingQueue() {
 		Queue q = new LinkedBlockingQueue<>();
 
 		assertThat(Queues.capacity(q)).isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityUnboundedConcurrentLinkedQueue() {
 		Queue q = new ConcurrentLinkedQueue<>();
 
@@ -81,7 +81,7 @@ public class QueuesTest {
 		assertThat(Queues.capacity(q)).isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityOneQueue() {
 		Queue q = Queues.one().get();
 
@@ -89,14 +89,14 @@ public class QueuesTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityEmptyQueue() {
 		Queue q = Queues.empty().get();
 
 		assertThat(Queues.capacity(q)).isZero();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void capacityOtherQueue() {
 		Queue q = new PriorityQueue<>(10);
 
@@ -105,7 +105,7 @@ public class QueuesTest {
 				.isEqualTo(Queues.CAPACITY_UNSURE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void zeroQueueOperations() {
 		Queue<Integer> q = Queues.<Integer>empty().get();
 		List<Integer> vals = Arrays.asList(1, 2, 3);
@@ -143,7 +143,7 @@ public class QueuesTest {
 		assertThat(q.toArray(array)).as("toArray(pre-filled)").containsExactly(null, -2, -3);
 	}
 
-	@org.junit.jupiter.api.Test    //https://github.com/reactor/reactor-core/issues/1326
+	@Test    //https://github.com/reactor/reactor-core/issues/1326
 	public void toArrayOnZeroQueueShouldNotFailAlsoOnJava9() {
 		Queue<Integer> emptyQueue = Queues.<Integer>empty().get();
 

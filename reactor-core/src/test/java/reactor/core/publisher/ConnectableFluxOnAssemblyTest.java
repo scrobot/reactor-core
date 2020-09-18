@@ -45,7 +45,7 @@ public class ConnectableFluxOnAssemblyTest {
 		assertThat(test.scan(Scannable.Attr.PARENT)).as("PARENT").isSameAs(source);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void stepNameAndToString() {
 		AssemblySnapshot stacktrace = new AssemblySnapshot(null, Traces.callSiteSupplierFactory.get());
 		ConnectableFluxOnAssembly<?> test = new ConnectableFluxOnAssembly<>(Flux.empty().publish(), stacktrace);

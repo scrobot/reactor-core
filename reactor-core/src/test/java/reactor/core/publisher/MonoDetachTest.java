@@ -30,7 +30,7 @@ public class MonoDetachTest {
 
 	Object o;
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void just() throws Exception {
 		o = new Object();
 
@@ -56,7 +56,7 @@ public class MonoDetachTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error() {
 		AssertSubscriber<Object> ts = new AssertSubscriber<>();
 
@@ -82,7 +82,7 @@ public class MonoDetachTest {
 		ts.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void backpressured() throws Exception {
 		o = new Object();
 
@@ -111,7 +111,7 @@ public class MonoDetachTest {
 		Assert.assertNull("Object retained!", wr.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void justUnsubscribed() throws Exception {
 		o = new Object();
 
@@ -137,7 +137,7 @@ public class MonoDetachTest {
 			});
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void deferredUpstreamProducer() {
 		final AtomicReference<Subscriber<? super Object>> subscriber =
 				new AtomicReference<>();

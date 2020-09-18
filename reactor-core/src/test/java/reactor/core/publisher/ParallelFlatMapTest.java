@@ -36,7 +36,7 @@ public class ParallelFlatMapTest {
 				.isEqualTo(source.parallelism());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() throws Exception {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelFlatMap<Integer, Integer> test = new ParallelFlatMap<>(source,

@@ -151,7 +151,7 @@ public class HooksTraceTest {
 		);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testOnLastPublisher() {
 		List<Publisher> l = new ArrayList<>();
 		Hooks.onLastOperator(p -> {

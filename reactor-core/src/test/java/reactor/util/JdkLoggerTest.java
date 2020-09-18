@@ -72,7 +72,7 @@ public class JdkLoggerTest {
 				.isEqualTo("test {} is {}");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void formatNullParamInVararg() {
 		Loggers.JdkLogger jdkLogger= new Loggers.JdkLogger(Mockito.mock(java.util.logging.Logger.class));
 

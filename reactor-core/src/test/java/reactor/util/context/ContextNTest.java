@@ -88,7 +88,7 @@ public class ContextNTest {
 		                                .withMessage("value");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void constructFromMapsLeftNull() {
 		assertThatNullPointerException().isThrownBy(() -> new ContextN(null, Collections.emptyMap()))
 		                                .withMessage("sourceMap");
@@ -197,7 +197,7 @@ public class ContextNTest {
 				.containsExactly("A", "B", "C", "D", "foo", "F");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void replaceKey6NewContext() {
 		Context put = c.put(6, "foo");
 
@@ -343,7 +343,7 @@ public class ContextNTest {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
@@ -383,7 +383,7 @@ public class ContextNTest {
 				.containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6, "A", "B", "C", "D", "E", "F");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putAllOfEmpty() {
 		Context m = Context.empty();
 		Context put = c.putAll(m);

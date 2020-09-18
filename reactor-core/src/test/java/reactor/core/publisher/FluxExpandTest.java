@@ -57,7 +57,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void recursiveCountdownBreadth() {
 		StepVerifier.create(Flux.just(10)
 		                        .expand(countDown))
@@ -72,7 +72,7 @@ public class FluxExpandTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorDepth() {
 		StepVerifier.create(Flux.<Integer>error(new IllegalStateException("boom"))
 				.expandDeep(countDown))
@@ -149,7 +149,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void recursiveCountdownTakeDepth() {
 		StepVerifier.create(Flux.just(10)
 		                        .expandDeep(countDown)
@@ -159,7 +159,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void recursiveCountdownBackpressure() {
 		StepVerifier.create(Flux.just(10)
 		                        .expand(countDown),
@@ -177,7 +177,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void recursiveCountdownBackpressureDepth() {
 		StepVerifier.create(Flux.just(10)
 		                        .expandDeep(countDown),
@@ -195,7 +195,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void expanderThrows() {
 		StepVerifier.create(Flux.just(10)
 		                        .expand(v -> {
@@ -314,7 +314,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void depthFirstAsync() {
 		Node root = createTest();
 
@@ -370,7 +370,7 @@ public class FluxExpandTest {
 		            .verify(Duration.ofSeconds(5));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void depthFirstCancel() {
 		final TestPublisher<Integer> pp = TestPublisher.create();
 		final AssertSubscriber<Integer> ts = AssertSubscriber.create();
@@ -428,7 +428,7 @@ public class FluxExpandTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void depthEmitCancelRace() {
 		for (int i = 0; i < 1000; i++) {
 
@@ -465,7 +465,7 @@ public class FluxExpandTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void depthCancelRace2() throws Exception {
 		for (int i = 0; i < 1000; i++) {
 

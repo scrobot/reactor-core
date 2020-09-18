@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxFilterWhenTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		StepVerifier.withVirtualTime(() -> Flux.range(1, 10)
 		                                       .filterWhen(v -> Mono.just(v % 2 == 0)
@@ -99,7 +99,7 @@ public class FluxFilterWhenTest {
 				.verifyError(IllegalStateException.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void backpressureExactlyOne() {
 		StepVerifier.create(Flux.just(1)
 		                        .filterWhen(v -> Mono.just(true)), 1L)
@@ -251,7 +251,7 @@ public class FluxFilterWhenTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cancel() {
 		final EmitterProcessor<Boolean> pp = EmitterProcessor.create();
 
@@ -262,7 +262,7 @@ public class FluxFilterWhenTest {
 		assertThat(pp.hasDownstreams()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void innerFluxCancelled() {
 		AtomicInteger cancelCount = new AtomicInteger();
 
@@ -377,7 +377,7 @@ public class FluxFilterWhenTest {
 	}
 
 	//TODO introspect errors (but is difficult due to Exceptions.terminate)
-	@org.junit.jupiter.api.Test
+	@Test
 	public void introspectionCancel() {
 		AtomicReference<Scannable> scannable = new AtomicReference<>();
 

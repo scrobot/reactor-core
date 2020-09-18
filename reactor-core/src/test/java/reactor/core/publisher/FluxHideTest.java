@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxHideTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		Flux<Integer> f = Flux.just(1);
 		assertThat(f instanceof Fuseable.ScalarCallable).isTrue();
@@ -35,7 +35,7 @@ public class FluxHideTest {
 		assertThat(f instanceof FluxHide).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void suppressedSubscriber() {
 		CoreSubscriber<Integer> s = new CoreSubscriber<Integer>() {
 			@Override
@@ -117,7 +117,7 @@ public class FluxHideTest {
 		sfs.clear(); //NOOP
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxHide.HideSubscriber<String> test = new FluxHide.HideSubscriber<>(actual);
@@ -128,7 +128,7 @@ public class FluxHideTest {
         assertThat(test.scan(Scannable.Attr.ACTUAL)).isSameAs(actual);
     }
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanSuppressFuseableSubscriber() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxHide.SuppressFuseableSubscriber<String> test = new FluxHide.SuppressFuseableSubscriber<>(actual);

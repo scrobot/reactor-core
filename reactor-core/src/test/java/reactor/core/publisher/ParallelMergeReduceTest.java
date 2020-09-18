@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelMergeReduceTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void reduceFull() {
 		for (int i = 1;
 		     i <= Runtime.getRuntime()
@@ -49,7 +49,7 @@ public class ParallelMergeReduceTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelReduceFull() {
 		int m = 100_000;
 		for (int n = 1; n <= m; n *= 10) {
@@ -85,7 +85,7 @@ public class ParallelMergeReduceTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel();
 		ParallelMergeReduce<Integer> test = new ParallelMergeReduce<>(source, (a, b) -> a + b);
@@ -93,7 +93,7 @@ public class ParallelMergeReduceTest {
 		assertThat(test.scan(Scannable.Attr.PARENT)).isSameAs(source);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMainSubscriber() {
 		CoreSubscriber<? super Integer> subscriber = new LambdaSubscriber<>(null, e -> { }, null,
 				sub -> sub.request(2));
@@ -129,7 +129,7 @@ public class ParallelMergeReduceTest {
 		assertThat(test.scan(Scannable.Attr.ERROR)).hasMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanInnerSubscriber() {
 		CoreSubscriber<? super Integer> subscriber = new LambdaSubscriber<>(null, e -> { }, null, null);
 		MergeReduceMain<Integer> main = new MergeReduceMain<>(subscriber, 2, (a, b) -> a + b);

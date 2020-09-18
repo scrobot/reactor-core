@@ -44,7 +44,7 @@ public class MonoDelayElementTest {
 		return Schedulers.parallel(); //reflects the default used in Mono.delay(duration)
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalIsDelayed() {
 		Mono<String> source = Mono.just("foo").log().hide();
 
@@ -161,7 +161,7 @@ public class MonoDelayElementTest {
 		            });
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cancelUpstreamOnceWhenCancelled() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 		AtomicLong upstreamCancelCount = new AtomicLong();
@@ -181,7 +181,7 @@ public class MonoDelayElementTest {
 		assertThat(upstreamCancelCount.get()).isEqualTo(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cancelUpstreamOnceWhenRejected() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 		vts.dispose();
@@ -200,7 +200,7 @@ public class MonoDelayElementTest {
 		testPublisher.assertCancelled(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoApiTestDuration() {
 		StepVerifier.withVirtualTime(() -> Mono.just("foo").delayElement(Duration.ofHours(1)))
 	                .expectSubscription()
@@ -209,7 +209,7 @@ public class MonoDelayElementTest {
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoApiTestMillis() {
 		StepVerifier.withVirtualTime(() -> Mono.just("foo").delayElement(Duration.ofMillis(5000L)))
 		            .expectSubscription()
@@ -277,7 +277,7 @@ public class MonoDelayElementTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void guardedAgainstOnError() {
 		AtomicReference<Throwable> dropped = new AtomicReference<>();
 		Hooks.onErrorDropped(dropped::set);
@@ -305,7 +305,7 @@ public class MonoDelayElementTest {
 		                         .isInstanceOf(IllegalStateException.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void upstreamIsDelayedSource() {
 		AtomicReference<Object> upstream = new AtomicReference<>();
 
@@ -326,7 +326,7 @@ public class MonoDelayElementTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void completeOnNextWithoutCancel() {
 		AtomicInteger onCancel = new AtomicInteger();
 		AtomicInteger sourceOnCancel = new AtomicInteger();
@@ -357,7 +357,7 @@ public class MonoDelayElementTest {
 		assertThat(sourceOnCancel.get()).isEqualTo(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		MonoDelayElement<String> test = new MonoDelayElement<>(Mono.empty(), 1, TimeUnit.SECONDS, Schedulers.immediate());
 

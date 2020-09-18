@@ -129,14 +129,14 @@ public class SignalLoggerTests {
 		assertThat(SignalLogger.subscriptionAsString(null), is("null subscription"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalSubscriptionAsString() {
 		Subscription s = new FluxPeek.PeekSubscriber<>(null, null);
 
 		assertThat(SignalLogger.subscriptionAsString(s), is("FluxPeek.PeekSubscriber"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void synchronousSubscriptionAsString() {
 		SynchronousSubscription<Object> s = new FluxArray.ArraySubscription<>(null, null);
 
@@ -150,7 +150,7 @@ public class SignalLoggerTests {
 		assertThat(SignalLogger.subscriptionAsString(s), is("[Fuseable] Operators.EmptySubscription"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void anonymousSubscriptionAsString() {
 		Subscription s = new Subscription() {
 			@Override
@@ -163,7 +163,7 @@ public class SignalLoggerTests {
 		assertThat(SignalLogger.subscriptionAsString(s), is("SignalLoggerTests$2"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSignalLogger() {
 		Mono<String> source = Mono.just("").map(i -> i);
 		SignalLogger<String> sl = new SignalLogger<>(source, null, Level.INFO, false);
@@ -240,7 +240,7 @@ public class SignalLoggerTests {
 		verifyNoMoreInteractions(mockLogger);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void logErrorUsesDebugWhenFine() {
 		Level level = Level.FINE;
 
@@ -287,7 +287,7 @@ public class SignalLoggerTests {
 		verifyNoMoreInteractions(mockLogger);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxLogWithGivenLogger() {
 		Level level = Level.WARNING;
 

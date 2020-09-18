@@ -41,7 +41,7 @@ public class MonoDoFirstTest {
 				.withMessage("onFirst");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void orderIsReversed_NoFusion() {
 		List<String> order = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class MonoDoFirstTest {
 		assertThat(order).containsExactly("three", "two", "one");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void orderIsReversed_Fused() {
 		List<String> order = new ArrayList<>();
 
@@ -78,7 +78,7 @@ public class MonoDoFirstTest {
 		assertThat(order).containsExactly("three", "two", "one");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mixedWithOnSubscribe_NoFusion() {
 		List<String> order = new ArrayList<>();
 
@@ -99,7 +99,7 @@ public class MonoDoFirstTest {
 				"doOnSubscribe2", "doOnNext1");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mixedWithOnSubscribe_Fused() {
 		List<String> order = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class MonoDoFirstTest {
 				"doOnSubscribe2", "doOnNext1");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void runnableFailure_NotFuseable() {
 		Mono<Integer> test = Mono.just(1)
 		                         .hide()
@@ -133,7 +133,7 @@ public class MonoDoFirstTest {
 		            .verifyErrorMessage("expected");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void runnableFailure_Fuseable() {
 		Mono<Integer> test = Mono.just(1)
 		                         .doFirst(() -> {
@@ -146,7 +146,7 @@ public class MonoDoFirstTest {
 		            .verifyErrorMessage("expected");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void performsDirectSubscriberToSource_NoFusion() {
 		AtomicReference<Subscription> subRef = new AtomicReference<>();
 		Mono<Integer> test = Mono.just(1)
@@ -158,7 +158,7 @@ public class MonoDoFirstTest {
 		assertThat(subRef.get().getClass()).isEqualTo(FluxHide.HideSubscriber.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void performsDirectSubscriberToSource_Fused() {
 		AtomicReference<Subscription> subRef = new AtomicReference<>();
 		Mono<Integer> test = Mono.just(1)

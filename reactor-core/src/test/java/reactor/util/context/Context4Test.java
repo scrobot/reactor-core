@@ -44,7 +44,7 @@ public class Context4Test {
 				.containsExactly("foo", "B", "C", "D");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void replaceKey2NewContext() {
 		Context put = c.put(2, "foo");
 
@@ -57,7 +57,7 @@ public class Context4Test {
 				.containsExactly("A", "foo", "C", "D");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void replaceKey3NewContext() {
 		Context put = c.put(3, "foo");
 
@@ -70,7 +70,7 @@ public class Context4Test {
 				.containsExactly("A", "B", "foo", "D");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void replaceKey4NewContext() {
 		Context put = c.put(4, "foo");
 
@@ -83,7 +83,7 @@ public class Context4Test {
 				.containsExactly("A", "B", "C", "foo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putDifferentKeyContext5() throws Exception {
 		Context put = c.put(5, "Abis");
 		assertThat(put)
@@ -94,7 +94,7 @@ public class Context4Test {
 				.containsExactly("A", "B", "C", "D", "Abis");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void hasKey() throws Exception {
 		assertThat(c.hasKey(1)).as("hasKey(1)").isTrue();
 		assertThat(c.hasKey(2)).as("hasKey(2)").isTrue();
@@ -103,7 +103,7 @@ public class Context4Test {
 		assertThat(c.hasKey(5)).as("hasKey(5)").isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void removeKeys() {
 		assertThat(c.delete(1))
 				.as("delete(1)")
@@ -155,18 +155,18 @@ public class Context4Test {
 				.withMessage("Context does not contain key: 5");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getUnknownWithDefault() throws Exception {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void stream() throws Exception {
 		assertThat(c.stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
 				.hasSize(4)
@@ -174,19 +174,19 @@ public class Context4Test {
 				.containsValues("A", "B", "C", "D");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void string() throws Exception {
 		assertThat(c.toString()).isEqualTo("Context4{1=A, 2=B, 3=C, 4=D}");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofApi() {
 		assertThat(Context.of("test", 12, "value", true, 123, 456L, true, false))
 				.isInstanceOf(Context4.class)
 				.hasToString("Context4{test=12, value=true, 123=456, true=false}");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putAllOf() {
 		Context m = Context.of("A", 1, "B", 2, "C", 3);
 		Context put = c.putAll(m);
@@ -196,7 +196,7 @@ public class Context4Test {
 				.containsExactlyInAnyOrder(1, 2, 3, 4, "A", "B", "C");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putAllOfEmpty() {
 		Context m = Context.empty();
 		Context put = c.putAll(m);
@@ -204,26 +204,26 @@ public class Context4Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putNonNullWithNull() {
 		Context put = c.putNonNull("putNonNull", null);
 
 		assertThat(put).isSameAs(c);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 
 		assertThat(put.getOrEmpty("putNonNull")).contains("value");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void size() {
 		assertThat(c.size()).isEqualTo(4);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void checkDuplicateKeysZeroOne() {
 		assertThatCode(Context4::checkKeys).as("zero").doesNotThrowAnyException();
 		assertThatCode(() -> Context4.checkKeys("one")).as("one").doesNotThrowAnyException();
@@ -236,7 +236,7 @@ public class Context4Test {
 				.withMessage("key1");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void checkDuplicateKeysTwo() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> Context4.checkKeys(1, 1))
@@ -249,7 +249,7 @@ public class Context4Test {
 		                                .withMessage("key2");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void checkDuplicateKeysThree() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> Context4.checkKeys(1, 1, 3))
@@ -264,7 +264,7 @@ public class Context4Test {
 				.withMessage("Key #2 (2) is duplicated");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void checkNullKeysThree() {
 		assertThatNullPointerException()
 				.isThrownBy(() -> Context4.checkKeys("one", "two", null))
@@ -305,7 +305,7 @@ public class Context4Test {
 				.withMessage("key4");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void checkDuplicateKeysFive() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> Context4.checkKeys(1, 1, 3, 4, 5))

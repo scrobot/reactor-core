@@ -78,7 +78,7 @@ public class MonoDelayTest {
 		assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.immediate());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanDelayRunnable() {
 		CoreSubscriber<Long> actual = new LambdaMonoSubscriber<>(null, e -> {
 		}, null, null);

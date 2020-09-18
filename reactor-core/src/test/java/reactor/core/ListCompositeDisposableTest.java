@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class ListCompositeDisposableTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isDisposed() throws Exception {
 		Disposable.Composite cd = new ListCompositeDisposable();
 
@@ -55,7 +55,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d.isDisposed()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void addAll() throws Exception {
 		FakeDisposable d1 = new FakeDisposable();
 		FakeDisposable d2 = new FakeDisposable();
@@ -110,7 +110,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d1.disposed).isEqualTo(2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void removeNonexistant() throws Exception {
 		FakeDisposable d = new FakeDisposable();
 		Disposable.Composite cd = new ListCompositeDisposable();
@@ -120,7 +120,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d.isDisposed()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void addAfterDispose() throws Exception {
 		FakeDisposable d = new FakeDisposable();
 		Disposable.Composite cd = new ListCompositeDisposable();
@@ -168,7 +168,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d.disposed).isEqualTo(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleErrorDuringDisposal() {
 		Disposable bad = () -> {
 			throw new IllegalStateException("boom");
@@ -220,7 +220,7 @@ public class ListCompositeDisposableTest {
 		assertThat(list).hasSize(2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void disposeConcurrent() {
 		for (int i = 0; i < 500; i++) {
 			final Disposable d1 = new FakeDisposable();
@@ -230,7 +230,7 @@ public class ListCompositeDisposableTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void removeConcurrent() {
 		for (int i = 0; i < 500; i++) {
 			final Disposable d1 = new FakeDisposable();

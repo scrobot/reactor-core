@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DisposableTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void compositeDisposableAddAllDefault() {
 		FakeDisposable d1 = new FakeDisposable();
 		FakeDisposable d2 = new FakeDisposable();
@@ -72,7 +72,7 @@ public class DisposableTest {
 		assertThat(d2.isDisposed()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void compositeDisposableAddAllDefaultAfterDispose() throws Exception {
 		final FakeDisposable d1 = new FakeDisposable();
 		final FakeDisposable d2 = new FakeDisposable();
@@ -118,7 +118,7 @@ public class DisposableTest {
 		assertThat(d2.isDisposed()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void compositeDisposableAddAllDefaultDuringDispose() throws Exception {
 		final FakeDisposable d1 = new FakeDisposable();
 		final FakeDisposable d2 = new FakeDisposable();
@@ -174,14 +174,14 @@ public class DisposableTest {
 		assertThat(d3.isDisposed()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleDisposableInitiallyNotDisposed() {
 		Disposable single = Disposables.single();
 
 		assertThat(single.isDisposed()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleDisposableCanBeDisposed() {
 		Disposable single = Disposables.single();
 		assertThat(single.isDisposed()).isFalse();
@@ -190,22 +190,22 @@ public class DisposableTest {
 		assertThat(single.isDisposed()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleDisposableCreatesInstances() {
 		assertThat(Disposables.single()).isNotSameAs(Disposables.single());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void disposedInitiallyDisposed() {
 		assertThat(Disposables.disposed().isDisposed()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void disposedCreatesInstances() {
 		assertThat(Disposables.disposed()).isNotSameAs(Disposables.disposed());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void neverInitiallyNotDisposed() {
 		assertThat(Disposables.never().isDisposed()).isFalse();
 	}
@@ -219,7 +219,7 @@ public class DisposableTest {
 		assertThat(never.isDisposed()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void neverCreatesInstances() {
 		assertThat(Disposables.never()).isNotSameAs(Disposables.never());
 	}

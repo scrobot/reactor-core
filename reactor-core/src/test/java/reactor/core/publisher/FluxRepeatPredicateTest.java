@@ -35,7 +35,7 @@ public class FluxRepeatPredicateTest {
 						.repeat(null));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nMinusOne() {
 		Flux<Integer> source = Flux.just(1, 2, 3);
 
@@ -52,7 +52,7 @@ public class FluxRepeatPredicateTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nOne() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 				.repeat(1, () -> true))
@@ -61,7 +61,7 @@ public class FluxRepeatPredicateTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nTwo() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 				.repeat(2, () -> true))
@@ -71,7 +71,7 @@ public class FluxRepeatPredicateTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		int[] times = {1};
 
@@ -86,7 +86,7 @@ public class FluxRepeatPredicateTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalBackpressured() {
 		int[] times = {1};
 
@@ -119,7 +119,7 @@ public class FluxRepeatPredicateTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void dontRepeat() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -132,7 +132,7 @@ public class FluxRepeatPredicateTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void predicateThrows() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -148,7 +148,7 @@ public class FluxRepeatPredicateTest {
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void alwaysTrueWithNSimilarToSimpleN() {
 		List<Integer> expected = Flux.just(1, 2, 3).repeat(3).collectList().block();
 		List<Integer> result = Flux.just(1, 2, 3).repeat(3, () -> true).collectList().block();
@@ -156,7 +156,7 @@ public class FluxRepeatPredicateTest {
 		assertThat(result).containsExactlyElementsOf(expected);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void alwaysFalseWithNSimilarToSimpleZero() {
 		List<Integer> expected = Flux.just(1, 2, 3).repeat(0).collectList().block();
 		List<Integer> result = Flux.just(1, 2, 3).repeat(3, () -> false).collectList().block();

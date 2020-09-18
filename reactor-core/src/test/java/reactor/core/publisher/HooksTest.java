@@ -81,7 +81,7 @@ public class HooksTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void staticActivationOfOperatorDebug() {
 		String oldProp = System.setProperty("reactor.trace.operatorStacktrace", "true");
 		//this will be reset by the ReactorTestExecutionListener
@@ -99,13 +99,13 @@ public class HooksTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getOnEachOperatorHooksIsUnmodifiable() {
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(Hooks.getOnEachOperatorHooks()::clear);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getOnLastOperatorHooksIsUnmodifiable() {
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(Hooks.getOnLastOperatorHooks()::clear);
@@ -132,7 +132,7 @@ public class HooksTest {
 		assertThat(applied.get()).isEqualTo(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onEachOperatorSameLambdaDifferentNamesAppliedTwice() {
 		AtomicInteger applied = new AtomicInteger();
 		Function<? super Publisher<Object>, ? extends Publisher<Object>> hook = p -> {
@@ -193,7 +193,7 @@ public class HooksTest {
 		assertThat(applied).containsExactly("h3", "h2");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onEachOperatorResetSpecific() {
 		List<String> applied = new ArrayList<>(3);
 		Function<? super Publisher<Object>, ? extends Publisher<Object>> hook1 = p -> {
@@ -220,7 +220,7 @@ public class HooksTest {
 		assertThat(applied).containsExactly("h2");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onEachOperatorReset() {
 		Hooks.onEachOperator("some", p -> p);
 
@@ -233,7 +233,7 @@ public class HooksTest {
 		assertThat(Hooks.getOnEachOperatorHooks()).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onEachOperatorClearByName() {
 		Hooks.onEachOperator("some", p -> p);
 		Hooks.onEachOperator("other", p -> p);
@@ -254,7 +254,7 @@ public class HooksTest {
 		assertThat(Hooks.getOnEachOperatorHooks()).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onLastOperatorSameLambdaSameNameAppliedOnce() {
 		AtomicInteger applied = new AtomicInteger();
 		Function<? super Publisher<Object>, ? extends Publisher<Object>> hook = p -> {
@@ -292,7 +292,7 @@ public class HooksTest {
 		assertThat(Hooks.onLastOperatorHook).isSameAs(hook);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onLastOperatorNamedReplacesKeepsOrder() {
 		List<String> applied = new ArrayList<>(3);
 
@@ -330,7 +330,7 @@ public class HooksTest {
 		assertThat(applied).containsExactly("h3", "h2");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onLastOperatorResetSpecific() {
 		List<String> applied = new ArrayList<>(3);
 		Function<? super Publisher<Object>, ? extends Publisher<Object>> hook1 = p -> {
@@ -357,7 +357,7 @@ public class HooksTest {
 		assertThat(applied).containsExactly("h2");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onLastOperatorReset() {
 		Hooks.onLastOperator("some", p -> p);
 
@@ -391,7 +391,7 @@ public class HooksTest {
 		assertThat(Hooks.getOnLastOperatorHooks()).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onOperatorErrorSameLambdaSameNameAppliedOnce() {
 		AtomicInteger applied = new AtomicInteger();
 		BiFunction<Throwable, Object, Throwable> hook = (t, s) -> {
@@ -421,7 +421,7 @@ public class HooksTest {
 		assertThat(applied.get()).isEqualTo(2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onOperatorErrorOneHookNoComposite() {
 		BiFunction<Throwable, Object, Throwable> hook = (t, s) -> t;
 
@@ -507,7 +507,7 @@ public class HooksTest {
 		assertThat(Hooks.getOnOperatorErrorHooks()).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onOperatorErrorClearByName() {
 		Hooks.onOperatorError("some", (t, v) -> t);
 		Hooks.onOperatorError("other", (t, v) -> t);
@@ -528,7 +528,7 @@ public class HooksTest {
 		assertThat(Hooks.getOnOperatorErrorHooks()).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorHooks() throws Exception {
 		Hooks.onOperatorError((e, s) -> new TestException(s.toString()));
 		Hooks.onNextDropped(d -> {
@@ -648,7 +648,7 @@ public class HooksTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelModeFused() {
 		Hooks.onOperatorDebug();
 
@@ -760,7 +760,7 @@ public class HooksTest {
 		assertThat(l).hasSize(5);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testMultiReceiver() throws Exception {
 		Hooks.onOperatorDebug();
 		try {
@@ -825,7 +825,7 @@ public class HooksTest {
 		assertThat(liftCounter).hasValue(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lastOperatorLiftsMono() {
 		AtomicInteger liftCounter = new AtomicInteger();
 		Hooks.onLastOperator(Operators.lift((sc, sub) -> liftSubscriber(sc, sub, liftCounter)));
@@ -837,7 +837,7 @@ public class HooksTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lastOperatorLiftsParallelFlux() {
 		AtomicInteger liftCounter = new AtomicInteger();
 		Hooks.onLastOperator(Operators.lift((sc, sub) -> liftSubscriber(sc, sub, liftCounter)));
@@ -870,7 +870,7 @@ public class HooksTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lastOperatorFilteredLiftMono() {
 		AtomicInteger liftCounter = new AtomicInteger();
 		Hooks.onLastOperator(Operators.lift(sc -> sc.tags()
@@ -912,7 +912,7 @@ public class HooksTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void eachOperatorLiftsFlux() {
 		AtomicInteger liftCounter = new AtomicInteger();
 		Hooks.onEachOperator(Operators.lift((sc, sub) -> liftSubscriber(sc, sub, liftCounter)));
@@ -924,7 +924,7 @@ public class HooksTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void eachOperatorLiftsMono() {
 		AtomicInteger liftCounter = new AtomicInteger();
 		Hooks.onEachOperator(Operators.lift((sc, sub) -> liftSubscriber(sc, sub, liftCounter)));
@@ -982,7 +982,7 @@ public class HooksTest {
 		Assertions.assertThat(wrappedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxWrapScalarErrorDoesntCallAssemblyHook() {
 		final Mono<Object> source = Mono.error(new IllegalStateException("scalarError"));
 
@@ -998,7 +998,7 @@ public class HooksTest {
 		Assertions.assertThat(wrappedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxWrapScalarEmptyDoesntCallAssemblyHook() {
 		final Mono<Object> source = Mono.empty();
 
@@ -1030,7 +1030,7 @@ public class HooksTest {
 		Assertions.assertThat(wrappedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxWrapMonoNormalDoesntCallAssemblyHook() {
 		final Mono<String> source = Mono.just("monoNormal")
 		                                .hide()
@@ -1048,7 +1048,7 @@ public class HooksTest {
 		Assertions.assertThat(wrappedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxWrapPublisherDoesntCallAssemblyHook() {
 		Publisher<String> publisher = sub -> sub.onSubscribe(Operators.emptySubscription());
 
@@ -1100,7 +1100,7 @@ public class HooksTest {
 		Assertions.assertThat(wrappedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoWrapCallableFluxDoesntCallAssemblyHook() {
 		final Flux<Integer> source = Flux.just(1);
 
@@ -1136,7 +1136,7 @@ public class HooksTest {
 		Assertions.assertThat(wrappedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoWrapPublisherDoesntCallAssemblyHook() {
 		final Publisher<Integer> source = TestPublisher.create();
 		Assertions.assertThat(source).isNotInstanceOf(Flux.class); //smoke test this is a Publisher

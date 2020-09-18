@@ -42,7 +42,7 @@ public class MonoElapsedTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		MonoElapsed<String> test = new MonoElapsed<>(Mono.empty(), Schedulers.immediate());
 

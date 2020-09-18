@@ -29,7 +29,7 @@ import static org.junit.Assert.fail;
  */
 public class CoreTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void defaultDisposable(){
 		Disposable d = () -> {};
 		assertThat(d.isDisposed()).isFalse();

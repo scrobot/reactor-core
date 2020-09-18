@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelMergeSortTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		ParallelFlux<List<Integer>> source = Flux.just(500, 300).buffer(1).parallel(10);
 		ParallelMergeSort<Integer> test = new ParallelMergeSort<>(source, Integer::compareTo);
@@ -62,7 +62,7 @@ public class ParallelMergeSortTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanInnerSubscriber() {
 		CoreSubscriber<Integer> mainActual = new LambdaSubscriber<>(null, e -> { }, null, null);
 		MergeSortMain<Integer> main = new MergeSortMain<>(mainActual, 2, Integer::compareTo);

@@ -71,7 +71,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		ctb.test();
 	}
 */
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -84,7 +84,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0L);
 
@@ -128,7 +128,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -142,7 +142,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void aggregatorThrows() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -159,7 +159,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void aggregatorReturnsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -173,7 +173,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 	}
 
 	/* see issue #230 */
-	@org.junit.jupiter.api.Test
+	@Test
 	public void should_reduce_to_10_events() {
 		AtomicInteger count = new AtomicInteger();
 		AtomicInteger countNulls = new AtomicInteger();
@@ -203,7 +203,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		return "x" + x + "y" + y;
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextAndCancelRace() {
 		final AssertSubscriber<Integer> testSubscriber = AssertSubscriber.create();
 
@@ -221,7 +221,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		testSubscriber.assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardAccumulatedOnCancel() {
 		final List<Object> discarded = new ArrayList<>();
 		final AssertSubscriber<Object> testSubscriber = new AssertSubscriber<>(
@@ -242,7 +242,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnError() {
 		final List<Object> discarded = new ArrayList<>();
 		final AssertSubscriber<Object> testSubscriber = new AssertSubscriber<>(
@@ -283,7 +283,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		testSubscriber.assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noRetainValueOnError() {
 		final AssertSubscriber<Object> testSubscriber = AssertSubscriber.create();
 
@@ -303,7 +303,7 @@ public class MonoReduceTest extends ReduceOperatorTest<String, String>{
 		testSubscriber.assertErrorMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoReduce.ReduceSubscriber<String> test = new MonoReduce.ReduceSubscriber<>(actual, (s1, s2) -> s1 + s2);

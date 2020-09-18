@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelConcatMapTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelism() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelConcatMap<Integer, Integer> test = new ParallelConcatMap<>(source,
@@ -52,7 +52,7 @@ public class ParallelConcatMapTest {
 		assertThat(test.scan(Scannable.Attr.DELAY_ERROR)).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperatorErrorModeBoundary() throws Exception {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelConcatMap<Integer, Integer> test = new ParallelConcatMap<>(source,
@@ -62,7 +62,7 @@ public class ParallelConcatMapTest {
 		assertThat(test.scan(Scannable.Attr.DELAY_ERROR)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperatorErrorModeEnd() throws Exception {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelConcatMap<Integer, Integer> test = new ParallelConcatMap<>(source,
@@ -73,7 +73,7 @@ public class ParallelConcatMapTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@org.junit.jupiter.api.Test
+	@Test
 	public void concatDelayErrorWithFluxError() {
 		StepVerifier.create(
 				Flux.just(
@@ -88,7 +88,7 @@ public class ParallelConcatMapTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@org.junit.jupiter.api.Test
+	@Test
 	public void concatDelayErrorWithMonoError() {
 		StepVerifier.create(
 				Flux.just(

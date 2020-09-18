@@ -60,7 +60,7 @@ public class SchedulersMetricsTest {
 				);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void metricsActivatedHasDistinctSchedulerIdTags() {
 		autoCleanup(Schedulers.newParallel("A", 4));
 		autoCleanup(Schedulers.newParallel("A", 4));

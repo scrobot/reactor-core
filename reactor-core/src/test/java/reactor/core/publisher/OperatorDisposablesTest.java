@@ -49,7 +49,7 @@ public class OperatorDisposablesTest {
 	}
 	
 	
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singletonIsDisposed() {
 		assertThat(OperatorDisposables.DISPOSED.isDisposed()).isTrue();
 		OperatorDisposables.DISPOSED.dispose();
@@ -84,7 +84,7 @@ public class OperatorDisposablesTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void setReplace() {
 		for (int i = 0; i < 500; i++) {
 
@@ -113,7 +113,7 @@ public class OperatorDisposablesTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void setReplaceNull() {
 		TestDisposable r = new TestDisposable();
 

@@ -59,7 +59,7 @@ public class ExecutorSchedulerTest extends AbstractSchedulerTest {
 		return Schedulers.fromExecutor(Runnable::run);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void directAndWorkerTimeSchedulingRejected() {
 		Scheduler scheduler = scheduler();
 		Scheduler.Worker worker = scheduler.createWorker();
@@ -83,7 +83,7 @@ public class ExecutorSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void failingExecutorRejects() {
 		final IllegalStateException boom = new IllegalStateException("boom");
 		ExecutorScheduler scheduler = new ExecutorScheduler(
@@ -100,7 +100,7 @@ public class ExecutorSchedulerTest extends AbstractSchedulerTest {
 		assertThat(done.get()).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void failingPlainExecutorIsNotTerminated() {
 		AtomicInteger count = new AtomicInteger();
 		final IllegalStateException boom = new IllegalStateException("boom");
@@ -127,7 +127,7 @@ public class ExecutorSchedulerTest extends AbstractSchedulerTest {
 		assertThat(count.get()).isEqualTo(3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void failingExecutorServiceIsNotTerminated() {
 		AtomicInteger count = new AtomicInteger();
 		final IllegalStateException boom = new IllegalStateException("boom");
@@ -186,7 +186,7 @@ public class ExecutorSchedulerTest extends AbstractSchedulerTest {
 		assertThat(count.get()).isEqualTo(3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void failingAndShutDownExecutorServiceIsTerminated() {
 		final IllegalStateException boom = new IllegalStateException("boom");
 		ExecutorService service = new AbstractExecutorService() {
@@ -277,7 +277,7 @@ public class ExecutorSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanName() {
 		Executor executor = new PlainExecutor();
 
@@ -338,7 +338,7 @@ public class ExecutorSchedulerTest extends AbstractSchedulerTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanBuffered() throws InterruptedException {
 		ExecutorScheduler.ExecutorSchedulerWorker worker =
 				new ExecutorScheduler.ExecutorSchedulerWorker(task -> new Thread(task, "scanBuffered_NotTrampolining").start());

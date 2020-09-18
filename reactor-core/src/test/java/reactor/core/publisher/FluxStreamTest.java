@@ -125,7 +125,7 @@ public class FluxStreamTest {
 		  .assertError(IllegalStateException.class);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void streamConsumedBySubscription() {
 		Stream<Integer> stream = source.stream();
 		Flux<Integer> flux = Flux.fromStream(stream);
@@ -295,7 +295,7 @@ public class FluxStreamTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void streamClosedOnCancelConditional() {
 		AtomicInteger closed = new AtomicInteger();
 		Stream<String> source = Stream.of("foo", "bar", "baz")
@@ -338,7 +338,7 @@ public class FluxStreamTest {
 		assertThat(closed.get()).isEqualTo(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void streamClosedOnCompletionSlowPathConditional() {
 		AtomicInteger closed = new AtomicInteger();
 		Stream<String> source = Stream.of("foo", "bar", "baz")

@@ -55,7 +55,7 @@ public class FluxAutoConnectTest {
 		Assert.assertFalse("sp has subscribers?", e.downstreamCount() != 0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void connectAfterMany() {
 		EmitterProcessor<Integer> e = EmitterProcessor.create();
 
@@ -80,7 +80,7 @@ public class FluxAutoConnectTest {
 		Assert.assertFalse("sp has subscribers?", e.downstreamCount() != 0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMain() {
 		@SuppressWarnings("unchecked")
 		ConnectableFlux<String> source = Mockito.mock(MockUtils.TestScannableConnectableFlux.class);

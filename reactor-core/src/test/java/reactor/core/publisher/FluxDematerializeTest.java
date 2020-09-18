@@ -114,7 +114,7 @@ public class FluxDematerializeTest extends FluxOperatorTest<Signal<String>, Stri
 
 	Signal<Integer> error = Signal.error(new RuntimeException("Forced failure"));
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleCompletion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -154,7 +154,7 @@ public class FluxDematerializeTest extends FluxOperatorTest<Signal<String>, Stri
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void immediateError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 

@@ -106,7 +106,7 @@ public class FluxProcessorTest {
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorSymmetricBlackboxProcessor(){
 		UnicastProcessor<Integer> upstream = UnicastProcessor.create();
 		FluxProcessor<Integer, Integer> processor =

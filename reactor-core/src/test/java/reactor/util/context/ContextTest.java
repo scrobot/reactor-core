@@ -58,7 +58,7 @@ public class ContextTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void empty() throws Exception {
 		Context c = Context.empty();
 
@@ -66,7 +66,7 @@ public class ContextTest {
 		assertThat(c.isEmpty()).as("isEmpty").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of1() throws Exception {
 		Context c = Context.of(1, 100);
 
@@ -75,7 +75,7 @@ public class ContextTest {
 		assertThat(c.stream()).hasSize(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of2() throws Exception {
 		Context c = Context.of(1, 100, 2, 200);
 
@@ -84,7 +84,7 @@ public class ContextTest {
 		assertThat(c.stream()).hasSize(2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of3() throws Exception {
 		Context c = Context.of(1, 100, 2, 200, 3, 300);
 
@@ -93,7 +93,7 @@ public class ContextTest {
 		assertThat(c.stream()).hasSize(3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of4() throws Exception {
 		Context c = Context.of(1, 100, 2, 200, 3, 300, 4, 400);
 
@@ -102,7 +102,7 @@ public class ContextTest {
 		assertThat(c.stream()).hasSize(4);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of5() throws Exception {
 		Context c = Context.of(1, 100, 2, 200, 3, 300, 4, 400, 5, 500);
 
@@ -111,7 +111,7 @@ public class ContextTest {
 		assertThat(c.stream()).hasSize(5);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of1NullChecks() {
 		assertThatNullPointerException().as("key1").isThrownBy(() -> Context.of(null, 0))
 		                                .withMessage("key");
@@ -119,7 +119,7 @@ public class ContextTest {
 		                                .withMessage("value");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of2NullChecks() {
 		assertThatNullPointerException().as("key1").isThrownBy(() -> Context.of(null, 0, 2, 0))
 		                                .withMessage("key1");
@@ -147,7 +147,7 @@ public class ContextTest {
 		                                .withMessage("value3");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of4NullChecks() {
 		assertThatNullPointerException().as("key1").isThrownBy(() -> Context.of(null, 0, 2, 0, 3, 0, 4, 0))
 		                                .withMessage("key1");
@@ -167,7 +167,7 @@ public class ContextTest {
 		                                .withMessage("value4");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void of5NullChecks() {
 		assertThatNullPointerException().as("key1").isThrownBy(() -> Context.of(null, 0, 2, 0, 3, 0, 4, 0, 5, 0))
 		                                .withMessage("key1");
@@ -191,14 +191,14 @@ public class ContextTest {
 		                                .withMessage("value5");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofTwoRejectsDuplicates() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> Context.of(1, 0, 1, 0))
 				.withMessage("Key #1 (1) is duplicated");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofThreeRejectsDuplicates() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> Context.of(1, 0, 1, 0, 3, 0))
@@ -214,21 +214,21 @@ public class ContextTest {
 	}
 
 	//the other implementations rely on Context4.checkDuplicateKeys which is extensively tested in Context4Test
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofFourRejectsSimpleDuplicate() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> Context.of(1, 0, 2, 0, 3, 0, 3, 0))
 				.withMessage("Key #3 (3) is duplicated");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofFiveRejectsSimpleDuplicate() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> Context.of(1, 0, 2, 0, 3, 0, 4, 0, 4, 0))
 				.withMessage("Key #4 (4) is duplicated");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofMapZero() {
 		Map<String, Integer> map = new HashMap<>(0);
 
@@ -242,7 +242,7 @@ public class ContextTest {
 		                                .withMessage("map");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofMapOne() {
 		Map<String, Integer> map = new HashMap<>(1);
 		map.put("k1", 1);
@@ -252,7 +252,7 @@ public class ContextTest {
 		assertThat(context.getOrDefault("k1", 0)).isEqualTo(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofMapTwo() {
 		Map<String, Integer> map = new HashMap<>(2);
 		map.put("k1", 1);
@@ -278,7 +278,7 @@ public class ContextTest {
 		assertThat(context.getOrDefault("k3", 0)).isEqualTo(3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofMapFour() {
 		Map<String, Integer> map = new HashMap<>(4);
 		map.put("k1", 1);
@@ -294,7 +294,7 @@ public class ContextTest {
 		assertThat(context.getOrDefault("k4", 0)).isEqualTo(4);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofMapFive() {
 		Map<String, Integer> map = new HashMap<>(5);
 		map.put("k1", 1);
@@ -312,7 +312,7 @@ public class ContextTest {
 		assertThat(context.getOrDefault("k5", 0)).isEqualTo(5);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ofMapSix() {
 		Map<String, Integer> map = new HashMap<>(6);
 		map.put("k1", 1);

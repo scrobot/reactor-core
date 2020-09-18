@@ -143,7 +143,7 @@ public class Tuple7Test {
 		assertThat(full.get(10)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getAllValuesCorrespondToArray() {
 		Object[] array = full.toArray();
 
@@ -152,7 +152,7 @@ public class Tuple7Test {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void equalityOfSameReference() {
 		assertThat(full).isEqualTo(full);
 	}

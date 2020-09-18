@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoNextTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		Flux.range(1, 1_000_000)
 		    .next()
@@ -62,7 +62,7 @@ public class MonoNextTest {
 		cancelTester.assertCancelled();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoNext.NextSubscriber<String> test = new MonoNext.NextSubscriber<>(actual);

@@ -95,14 +95,14 @@ public class MonoDelayUntilTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sourceHasError() {
 		StepVerifier.create(Mono.<String>error(new IllegalStateException("boom"))
 				.delayUntil(a -> Mono.just("foo")))
 		            .verifyErrorMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void triggerHasError() {
 		StepVerifier.create(Mono.just("foo")
 		                        .delayUntil(a -> Mono.<String>error(new IllegalStateException("boom"))))
@@ -226,7 +226,7 @@ public class MonoDelayUntilTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanTrigger() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		@SuppressWarnings("unchecked")

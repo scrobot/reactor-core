@@ -56,7 +56,7 @@ public class ImmediateSchedulerTest extends AbstractSchedulerTest {
 		return false;
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void directAndWorkerTimeSchedulingRejected() {
 		Scheduler scheduler = scheduler();
 		Worker worker = scheduler.createWorker();
@@ -80,7 +80,7 @@ public class ImmediateSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanScheduler() {
 		ImmediateScheduler s = (ImmediateScheduler) Schedulers.immediate();
 

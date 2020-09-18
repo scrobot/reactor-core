@@ -166,7 +166,7 @@ public class FluxSkipLastTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void skipAllBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 

@@ -165,7 +165,7 @@ public class SchedulersTest {
 		assertThat(tracker).as("decorator invoked once").hasValue(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void schedulerDecoratorDisposedWhenRemoved() {
 		AtomicBoolean disposeTracker = new AtomicBoolean();
 
@@ -204,7 +204,7 @@ public class SchedulersTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@SuppressWarnings("deprecated")
 	public void schedulerDecoratorEmptyDecoratorsButCustomFactory() {
 		AtomicInteger factoryDecoratorCounter = new AtomicInteger();
@@ -223,7 +223,7 @@ public class SchedulersTest {
 		assertThat(factoryDecoratorCounter).hasValue(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void schedulerDecoratorRemovesKnown() {
 		BiFunction<Scheduler, ScheduledExecutorService, ScheduledExecutorService> decorator1 = (scheduler, serv) -> serv;
 		BiFunction<Scheduler, ScheduledExecutorService, ScheduledExecutorService> decorator2 = (scheduler, serv) -> serv;
@@ -250,7 +250,7 @@ public class SchedulersTest {
 				.isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelSchedulerDefaultNonBlocking() throws InterruptedException {
 		Scheduler scheduler = Schedulers.newParallel("parallelSchedulerDefaultNonBlocking");
 		CountDownLatch latch = new CountDownLatch(1);
@@ -338,14 +338,14 @@ public class SchedulersTest {
 		assertThat(errorRef.get()).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isInNonBlockingThreadFalse() {
 		assertThat(Thread.currentThread()).isNotInstanceOf(NonBlocking.class);
 
 		assertThat(Schedulers.isInNonBlockingThread()).as("isInNonBlockingThread").isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isNonBlockingThreadInstanceOf() {
 		Thread nonBlocking = new ReactorThreadFactory.NonBlockingThread(() -> {}, "isNonBlockingThreadInstanceOf_nonBlocking");
 		Thread thread = new Thread(() -> {}, "isNonBlockingThreadInstanceOf_blocking");
@@ -362,7 +362,7 @@ public class SchedulersTest {
 				"isInNonBlockingThreadTrue");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void handleErrorWithJvmFatalForwardsToUncaughtHandlerFusedCallable() {
 		AtomicBoolean handlerCaught = new AtomicBoolean();
 		Scheduler scheduler = Schedulers.fromExecutorService(Executors.newSingleThreadExecutor(r -> {
@@ -452,7 +452,7 @@ public class SchedulersTest {
 		assertThat(handlerCaught).as("uncaughtExceptionHandler used").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void handleErrorWithJvmFatalForwardsToUncaughtHandlerFusedInnerCallable() {
 		AtomicBoolean handlerCaught = new AtomicBoolean();
 		Scheduler scheduler = Schedulers.fromExecutorService(Executors.newSingleThreadExecutor(r -> {
@@ -529,7 +529,7 @@ public class SchedulersTest {
 		Assert.assertNotNull(cachedTimerNew.schedule(() -> {}));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testUncaughtHookCalledWhenOnErrorNotImplemented() {
 		AtomicBoolean handled = new AtomicBoolean(false);
 		Schedulers.onHandleError((t, e) -> handled.set(true));
@@ -542,7 +542,7 @@ public class SchedulersTest {
 		Assert.assertTrue("errorCallbackNotImplemented not handled", handled.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testUncaughtHookCalledWhenCommonException() {
 		AtomicBoolean handled = new AtomicBoolean(false);
 		Schedulers.onHandleError((t, e) -> handled.set(true));
@@ -555,7 +555,7 @@ public class SchedulersTest {
 		Assert.assertTrue("IllegalArgumentException not handled", handled.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testUncaughtHooksCalledWhenThreadDeath() {
 		AtomicReference<Throwable> onHandleErrorInvoked = new AtomicReference<>();
 		AtomicReference<Throwable> globalUncaughtInvoked = new AtomicReference<>();
@@ -579,12 +579,12 @@ public class SchedulersTest {
 		                                 .hasValue(fatal);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testRejectingSingleScheduler() {
 		assertRejectingScheduler(Schedulers.newSingle("test"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testRejectingParallelScheduler() {
 		assertRejectingScheduler(Schedulers.newParallel("test"));
 	}
@@ -666,7 +666,7 @@ public class SchedulersTest {
 		Assert.assertTrue("Timeout too long", (end - start) >= 1000);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void immediateTaskIsSkippedIfDisposeRightAfter() throws Exception {
 		Scheduler serviceRB = Schedulers.newSingle("rbWork");
 		Scheduler.Worker r = serviceRB.createWorker();
@@ -694,7 +694,7 @@ public class SchedulersTest {
 		Assert.assertTrue("Timeout too long", (end - start) >= 1000);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void singleSchedulerPipelining() throws Exception {
 		Scheduler serviceRB = Schedulers.newSingle("rb", true);
 		Scheduler.Worker dispatcher = serviceRB.createWorker();
@@ -717,7 +717,7 @@ public class SchedulersTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testCachedSchedulerDelegates() {
 		Scheduler mock = new Scheduler() {
 			@Override
@@ -1130,7 +1130,7 @@ public class SchedulersTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSupportBuffered() throws InterruptedException {
 		Executor plain = Runnable::run;
 		ExecutorService plainService = Executors.newSingleThreadExecutor();
@@ -1244,7 +1244,7 @@ public class SchedulersTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scheduleInstantTaskTest() throws Exception {
 		try(TaskCheckingScheduledExecutor executorService = new TaskCheckingScheduledExecutor()) {
 			CountDownLatch latch = new CountDownLatch(1);
@@ -1255,7 +1255,7 @@ public class SchedulersTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scheduleInstantTaskWithDelayTest() throws Exception {
 		try(TaskCheckingScheduledExecutor executorService = new TaskCheckingScheduledExecutor()) {
 			CountDownLatch latch = new CountDownLatch(1);
@@ -1266,7 +1266,7 @@ public class SchedulersTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testWorkerSchedulePeriodicallyCancelsSchedulerTask() throws Exception {
 		try(TaskCheckingScheduledExecutor executorService = new TaskCheckingScheduledExecutor()) {
 			AtomicInteger zeroDelayZeroPeriod = new AtomicInteger();
@@ -1305,7 +1305,7 @@ public class SchedulersTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testWorkerScheduleRejectedWithDisposedParent() {
 		try(TaskCheckingScheduledExecutor executorService = new TaskCheckingScheduledExecutor()) {
 			Disposable.Composite tasks = Disposables.composite();
@@ -1331,7 +1331,7 @@ public class SchedulersTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testWorkerScheduleSupportZeroPeriodWithDelayPeriod() {
 		try(TaskCheckingScheduledExecutor executorService = new TaskCheckingScheduledExecutor()) {
 			Disposable.Composite tasks = Disposables.composite();

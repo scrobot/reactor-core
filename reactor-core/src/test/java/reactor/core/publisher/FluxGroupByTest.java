@@ -136,7 +136,7 @@ public class FluxGroupByTest extends
 		ts2.assertValues(-2, -4, -6, -8, -10);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void takeTwoGroupsOnly() {
 		AssertSubscriber<GroupedFlux<Integer, Integer>> ts = AssertSubscriber.create();
 
@@ -162,7 +162,7 @@ public class FluxGroupByTest extends
 		ts2.assertValues(2, 5, 8);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void keySelectorNull() {
 		AssertSubscriber<GroupedFlux<Integer, Integer>> ts = AssertSubscriber.create();
 
@@ -235,7 +235,7 @@ public class FluxGroupByTest extends
 		ts.assertValues(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void flatMapBackHidden() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -781,7 +781,7 @@ public class FluxGroupByTest extends
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void groupsCompleteAsSoonAsMainCompletesNoFusion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -815,7 +815,7 @@ public class FluxGroupByTest extends
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void prefetchIsUsed() {
 		AtomicLong initialRequest = new AtomicLong();
 

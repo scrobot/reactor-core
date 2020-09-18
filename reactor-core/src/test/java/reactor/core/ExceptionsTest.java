@@ -56,7 +56,7 @@ public class ExceptionsTest {
 		assertTrue(Exceptions.unwrap(w) == w);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void duplicateOnSubscribeReferencesSpec() {
 		IllegalStateException error = duplicateOnSubscribeException();
 		assertThat(error).hasMessageContaining("Rule 2.12");
@@ -70,7 +70,7 @@ public class ExceptionsTest {
 		assertThat(error1).isNotSameAs(error2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorCallbackNotImplementedRejectsNull() {
 		//noinspection ThrowableNotThrown,ConstantConditions
 		assertThatNullPointerException().isThrownBy(() -> Exceptions.errorCallbackNotImplemented(null));
@@ -128,7 +128,7 @@ public class ExceptionsTest {
 		assertThat(Exceptions.isBubbling(bubbling)).as("bubbling").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isCancelAndCancelIsBubbling() {
 		Throwable notCancel = new BubblingException("foo");
 		Throwable cancel = new CancelException();
@@ -139,7 +139,7 @@ public class ExceptionsTest {
 		assertThat(Exceptions.isBubbling(cancel)).as("cancel are bubbling").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nullOrNegativeRequestReferencesSpec() {
 		assertThat(Exceptions.nullOrNegativeRequestException(-3))
 				.hasMessage("Spec. Rule 3.9 - Cannot request a non strictly positive number: -3");
@@ -172,7 +172,7 @@ public class ExceptionsTest {
 				.withCause(expected.getCause());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void throwIfJvmFatal() {
 		VirtualMachineError fatal1 = new VirtualMachineError() {};
 		ThreadDeath fatal2 = new ThreadDeath();
@@ -194,7 +194,7 @@ public class ExceptionsTest {
 				.isSameAs(fatal3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void multipleWithNullVararg() {
 		//noinspection ConstantConditions
 		assertThat(Exceptions.multiple((Throwable[]) null))
@@ -204,7 +204,7 @@ public class ExceptionsTest {
 	            .hasNoSuppressedExceptions();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void multipleWithOneVararg() {
 		IOException e1 = new IOException("boom");
 
@@ -215,7 +215,7 @@ public class ExceptionsTest {
 	            .hasSuppressedException(e1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void multipleWithTwoVararg() {
 		IOException e1 = new IOException("boom");
 		IllegalArgumentException  e2 = new IllegalArgumentException("boom");
@@ -272,13 +272,13 @@ public class ExceptionsTest {
 		assertThat(Exceptions.isMultiple(null)).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void unwrapMultipleNull() {
 		assertThat(Exceptions.unwrapMultiple(null))
 				.isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void unwrapMultipleNotComposite() {
 		RuntimeException e1 = Exceptions.failWithCancel();
 		assertThat(Exceptions.unwrapMultiple(e1)).containsExactly(e1);
@@ -395,7 +395,7 @@ public class ExceptionsTest {
 				.isSameAs(TERMINATED);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void addSuppressedRuntimeToNormal() {
 		RuntimeException original = new RuntimeException("foo");
 		Exception suppressed = new IllegalStateException("boom");
@@ -405,7 +405,7 @@ public class ExceptionsTest {
 				.hasSuppressedException(suppressed);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void addSuppressedRuntimeToRejectedInstance() {
 		RuntimeException original = new RejectedExecutionException("foo");
 		Exception suppressed = new IllegalStateException("boom");
@@ -435,7 +435,7 @@ public class ExceptionsTest {
 				.hasSuppressedException(suppressed);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void addSuppressedRuntimeToRejectedSingleton2() {
 		RuntimeException original = NOT_TIME_CAPABLE_REJECTED_EXECUTION;
 		Exception suppressed = new IllegalStateException("boom");

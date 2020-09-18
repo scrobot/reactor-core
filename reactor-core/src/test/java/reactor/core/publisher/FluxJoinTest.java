@@ -34,7 +34,7 @@ public class FluxJoinTest {
 		return t1 -> publisher;
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal1() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 
@@ -62,7 +62,7 @@ public class FluxJoinTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal1WithDuration() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -91,7 +91,7 @@ public class FluxJoinTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal2() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -117,7 +117,7 @@ public class FluxJoinTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void leftThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -136,7 +136,7 @@ public class FluxJoinTest {
 		  .assertNoValues();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void rightThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -155,7 +155,7 @@ public class FluxJoinTest {
 		  .assertNoValues();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void leftDurationThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -191,7 +191,7 @@ public class FluxJoinTest {
 		  .assertNoValues();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void leftDurationSelectorThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -211,7 +211,7 @@ public class FluxJoinTest {
 		  .assertNoValues();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void rightDurationSelectorThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -231,7 +231,7 @@ public class FluxJoinTest {
 		  .assertNoValues();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void resultSelectorThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -253,7 +253,7 @@ public class FluxJoinTest {
 		  .assertNoValues();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscription() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, sub -> sub.request(100));
 		FluxJoin.JoinSubscription<String, String, String, String, String> test =

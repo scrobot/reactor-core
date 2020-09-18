@@ -49,7 +49,7 @@ public class MonoFlatMapManyTest {
 		.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalInnerEmpty() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 

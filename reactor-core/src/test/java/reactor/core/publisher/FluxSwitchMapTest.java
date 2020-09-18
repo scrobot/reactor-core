@@ -140,7 +140,7 @@ public class FluxSwitchMapTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void switchRegularQueue() {
 		Flux<String> source = Flux.just("a", "bb", "ccc");
 		FluxSwitchMap<String, Integer> test = new FluxSwitchMap<>(
@@ -206,7 +206,7 @@ public class FluxSwitchMapTest {
 		  .assertNotComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void innerError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -233,7 +233,7 @@ public class FluxSwitchMapTest {
 		Assert.assertFalse("sp2 has subscribers?", sp2.hasDownstreams());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapperThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 

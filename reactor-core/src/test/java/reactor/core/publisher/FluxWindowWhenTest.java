@@ -63,7 +63,7 @@ public class FluxWindowWhenTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noWindowRetained_gh975() throws InterruptedException {
 		LongAdder created = new LongAdder();
 		class Wrapper {
@@ -387,7 +387,7 @@ public class FluxWindowWhenTest {
 		end.assertNoSubscribers();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void startDoneThenComplete() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> start = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -430,7 +430,7 @@ public class FluxWindowWhenTest {
 		end.assertNoSubscribers();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void endError() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> start = TestPublisher.create();
@@ -494,7 +494,7 @@ public class FluxWindowWhenTest {
 		//end doesn't cleanup and as such still has a subscriber
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void endDoneThenNext() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> start = TestPublisher.create();
@@ -538,7 +538,7 @@ public class FluxWindowWhenTest {
 		            .hasDropped(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mainDoneThenError() {
 		TestPublisher<Integer> source = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 
@@ -551,7 +551,7 @@ public class FluxWindowWhenTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mainDoneThenComplete() {
 		TestPublisher<Integer> source = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 

@@ -22,7 +22,7 @@ import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxCallableTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableReturnsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -34,7 +34,7 @@ public class FluxCallableTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -66,7 +66,7 @@ public class FluxCallableTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 

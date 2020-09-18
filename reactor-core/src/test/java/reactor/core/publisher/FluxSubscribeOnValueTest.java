@@ -34,13 +34,13 @@ public class FluxSubscribeOnValueTest {
 
 	ConcurrentMap<Integer, Integer> execs = new ConcurrentHashMap<>();
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void finishedConstantsAreNotSame() {
 		assertThat(FluxSubscribeOnValue.ScheduledScalar.FINISHED)
 				.isNotSameAs(FluxSubscribeOnValue.ScheduledEmpty.FINISHED);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testSubscribeOnValueFusion() {
 
 		StepVerifier.create(Flux.range(1, 100)
@@ -75,7 +75,7 @@ public class FluxSubscribeOnValueTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanOperator() {
 		final Flux<Integer> test = Flux.just(1).subscribeOn(Schedulers.immediate());
 

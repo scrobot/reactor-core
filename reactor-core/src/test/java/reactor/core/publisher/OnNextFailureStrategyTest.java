@@ -211,7 +211,7 @@ public class OnNextFailureStrategyTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void resumeDropIfPredicateFails() {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicReference<Object> value = new AtomicReference<>();
@@ -244,7 +244,7 @@ public class OnNextFailureStrategyTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void resumeDropValueHookFails() {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		UnsupportedOperationException failure = new UnsupportedOperationException("value hook");
@@ -323,7 +323,7 @@ public class OnNextFailureStrategyTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void resume() {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicReference<Object> value = new AtomicReference<>();
@@ -391,7 +391,7 @@ public class OnNextFailureStrategyTest {
 		assertThat(value.get()).isEqualTo("foo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void resumeIfMatch() {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicReference<Object> value = new AtomicReference<>();
@@ -439,7 +439,7 @@ public class OnNextFailureStrategyTest {
 		assertThat(value.get()).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void resumeIfWithFatalMatch() {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicReference<Object> value = new AtomicReference<>();
@@ -512,7 +512,7 @@ public class OnNextFailureStrategyTest {
 		assertThat(value.get()).isEqualTo("foo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void resumeIfPredicateFails() {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicReference<Object> value = new AtomicReference<>();
@@ -590,7 +590,7 @@ public class OnNextFailureStrategyTest {
 		             .hasSuppressedException(exception);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void stopProcessWithFatal() {
 		OnNextFailureStrategy strategy = OnNextFailureStrategy.stop();
 		Throwable exception = new NoSuchMethodError("foo");
@@ -602,7 +602,7 @@ public class OnNextFailureStrategyTest {
 						.hasNoSuppressedExceptions());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxApiErrorContinue() {
 		List<String> valueDropped = new ArrayList<>();
 		List<Throwable> errorDropped = new ArrayList<>();
@@ -725,7 +725,7 @@ public class OnNextFailureStrategyTest {
 		assertThat(errorDropped).isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxApiWithinFlatMap() {
 		Flux<Integer> test = Flux.just(1, 2, 3)
 		                         .flatMap(i -> Flux.range(0, i + 1)
@@ -779,7 +779,7 @@ public class OnNextFailureStrategyTest {
 		assertThat(errorRef).hasValue(null);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void overrideInheritedErrorStrategyInFlatMapMono() {
 		AtomicReference<Throwable> errorRef = new AtomicReference<>();
 		Mono<Integer> test = Mono.just(1)
@@ -798,7 +798,7 @@ public class OnNextFailureStrategyTest {
 		assertThat(errorRef).hasValue(null);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorStrategyConfiguredInFlatMapDoesNotLeak() {
 		@SuppressWarnings("divzero")
 		Flux<Integer> test = Flux.just(0, 1, 2)
@@ -810,7 +810,7 @@ public class OnNextFailureStrategyTest {
 				.verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorStrategySimpleScoping() {
 		Flux<Integer> test = Flux.just(0, 1, 2, 3)
 				.map(i -> {

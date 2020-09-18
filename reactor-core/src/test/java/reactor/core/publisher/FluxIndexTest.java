@@ -61,7 +61,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 		);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void defaultNormal() {
 		AtomicLong counter = new AtomicLong(2);
 		StepVerifier.create(
@@ -80,7 +80,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void defaultBackpressured() {
 		AtomicLong counter = new AtomicLong(4);
 
@@ -105,7 +105,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void defaultConditional() {
 		AtomicLong counter = new AtomicLong(2);
 		StepVerifier.create(
@@ -144,7 +144,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void customBackpressured() {
 		AtomicLong counter = new AtomicLong(4);
 
@@ -169,7 +169,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void customConditional() {
 		AtomicLong counter = new AtomicLong(2);
 		StepVerifier.create(
@@ -189,7 +189,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sourceNull() {
 		//noinspection ConstantConditions
 		assertThatNullPointerException()
@@ -197,7 +197,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 				.withMessage(null);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void indexMapperNull() {
 		Flux<String> source = Flux.just("foo", "bar");
 		//noinspection ConstantConditions
@@ -206,7 +206,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 				.withMessage("indexMapper must be non null");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void indexMapperReturnsNull() {
 		Flux<String> source = Flux.just("foo", "bar");
 		Flux<Tuple2<Integer, String>> test = new FluxIndex<>(source,
@@ -220,7 +220,7 @@ public class FluxIndexTest extends FluxOperatorTest<Integer, Tuple2<Long, Intege
 		            .verifyErrorMessage("indexMapper returned a null value at raw index 1 for value bar");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void indexMapperThrows() {
 		Flux<String> source = Flux.just("foo", "bar");
 		Flux<Tuple2<Integer, String>> test = new FluxIndex<>(source,

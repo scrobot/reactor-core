@@ -44,7 +44,7 @@ public class FluxWindowTimeoutTest {
 		           .concatMap(Flux::buffer);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void windowWithTimeoutAccumulateOnTimeOrSize() {
 		StepVerifier.withVirtualTime(this::scenario_windowWithTimeoutAccumulateOnTimeOrSize)
 		            .thenAwait(Duration.ofMillis(1500))
@@ -174,7 +174,7 @@ public class FluxWindowTimeoutTest {
 		.verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void rejectedDuringLifecycle() {
 		AtomicBoolean reject = new AtomicBoolean();
 		Scheduler testScheduler = new Scheduler() {

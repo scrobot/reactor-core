@@ -45,7 +45,7 @@ public class ConsoleLoggerTest {
 		errContent.reset();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isTraceEnabled() throws Exception {
 		assertThat(logger.isTraceEnabled()).isTrue();
 	}
@@ -66,7 +66,7 @@ public class ConsoleLoggerTest {
 		assertThat(outContent.toString()).isEqualTo("[TRACE] (" + Thread.currentThread().getName() + ") message with 1 format\n");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void trace2() throws Exception {
 		logger.trace("with cause", CAUSE);
 
@@ -106,7 +106,7 @@ public class ConsoleLoggerTest {
 		assertThat(logger.isDebugEnabled()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void debug() throws Exception {
 		logger.debug("message");
 
@@ -114,7 +114,7 @@ public class ConsoleLoggerTest {
 		assertThat(outContent.toString()).isEqualTo("[DEBUG] (" + Thread.currentThread().getName() + ") message\n");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void debug1() throws Exception {
 		logger.debug("message {} {} format", "with", 1);
 
@@ -157,7 +157,7 @@ public class ConsoleLoggerTest {
 		assertThat(log.isDebugEnabled()).as("isDebugEnabled").isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isInfoEnabled() throws Exception {
 		assertThat(logger.isInfoEnabled()).isTrue();
 	}
@@ -178,7 +178,7 @@ public class ConsoleLoggerTest {
 		assertThat(outContent.toString()).isEqualTo("[ INFO] (" + Thread.currentThread().getName() + ") message with 1 format\n");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void info2() throws Exception {
 		logger.info("with cause", CAUSE);
 
@@ -205,7 +205,7 @@ public class ConsoleLoggerTest {
 		assertThat(logger.isWarnEnabled()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void warn() throws Exception {
 		logger.warn("message");
 
@@ -244,12 +244,12 @@ public class ConsoleLoggerTest {
 		assertThat(outContent.size()).isZero();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isErrorEnabled() throws Exception {
 		assertThat(logger.isErrorEnabled()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error() throws Exception {
 		logger.error("message");
 
@@ -276,7 +276,7 @@ public class ConsoleLoggerTest {
 						"\tat reactor.util.ConsoleLoggerTest");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorNulls() {
 		logger.error("vararg {} is {}", (Object[]) null);
 		logger.error("param {} is {}", null, null);
@@ -287,7 +287,7 @@ public class ConsoleLoggerTest {
 		assertThat(outContent.size()).isZero();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void formatNull() {
 		logger.info(null, null, null);
 

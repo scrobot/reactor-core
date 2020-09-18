@@ -80,7 +80,7 @@ public class FluxMetricsFuseableTest {
 		assertThat(fuseableSubscriber.size()).as("size after clear").isEqualTo(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void queueClearEmptySizeWhenQueueSubscriptionNull() {
 		AssertSubscriber<Integer> testSubscriber = AssertSubscriber.create();
 		MicrometerFluxMetricsFuseableSubscriber<Integer> fuseableSubscriber =
@@ -413,7 +413,7 @@ public class FluxMetricsFuseableTest {
 		assertThat(meter.count()).as("after more subscribe").isEqualTo(3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void requestTrackingDisabledIfNotNamedFuseable() {
 		Flux<Integer> source = Flux.range(1, 10);
 		new FluxMetricsFuseable<>(source, registry)

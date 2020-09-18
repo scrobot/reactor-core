@@ -101,7 +101,7 @@ public class FluxFilterFuseableTest extends FluxOperatorTest<String, String> {
         }
     }
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnNextPredicateFail() {
 		StepVerifier.create(Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) //range uses tryOnNext, so let's use just instead
 		                        .filter(i -> { throw new IllegalStateException("boom"); })
@@ -159,7 +159,7 @@ public class FluxFilterFuseableTest extends FluxOperatorTest<String, String> {
 		            .hasDiscarded(1); //publishOn also might discard the rest
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardPollAsyncPredicateMiss() {
 		StepVerifier.create(Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) //range uses tryOnNext, so let's use just instead
 		                        .publishOn(Schedulers.newSingle("discardPollAsync"))
@@ -207,7 +207,7 @@ public class FluxFilterFuseableTest extends FluxOperatorTest<String, String> {
 		            .hasDiscardedExactly(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardConditionalOnNextPredicateMiss() {
 		StepVerifier.create(Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) //range uses tryOnNext, so let's use just instead
 		                        .filter(i -> i % 2 == 0)
@@ -232,7 +232,7 @@ public class FluxFilterFuseableTest extends FluxOperatorTest<String, String> {
 		            .hasDiscardedExactly(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardConditionalTryOnNextPredicateMiss() {
 		StepVerifier.create(Flux.range(1, 10) //range uses tryOnNext
 		                         .filter(i -> i % 2 == 0)
@@ -272,7 +272,7 @@ public class FluxFilterFuseableTest extends FluxOperatorTest<String, String> {
 		            .hasDiscardedExactly(1, 3, 5, 7, 9);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardConditionalPollSyncPredicateFail() {
 		StepVerifier.create(Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) //range uses tryOnNext, so let's use just instead
 		                        .filter(i -> { throw new IllegalStateException("boom"); })
@@ -284,7 +284,7 @@ public class FluxFilterFuseableTest extends FluxOperatorTest<String, String> {
 		            .hasDiscardedExactly(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardConditionalPollSyncPredicateMiss() {
 		StepVerifier.create(Flux.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) //range uses tryOnNext, so let's use just instead
 		                        .filter(i -> i % 2 == 0)

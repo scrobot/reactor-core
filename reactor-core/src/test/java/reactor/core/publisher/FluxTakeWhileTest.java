@@ -28,18 +28,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxTakeWhileTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sourceNull() {
 		assertThrows(NullPointerException.class, () -> new FluxTakeWhile<>(null, v -> true));
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void predicateNull() {
 		assertThrows(NullPointerException.class, () -> Flux.never().takeWhile(null));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void takeAll() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -52,7 +52,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void takeAllBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -90,7 +90,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void takeSomeBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -128,7 +128,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void takeNoneBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -147,7 +147,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void predicateThrows() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -164,7 +164,7 @@ public class FluxTakeWhileTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void aFluxCanBeLimitedWhile(){
 		StepVerifier.create(Flux.just("test", "test2", "test3")
 		                        .takeWhile("test"::equals)

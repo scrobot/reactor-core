@@ -27,13 +27,13 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoErrorSuppliedTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		StepVerifier.create(Mono.error(() -> new Exception("test")))
 		            .verifyErrorMessage("test");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void throwOnBlock() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new MonoErrorSupplied<>(() -> new IllegalStateException("boom"))
@@ -42,7 +42,7 @@ public class MonoErrorSuppliedTest {
 				.withMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void throwOnTimeoutBlock() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new MonoErrorSupplied<>(() -> new IllegalStateException("boom"))
@@ -51,7 +51,7 @@ public class MonoErrorSuppliedTest {
 				.withMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void throwOnCall() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new MonoErrorSupplied<>(() -> new IllegalStateException("boom"))
@@ -60,7 +60,7 @@ public class MonoErrorSuppliedTest {
 				.withMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lazilyEvaluatedSubscribe() {
 		AtomicInteger count = new AtomicInteger();
 		Mono<Object> error = Mono.error(() -> new IllegalStateException("boom" + count.incrementAndGet()));
@@ -71,7 +71,7 @@ public class MonoErrorSuppliedTest {
 		            .verifyErrorMessage("boom4");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lazilyEvaluatedBlock() {
 		AtomicInteger count = new AtomicInteger();
 		Mono<Object> error = Mono.error(() -> new IllegalStateException("boom" + count.incrementAndGet()));
@@ -85,7 +85,7 @@ public class MonoErrorSuppliedTest {
 		assertThat(count).as("after block").hasValue(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lazilyEvaluatedBlockTimeout() {
 		AtomicInteger count = new AtomicInteger();
 		Mono<Object> error = Mono.error(() -> new IllegalStateException("boom" + count.incrementAndGet()));

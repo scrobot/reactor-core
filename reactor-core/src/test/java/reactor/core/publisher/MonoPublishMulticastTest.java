@@ -111,7 +111,7 @@ public class MonoPublishMulticastTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void failingFunction() {
 		RuntimeException expected = new IllegalStateException("boom");
 		StepVerifier.create(Mono.just("Foo")
@@ -157,7 +157,7 @@ public class MonoPublishMulticastTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMulticastInner() {
 		CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		MonoPublishMulticast.MonoPublishMulticaster<Integer> parent =

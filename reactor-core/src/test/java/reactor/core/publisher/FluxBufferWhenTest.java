@@ -58,7 +58,7 @@ public class FluxBufferWhenTest {
 	private static final Logger LOGGER = Loggers.getLogger(FluxBufferWhenTest.class);
 
 	//see https://github.com/reactor/reactor-core/issues/969
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferedCanCompleteIfOpenNeverCompletesDropping() {
 		//this test ensures that dropping buffers will complete if the source is exhausted before the open publisher finishes
 		Mono<Integer> buffered = Flux.range(1, 200)
@@ -76,7 +76,7 @@ public class FluxBufferWhenTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/969
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferedCanCompleteIfOpenNeverCompletesOverlapping() {
 		//this test ensures that overlapping buffers will complete if the source is exhausted before the open publisher finishes
 		Mono<Integer> buffered = Flux.range(1, 200)
@@ -94,7 +94,7 @@ public class FluxBufferWhenTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/969
-	@org.junit.jupiter.api.Test
+	@Test
 	public void timedOutBuffersDontLeak() throws InterruptedException {
 		LongAdder created = new LongAdder();
 		MemoryUtils.RetainedDetector retainedDetector = new MemoryUtils.RetainedDetector();
@@ -155,7 +155,7 @@ public class FluxBufferWhenTest {
 				.isEqualTo(created.longValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		AssertSubscriber<List<Integer>> ts = AssertSubscriber.create();
 
@@ -212,7 +212,7 @@ public class FluxBufferWhenTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void startCompletes() {
 		AssertSubscriber<List<Integer>> ts = AssertSubscriber.create();
 
@@ -255,7 +255,7 @@ public class FluxBufferWhenTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferWillAcumulateMultipleListsOfValuesOverlap() {
 		//given: "a source and a collected flux"
 		EmitterProcessor<Integer> numbers = EmitterProcessor.create();
@@ -292,7 +292,7 @@ public class FluxBufferWhenTest {
 		           .buffer(Duration.ofMillis(300), Duration.ofMillis(200));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferWillSubdivideAnInputFluxOverlapTime() {
 		StepVerifier.withVirtualTime(this::scenario_bufferWillSubdivideAnInputFluxOverlapTime)
 		            .thenAwait(Duration.ofSeconds(10))
@@ -309,7 +309,7 @@ public class FluxBufferWhenTest {
 		           .buffer(Duration.ofMillis(300L), Duration.ofMillis(200L));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferWillSubdivideAnInputFluxOverlapTime2() {
 		StepVerifier.withVirtualTime(this::scenario_bufferWillSubdivideAnInputFluxOverlapTime2)
 		            .thenAwait(Duration.ofSeconds(10))
@@ -342,7 +342,7 @@ public class FluxBufferWhenTest {
 		           .buffer(Duration.ofMillis(200), Duration.ofMillis(300));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferWillSubdivideAnInputFluxGapTime() {
 		StepVerifier.withVirtualTime(this::scenario_bufferWillSubdivideAnInputFluxGapTime)
 		            .thenAwait(Duration.ofSeconds(10))
@@ -352,7 +352,7 @@ public class FluxBufferWhenTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanStartEndMain() {
 		CoreSubscriber<List<String>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 
@@ -375,7 +375,7 @@ public class FluxBufferWhenTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanStartEndMainCancelled() {
 		CoreSubscriber<List<String>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 
@@ -388,7 +388,7 @@ public class FluxBufferWhenTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanStartEndMainCompleted() {
 		CoreSubscriber<List<String>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 
@@ -427,7 +427,7 @@ public class FluxBufferWhenTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanWhenOpenSubscriber() {
 		CoreSubscriber<Object> actual = new LambdaSubscriber<>(null, null, null, null);
 
@@ -450,7 +450,7 @@ public class FluxBufferWhenTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseDisposedOnComplete() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> open = TestPublisher.create();
@@ -477,7 +477,7 @@ public class FluxBufferWhenTest {
 		close.assertNoSubscribers();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseMainError() {
 		StepVerifier.create(Flux.error(new IllegalStateException("boom"))
 				.bufferWhen(Flux.never(), a -> Flux.never())
@@ -485,7 +485,7 @@ public class FluxBufferWhenTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseBadSource() {
 		TestPublisher<Object> badSource =
 				TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -503,7 +503,7 @@ public class FluxBufferWhenTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseOpenCompletes() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> open = TestPublisher.create();
@@ -529,7 +529,7 @@ public class FluxBufferWhenTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseOpenCompletesNoBuffers() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> open = TestPublisher.create();
@@ -554,7 +554,7 @@ public class FluxBufferWhenTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseTake() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> open = TestPublisher.create();
@@ -576,7 +576,7 @@ public class FluxBufferWhenTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseLimit() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> open = TestPublisher.create();
@@ -598,7 +598,7 @@ public class FluxBufferWhenTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseEmptyBackpressure() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> open = TestPublisher.create();
@@ -615,7 +615,7 @@ public class FluxBufferWhenTest {
 //		ts.assertResult();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseErrorBackpressure() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> open = TestPublisher.create();
@@ -632,7 +632,7 @@ public class FluxBufferWhenTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseBadOpen() {
 		TestPublisher<Object> badOpen = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 
@@ -651,7 +651,7 @@ public class FluxBufferWhenTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void openCloseBadClose() {
 		TestPublisher<Object> badClose = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 
@@ -670,7 +670,7 @@ public class FluxBufferWhenTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void immediateOpen() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .bufferWhen(Mono.just("OPEN"), u -> Mono.delay(Duration.ofMillis(100)))
@@ -715,7 +715,7 @@ public class FluxBufferWhenTest {
 				.isEmpty();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnCancel() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatWith(Mono.never())
@@ -726,7 +726,7 @@ public class FluxBufferWhenTest {
 				.hasDiscardedExactly(1, 2, 3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnCancelPostQueueing() {
 		List<Object> discarded = new ArrayList<>();
 
@@ -746,7 +746,7 @@ public class FluxBufferWhenTest {
 		assertThat(discarded).containsExactly(1, 2, 3, 4, 5);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnNextWhenNoBuffers() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        //buffer don't open in time
@@ -756,7 +756,7 @@ public class FluxBufferWhenTest {
 		            .hasDiscardedExactly(1, 2, 3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnError() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatWith(Mono.error(new IllegalStateException("boom")))
@@ -766,7 +766,7 @@ public class FluxBufferWhenTest {
 		            .hasDiscardedExactly(1, 2, 3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnDrainCancelled() {
 		List<Object> discarded = new ArrayList<>();
 
@@ -789,7 +789,7 @@ public class FluxBufferWhenTest {
 		assertThat(discarded).containsExactly(1, 2, 3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnDrainDoneWithErrors() {
 		List<Object> discarded = new ArrayList<>();
 
@@ -810,7 +810,7 @@ public class FluxBufferWhenTest {
 		assertThat(discarded).containsExactly(1, 2, 3, 4, 5);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnDrainEmittedAllCancelled() {
 		List<Object> discarded = new ArrayList<>();
 
@@ -832,7 +832,7 @@ public class FluxBufferWhenTest {
 		assertThat(discarded).containsExactly(1, 2, 3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnDrainEmittedAllWithErrors() {
 		List<Object> discarded = new ArrayList<>();
 
@@ -852,7 +852,7 @@ public class FluxBufferWhenTest {
 		assertThat(discarded).containsExactly(1, 2, 3, 4, 5);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnOpenError() {
 		StepVerifier.withVirtualTime(() -> Flux.interval(Duration.ZERO, Duration.ofMillis(100)) // 0, 1, 2
 		                                       .map(Long::intValue)
@@ -865,7 +865,7 @@ public class FluxBufferWhenTest {
 		            .hasDiscardedExactly(0, 1, 1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardOnBoundaryError() {
 		StepVerifier.withVirtualTime(() -> Flux.interval(Duration.ZERO, Duration.ofMillis(100)) // 0, 1, 2
 		                                       .map(Long::intValue)

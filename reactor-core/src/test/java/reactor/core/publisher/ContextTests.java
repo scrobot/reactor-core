@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
  */
 public class ContextTests {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextPassing() throws InterruptedException {
 		AtomicReference<Context> innerC = new AtomicReference<>();
 
@@ -67,7 +67,7 @@ public class ContextTests {
 		                 .get("test"), is("baseSubscriber_take_range_innerFlatmap"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextPassing2() throws InterruptedException {
 		AtomicReference<String> innerC = new AtomicReference<>();
 
@@ -92,7 +92,7 @@ public class ContextTests {
 		assertThat(innerC.get(), is("foobar"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextGet() throws InterruptedException {
 
 		StepVerifier.create(Flux.range(1, 1000)
@@ -110,7 +110,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void currentContext() throws InterruptedException {
 		StepVerifier.create(Mono.just("foo")
 		                        .flatMap(d -> Mono.subscriberContext()
@@ -132,7 +132,7 @@ public class ContextTests {
 				            && "Context is empty".equals(t.getMessage()));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextGetHide() throws InterruptedException {
 
 		StepVerifier.create(Flux.range(1, 1000)
@@ -152,7 +152,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextGetMono() throws InterruptedException {
 
 		StepVerifier.create(Mono.just(1)
@@ -166,7 +166,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextGetHideMono() throws InterruptedException {
 
 		StepVerifier.create(Mono.just(1)
@@ -193,7 +193,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoSubscriberContextWithMergedEmpty() {
 		StepVerifier.create(
 				Mono.just("foo")
@@ -205,7 +205,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoSubscriberContextWithBothEmpty() {
 		StepVerifier.create(
 				Mono.just("foo")
@@ -229,7 +229,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxSubscriberContextWithMergedEmpty() {
 		StepVerifier.create(
 				Flux.just("foo")
@@ -286,7 +286,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextNotAccessibleWithEmptySubscriptionOnly() {
 		StepVerifier.create(Flux.empty(), StepVerifierOptions.create().withInitialContext(Context.of("a", "b")))
 		            .expectNoAccessibleContext()

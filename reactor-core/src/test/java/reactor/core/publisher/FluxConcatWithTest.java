@@ -21,7 +21,7 @@ import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxConcatWithTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noStackOverflow() {
 		int n = 5000;
 		
@@ -64,7 +64,7 @@ public class FluxConcatWithTest {
 		.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noStackOverflow3() {
 		int n = 5000;
 		
@@ -87,7 +87,7 @@ public class FluxConcatWithTest {
 	}
 
 	
-	@org.junit.jupiter.api.Test
+	@Test
 	public void dontBreakFluxArrayConcatMap() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 		
@@ -100,7 +100,7 @@ public class FluxConcatWithTest {
 		.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void concatWithValues() {
       StepVerifier.create(Flux.just(1, 2).concatWithValues(4, 5, 6))
           .expectNext(1, 2, 4, 5, 6)

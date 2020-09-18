@@ -159,7 +159,7 @@ public class ScannableTest {
 		assertThat(Scannable.from(named2).name()).isEqualTo("multiple of 3 100s");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void namedOverridenFluxTest() {
 		Flux<Integer> named1 =
 				Flux.range(1, 10)
@@ -417,7 +417,7 @@ public class ScannableTest {
 		assertThat(Scannable.from(named2).name()).isEqualTo("multiple of 3 100s");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void namedOverridenParallelFluxTest() {
 		ParallelFlux<Integer> named1 =
 				ParallelFlux.from(Mono.just(1))
@@ -461,7 +461,7 @@ public class ScannableTest {
 				.containsExactlyInAnyOrder(Tuples.of("1", "One"), Tuples.of( "2", "Two"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void taggedAppendedParallelFluxTest() {
 		ParallelFlux<Integer> tagged1 =
 				ParallelFlux.from(Mono.just(1))
@@ -481,7 +481,7 @@ public class ScannableTest {
 				.isSameAs(Scannable.Attr.UNAVAILABLE_SCAN);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanForActualIsSafe() {
 		Scannable scannable = key -> "String";
 

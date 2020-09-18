@@ -31,7 +31,7 @@ public class MonoHandleTest {
 		    .assertNoError()
 		    .assertComplete();
 	}
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalHide() {
 		Mono.just(1)
 		    .hide()
@@ -42,7 +42,7 @@ public class MonoHandleTest {
 		    .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void filterNullMapResult() {
 
 		Mono.just(1)

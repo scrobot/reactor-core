@@ -243,7 +243,7 @@ public class Context5Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 

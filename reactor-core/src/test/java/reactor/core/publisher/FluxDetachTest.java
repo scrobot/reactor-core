@@ -100,7 +100,7 @@ public class FluxDetachTest {
 		ts.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void backpressured() throws Exception {
 		o = new Object();
 
@@ -130,7 +130,7 @@ public class FluxDetachTest {
 		Assert.assertNull("Object retained!", wr.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void justUnsubscribed() throws Exception {
 		o = new Object();
 
@@ -202,7 +202,7 @@ public class FluxDetachTest {
 		assertThat(test.scan(Scannable.Attr.PARENT)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriberCancelled() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		FluxDetach.DetachSubscriber<String> test = new FluxDetach.DetachSubscriber<>(actual);

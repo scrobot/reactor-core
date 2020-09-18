@@ -119,7 +119,7 @@ public class FluxMaterializeTest
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorOnlyBackpressured() {
 		AssertSubscriber<Signal<Integer>> ts = AssertSubscriber.create(0L);
 
@@ -139,7 +139,7 @@ public class FluxMaterializeTest
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void materialize() {
 		StepVerifier.create(Flux.just("Three", "Two", "One")
 		                        .materialize())

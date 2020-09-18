@@ -47,7 +47,7 @@ public class MonoZipTest {
 		                      .block());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void allNonEmptyIterable() {
 		assertThat(Mono.zip(Arrays.asList(Mono.just(1), Mono.just(2)),
 				args -> (int) args[0] + (int) args[1])
@@ -116,7 +116,7 @@ public class MonoZipTest {
 		               .block()).isEqualTo(3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void someEmpty() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.zip(Mono.delay(Duration.ofMillis(150)).then(), Mono.delay(Duration
@@ -158,7 +158,7 @@ public class MonoZipTest {
 		 .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void pairWise2() {
 		Mono<Tuple2<Tuple2<Integer, String>, String>> f =
 				Mono.zip(Mono.just(1), Mono.just("test"))
@@ -179,7 +179,7 @@ public class MonoZipTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void pairWise3() {
 		Mono<Tuple2<Tuple2<Integer, String>, String>> f =
 				Mono.zip(Arrays.asList(Mono.just(1), Mono.just("test")),
@@ -213,7 +213,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenMonoJust3() {
 		MonoProcessor<Tuple3<Integer, Integer, Integer>> mp = MonoProcessor.create();
 		StepVerifier.create(Mono.zip(Mono.just(1), Mono.just(2), Mono.just(3))
@@ -241,7 +241,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenMonoJust5() {
 		MonoProcessor<Tuple5<Integer, Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -258,7 +258,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenMonoJust6() {
 		MonoProcessor<Tuple6<Integer, Integer, Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -276,7 +276,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenMonoJust7() {
 		StepVerifier.create(Mono.zip(Mono.just(1),
 				Mono.just(2),
@@ -352,7 +352,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenDelayMonoJust4() {
 		MonoProcessor<Tuple4<Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -368,7 +368,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenDelayMonoJust5() {
 		MonoProcessor<Tuple5<Integer, Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -456,7 +456,7 @@ public class MonoZipTest {
 		            .verifyErrorMatches(e -> e == boom1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void delayErrorEmptySourceErrorSource() {
 		Mono<String> error = Mono.error(new IllegalStateException("boom"));
 		Mono<String> empty = Mono.empty();
@@ -565,7 +565,7 @@ public class MonoZipTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanWhenInner() {
 		CoreSubscriber<? super String> actual = new LambdaMonoSubscriber<>(null, e ->
 		{}, null, null);

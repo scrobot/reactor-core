@@ -36,7 +36,7 @@ public class MonoPeekAfterTest {
 
 	private static final Logger LOG = Loggers.getLogger(MonoPeekAfterTest.class);
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessNormal() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean hasNull = new AtomicBoolean();
@@ -60,7 +60,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessNormalConditional() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean hasNull = new AtomicBoolean();
@@ -86,7 +86,7 @@ public class MonoPeekAfterTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessFusion() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean hasNull = new AtomicBoolean();
@@ -109,7 +109,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessFusionConditional() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean hasNull = new AtomicBoolean();
@@ -133,7 +133,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessOrErrorNormal() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean completedEmpty = new AtomicBoolean();
@@ -160,7 +160,7 @@ public class MonoPeekAfterTest {
 		assertEquals("unexpected error", null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessOrErrorNormalConditional() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean completedEmpty = new AtomicBoolean();
@@ -188,7 +188,7 @@ public class MonoPeekAfterTest {
 		assertEquals("unexpected error", null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessOrErrorFusion() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean completedEmpty = new AtomicBoolean();
@@ -214,7 +214,7 @@ public class MonoPeekAfterTest {
 		assertEquals("unexpected error", null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessOrErrorFusionConditional() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean completedEmpty = new AtomicBoolean();
@@ -241,7 +241,7 @@ public class MonoPeekAfterTest {
 		assertEquals("unexpected error", null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onAfterSuccessOrErrorNormal() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean completedEmpty = new AtomicBoolean();
@@ -296,7 +296,7 @@ public class MonoPeekAfterTest {
 		assertEquals("unexpected error", null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onAfterSuccessOrErrorFusion() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean completedEmpty = new AtomicBoolean();
@@ -322,7 +322,7 @@ public class MonoPeekAfterTest {
 		assertEquals("unexpected error", null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onAfterSuccessOrErrorFusionConditional() {
 		LongAdder invoked = new LongAdder();
 		AtomicBoolean completedEmpty = new AtomicBoolean();
@@ -349,7 +349,7 @@ public class MonoPeekAfterTest {
 		assertEquals("unexpected error", null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onAfterTerminateNormalConditional() {
 		LongAdder invoked = new LongAdder();
 
@@ -369,7 +369,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onAfterTerminateFusion() {
 		LongAdder invoked = new LongAdder();
 
@@ -387,7 +387,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onAfterTerminateFusionConditional() {
 		LongAdder invoked = new LongAdder();
 
@@ -406,7 +406,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessCallbackFailureInterruptsOnNext() {
 		LongAdder invoked = new LongAdder();
 		StepVerifier.create(Mono.just("foo")
@@ -419,7 +419,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessOrErrorCallbackFailureInterruptsOnNext() {
 		LongAdder invoked = new LongAdder();
 		StepVerifier.create(Mono.just("foo")
@@ -433,7 +433,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void afterSuccessOrErrorCallbackFailureInterruptsOnNextAndThrows() {
 		LongAdder invoked = new LongAdder();
 		try {
@@ -455,7 +455,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void afterTerminateCallbackFailureInterruptsOnNextAndThrows() {
 		LongAdder invoked = new LongAdder();
 		try {
@@ -477,7 +477,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessNotCalledOnError() {
 		LongAdder invoked = new LongAdder();
 		IllegalArgumentException err = new IllegalArgumentException("boom");
@@ -490,7 +490,7 @@ public class MonoPeekAfterTest {
 		assertEquals(0, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessOrErrorForOnError() {
 		LongAdder invoked = new LongAdder();
 		AtomicReference<String> value = new AtomicReference<>();
@@ -512,7 +512,7 @@ public class MonoPeekAfterTest {
 		assertEquals(err, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void afterSuccessOrErrorForOnError() {
 		LongAdder invoked = new LongAdder();
 		AtomicReference<String> value = new AtomicReference<>();
@@ -534,7 +534,7 @@ public class MonoPeekAfterTest {
 		assertEquals(err, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void afterTerminateForOnError() {
 		LongAdder invoked = new LongAdder();
 
@@ -548,7 +548,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessForEmpty() {
 		LongAdder invoked = new LongAdder();
 		AtomicReference<String> value = new AtomicReference<>();
@@ -565,7 +565,7 @@ public class MonoPeekAfterTest {
 		assertEquals(null, value.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onSuccessOrErrorForEmpty() {
 		LongAdder invoked = new LongAdder();
 		AtomicReference<String> value = new AtomicReference<>();
@@ -585,7 +585,7 @@ public class MonoPeekAfterTest {
 		assertEquals(null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void afterSuccessOrErrorForEmpty() {
 		LongAdder invoked = new LongAdder();
 		AtomicReference<String> value = new AtomicReference<>();
@@ -605,7 +605,7 @@ public class MonoPeekAfterTest {
 		assertEquals(null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void afterTerminateForEmpty() {
 		LongAdder invoked = new LongAdder();
 
@@ -619,7 +619,7 @@ public class MonoPeekAfterTest {
 		assertEquals(1, invoked.intValue());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testCallbacksNoFusion() {
 		AtomicReference<Integer> successInvocation = new AtomicReference<>();
 		AtomicReference<Integer> onTerminateInvocation = new AtomicReference<>();
@@ -654,7 +654,7 @@ public class MonoPeekAfterTest {
 		assertEquals(null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testCallbacksFusionSync() {
 		AtomicReference<Integer> successInvocation = new AtomicReference<>();
 		AtomicReference<Integer> onTerminateInvocation = new AtomicReference<>();
@@ -686,7 +686,7 @@ public class MonoPeekAfterTest {
 		assertEquals(null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testCallbacksFusionAsync() {
 		AtomicReference<Integer> successInvocation = new AtomicReference<>();
 		AtomicReference<Integer> onTerminateInvocation = new AtomicReference<>();
@@ -720,7 +720,7 @@ public class MonoPeekAfterTest {
 		assertEquals(null, error.get());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void should_reduce_to_10_events() {
 		for (int i = 0; i < 20; i++) {
 			AtomicInteger count = new AtomicInteger();

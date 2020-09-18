@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoSingleMonoTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableEmpty() {
 		StepVerifier.create(Mono.empty().single())
 		            .verifyErrorSatisfies(e -> assertThat(e)
@@ -17,7 +17,7 @@ public class MonoSingleMonoTest {
 				            .hasMessage("Source was a (constant) empty"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableValued() {
 		StepVerifier.create(Mono.just("foo").single())
 		            .expectNext("foo")
@@ -32,7 +32,7 @@ public class MonoSingleMonoTest {
 				            .hasMessage("Source was empty"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalValued() {
 		StepVerifier.create(Mono.just("foo").hide().single())
 		            .expectNext("foo")

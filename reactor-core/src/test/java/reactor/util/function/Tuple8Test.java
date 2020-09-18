@@ -27,7 +27,7 @@ public class Tuple8Test {
 	private Tuple8<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer> full =
 			new Tuple8<>(1, 2, 3, 4, 5, 6, 7, 8);
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nullT8Rejected() {
 		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Tuple8<>(1, 2, 3, 4, 5, 6, 7, null))
@@ -86,7 +86,7 @@ public class Tuple8Test {
 				                  base.getT5(), base.getT6(), base.getT7(), base.getT8());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT5() {
 		Tuple8<Integer, Integer, Integer, Integer, String, Integer, Integer, Integer> base = 
 				Tuples.of(100, 200, 300, 400, "Foo", 600, 700, 800);
@@ -151,12 +151,12 @@ public class Tuple8Test {
 		assertThat(full.get(-1)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getTooLargeIndex() {
 		assertThat(full.get(10)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getAllValuesCorrespondToArray() {
 		Object[] array = full.toArray();
 
@@ -183,7 +183,7 @@ public class Tuple8Test {
 				.isEqualTo(new Tuple8<>(1, 2, 3, 4, 5, 6, 7, 8));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sanityTestHashcode() {
 		Tuple8<Integer, Integer, Integer, Integer, Integer, Integer, Integer, Integer>
 				same = new Tuple8<>(1, 2, 3, 4, 5, 6, 7, 8);

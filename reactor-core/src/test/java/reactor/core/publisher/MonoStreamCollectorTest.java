@@ -96,7 +96,7 @@ public class MonoStreamCollectorTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void collectToSet() {
 		Mono<Set<Integer>> source = Flux.just(1).repeat(5).collect(Collectors.toSet());
 
@@ -140,7 +140,7 @@ public class MonoStreamCollectorTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardValueAndIntermediateListElementsOnAccumulatorFailure() {
 		Collector<Integer, List<Integer>, Set<Integer>> collector = new TestCollector<>(ArrayList::new, (l, i) -> {
 			if (i == 2) throw new IllegalStateException("accumulator: boom");
@@ -155,7 +155,7 @@ public class MonoStreamCollectorTest {
 		    .hasDiscardedExactly(1, 2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardValueAndIntermediateMapOnAccumulatorFailure() {
 		Collector<Integer, Map<Integer, String>, Set<Integer>> collector = new TestCollector<>(HashMap::new, (m, i) -> {
 			if (i == 2) throw new IllegalStateException("accumulator: boom");
@@ -170,7 +170,7 @@ public class MonoStreamCollectorTest {
 		    .hasDiscardedExactly(Collections.singletonMap(1, "1"), 2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardIntermediateListElementsOnError() {
 		final Collector<Integer, ?, Collection<Integer>> collector = Collectors.toCollection(ArrayList::new);
 
@@ -207,7 +207,7 @@ public class MonoStreamCollectorTest {
 		            .hasDiscardedExactly(0L, 1L);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardIntermediateListElementsOnFinisherFailure() {
 		Collector<Integer, List<Integer>, Set<Integer>> collector = new TestCollector<>(ArrayList::new, List::add, m -> { throw new IllegalStateException("finisher: boom"); });
 
@@ -222,7 +222,7 @@ public class MonoStreamCollectorTest {
 		            .hasDiscardedExactly(1, 2, 3, 4);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardIntermediateMapOnError() {
 		Collector<Integer, ?, Map<Integer, String>> collector = Collectors.toMap(Function.identity(), String::valueOf);
 		List<Object> discarded = new ArrayList<>();

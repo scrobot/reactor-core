@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
  */
 public class MetricsNoMicrometerTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void isMicrometerAvailable() {
 		assertThat(Metrics.isInstrumentationAvailable()).isFalse();
 	}
@@ -51,7 +51,7 @@ public class MetricsNoMicrometerTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void FluxMetricsFusedNoOp() {
 		assertThatCode(() -> Flux.just("foo").metrics().blockLast())
 				.doesNotThrowAnyException();
@@ -63,7 +63,7 @@ public class MetricsNoMicrometerTest {
 				.doesNotThrowAnyException();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void MonoMetricsFusedNoOp() {
 		assertThatCode(() -> Mono.just("foo").metrics().block())
 				.doesNotThrowAnyException();

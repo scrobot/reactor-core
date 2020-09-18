@@ -45,7 +45,7 @@ public class MonoTakeUntilOtherTest {
 				.withMessage("other");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void neverSourceIsCancelled() {
 		AtomicReference<SignalType> signal = new AtomicReference<>();
 
@@ -59,7 +59,7 @@ public class MonoTakeUntilOtherTest {
 		assertThat(signal.get()).isEqualTo(SignalType.CANCEL);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void disposeCancelsBoth() {
 		AtomicReference<SignalType> s1 = new AtomicReference<>();
 		AtomicReference<SignalType> s2 = new AtomicReference<>();
@@ -75,7 +75,7 @@ public class MonoTakeUntilOtherTest {
 		assertThat(s2.get()).isEqualTo(SignalType.CANCEL);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void apiTakeShortcircuits() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(200))
@@ -96,7 +96,7 @@ public class MonoTakeUntilOtherTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void apiTakeValuedBeforeDuration() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(100))
@@ -107,7 +107,7 @@ public class MonoTakeUntilOtherTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void apiTakeErrorBeforeDuration() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(100))
@@ -118,7 +118,7 @@ public class MonoTakeUntilOtherTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void apiTakeCompleteBeforeDuration() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(100))
@@ -144,7 +144,7 @@ public class MonoTakeUntilOtherTest {
 		other.assertCancelled();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void apiTakeUntilOtherValuedBeforeOther() {
 		TestPublisher<String> other = TestPublisher.create();
 

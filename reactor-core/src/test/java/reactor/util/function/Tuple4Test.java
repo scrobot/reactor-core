@@ -44,7 +44,7 @@ public class Tuple4Test {
 		                  .containsExactly(3, base.getT2(), base.getT3(), base.getT4());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT2() {
 		Tuple4<Integer, String, Integer, Integer> base = Tuples.of(100, "Foo", 300, 400);
 
@@ -85,7 +85,7 @@ public class Tuple4Test {
 		).withMessage("t4");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getNegativeIndex() {
 		assertThat(full.get(-1)).isNull();
 	}

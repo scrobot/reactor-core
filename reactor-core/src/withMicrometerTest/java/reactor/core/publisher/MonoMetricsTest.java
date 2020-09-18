@@ -94,7 +94,7 @@ public class MonoMetricsTest {
 		assertThat(test.name).isEqualTo("foo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testUsesMicrometer() {
 		AtomicReference<Subscription> subRef = new AtomicReference<>();
 
@@ -312,7 +312,7 @@ public class MonoMetricsTest {
 		});
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void subscribeToCancel() throws InterruptedException {
 		Mono<Long> source = Mono.delay(Duration.ofMillis(200))
 		                           .hide();
@@ -347,7 +347,7 @@ public class MonoMetricsTest {
 		});
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void countsSubscriptions() {
 		Mono<Integer> source = Mono.just(1)
 		                           .hide();

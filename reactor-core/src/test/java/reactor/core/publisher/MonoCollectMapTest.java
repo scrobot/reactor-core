@@ -77,7 +77,7 @@ public class MonoCollectMapTest {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void collectMapCallable() {
 		StepVerifier.create(Mono.fromCallable(() -> new Pojo("test", 1L))
 		                        .flux()

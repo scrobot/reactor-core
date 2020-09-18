@@ -377,7 +377,7 @@ public class FluxRefCountTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void delayElementShouldNotCancelTwice() throws Exception {
 		DirectProcessor<Long> p = DirectProcessor.create();
 		AtomicInteger cancellations = new AtomicInteger();

@@ -24,7 +24,7 @@ import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxFirstEmittingWithTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noStackOverflow() {
 		int n = 5000;
 		
@@ -58,7 +58,7 @@ public class FluxFirstEmittingWithTest {
 		.assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void pairWise() {
 		Flux<Integer> f = Flux.first(Mono.just(1), Mono.just(2))
 		                      .or(Mono.just(3));
@@ -73,7 +73,7 @@ public class FluxFirstEmittingWithTest {
 		 .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void pairWiseIterable() {
 		Flux<Integer> f = Flux.first(Arrays.asList(Mono.just(1), Mono.just(2)))
 		                      .or(Mono.just(3));

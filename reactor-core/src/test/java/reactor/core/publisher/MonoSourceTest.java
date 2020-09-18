@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 
 public class MonoSourceTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void empty() {
 		Mono<Integer> m = Mono.from(Flux.empty());
 		assertTrue(m == Mono.<Integer>empty());
@@ -39,7 +39,7 @@ public class MonoSourceTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void just() {
 		Mono<Integer> m = Mono.from(Flux.just(1));
 		assertTrue(m instanceof MonoJust);
@@ -48,7 +48,7 @@ public class MonoSourceTest {
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error() {
 		Mono<Integer> m = Mono.from(Flux.error(new Exception("test")));
 		assertTrue(m instanceof MonoError);
@@ -56,7 +56,7 @@ public class MonoSourceTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorPropagate() {
 		Mono<Integer> m = Mono.from(Flux.error(new Error("test")));
 		assertTrue(m instanceof MonoError);
@@ -71,56 +71,56 @@ public class MonoSourceTest {
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void asJustNext() {
 		StepVerifier.create(Flux.just(1, 2, 3).as(Mono::from))
 	                .expectNext(1)
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoNext() {
 		StepVerifier.create(Flux.just(1, 2, 3).next())
 	                .expectNext(1)
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoDirect() {
 		StepVerifier.create(Flux.just(1).as(Mono::fromDirect))
 	                .expectNext(1)
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoDirectHidden() {
 		StepVerifier.create(Flux.just(1).hide().as(Mono::fromDirect))
 	                .expectNext(1)
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoDirectIdentity() {
 		StepVerifier.create(Mono.just(1).as(Mono::fromDirect))
 	                .expectNext(1)
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoDirectPlainFuseable() {
 		StepVerifier.create(Mono.just(1).as(TestPubFuseable::new))
 	                .expectNext(1)
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoDirectPlain() {
 		StepVerifier.create(Mono.just(1).as(TestPub::new))
 	                .expectNext(1)
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoFromFluxThatIsItselfFromMono() {
 		AtomicBoolean emitted = new AtomicBoolean();
 		AtomicBoolean terminated = new AtomicBoolean();
@@ -158,7 +158,7 @@ public class MonoSourceTest {
 		assertThat(secondConversion).as("conversions negated").isSameAs(original);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoFromFluxThatIsItselfFromMonoFuseable() {
 		Mono<String> original = Mono.just("foo").map(v -> v + "bar");
 
@@ -171,7 +171,7 @@ public class MonoSourceTest {
 		assertThat(secondConversion).as("conversions negated").isSameAs(original);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoFromFluxThatIsItselfFromMono_scalarCallableNotOptimized() {
 		Mono<String> original = Mono.just("foo");
 
@@ -184,7 +184,7 @@ public class MonoSourceTest {
 		                            .hasSameClassAs(original);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoFromFluxItselfMonoToFlux() {
 		Mono<String> original = Mono.just("foo").hide();
 
@@ -195,7 +195,7 @@ public class MonoSourceTest {
 		assertThat(secondConversion).as("conversions negated").isSameAs(original);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoFromFluxItselfMonoToFlux_fuseable() {
 		Mono<String> original = Mono.just("foo").map(v -> v + "bar");
 
@@ -208,7 +208,7 @@ public class MonoSourceTest {
 		assertThat(secondConversion).as("conversions negated").isSameAs(original);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoFromFluxItselfMonoToFlux_scalarCallableNotOptimized() {
 		Mono<String> original = Mono.just("foo");
 
@@ -254,14 +254,14 @@ public class MonoSourceTest {
 	                .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onAssemblyDescription() {
 		String monoOnAssemblyStr = Mono.just(1).checkpoint("onAssemblyDescription").toString();
 		System.out.println(Mono.just(1).checkpoint("onAssemblyDescription"));
 		assertTrue("Description not included: " + monoOnAssemblyStr, monoOnAssemblyStr.contains("checkpoint(\"onAssemblyDescription\")"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriber() {
 		Flux<String> source = Flux.just("foo").map(i -> i);
 		Mono<String> test = Mono.fromDirect(source);
@@ -271,7 +271,7 @@ public class MonoSourceTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriberHide() {
 		Flux<String> source = Flux.just("foo").hide();
 		Mono<String> test = Mono.fromDirect(source);
@@ -280,7 +280,7 @@ public class MonoSourceTest {
 		assertThat(Scannable.from(test).scan(Scannable.Attr.ACTUAL)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriberIgnore() {
 		Flux<String> source = Flux.just("foo").map(i -> i);
 		MonoIgnorePublisher<String> test = new MonoIgnorePublisher<>(source);
@@ -289,7 +289,7 @@ public class MonoSourceTest {
 		assertThat(test.scan(Scannable.Attr.ACTUAL)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanSubscriberFrom() {
 		Flux<String> source = Flux.just("foo").map(i -> i);
 		MonoFromPublisher<String> test = new MonoFromPublisher<>(source);

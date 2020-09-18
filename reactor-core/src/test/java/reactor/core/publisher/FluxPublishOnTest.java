@@ -1299,7 +1299,7 @@ public class FluxPublishOnTest extends FluxOperatorTest<String, String> {
         Assertions.assertThat(test.scan(Scannable.Attr.BUFFERED)).isEqualTo(2);
     }
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanConditionalSubscriber() {
 		@SuppressWarnings("unchecked")
 		Fuseable.ConditionalSubscriber<Integer> actual = Mockito.mock(MockUtils.TestScannableConditionalSubscriber.class);

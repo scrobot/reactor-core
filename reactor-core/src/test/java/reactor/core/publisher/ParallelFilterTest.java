@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelFilterTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelism() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelFilter<Integer> test = new ParallelFilter<>(source, i -> i % 2 == 0);
@@ -45,7 +45,7 @@ public class ParallelFilterTest {
 				.isNotEqualTo(source.getPrefetch());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void conditional() {
 		Flux<Integer> source = Flux.range(1, 1_000);
 		for (int i = 1; i < 33; i++) {

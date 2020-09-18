@@ -118,7 +118,7 @@ public class MonoHasElementsTest {
 		assertThat(cancelCount.get()).isEqualTo(1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoSourceIsNotCancelled() {
 		AtomicLong cancelCount = new AtomicLong();
 
@@ -213,7 +213,7 @@ public class MonoHasElementsTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanHasElementsNoTerminatedOnError() {
 		CoreSubscriber<? super Boolean> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoHasElements.HasElementsSubscriber<String> test = new MonoHasElements.HasElementsSubscriber<>(actual);

@@ -53,7 +53,7 @@ public class FluxSubscribeOnCallableTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableReturnsNull2() {
 		StepVerifier.create(Mono.fromCallable(() -> null)
 		                        .flux()
@@ -102,7 +102,7 @@ public class FluxSubscribeOnCallableTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableReturnsNullFused2() {
 		StepVerifier.create(Mono.fromCallable(() -> null)
 		                        .flux()
@@ -122,7 +122,7 @@ public class FluxSubscribeOnCallableTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalFused() {
 		StepVerifier.create(Mono.fromCallable(() -> 1)
 		                        .flux()
@@ -133,7 +133,7 @@ public class FluxSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalBackpressuredFused() {
 		StepVerifier.withVirtualTime(() -> Mono.fromCallable(() -> 1)
 		                                       .flux()
@@ -165,7 +165,7 @@ public class FluxSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void callableThrows() {
 		StepVerifier.create(Mono.fromCallable(() -> {
 			throw new IOException("forced failure");
@@ -177,7 +177,7 @@ public class FluxSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		FluxSubscribeOnCallable test = new FluxSubscribeOnCallable<>(() -> "foo", Schedulers.immediate());
 

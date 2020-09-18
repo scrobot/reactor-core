@@ -57,7 +57,7 @@ public class ParallelGroupTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanInnerGroupRequestNotTrackedWhenParent() {
 		ParallelInnerGroup<Integer> test = new ParallelInnerGroup<>(1023);
 

@@ -95,7 +95,7 @@ public class FluxGenerateTest {
 		  .assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void generateError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -219,7 +219,7 @@ public class FluxGenerateTest {
 		                                                    .hasMessage("forced failure"));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void generatorMultipleOnErrors() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -420,7 +420,7 @@ public class FluxGenerateTest {
         assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextTest() {
 		StepVerifier.create(Flux.generate(s -> s.next(s.currentContext()
 		                                               .get(AtomicInteger.class)

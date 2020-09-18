@@ -194,7 +194,7 @@ public class FluxReplayTest extends FluxOperatorTest<String, String> {
 
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cacheFluxTTLMillis() {
 
 		Flux<Tuple2<Long, Integer>> source = Flux.just(1, 2, 3)

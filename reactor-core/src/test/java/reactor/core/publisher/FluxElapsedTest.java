@@ -43,7 +43,7 @@ public class FluxElapsedTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanOperator() {
 		Flux<Tuple2<Long, Integer>> test = Flux.just(1).elapsed(Schedulers.single());
 
@@ -51,7 +51,7 @@ public class FluxElapsedTest {
 		assertThat(((Scannable) test).scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.single());
     }
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanSubscriber() {
         CoreSubscriber<Tuple2<Long, String>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxElapsed.ElapsedSubscriber<String> test = new FluxElapsed.ElapsedSubscriber<>(actual, Schedulers.single());

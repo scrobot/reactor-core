@@ -140,7 +140,7 @@ public class CombinationTests {
 		}
 	}*/
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sampleConcatTest() throws Exception {
 		int elements = 40;
 
@@ -320,7 +320,7 @@ public class CombinationTests {
 		ts.assertValues(1L, 2L, 3L, 4L).assertComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mergeWithNoInterleave() throws Exception{
 		Flux.concat(emitter1.log("test1"), emitter2.log("test2")).log().subscribe(ts);
 		emitValues();

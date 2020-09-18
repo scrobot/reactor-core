@@ -26,14 +26,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoIgnoreEmptyTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		StepVerifier.create(Flux.just(1)
 		                        .thenEmpty(Flux.empty()))
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal3() {
 		StepVerifier.create(Flux.just(1)
 		                        .then())

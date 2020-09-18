@@ -101,7 +101,7 @@ public class OperatorsTest {
 		assertThat(new Operators(){}).isNotNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void castAsQueueSubscription() {
 		Fuseable.QueueSubscription<String> qs = new Fuseable.SynchronousSubscription<String>() {
 			@Override
@@ -141,7 +141,7 @@ public class OperatorsTest {
 		assertThat(Operators.as(s)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cancelledSubscription(){
 		Operators.CancelledSubscription es =
 				(Operators.CancelledSubscription)Operators.cancelledSubscription();
@@ -158,7 +158,7 @@ public class OperatorsTest {
 		OperatorDisposables.DISPOSED.dispose(); //noop
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void drainSubscriber() {
 		AtomicBoolean requested = new AtomicBoolean();
 		AtomicBoolean errored = new AtomicBoolean();
@@ -240,13 +240,13 @@ public class OperatorsTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanEmptySubscription() {
 		EmptySubscription test = EmptySubscription.INSTANCE;
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMonoSubscriber() {
 		CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, null, null, null);
 		MonoSubscriber<Integer, Integer> test = new MonoSubscriber<>(actual);
@@ -284,7 +284,7 @@ public class OperatorsTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanScalarSubscription() {
 		CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, null, null, null);
 		ScalarSubscription<Integer> test = new ScalarSubscription<>(actual, 5);
@@ -298,7 +298,7 @@ public class OperatorsTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextErrorModeLocalStrategy() {
 		List<Object> nextDropped = new ArrayList<>();
 		List<Object> errorDropped = new ArrayList<>();
@@ -326,7 +326,7 @@ public class OperatorsTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void pollErrorModeLocalStrategy() {
 		List<Object> nextDropped = new ArrayList<>();
 		List<Object> errorDropped = new ArrayList<>();
@@ -361,7 +361,7 @@ public class OperatorsTest {
 		                           .hasMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextDroppedLocal() {
 		AtomicReference<Object> hookState = new AtomicReference<>();
 		Consumer<Object> localHook = hookState::set;
@@ -372,7 +372,7 @@ public class OperatorsTest {
 		assertThat(hookState.get()).isEqualTo("foo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onOperatorErrorLocal() {
 		BiFunction<Throwable, Object, Throwable> localHook = (e, v) ->
 				new IllegalStateException("boom_" + v, e);
@@ -423,7 +423,7 @@ public class OperatorsTest {
 		                                .hasCause(failure);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onRejectedExecutionLocalTakesPrecedenceOverOnOperatorError() {
 		BiFunction<Throwable, Object, Throwable> localOperatorErrorHook = (e, v) ->
 				new IllegalStateException("boom_" + v, e);
@@ -446,7 +446,7 @@ public class OperatorsTest {
 		                                .hasCause(failure);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void testOnRejectedWithReactorRee() {
 		Exception originalCause = new Exception("boom");
 		RejectedExecutionException original = Exceptions.failWithRejected(originalCause);
@@ -497,7 +497,7 @@ public class OperatorsTest {
 				.isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void unboundedOrLimitLowTide() {
 		assertThat(Operators.unboundedOrLimit(100, 100))
 				.as("same lowTide")
@@ -536,7 +536,7 @@ public class OperatorsTest {
 				.isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextFailureWithStrategyMatchingDoesntCancel() {
 		Context context = Context.of(OnNextFailureStrategy.KEY_ON_NEXT_ERROR_STRATEGY, new OnNextFailureStrategy() {
 			@Override
@@ -559,7 +559,7 @@ public class OperatorsTest {
 		assertThat(s.isCancelled()).as("subscription cancelled").isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextFailureWithStrategyNotMatchingDoesCancel() {
 		Context context = Context.of(OnNextFailureStrategy.KEY_ON_NEXT_ERROR_STRATEGY, new OnNextFailureStrategy() {
 			@Override
@@ -585,7 +585,7 @@ public class OperatorsTest {
 		assertThat(s.isCancelled()).as("subscription cancelled").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void onNextFailureWithStrategyMatchingButNotNullDoesCancel() {
 		Context context = Context.of(OnNextFailureStrategy.KEY_ON_NEXT_ERROR_STRATEGY, new OnNextFailureStrategy() {
 			@Override
@@ -762,7 +762,7 @@ public class OperatorsTest {
 		          .isEqualTo(original);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardQueueWithClearContinuesOnExtractionError() {
 		AtomicInteger discardedCount = new AtomicInteger();
 		Context hookContext = Operators.discardLocalAdapter(Integer.class, i -> {
@@ -786,7 +786,7 @@ public class OperatorsTest {
 		assertThat(discardedCount).hasValue(4);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardQueueWithClearContinuesOnExtractedElementNotDiscarded() {
 		AtomicInteger discardedCount = new AtomicInteger();
 		Context hookContext = Operators.discardLocalAdapter(Integer.class, i -> {
@@ -843,7 +843,7 @@ public class OperatorsTest {
 		assertThat(discardedCount).as("discarding stops").hasValue(2);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardStreamContinuesWhenElementFailsToBeDiscarded() {
 		Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5);
 		AtomicInteger discardedCount = new AtomicInteger();
@@ -871,7 +871,7 @@ public class OperatorsTest {
 		assertThat(discardedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardCollectionContinuesWhenIteratorElementFailsToBeDiscarded() {
 		List<Integer> elements = Arrays.asList(1, 2, 3, 4, 5);
 		AtomicInteger discardedCount = new AtomicInteger();
@@ -885,7 +885,7 @@ public class OperatorsTest {
 		assertThat(discardedCount).hasValue(4);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardCollectionStopsOnIterationError() {
 		List<Integer> elements = Arrays.asList(1, 2, 3, 4, 5);
 		Iterator<Integer> trueIterator = elements.iterator();
@@ -930,7 +930,7 @@ public class OperatorsTest {
 		assertThat(discardedCount).hasValue(0);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void discardIteratorContinuesWhenIteratorElementFailsToBeDiscarded() {
 		List<Integer> elements = Arrays.asList(1, 2, 3, 4, 5);
 		AtomicInteger discardedCount = new AtomicInteger();

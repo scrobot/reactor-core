@@ -47,7 +47,7 @@ public class ExecutorSchedulerTrampolineTest extends AbstractSchedulerTest {
 		return false;
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanParent() {
 		Executor plainExecutor = new ExecutorSchedulerTest.PlainExecutor();
 		Executor scannableExecutor = new ExecutorSchedulerTest.ScannableExecutor();

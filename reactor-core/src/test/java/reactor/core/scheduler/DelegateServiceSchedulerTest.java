@@ -119,7 +119,7 @@ public class DelegateServiceSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void smokeTestInterval() {
 		Scheduler s = autoCleanup(scheduler());
 
@@ -159,7 +159,7 @@ public class DelegateServiceSchedulerTest extends AbstractSchedulerTest {
 				.isEqualTo("fromExecutorService(anonymousExecutor@" + singleId + ")");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanNameExplicit() {
 		Scheduler fixedThreadPool = autoCleanup(Schedulers.fromExecutorService(Executors.newFixedThreadPool(3), "fixedThreadPool(3)"));
 		Scheduler cachedThreadPool = autoCleanup(Schedulers.fromExecutorService(Executors.newCachedThreadPool(), "cachedThreadPool"));

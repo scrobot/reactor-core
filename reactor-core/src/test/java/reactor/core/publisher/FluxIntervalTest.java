@@ -47,7 +47,7 @@ public class FluxIntervalTest {
 		exec.dispose();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		try {
 			AssertSubscriber<Long> ts = AssertSubscriber.create();
@@ -89,7 +89,7 @@ public class FluxIntervalTest {
 		                                        .flatMapMany(Flux::fromIterable))).log();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void flatMap() throws Exception {
 		StepVerifier.withVirtualTime(this::flatMapScenario)
 		            .thenAwait(Duration.ofSeconds(3))
@@ -103,7 +103,7 @@ public class FluxIntervalTest {
 		return Flux.interval(Duration.ofMillis(500));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal2() {
 		StepVerifier.withVirtualTime(this::scenario2)
 		            .thenAwait(Duration.ofMillis(5_000))
@@ -116,7 +116,7 @@ public class FluxIntervalTest {
 		return Flux.interval(Duration.ofMillis(500), Duration.ofMillis(1000));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal3() {
 		StepVerifier.withVirtualTime(this::scenario3)
 		            .thenAwait(Duration.ofMillis(1500))
@@ -131,7 +131,7 @@ public class FluxIntervalTest {
 		return Flux.interval(Duration.ofMillis(500), Duration.ofMillis(1000));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal4() {
 		StepVerifier.withVirtualTime(this::scenario4)
 		            .thenAwait(Duration.ofMillis(1500))
@@ -142,7 +142,7 @@ public class FluxIntervalTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
     public void scanIntervalRunnable() {
 		Scheduler.Worker worker = Schedulers.single().createWorker();
 

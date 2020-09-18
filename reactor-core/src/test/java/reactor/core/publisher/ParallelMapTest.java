@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelMapTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void parallelism() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelMap<Integer, String> test = new ParallelMap<>(source, i -> "" + i);
@@ -42,7 +42,7 @@ public class ParallelMapTest {
 		assertThat(test.scan(Scannable.Attr.PREFETCH)).isEqualTo(-1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void conditional() {
 		Flux<Integer> source = Flux.range(1, 1_000);
 		for (int i = 1; i < 33; i++) {

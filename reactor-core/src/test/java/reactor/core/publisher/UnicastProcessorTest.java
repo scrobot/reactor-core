@@ -121,7 +121,7 @@ public class UnicastProcessorTest {
 			assertEquals(onOverflow, processor.onOverflow);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void bufferSizeReactorUnboundedQueue() {
     	UnicastProcessor processor = UnicastProcessor.create(
     			Queues.unbounded(2).get());
@@ -174,7 +174,7 @@ public class UnicastProcessorTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void contextTest() {
     	UnicastProcessor<Integer> p = UnicastProcessor.create();
     	p.subscriberContext(ctx -> ctx.put("foo", "bar")).subscribe();
@@ -182,7 +182,7 @@ public class UnicastProcessorTest {
     	assertThat(p.sink().currentContext().get("foo").toString()).isEqualTo("bar");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void subscriptionCancelUpdatesDownstreamCount() {
 		UnicastProcessor<String> processor = UnicastProcessor.create();
 

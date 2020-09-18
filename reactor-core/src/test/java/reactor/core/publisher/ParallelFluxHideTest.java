@@ -33,7 +33,7 @@ public class ParallelFluxHideTest {
 				.isEqualTo(source.parallelism());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() throws Exception {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelFluxHide<Integer> test = new ParallelFluxHide<>(source);

@@ -736,7 +736,7 @@ public class FluxSpecTests {
 		assertThat(tap).isEqualTo(-1);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxValuesCanBeFiltered() {
 //		"A Flux"s values can be filtered"
 //		given: "a source composable with a filter that rejects odd values"
@@ -775,7 +775,7 @@ public class FluxSpecTests {
 		assertThat(tap.get()).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenMappingFunctionThrowsMappedComposableAcceptsError() {
 //		"When a mapping function throws an exception, the mapped composable accepts the error"
 //		given: "a source composable with a mapping function that throws an error"

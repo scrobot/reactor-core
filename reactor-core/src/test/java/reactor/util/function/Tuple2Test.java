@@ -33,13 +33,13 @@ public class Tuple2Test {
 				.withMessage("t1");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void nullT2Rejected() {
 		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Tuple2<>(1, null))
 				.withMessage("t2");
 	}
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT1() {
 		Tuple2<String, Integer> base = Tuples.of("Foo", 200);
 
@@ -61,7 +61,7 @@ public class Tuple2Test {
 		                  .containsExactly(base.getT1(), 3);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT1Null() {
 		assertThatNullPointerException().isThrownBy(() ->
 				Tuples.of(1, 2)
@@ -69,7 +69,7 @@ public class Tuple2Test {
 		).withMessage("t1");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void mapT2Null() {
 		assertThatNullPointerException().isThrownBy(() ->
 				Tuples.of(1, 2)
@@ -82,7 +82,7 @@ public class Tuple2Test {
 		assertThat(full.get(-1)).isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getTooLargeIndex() {
 		assertThat(full.get(10)).isNull();
 	}
@@ -96,12 +96,12 @@ public class Tuple2Test {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void equalityOfSameReference() {
 		assertThat(full).isEqualTo(full);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void equalityOfNullOrWrongClass() {
 		assertThat(full).isNotEqualTo(null)
 	                    .isNotEqualTo("foo");
@@ -115,7 +115,7 @@ public class Tuple2Test {
 		        .isEqualTo(otherFull);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void invertedContentNotEquals() {
 		Tuple2<Integer, Integer> otherFull = new Tuple2<>(2, 1);
 
@@ -123,7 +123,7 @@ public class Tuple2Test {
 		        .isNotEqualTo(otherFull);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void sanityTestHashcode() {
 		Tuple2<Integer, Integer> same = new Tuple2<>(1, 2);
 		Tuple2<Integer, Integer> different = new Tuple2<>(2, 1);

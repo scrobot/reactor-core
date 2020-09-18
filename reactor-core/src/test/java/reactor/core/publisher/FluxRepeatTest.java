@@ -70,7 +70,7 @@ public class FluxRepeatTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void twoRepeat() {
 		StepVerifier.create(Flux.range(1, 5)
 		                        .repeat(2))

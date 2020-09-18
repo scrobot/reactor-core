@@ -28,7 +28,7 @@ public class Context0Test {
 
 	Context c = Context.empty();
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putAnyKeyContext1() throws Exception {
 		Context put = c.put(1, "Abis");
 		assertThat(put)
@@ -55,19 +55,19 @@ public class Context0Test {
 		assertThat(c.delete(1)).isSameAs(c);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getThrows() throws Exception {
 		assertThatExceptionOfType(NoSuchElementException.class)
 				.isThrownBy(() -> c.get(1))
 				.withMessage("Context is empty");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getUnknownWithDefault() throws Exception {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
@@ -99,7 +99,7 @@ public class Context0Test {
 		               .hasToString("Context3{A=1, B=2, C=3}");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putAllOfEmpty() {
 		Context m = Context.empty();
 		Context put = c.putAll(m);
@@ -114,14 +114,14 @@ public class Context0Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 
 		assertThat(put.getOrEmpty("putNonNull")).contains("value");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void size() {
 		assertThat(c.size()).isZero();
 	}

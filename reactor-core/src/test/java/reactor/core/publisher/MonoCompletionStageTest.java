@@ -50,7 +50,7 @@ public class MonoCompletionStageTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cancelFutureImmediatelyCancelledLoop() {
 		for (int i = 0; i < 10000; i++) {
 			CompletableFuture<Integer> future = new CompletableFuture<>();
@@ -91,7 +91,7 @@ public class MonoCompletionStageTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void cancelFutureTimeoutCancelledLoop() {
 		for (int i = 0; i < 500; i++) {
 			CompletableFuture<Integer> future = new CompletableFuture<>();

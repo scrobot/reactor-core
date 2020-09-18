@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 
 public class FluxSourceTest {
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void wrapToFlux(){
 		MonoProcessor<String> mp = MonoProcessor.create();
 
@@ -34,7 +34,7 @@ public class FluxSourceTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void empty() {
 		Flux<Integer> m = Flux.from(Mono.empty());
 		assertTrue(m == Flux.<Integer>empty());
@@ -42,7 +42,7 @@ public class FluxSourceTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void just() {
 		Flux<Integer> m = Flux.from(Mono.just(1));
 		assertTrue(m instanceof FluxJust);
@@ -51,7 +51,7 @@ public class FluxSourceTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void error() {
 		Flux<Integer> m = Flux.from(Mono.error(new Exception("test")));
 		assertTrue(m instanceof FluxError);
@@ -59,7 +59,7 @@ public class FluxSourceTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorPropagate() {
 		Flux<Integer> m = Flux.from(Mono.error(new Error("test")));
 		assertTrue(m instanceof FluxError);
@@ -68,7 +68,7 @@ public class FluxSourceTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void wrap() {
 		Flux<Integer> m = Flux.wrap(Flux.just(1));
 		StepVerifier.create(m)
@@ -81,34 +81,34 @@ public class FluxSourceTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void asJust() {
 		StepVerifier.create(Mono.just(1).as(Flux::from))
 		            .expectNext(1)
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxJust() {
 		StepVerifier.create(Mono.just(1).flux())
 		            .expectNext(1)
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxError() {
 		StepVerifier.create(Mono.error(new Exception("test")).flux())
 		            .verifyErrorMessage("test");
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxEmpty() {
 		StepVerifier.create(Mono.empty().flux())
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMain() {
 		Flux<Integer> parent = Flux.range(1,  10).map(i -> i);
 		FluxSource<Integer> test = new FluxSource<>(parent);

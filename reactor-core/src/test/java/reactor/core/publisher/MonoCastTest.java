@@ -60,7 +60,7 @@ public class MonoCastTest {
 		            .verifyComplete();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorOfType() {
 		StepVerifier.create(Mono.just(1)
 		                        .ofType(String.class))

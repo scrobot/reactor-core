@@ -43,7 +43,7 @@ public class FluxTakeUntilOtherTest {
 						.takeUntilOther(null));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void takeAll() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -94,7 +94,7 @@ public class FluxTakeUntilOtherTest {
 		  .assertNoError();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void takeNoneBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -147,7 +147,7 @@ public class FluxTakeUntilOtherTest {
 		  .assertErrorMessage("forced failure");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void otherSignalsErrorBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -179,7 +179,7 @@ public class FluxTakeUntilOtherTest {
 		           .take(Duration.ofMillis(2000));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void aFluxCanBeLimitedByTime2(){
 		StepVerifier.withVirtualTime(this::scenario_aFluxCanBeLimitedByTime2)
 		            .thenAwait(Duration.ofSeconds(2))

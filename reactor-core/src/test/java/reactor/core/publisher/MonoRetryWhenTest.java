@@ -48,7 +48,7 @@ public class MonoRetryWhenTest {
 		                             .flatMap(time -> Mono.delay(Duration.ofSeconds(time))));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void exponentialRetry() {
 		StepVerifier.withVirtualTime(this::exponentialRetryScenario)
 		            .thenAwait(Duration.ofSeconds(6))
@@ -57,7 +57,7 @@ public class MonoRetryWhenTest {
 		            .verify();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoRetryRandomBackoff() {
 		AtomicInteger errorCount = new AtomicInteger();
 		Exception exception = new IOException("boom retry");
@@ -126,7 +126,7 @@ public class MonoRetryWhenTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoRetryRandomBackoffDefaultMaxDuration() {
 		AtomicInteger errorCount = new AtomicInteger();
 		Exception exception = new IOException("boom retry");
@@ -160,7 +160,7 @@ public class MonoRetryWhenTest {
 				.isCloseTo(800, Percentage.withPercentage(50));
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoRetryRandomBackoff_maxBackoffShaves() {
 		AtomicInteger errorCount = new AtomicInteger();
 		Exception exception = new IOException("boom retry");
@@ -199,7 +199,7 @@ public class MonoRetryWhenTest {
 				.isLessThanOrEqualTo(220);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoRetryRandomBackoff_minBackoffFloor() {
 		for (int i = 0; i < 50; i++) {
 			AtomicInteger errorCount = new AtomicInteger();
@@ -229,7 +229,7 @@ public class MonoRetryWhenTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoRetryRandomBackoff_noRandom() {
 		AtomicInteger errorCount = new AtomicInteger();
 		Exception exception = new IOException("boom retry");
@@ -258,7 +258,7 @@ public class MonoRetryWhenTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoRetryBackoffWithGivenScheduler() {
 		VirtualTimeScheduler backoffScheduler = VirtualTimeScheduler.create();
 
@@ -282,7 +282,7 @@ public class MonoRetryWhenTest {
 	}
 
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoRetryBackoffRetriesOnGivenScheduler() {
 		//the monoRetryBackoffWithGivenScheduler above is not suitable to verify the retry scheduler,
 		// as VTS is akin to immediate() and doesn't really change the Thread

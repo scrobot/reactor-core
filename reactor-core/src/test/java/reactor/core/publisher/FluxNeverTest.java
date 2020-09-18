@@ -26,7 +26,7 @@ public class FluxNeverTest {
 		Assert.assertSame(Flux.never(), Flux.never());
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 

@@ -36,7 +36,7 @@ public class BlockingSingleSubscriberTest {
 		}
 	};
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMain() {
 		Subscription s = Operators.emptySubscription();
 		test.onSubscribe(s);
@@ -48,7 +48,7 @@ public class BlockingSingleSubscriberTest {
 		assertThat(test.scan(Scannable.Attr.PREFETCH)).describedAs("PREFETCH").isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMainTerminated() {
 		test.onComplete();
 
@@ -63,7 +63,7 @@ public class BlockingSingleSubscriberTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanMainCancelled() {
 		test.dispose();
 
