@@ -33,7 +33,6 @@ import static org.mockito.Mockito.*;
 /**
  * @author David Karnok
  */
-@RunWith(MockitoJUnitRunner.class)
 public class SwapDisposableTest {
 
 	private Disposables.SwapDisposable sequentialDisposable;
@@ -48,7 +47,7 @@ public class SwapDisposableTest {
 		sequentialDisposable.dispose();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void getDisposableShouldReturnset() {
 		final Disposable underlying = mock(Disposable.class);
 		sequentialDisposable.update(underlying);
@@ -59,7 +58,7 @@ public class SwapDisposableTest {
 		assertThat(sequentialDisposable.get()).isSameAs(another);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void notDisposedWhenReplaced() {
 		final Disposable underlying = mock(Disposable.class);
 		sequentialDisposable.update(underlying);
@@ -82,7 +81,7 @@ public class SwapDisposableTest {
 		verifyNoMoreInteractions(underlying);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void settingSameDisposableTwiceDoesUnsubscribeIt() {
 		Disposable underlying = mock(Disposable.class);
 		sequentialDisposable.update(underlying);
@@ -99,7 +98,7 @@ public class SwapDisposableTest {
 		verify(underlying).dispose();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void replacingFirstUnderlyingCausesUnsubscription() {
 		Disposable first = mock(Disposable.class);
 		sequentialDisposable.update(first);
@@ -108,7 +107,7 @@ public class SwapDisposableTest {
 		verify(first).dispose();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void whenUnsubscribingSecondUnderlyingUnsubscribed() {
 		Disposable first = mock(Disposable.class);
 		sequentialDisposable.update(first);
@@ -118,7 +117,7 @@ public class SwapDisposableTest {
 		verify(second).dispose();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void settingUnderlyingWhenUnsubscribedCausesImmediateUnsubscription() {
 		sequentialDisposable.dispose();
 		Disposable underlying = mock(Disposable.class);
@@ -166,7 +165,7 @@ public class SwapDisposableTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void concurrentSetDisposableShouldNotInterleave()
 			throws InterruptedException {
 		final int count = 10;

@@ -66,7 +66,7 @@ public class FluxMapTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void nullSource() {
-		assertThrows(IllegalArgumentException.class, () ->
+		assertThrows(NullPointerException.class, () ->
 				new FluxMap<Integer, Integer>(null, v -> v));
 	}
 

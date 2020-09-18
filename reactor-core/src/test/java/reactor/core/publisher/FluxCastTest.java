@@ -32,7 +32,7 @@ public class FluxCastTest {
 
 	@Test
 	public void sourceNull2() {
-		assertThrows(IllegalArgumentException.class, () ->
+		assertThrows(NullPointerException.class, () ->
 				Flux.just(1)
 						.ofType(null));
 	}

@@ -98,7 +98,7 @@ public class FluxUsingWhenTest {
 		assertThat(rollbackDone).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorResourcePublisherDoesntApplyCallback() {
 		AtomicBoolean commitDone = new AtomicBoolean();
 		AtomicBoolean rollbackDone = new AtomicBoolean();
@@ -120,7 +120,7 @@ public class FluxUsingWhenTest {
 		assertThat(rollbackDone).isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void errorResourceCallableDoesntApplyCallback() {
 		AtomicBoolean commitDone = new AtomicBoolean();
 		AtomicBoolean rollbackDone = new AtomicBoolean();
@@ -194,7 +194,7 @@ public class FluxUsingWhenTest {
 		testPublisher.assertCancelled();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void fluxResourcePublisherIsCancelled() {
 		AtomicBoolean cancelled = new AtomicBoolean();
 		AtomicBoolean commitDone = new AtomicBoolean();
@@ -220,7 +220,7 @@ public class FluxUsingWhenTest {
 		assertThat(cancelled).as("resource publisher was cancelled").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void monoResourcePublisherIsNotCancelled() {
 		AtomicBoolean cancelled = new AtomicBoolean();
 		AtomicBoolean commitDone = new AtomicBoolean();
@@ -246,7 +246,7 @@ public class FluxUsingWhenTest {
 		assertThat(cancelled).as("resource publisher was not cancelled").isFalse();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lateFluxResourcePublisherIsCancelledOnCancel() {
 		AtomicBoolean resourceCancelled = new AtomicBoolean();
 		AtomicBoolean commitDone = new AtomicBoolean();
@@ -273,7 +273,7 @@ public class FluxUsingWhenTest {
 		assertThat(resourceCancelled).as("resource cancelled").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void lateMonoResourcePublisherIsCancelledOnCancel() {
 		AtomicBoolean resourceCancelled = new AtomicBoolean();
 		AtomicBoolean commitDone = new AtomicBoolean();
@@ -302,7 +302,7 @@ public class FluxUsingWhenTest {
 		assertThat(resourceCancelled).as("resource cancelled").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void blockOnNeverResourceCanBeCancelled() throws InterruptedException {
 		CountDownLatch latch = new CountDownLatch(1);
 		Disposable disposable = Flux.usingWhen(Flux.<String>never(),
@@ -358,7 +358,7 @@ public class FluxUsingWhenTest {
 		testResource.rollbackProbe.assertWasSubscribed();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Parameters(method = "sources01")
 	public void cancelWithHandler(Flux<String> source) {
 		TestResource testResource = new TestResource();
@@ -461,7 +461,7 @@ public class FluxUsingWhenTest {
 		testResource.rollbackProbe.assertWasNotSubscribed();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Parameters(method = "sources01")
 	public void cancelDefaultHandlerFailure(Flux<String> source) {
 		TestResource testResource = new TestResource();
@@ -493,7 +493,7 @@ public class FluxUsingWhenTest {
 				.contains("java.lang.IllegalStateException: commit error");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Parameters(method = "sourcesFullTransaction")
 	public void apiCommit(Flux<String> fullTransaction) {
 		final AtomicReference<TestResource> ref = new AtomicReference<>();
@@ -519,7 +519,7 @@ public class FluxUsingWhenTest {
 				.matches(tr -> !tr.rollbackProbe.wasSubscribed(), "no rollback");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Parameters(method = "sourcesFullTransaction")
 	public void apiCommitFailure(Flux<String> fullTransaction) {
 		final AtomicReference<TestResource> ref = new AtomicReference<>();
@@ -574,7 +574,7 @@ public class FluxUsingWhenTest {
 				.matches(tr -> !tr.rollbackProbe.wasSubscribed(), "no rollback");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Parameters(method = "sourcesTransactionError")
 	public void apiRollback(Flux<String> transactionWithError) {
 		final AtomicReference<TestResource> ref = new AtomicReference<>();
@@ -652,7 +652,7 @@ public class FluxUsingWhenTest {
 				.matches(tr -> !tr.rollbackProbe.wasSubscribed(), "rollback method short-circuited");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void apiAsyncCleanup() {
 		final AtomicReference<TestResource> ref = new AtomicReference<>();
 
@@ -701,7 +701,7 @@ public class FluxUsingWhenTest {
 				.matches(tr -> !tr.rollbackProbe.wasSubscribed(), "no rollback");
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void normalHasNoQueueOperations() {
 		final FluxPeekFuseableTest.AssertQueueSubscription<String> assertQueueSubscription =
 				new FluxPeekFuseableTest.AssertQueueSubscription<>();
@@ -825,7 +825,7 @@ public class FluxUsingWhenTest {
 		assertThat(errorRef).hasValue(null);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	@Parameters(method = "sources01")
 	public void contextPropagationOnCancelWithNoHandler(Flux<String> source) {
 		TestResource testResource = new TestResource();
@@ -857,7 +857,7 @@ public class FluxUsingWhenTest {
 
 	// == tests checking callbacks don't pile up ==
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noCancelCallbackAfterComplete() {
 		LongAdder cleanupCount = new LongAdder();
 		Flux<String> flux = Flux.usingWhen(Mono.defer(() -> Mono.just("foo")), Mono::just,
@@ -890,7 +890,7 @@ public class FluxUsingWhenTest {
 		assertThat(cleanupCount.sum()).isEqualTo(10);
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void noCancelCallbackAfterError() {
 		LongAdder cleanupCount = new LongAdder();
 		Flux<String> flux = Flux.usingWhen(Mono.just("foo"), v -> Mono.error(new IllegalStateException("boom")),
@@ -1032,7 +1032,7 @@ public class FluxUsingWhenTest {
 
 	// == scanUnsafe tests ==
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanOperator() {
 		FluxUsingWhen<Object, Object> op = new FluxUsingWhen<>(Mono.empty(), Mono::just, Mono::just, Mono::just, Mono::just);
 
@@ -1054,7 +1054,7 @@ public class FluxUsingWhenTest {
 				.isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanResourceSubscriber() {
 		CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		ResourceSubscriber<String, Integer> op = new ResourceSubscriber<>(actual, s -> Flux.just(s.length()), Mono::just, Mono::just, Mono::just, true);
@@ -1073,7 +1073,7 @@ public class FluxUsingWhenTest {
 		assertThat(op.scanUnsafe(Attr.CANCELLED)).as("CANCELLED not supported").isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanUsingWhenSubscriber() {
 		CoreSubscriber<? super Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		UsingWhenSubscriber<Integer, String> op = new UsingWhenSubscriber<>(actual, "RESOURCE", Mono::just, Mono::just, Mono::just, null);
@@ -1096,7 +1096,7 @@ public class FluxUsingWhenTest {
 		assertThat(op.scan(Attr.CANCELLED)).as("CANCELLED").isTrue();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanCommitInner() {
 		CoreSubscriber<? super Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		UsingWhenSubscriber<Integer, String> up = new UsingWhenSubscriber<>(actual, "RESOURCE", Mono::just, Mono::just, Mono::just, null);
@@ -1122,7 +1122,7 @@ public class FluxUsingWhenTest {
 		assertThat(op.scanUnsafe(Attr.PREFETCH)).as("PREFETCH not supported").isNull();
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void scanRollbackInner() {
 		CoreSubscriber<? super Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		UsingWhenSubscriber<Integer, String> up = new UsingWhenSubscriber<>(actual, "RESOURCE", Mono::just, Mono::just, Mono::just, null);

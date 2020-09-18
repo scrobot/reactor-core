@@ -328,7 +328,7 @@ public class OnDiscardShouldNotLeakTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOnComplete() {
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
 		for (int i = 0; i < 10000; i++) {
@@ -375,7 +375,7 @@ public class OnDiscardShouldNotLeakTest {
 		}
 	}
 
-	@org.junit.jupiter.api.Test
+	@Test
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOnError() {
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
 		for (int i = 0; i < 10000; i++) {

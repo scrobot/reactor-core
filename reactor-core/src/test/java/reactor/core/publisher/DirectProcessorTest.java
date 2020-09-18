@@ -30,7 +30,7 @@ public class DirectProcessorTest {
 
 	@Test
 	public void onNextNull() {
-		assertThrows(IllegalArgumentException.class, () ->
+		assertThrows(NullPointerException.class, () ->
 				DirectProcessor.create().onNext(null));
 	}
 

@@ -35,7 +35,7 @@ public class FluxRetryTest {
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(NullPointerException.class, () ->
+		assertThrows(IllegalArgumentException.class, () ->
 				Flux.never().retry(-1));
 	}
 
