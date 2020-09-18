@@ -15,14 +15,13 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxConcatWithTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noStackOverflow() {
 		int n = 5000;
 		
@@ -65,7 +64,7 @@ public class FluxConcatWithTest {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noStackOverflow3() {
 		int n = 5000;
 		
@@ -88,7 +87,7 @@ public class FluxConcatWithTest {
 	}
 
 	
-	@Test
+	@org.junit.jupiter.api.Test
 	public void dontBreakFluxArrayConcatMap() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 		
@@ -101,7 +100,7 @@ public class FluxConcatWithTest {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void concatWithValues() {
       StepVerifier.create(Flux.just(1, 2).concatWithValues(4, 5, 6))
           .expectNext(1, 2, 4, 5, 6)

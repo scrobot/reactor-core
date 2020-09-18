@@ -20,7 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
@@ -50,7 +50,7 @@ public class MonoNameTest {
 		assertThat(scannedTags.iterator()).containsExactlyInAnyOrder(tag1, tag2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperatorNullTags() throws Exception {
 		Mono<Integer> source = Mono.just(1);
 		MonoName<Integer> test = new MonoName<>(source, "foo", null);

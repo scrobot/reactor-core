@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelMergeSequentialTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		ParallelFlux<Integer> source = Flux.just(500, 300).parallel(10);
 		ParallelMergeSequential<Integer> test = new ParallelMergeSequential<>(source, 123, Queues.one());
@@ -37,7 +37,7 @@ public class ParallelMergeSequentialTest {
 		assertThat(test.scan(Scannable.Attr.PREFETCH)).isEqualTo(123);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMainSubscriber() {
 		LambdaSubscriber<Integer> subscriber = new LambdaSubscriber<>(null, e -> { }, null,
 				s -> s.request(2));
@@ -78,7 +78,7 @@ public class ParallelMergeSequentialTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMainSubscriberError() {
 		LambdaSubscriber<Integer> subscriber = new LambdaSubscriber<>(null, e -> { }, null,
 				s -> s.request(2));
@@ -95,7 +95,7 @@ public class ParallelMergeSequentialTest {
 		assertThat(test.scan(Scannable.Attr.ERROR)).hasMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanInnerSubscriber() {
 		CoreSubscriber<Integer>
 				mainActual = new LambdaSubscriber<>(null, e -> { }, null, null);

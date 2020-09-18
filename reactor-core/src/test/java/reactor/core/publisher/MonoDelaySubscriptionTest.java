@@ -18,21 +18,25 @@ package reactor.core.publisher;
 
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class MonoDelaySubscriptionTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new MonoDelaySubscription<>(null, Mono.never());
+		assertThrows(NullPointerException.class, () ->
+				new MonoDelaySubscription<>(null, Mono.never()));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void otherNull() {
-		Mono.never().delaySubscription((Publisher<?>)null);
+		assertThrows(NullPointerException.class, () ->
+				Mono.never().delaySubscription((Publisher<?>) null));
 	}
 
 	@Test

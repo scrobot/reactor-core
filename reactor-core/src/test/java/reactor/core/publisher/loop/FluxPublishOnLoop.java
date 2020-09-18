@@ -17,9 +17,9 @@ package reactor.core.publisher.loop;
 
 import java.util.concurrent.Executors;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxPublishOnTest;
 import reactor.core.scheduler.Scheduler;
@@ -33,17 +33,17 @@ public class FluxPublishOnLoop {
 
 	final FluxPublishOnTest publishOnTest = new FluxPublishOnTest();
 
-	@BeforeClass
+	@BeforeAll
 	public static void before() {
 		FluxPublishOnTest.exec = Executors.newSingleThreadExecutor();
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void after() {
 		FluxPublishOnTest.exec.shutdownNow();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void prefetchAmountOnlyLoop() {
 		for (int i = 0; i < 1000; i++) {
 			publishOnTest.prefetchAmountOnly();
@@ -64,7 +64,7 @@ public class FluxPublishOnLoop {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void boundedQueueFilterLoop() {
 		for (int i = 0; i < 1000; i++) {
 			publishOnTest.boundedQueueFilter();
@@ -77,7 +77,7 @@ public class FluxPublishOnLoop {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void crossRangeMaxHiddenLoop() throws Exception {
 		for (int i = 0; i < 10; i++) {
 			publishOnTest.crossRangeMaxHidden();
@@ -98,7 +98,7 @@ public class FluxPublishOnLoop {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void crossRangePerfDefaultLoop() {
 		for (int i = 0; i < 100000; i++) {
 			if (i % 2000 == 0) {
@@ -107,7 +107,7 @@ public class FluxPublishOnLoop {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void crossRangePerfDefaultLoop2() {
 		Scheduler scheduler = Schedulers.fromExecutorService(FluxPublishOnTest.exec);
 

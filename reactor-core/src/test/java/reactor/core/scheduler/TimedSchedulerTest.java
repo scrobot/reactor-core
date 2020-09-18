@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Disposable;
 import reactor.core.scheduler.Scheduler.Worker;
 
@@ -64,7 +64,7 @@ public class TimedSchedulerTest extends AbstractSchedulerTest {
         }
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void massCancel() throws InterruptedException {
         Scheduler timer = Schedulers.newSingle("test-timer");
         

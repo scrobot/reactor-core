@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -49,7 +49,7 @@ public class FluxWindowBoundaryTest {
 		                     .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		AssertSubscriber<Flux<Integer>> ts = AssertSubscriber.create();
 
@@ -276,7 +276,7 @@ public class FluxWindowBoundaryTest {
 		Assertions.assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanOtherSubscriber() {
         CoreSubscriber<Flux<Integer>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxWindowBoundary.WindowBoundaryMain<Integer, Integer> main = new FluxWindowBoundary.WindowBoundaryMain<>(actual,

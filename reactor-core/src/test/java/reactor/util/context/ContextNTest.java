@@ -22,8 +22,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 import static reactor.util.context.ContextTest.*;
@@ -32,7 +32,7 @@ public class ContextNTest {
 
 	Context c;
 
-	@Before
+	@BeforeEach
 	public void initContext() {
 		c = new ContextN(1, "A", 2, "B", 3, "C",
 			4, "D", 5, "E", 6, "F");
@@ -88,7 +88,7 @@ public class ContextNTest {
 		                                .withMessage("value");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void constructFromMapsLeftNull() {
 		assertThatNullPointerException().isThrownBy(() -> new ContextN(null, Collections.emptyMap()))
 		                                .withMessage("sourceMap");
@@ -197,7 +197,7 @@ public class ContextNTest {
 				.containsExactly("A", "B", "C", "D", "foo", "F");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void replaceKey6NewContext() {
 		Context put = c.put(6, "foo");
 
@@ -343,7 +343,7 @@ public class ContextNTest {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
@@ -383,7 +383,7 @@ public class ContextNTest {
 				.containsExactlyInAnyOrder(1, 2, 3, 4, 5, 6, "A", "B", "C", "D", "E", "F");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putAllOfEmpty() {
 		Context m = Context.empty();
 		Context put = c.putAll(m);

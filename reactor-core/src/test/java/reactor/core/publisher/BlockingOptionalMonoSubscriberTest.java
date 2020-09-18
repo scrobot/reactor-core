@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.Scannable;
 
@@ -62,7 +62,7 @@ public class BlockingOptionalMonoSubscriberTest {
 		assertThat(result).isEmpty();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void optionalError() {
 		Mono<String> source = Mono.error(new IllegalStateException("boom"));
 		assertThatExceptionOfType(IllegalStateException.class)
@@ -70,7 +70,7 @@ public class BlockingOptionalMonoSubscriberTest {
 				.withMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void timeoutOptionalValued() {
 		Optional<String> result = Mono.just("foo")
 		                              .blockOptional(Duration.ofMillis(500));

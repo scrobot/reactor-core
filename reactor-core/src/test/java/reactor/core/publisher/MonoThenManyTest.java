@@ -17,7 +17,7 @@
 package reactor.core.publisher;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 /**
@@ -36,7 +36,7 @@ public class MonoThenManyTest {
 		ts.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testThenManyFusion() {
 		Flux<Integer> test = Mono.just("A")
 		                         .thenMany(Flux.just("C", "D"))
@@ -53,7 +53,7 @@ public class MonoThenManyTest {
 		ts.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testThenManyDifferentType() {
 		Flux<String> test = Mono.just(1)
 		                        .thenMany(Flux.just("C", "D"));

@@ -16,7 +16,7 @@
 
 package reactor.util.concurrent;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Queue;
 
@@ -27,18 +27,18 @@ public class QueuesOneQueueTest {
 
 	private static final int TEST_ELEMENT = 2;
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyOneQueueShouldConvertToArrayWhenPassedZeroLengthArray() {
 		assertThat(emptyOneQueue().toArray(new Integer[0])).isEmpty();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void oneQueueWithOneElementShouldConvertToArrayWhenPassedZeroLengthArray() {
 		assertThat(oneQueueWithTestElement(TEST_ELEMENT).toArray(new Integer[0]))
 				.containsExactly(TEST_ELEMENT);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyOneQueueShouldConvertToArrayAndPutNullMarkerAndReuseInputArrayOnWhenPassedOneLengthArray() {
 		Queue<Integer> q = emptyOneQueue();
 		//and
@@ -79,7 +79,7 @@ public class QueuesOneQueueTest {
 				.isSameAs(passedArray);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void oneQueueWithOneElementShouldConvertToArrayAndPutNullMarkerAndReuseInputArrayWhenPassedLargerArray() {
 		Queue<Integer> q = oneQueueWithTestElement(TEST_ELEMENT);
 		//and

@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -26,14 +26,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoIgnoreEmptyTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		StepVerifier.create(Flux.just(1)
 		                        .thenEmpty(Flux.empty()))
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal3() {
 		StepVerifier.create(Flux.just(1)
 		                        .then())

@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Disposable;
@@ -377,7 +377,7 @@ public class FluxRefCountTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void delayElementShouldNotCancelTwice() throws Exception {
 		DirectProcessor<Long> p = DirectProcessor.create();
 		AtomicInteger cancellations = new AtomicInteger();

@@ -21,9 +21,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Disposable;
@@ -38,6 +38,7 @@ import reactor.util.function.Tuple2;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxReplayTest extends FluxOperatorTest<String, String> {
 
@@ -63,27 +64,29 @@ public class FluxReplayTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void failPrefetch(){
-		Flux.never()
-		    .replay( -1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.never()
+						.replay(-1));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void failTime(){
-		Flux.never()
-		    .replay( Duration.ofDays(-1));
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.never()
+						.replay(Duration.ofDays(-1)));
 	}
 
 	VirtualTimeScheduler vts;
 
-	@Before
+	@BeforeEach
 	public void vtsStart() {
 		//delayElements (notably) now uses parallel() so VTS must be enabled everywhere
 		vts = VirtualTimeScheduler.getOrSet();
 	}
 
-	@After
+	@AfterEach
 	public void vtsStop() {
 		vts = null;
 		VirtualTimeScheduler.reset();
@@ -191,7 +194,7 @@ public class FluxReplayTest extends FluxOperatorTest<String, String> {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheFluxTTLMillis() {
 
 		Flux<Tuple2<Long, Integer>> source = Flux.just(1, 2, 3)

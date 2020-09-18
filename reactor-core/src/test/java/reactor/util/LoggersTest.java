@@ -16,13 +16,13 @@
 
 package reactor.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LoggersTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void dontFallbackToJdk() throws Exception {
 		String oldValue = System.getProperty(Loggers.FALLBACK_PROPERTY);
 

@@ -18,19 +18,21 @@ package reactor.core.publisher;
 import java.util.Optional;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Fuseable;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoJustTest {
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void nullValue() {
-        new MonoJust<Integer>(null);
+		assertThrows(NullPointerException.class, () ->
+				new MonoJust<Integer>(null));
     }
 
     @Test

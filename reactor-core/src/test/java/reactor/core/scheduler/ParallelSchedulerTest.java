@@ -22,13 +22,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Stephane Maldini
@@ -40,9 +41,10 @@ public class ParallelSchedulerTest extends AbstractSchedulerTest {
 		return Schedulers.newParallel("ParallelSchedulerTest");
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void negativeParallelism() throws Exception {
-		Schedulers.newParallel("test", -1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Schedulers.newParallel("test", -1));
 	}
 
 	@Override

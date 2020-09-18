@@ -2,9 +2,10 @@ package reactor.util.concurrent;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MpscLinkedQueueTest {
 
@@ -13,16 +14,18 @@ public class MpscLinkedQueueTest {
 		assertThat(Queues.unboundedMultiproducer().get()).isInstanceOf(MpscLinkedQueue.class);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void shouldRejectNullableValues() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
-		q.offer(null);
+		assertThrows(NullPointerException.class, () ->
+				q.offer(null));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void shouldRejectNullableValuesForTest() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
-		q.test(null, null);
+		assertThrows(NullPointerException.class, () ->
+				q.test(null, null));
 	}
 
 	@Test
@@ -35,19 +38,21 @@ public class MpscLinkedQueueTest {
 		assertThat(q.poll()).isNull();
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowIteratingWithIterator() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
 
-		q.iterator();
+		assertThrows(UnsupportedOperationException.class, () ->
+				q.iterator());
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowElementsRemoving() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
 
 		q.offer(1);
-		q.remove(1);
+		assertThrows(UnsupportedOperationException.class, () ->
+				q.remove(1));
 	}
 
 	@Test

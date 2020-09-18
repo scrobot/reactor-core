@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -29,23 +29,27 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxOnBackpressureDropTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void source1Null() {
-		new FluxOnBackpressureDrop<>(null);
+		assertThrows(NullPointerException.class, () ->
+				new FluxOnBackpressureDrop<>(null));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void source2Null() {
-		new FluxOnBackpressureDrop<>(null, v -> {
-		});
+		assertThrows(NullPointerException.class, () ->
+				new FluxOnBackpressureDrop<>(null, v -> {
+				}));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void onDropNull() {
-		Flux.never().onBackpressureDrop(null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never().onBackpressureDrop(null));
 	}
 
 	@Test

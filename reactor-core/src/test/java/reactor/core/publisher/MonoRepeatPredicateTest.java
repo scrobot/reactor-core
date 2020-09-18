@@ -16,18 +16,20 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoRepeatPredicateTest {
 
 	//these tests essentially cover the API and its escape hatches
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void predicateNull() {
-		Mono.never()
-		    .repeat(null);
+		assertThrows(NullPointerException.class, () ->
+				Mono.never()
+						.repeat(null));
 	}
 
 	@Test
@@ -47,7 +49,7 @@ public class MonoRepeatPredicateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nOne() {
 		StepVerifier.create(Mono.just(3)
 		                        .repeat(1, () -> true))

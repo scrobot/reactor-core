@@ -18,7 +18,7 @@ package reactor.core;
 import java.util.Collections;
 
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.util.annotation.Nullable;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -29,7 +29,7 @@ import static org.junit.Assert.fail;
  */
 public class CoreTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void defaultDisposable(){
 		Disposable d = () -> {};
 		assertThat(d.isDisposed()).isFalse();

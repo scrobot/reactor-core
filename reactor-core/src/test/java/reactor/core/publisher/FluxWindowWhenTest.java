@@ -16,12 +16,8 @@
 
 package reactor.core.publisher;
 
-import java.lang.ref.PhantomReference;
-import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +27,7 @@ import java.util.concurrent.atomic.LongAdder;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -67,7 +63,7 @@ public class FluxWindowWhenTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noWindowRetained_gh975() throws InterruptedException {
 		LongAdder created = new LongAdder();
 		class Wrapper {
@@ -391,7 +387,7 @@ public class FluxWindowWhenTest {
 		end.assertNoSubscribers();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void startDoneThenComplete() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> start = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -434,7 +430,7 @@ public class FluxWindowWhenTest {
 		end.assertNoSubscribers();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void endError() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> start = TestPublisher.create();
@@ -498,7 +494,7 @@ public class FluxWindowWhenTest {
 		//end doesn't cleanup and as such still has a subscriber
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void endDoneThenNext() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		TestPublisher<Integer> start = TestPublisher.create();
@@ -542,7 +538,7 @@ public class FluxWindowWhenTest {
 		            .hasDropped(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mainDoneThenError() {
 		TestPublisher<Integer> source = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 
@@ -555,7 +551,7 @@ public class FluxWindowWhenTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mainDoneThenComplete() {
 		TestPublisher<Integer> source = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 

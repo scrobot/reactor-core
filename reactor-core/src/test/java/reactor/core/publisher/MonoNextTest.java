@@ -15,7 +15,7 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoNextTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		Flux.range(1, 1_000_000)
 		    .next()
@@ -62,7 +62,7 @@ public class MonoNextTest {
 		cancelTester.assertCancelled();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoNext.NextSubscriber<String> test = new MonoNext.NextSubscriber<>(actual);

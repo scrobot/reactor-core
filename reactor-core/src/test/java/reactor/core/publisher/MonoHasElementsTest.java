@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -28,12 +28,14 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoHasElementsTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new MonoHasElements<>(null);
+		assertThrows(NullPointerException.class, () ->
+				new MonoHasElements<>(null));
 	}
 
 	@Test
@@ -116,7 +118,7 @@ public class MonoHasElementsTest {
 		assertThat(cancelCount.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoSourceIsNotCancelled() {
 		AtomicLong cancelCount = new AtomicLong();
 
@@ -211,7 +213,7 @@ public class MonoHasElementsTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanHasElementsNoTerminatedOnError() {
 		CoreSubscriber<? super Boolean> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoHasElements.HasElementsSubscriber<String> test = new MonoHasElements.HasElementsSubscriber<>(actual);

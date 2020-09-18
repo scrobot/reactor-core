@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.CoreSubscriber;
 import reactor.core.Disposable;
 import reactor.core.Disposables;
@@ -42,7 +42,7 @@ import reactor.util.function.Tuple2;
 
 public class FluxSwitchOnFirstTest {
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldNotSubscribeTwice() {
         Throwable[] throwables = new Throwable[1];
         CountDownLatch latch = new CountDownLatch(1);
@@ -71,7 +71,7 @@ public class FluxSwitchOnFirstTest {
                   .hasMessage("FluxSwitchOnFirst allows only one Subscriber");
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldNotSubscribeTwiceConditional() {
         Throwable[] throwables = new Throwable[1];
         CountDownLatch latch = new CountDownLatch(1);
@@ -102,7 +102,7 @@ public class FluxSwitchOnFirstTest {
                   .hasMessage("FluxSwitchOnFirst allows only one Subscriber");
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldNotSubscribeTwiceWhenCanceled() {
         CountDownLatch latch = new CountDownLatch(1);
         StepVerifier.create(Flux.just(1L)
@@ -133,7 +133,7 @@ public class FluxSwitchOnFirstTest {
                     .hasNotDroppedErrors();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldNotSubscribeTwiceConditionalWhenCanceled() {
         CountDownLatch latch = new CountDownLatch(1);
         StepVerifier.create(Flux.just(1L)
@@ -165,7 +165,7 @@ public class FluxSwitchOnFirstTest {
                     .hasNotDroppedErrors();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldSendOnErrorSignalConditional() {
         Signal<? extends Long>[] first = new Signal[1];
 
@@ -207,7 +207,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat((long) first[0].get()).isEqualTo(1L);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldSendOnErrorSignalWithDelaySubscription() {
         Signal<? extends Long>[] first = new Signal[1];
 
@@ -226,7 +226,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(first).containsExactly(Signal.error(error));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldSendOnCompleteSignalWithDelaySubscription() {
         Signal<? extends Long>[] first = new Signal[1];
 
@@ -388,7 +388,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(requested).containsExactly(1L, 1L);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeRequestedExactlyOneAndThenLongMaxValue() throws InterruptedException {
         TestPublisher<Long> publisher = TestPublisher.createCold();
         ArrayList<Long> capture = new ArrayList<>();
@@ -409,7 +409,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(requested).containsExactly(1L, Long.MAX_VALUE);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeRequestedExactlyOneAndThenLongMaxValueConditional() throws InterruptedException {
         TestPublisher<Long> publisher = TestPublisher.createCold();
         ArrayList<Long> capture = new ArrayList<>();
@@ -455,7 +455,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(first).containsExactly(Signal.complete(Context.of("a", "c").put("c", "d")));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldNotFailOnIncorrectPublisherBehavior() {
         TestPublisher<Long> publisher =
                 TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -519,7 +519,7 @@ public class FluxSwitchOnFirstTest {
         publisher.assertNoRequestOverflow();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldNotHangWhenOneElementUpstream() {
         TestPublisher<Long> publisher = TestPublisher.createCold();
 
@@ -544,7 +544,7 @@ public class FluxSwitchOnFirstTest {
         publisher.assertNoRequestOverflow();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void backpressureTest() {
         TestPublisher<Long> publisher = TestPublisher.createCold();
         AtomicLong requested = new AtomicLong();
@@ -571,7 +571,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(requested.get()).isEqualTo(2L);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void backpressureConditionalTest() {
         Flux<Integer> publisher = Flux.range(0, 10000);
         AtomicLong requested = new AtomicLong();
@@ -607,7 +607,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(requested.get()).isEqualTo(10001L);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void backpressureDrawbackOnConditionalInTransformTest() {
         Flux<Integer> publisher = Flux.range(0, 10000);
         AtomicLong requested = new AtomicLong();
@@ -625,7 +625,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(requested.get()).isEqualTo(10001L);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldErrorOnOverflowTest() {
         TestPublisher<Long> publisher = TestPublisher.createCold();
 
@@ -649,7 +649,7 @@ public class FluxSwitchOnFirstTest {
         publisher.assertNoRequestOverflow();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldPropagateonCompleteCorrectly() {
         Flux<String> switchTransformed = Flux.empty()
                                              .switchOnFirst((first, innerFlux) -> innerFlux.map(String::valueOf));
@@ -684,7 +684,7 @@ public class FluxSwitchOnFirstTest {
                     .verify(Duration.ofSeconds(10));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeAbleToBeCancelledProperly() {
         TestPublisher<Integer> publisher = TestPublisher.createCold();
         Flux<String> switchTransformed = publisher.flux()
@@ -700,7 +700,7 @@ public class FluxSwitchOnFirstTest {
         publisher.assertWasRequested();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeAbleToBeCancelledProperly2() {
         TestPublisher<Integer> publisher = TestPublisher.createCold();
         Flux<String> switchTransformed = publisher.flux()
@@ -724,7 +724,7 @@ public class FluxSwitchOnFirstTest {
         publisher.assertWasRequested();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeAbleToBeCancelledProperly3() {
         TestPublisher<Integer> publisher = TestPublisher.createCold();
         Flux<String> switchTransformed = publisher.flux()
@@ -748,7 +748,7 @@ public class FluxSwitchOnFirstTest {
         publisher.assertWasRequested();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeAbleToCatchDiscardedElement() {
         TestPublisher<Integer> publisher = TestPublisher.createCold();
         Integer[] discarded = new Integer[1];
@@ -768,7 +768,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(discarded).containsExactly(1);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeAbleToCatchDiscardedElementInCaseOfConditional() {
         TestPublisher<Integer> publisher = TestPublisher.createCold();
         Integer[] discarded = new Integer[1];
@@ -789,7 +789,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(discarded).contains(1);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldBeAbleToCancelSubscription() throws InterruptedException {
         Flux<Long> publisher = Flux.just(1L);
         for (int j = 0; j < 100; j++) {
@@ -823,7 +823,7 @@ public class FluxSwitchOnFirstTest {
         }
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldReturnNormallyIfExceptionIsThrownOnNextDuringSwitching() {
         Signal<? extends Long>[] first = new Signal[1];
 
@@ -847,7 +847,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat((long) first[0].get()).isEqualTo(1L);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldReturnNormallyIfExceptionIsThrownOnErrorDuringSwitching() {
         Signal<? extends Long>[] first = new Signal[1];
 
@@ -875,7 +875,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(first).containsExactly(Signal.error(error));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldReturnNormallyIfExceptionIsThrownOnCompleteDuringSwitching() {
         Signal<? extends Long>[] first = new Signal[1];
 
@@ -898,7 +898,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(first).containsExactly(Signal.complete());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void sourceSubscribedOnce() {
         AtomicInteger subCount = new AtomicInteger();
         Flux<Integer> source = Flux.range(1, 10)
@@ -936,7 +936,7 @@ public class FluxSwitchOnFirstTest {
                     .verifyComplete();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldCancelSourceOnUnrelatedPublisherComplete() {
         EmitterProcessor<Long> testPublisher = EmitterProcessor.create();
 
@@ -949,7 +949,7 @@ public class FluxSwitchOnFirstTest {
         Assertions.assertThat(testPublisher.isCancelled()).isTrue();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void shouldCancelSourceOnUnrelatedPublisherError() {
         EmitterProcessor<Long> testPublisher = EmitterProcessor.create();
 

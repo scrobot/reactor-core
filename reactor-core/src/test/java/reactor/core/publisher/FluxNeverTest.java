@@ -16,7 +16,7 @@
 package reactor.core.publisher;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxNeverTest {
@@ -26,7 +26,7 @@ public class FluxNeverTest {
 		Assert.assertSame(Flux.never(), Flux.never());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 

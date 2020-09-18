@@ -15,7 +15,7 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoFlatMapTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalHidden() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -38,7 +38,7 @@ public class MonoFlatMapTest {
 		.assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancel() {
 		TestPublisher<String> cancelTester = TestPublisher.create();
 
@@ -51,7 +51,7 @@ public class MonoFlatMapTest {
 		cancelTester.assertCancelled();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMain() {
 		CoreSubscriber<Integer> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoFlatMap.FlatMapMain<String, Integer> test = new MonoFlatMap.FlatMapMain<>(
@@ -73,7 +73,7 @@ public class MonoFlatMapTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanInner() {
 		CoreSubscriber<Integer> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoFlatMap.FlatMapMain<String, Integer> main = new MonoFlatMap.FlatMapMain<>(actual, s

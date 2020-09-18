@@ -19,21 +19,24 @@ package reactor.core.publisher;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class FluxRetryTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxRetry<>(null, 1);
+		assertThrows(NullPointerException.class, () ->
+				new FluxRetry<>(null, 1));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void timesInvalid() {
-		Flux.never()
-		    .retry(-1);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never().retry(-1));
 	}
 
 	@Test

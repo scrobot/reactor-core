@@ -19,7 +19,7 @@ package reactor.core.publisher;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.Scannable;
 
@@ -29,7 +29,7 @@ import static org.junit.Assert.fail;
 
 public class LambdaSubscriberTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void consumeOnSubscriptionNotifiesError() {
 		AtomicReference<Throwable> errorHolder = new AtomicReference<>(null);
 
@@ -105,7 +105,7 @@ public class LambdaSubscriberTest {
 				testSubscription.requested, is(equalTo(32L)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noSubscriptionConsumerTriggersRequestOfMax() {
 		AtomicReference<Throwable> errorHolder = new AtomicReference<>(null);
 		LambdaSubscriber<String> tested = new LambdaSubscriber<>(
@@ -126,7 +126,7 @@ public class LambdaSubscriberTest {
 				testSubscription.requested, is(equalTo(Long.MAX_VALUE)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onNextConsumerExceptionTriggersCancellation() {
 		AtomicReference<Throwable> errorHolder = new AtomicReference<>(null);
 
@@ -148,7 +148,7 @@ public class LambdaSubscriberTest {
 				testSubscription.isCancelled, is(true));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onNextConsumerFatalDoesntTriggerCancellation() {
 		AtomicReference<Throwable> errorHolder = new AtomicReference<>(null);
 
@@ -175,7 +175,7 @@ public class LambdaSubscriberTest {
 				testSubscription.isCancelled, is(not(true)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scan() {
 		LambdaSubscriber<String> test = new LambdaSubscriber<>(null, null, null, null);
 		Subscription parent = Operators.emptySubscription();

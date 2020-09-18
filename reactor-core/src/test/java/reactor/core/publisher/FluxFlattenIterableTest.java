@@ -25,7 +25,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 
 import reactor.core.CoreSubscriber;
@@ -40,6 +40,7 @@ import reactor.util.concurrent.Queues;
 import reactor.util.context.Context;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxFlattenIterableTest extends FluxOperatorTest<String, String> {
 
@@ -138,10 +139,11 @@ public class FluxFlattenIterableTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void failPrefetch(){
-		Flux.never()
-	        .flatMapIterable(t -> null, -1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.never()
+						.flatMapIterable(t -> null, -1));
 	}
 
 	@Test

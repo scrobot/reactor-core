@@ -19,7 +19,7 @@ package reactor.core.publisher;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,13 +27,13 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoErrorSuppliedTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		StepVerifier.create(Mono.error(() -> new Exception("test")))
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void throwOnBlock() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new MonoErrorSupplied<>(() -> new IllegalStateException("boom"))
@@ -42,7 +42,7 @@ public class MonoErrorSuppliedTest {
 				.withMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void throwOnTimeoutBlock() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new MonoErrorSupplied<>(() -> new IllegalStateException("boom"))
@@ -51,7 +51,7 @@ public class MonoErrorSuppliedTest {
 				.withMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void throwOnCall() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new MonoErrorSupplied<>(() -> new IllegalStateException("boom"))
@@ -60,7 +60,7 @@ public class MonoErrorSuppliedTest {
 				.withMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void lazilyEvaluatedSubscribe() {
 		AtomicInteger count = new AtomicInteger();
 		Mono<Object> error = Mono.error(() -> new IllegalStateException("boom" + count.incrementAndGet()));
@@ -71,7 +71,7 @@ public class MonoErrorSuppliedTest {
 		            .verifyErrorMessage("boom4");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void lazilyEvaluatedBlock() {
 		AtomicInteger count = new AtomicInteger();
 		Mono<Object> error = Mono.error(() -> new IllegalStateException("boom" + count.incrementAndGet()));
@@ -85,7 +85,7 @@ public class MonoErrorSuppliedTest {
 		assertThat(count).as("after block").hasValue(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void lazilyEvaluatedBlockTimeout() {
 		AtomicInteger count = new AtomicInteger();
 		Mono<Object> error = Mono.error(() -> new IllegalStateException("boom" + count.incrementAndGet()));

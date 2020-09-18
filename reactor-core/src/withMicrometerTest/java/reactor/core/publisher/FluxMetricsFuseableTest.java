@@ -31,9 +31,9 @@ import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.simple.SimpleConfig;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.Fuseable;
 import reactor.test.StepVerifier;
@@ -46,12 +46,12 @@ public class FluxMetricsFuseableTest {
 
 	private MeterRegistry registry;
 
-	@Before
+	@BeforeEach
 	public void setupRegistry() {
 		registry = new SimpleMeterRegistry();
 	}
 
-	@After
+	@AfterEach
 	public void removeRegistry() {
 		registry.close();
 	}
@@ -80,7 +80,7 @@ public class FluxMetricsFuseableTest {
 		assertThat(fuseableSubscriber.size()).as("size after clear").isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void queueClearEmptySizeWhenQueueSubscriptionNull() {
 		AssertSubscriber<Integer> testSubscriber = AssertSubscriber.create();
 		MicrometerFluxMetricsFuseableSubscriber<Integer> fuseableSubscriber =
@@ -413,7 +413,7 @@ public class FluxMetricsFuseableTest {
 		assertThat(meter.count()).as("after more subscribe").isEqualTo(3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestTrackingDisabledIfNotNamedFuseable() {
 		Flux<Integer> source = Flux.range(1, 10);
 		new FluxMetricsFuseable<>(source, registry)

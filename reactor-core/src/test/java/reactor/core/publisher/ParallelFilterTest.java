@@ -16,16 +16,15 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
-import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelFilterTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void parallelism() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelFilter<Integer> test = new ParallelFilter<>(source, i -> i % 2 == 0);
@@ -46,7 +45,7 @@ public class ParallelFilterTest {
 				.isNotEqualTo(source.getPrefetch());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void conditional() {
 		Flux<Integer> source = Flux.range(1, 1_000);
 		for (int i = 1; i < 33; i++) {

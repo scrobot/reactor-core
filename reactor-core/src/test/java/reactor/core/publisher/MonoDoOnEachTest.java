@@ -25,8 +25,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.LongAdder;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import reactor.core.CoreSubscriber;
@@ -43,7 +43,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MonoDoOnEachTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nullSource() {
 		Assertions.assertThatNullPointerException()
 		          .isThrownBy(() -> new MonoDoOnEach<>(null, s -> {}))
@@ -57,7 +57,7 @@ public class MonoDoOnEachTest {
 		          .withMessage("onSignal");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void usesFluxDoOnEachSubscriber() {
 		@SuppressWarnings("unchecked")
 		ArgumentCaptor<CoreSubscriber<String>> argumentCaptor =
@@ -124,7 +124,7 @@ public class MonoDoOnEachTest {
 		assertThat(onComplete.get()).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void error() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -152,7 +152,7 @@ public class MonoDoOnEachTest {
 		assertThat(onComplete.get()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void empty() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -179,7 +179,7 @@ public class MonoDoOnEachTest {
 		assertThat(onComplete.get()).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void never() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -206,7 +206,7 @@ public class MonoDoOnEachTest {
 		assertThat(onComplete.get()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void consumerError() {
 		LongAdder state = new LongAdder();
 		Throwable err = new Exception("test");
@@ -247,7 +247,7 @@ public class MonoDoOnEachTest {
 		assertThat(state.intValue()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nextComplete() {
 		List<Tuple2<Signal, Context>> signalsAndContext = new ArrayList<>();
 		Mono.just(1)
@@ -269,7 +269,7 @@ public class MonoDoOnEachTest {
 				.containsExactly(SignalType.ON_NEXT, SignalType.ON_COMPLETE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nextError() {
 		List<Tuple2<Signal, Context>> signalsAndContext = new ArrayList<>();
 		Mono.just(0)
@@ -292,7 +292,7 @@ public class MonoDoOnEachTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1547
-	@Test
+	@org.junit.jupiter.api.Test
 	public void triggersCompleteSignalInMonoOnNext() {
 		CopyOnWriteArrayList<String> eventOrder = new CopyOnWriteArrayList<>();
 
@@ -315,7 +315,7 @@ public class MonoDoOnEachTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1547
-	@Test
+	@org.junit.jupiter.api.Test
 	public void triggersCompleteSignalInMonoOnNextFused() {
 		CopyOnWriteArrayList<String> eventOrder = new CopyOnWriteArrayList<>();
 
@@ -338,8 +338,8 @@ public class MonoDoOnEachTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1547
-	@Test
-	@Ignore("Mono doesn't trigger tryOnNext")
+	@org.junit.jupiter.api.Test
+	@Disabled("Mono doesn't trigger tryOnNext")
 	public void triggersCompleteSignalInMonoOnNextConditional() {
 		CopyOnWriteArrayList<String> eventOrder = new CopyOnWriteArrayList<>();
 
@@ -365,8 +365,8 @@ public class MonoDoOnEachTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1547
-	@Test
-	@Ignore("Mono doesn't trigger tryOnNext")
+	@org.junit.jupiter.api.Test
+	@Disabled("Mono doesn't trigger tryOnNext")
 	public void triggersCompleteSignalInMonoOnNextConditionalFused() {
 		CopyOnWriteArrayList<String> eventOrder = new CopyOnWriteArrayList<>();
 
@@ -456,7 +456,7 @@ public class MonoDoOnEachTest {
 				"parentError");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoOnNextDoesntTriggerCompleteTwice() {
 		AtomicInteger completeHandlerCount = new AtomicInteger();
 
@@ -472,7 +472,7 @@ public class MonoDoOnEachTest {
 		assertThat(completeHandlerCount).hasValue(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoOnNextDoesntTriggerCompleteTwiceFused() {
 		AtomicInteger completeHandlerCount = new AtomicInteger();
 
@@ -487,7 +487,7 @@ public class MonoDoOnEachTest {
 		assertThat(completeHandlerCount).hasValue(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorInCompleteHandlingTriggersErrorHandling() {
 		AtomicInteger errorHandlerCount = new AtomicInteger();
 
@@ -508,7 +508,7 @@ public class MonoDoOnEachTest {
 		assertThat(errorHandlerCount).as("error handler invoked on top on complete").hasValue(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorInCompleteHandlingTriggersErrorHandlingFused() {
 		AtomicInteger errorHandlerCount = new AtomicInteger();
 

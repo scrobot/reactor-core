@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoFilterWhenTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalFiltered() {
 		StepVerifier.withVirtualTime(() -> Mono.just(1)
 		                                       .filterWhen(v -> Mono.just(v % 2 == 0)
@@ -76,7 +76,7 @@ public class MonoFilterWhenTest {
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalSyncFusedNotFiltered() {
 		StepVerifier.create(Mono.just(2)
 		                        .filterWhen(v -> Mono.just(v % 2 == 0)))
@@ -91,14 +91,14 @@ public class MonoFilterWhenTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void allEmptyFused() {
 		StepVerifier.create(Mono.just(2)
 		                        .filterWhen(v -> Mono.empty()))
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void empty() {
 		StepVerifier.create(Mono.<Integer>empty()
 								.filterWhen(v -> Mono.just(true)))
@@ -112,7 +112,7 @@ public class MonoFilterWhenTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void error() {
 		StepVerifier.create(Mono.<Integer>error(new IllegalStateException())
 				.filterWhen(v -> Mono.just(true)))
@@ -134,7 +134,7 @@ public class MonoFilterWhenTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void oneAndErrorInner() {
 		StepVerifier.create(Mono.just(1)
 		                        .filterWhen(v -> s -> {
@@ -152,7 +152,7 @@ public class MonoFilterWhenTest {
 		            );
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void predicateThrows() {
 		StepVerifier.create(Mono.just(1)
 		                        .filterWhen(v -> { throw new IllegalStateException(); }))
@@ -165,7 +165,7 @@ public class MonoFilterWhenTest {
 		            .verifyError(NullPointerException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void predicateError() {
 		StepVerifier.create(Mono.just(1)
 		                        .filterWhen(v -> Mono.<Boolean>error(new IllegalStateException()).hide()))
@@ -212,7 +212,7 @@ public class MonoFilterWhenTest {
 		assertThat(endSignal.get()).isEqualTo(SignalType.CANCEL);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void take1CancelBackpressured() {
 		AtomicLong onNextCount = new AtomicLong();
 		AtomicReference<SignalType> endSignal = new AtomicReference<>();
@@ -245,7 +245,7 @@ public class MonoFilterWhenTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancel() {
 		final EmitterProcessor<Boolean> pp = EmitterProcessor.create();
 
@@ -269,7 +269,7 @@ public class MonoFilterWhenTest {
 		assertThat(cancelCount.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void innerFluxOnlyConsidersFirstValue() {
 		StepVerifier.create(Mono.just(1)
 		                        .filterWhen(v -> Flux.just(false, true, true)))
@@ -289,7 +289,7 @@ public class MonoFilterWhenTest {
 		assertThat(cancelCount.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanTerminatedOnlyTrueIfFilterTerminated() {
 		AtomicReference<Subscriber> subscriber = new AtomicReference<>();
 		TestPublisher<Boolean> filter = TestPublisher.create();
@@ -315,7 +315,7 @@ public class MonoFilterWhenTest {
 		assertThat(terminated).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoFilterWhen.MonoFilterWhenMain<String>
@@ -336,7 +336,7 @@ public class MonoFilterWhenTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanFilterWhenInner() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoFilterWhen.MonoFilterWhenMain<String>

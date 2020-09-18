@@ -15,7 +15,7 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
@@ -39,7 +39,7 @@ public class MonoMaterializeTest {
         .assertComplete();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void errorOnlyBackpressured() {
         AssertSubscriber<Signal<Integer>> ts = AssertSubscriber.create(0L);
 

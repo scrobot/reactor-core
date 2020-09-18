@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -119,7 +119,7 @@ public class FluxMaterializeTest
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorOnlyBackpressured() {
 		AssertSubscriber<Signal<Integer>> ts = AssertSubscriber.create(0L);
 
@@ -139,7 +139,7 @@ public class FluxMaterializeTest
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void materialize() {
 		StepVerifier.create(Flux.just("Three", "Two", "One")
 		                        .materialize())
@@ -162,7 +162,7 @@ public class FluxMaterializeTest
 		            .verifyComplete();
 	}
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void scanSubscriber() {
         CoreSubscriber<Signal<String>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxMaterialize.MaterializeSubscriber<String> test = new FluxMaterialize.MaterializeSubscriber<String>(actual);

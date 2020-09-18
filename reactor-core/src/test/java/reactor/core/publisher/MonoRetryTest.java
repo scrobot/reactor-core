@@ -18,24 +18,27 @@ package reactor.core.publisher;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.test.subscriber.AssertSubscriber;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class MonoRetryTest {
 
-	@Test(expected = NullPointerException.class)
+	@org.junit.jupiter.api.Test
 	public void sourceNull() {
-		new MonoRetry<>(null, 1);
+		assertThrows(NullPointerException.class, () ->
+				new MonoRetry<>(null, 1));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test
 	public void timesInvalid() {
-		Mono.never()
-		    .retry(-1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Mono.never().retry(-1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void zeroRetryNoError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -48,7 +51,7 @@ public class MonoRetryTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void zeroRetry() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -81,7 +84,7 @@ public class MonoRetryTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void retryInfinite() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 		AtomicInteger i = new AtomicInteger();
@@ -100,7 +103,7 @@ public class MonoRetryTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void doOnNextFails() {
 		Mono.just(1)
 		    .doOnNext(new Consumer<Integer>() {

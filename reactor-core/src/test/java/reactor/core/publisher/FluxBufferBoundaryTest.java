@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
@@ -215,7 +215,7 @@ public class FluxBufferBoundaryTest
 		  .assertNotComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferSupplierThrows() {
 		AssertSubscriber<List<Integer>> ts = AssertSubscriber.create();
 
@@ -308,7 +308,7 @@ public class FluxBufferBoundaryTest
 		           .buffer(Duration.ofMillis(200));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferWillSubdivideAnInputFluxTime2() {
 		StepVerifier.withVirtualTime(this::scenario_bufferWillSubdivideAnInputFluxTime2)
 		            .thenAwait(Duration.ofSeconds(10))
@@ -358,7 +358,7 @@ public class FluxBufferBoundaryTest
 		assertThat(ranges).isEmpty();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxEmptyBuffer() {
 //		"flux empty buffer"
 //		when:
@@ -429,7 +429,7 @@ public class FluxBufferBoundaryTest
 		assertThat(test.scan(Scannable.Attr.REQUESTED_FROM_DOWNSTREAM)).isEqualTo(2L);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnCancel() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatWith(Mono.never())

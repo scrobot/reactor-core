@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -59,7 +59,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyError(IOException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorDelayed() {
 		StepVerifier.create(Flux.just(1)
 		                        .concatWith(Flux.error(new IOException()))
@@ -72,7 +72,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyError(IOException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal1() {
 		StepVerifier.create(Flux.range(1, 5)
 		                        .onBackpressureBuffer(Duration.ofMinutes(1), Integer.MAX_VALUE, v -> {}))
@@ -106,7 +106,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal3() {
 		StepVerifier.create(Flux.range(1, 5)
 		                        .onBackpressureBuffer(Duration.ofMinutes(1), 10, this, Schedulers.single()))
@@ -123,7 +123,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal4() {
 		StepVerifier.create(Flux.range(1, 5)
 		                        .onBackpressureBuffer(Duration.ofMinutes(1), Integer.MAX_VALUE, this, Schedulers.single()))
@@ -131,7 +131,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal4SingleStep() {
 		StepVerifier.create(Flux.range(1, 5)
 		                        .onBackpressureBuffer(Duration.ofMinutes(1), Integer.MAX_VALUE, this, Schedulers.single())
@@ -140,7 +140,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferLimit() {
 		StepVerifier.create(Flux.range(1, 5)
 				.onBackpressureBuffer(Duration.ofMinutes(1), 1, this, Schedulers.single()),
@@ -154,7 +154,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		assertThat(evicted).containsExactly(1, 2, 3, 4);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void timeoutLimit() {
 		TestPublisher<Integer> tp = TestPublisher.create();
 		StepVerifier.withVirtualTime(() ->
@@ -187,7 +187,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancelEvictAll() {
 		StepVerifier.create(Flux.range(1, 5)
 		                        .log()
@@ -215,7 +215,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		assertThat(evicted).containsExactly(1, 2, 3, 4, 5);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void evictCancels() {
 		AtomicReference<Subscription> subscription = new AtomicReference<>();
 		TestPublisher<Integer> tp = TestPublisher.create();
@@ -259,7 +259,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            });
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancelAndRequest() {
 		List<Integer> seen = Collections.synchronizedList(new ArrayList<>());
 
@@ -281,7 +281,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		assertThat(seen).containsExactly(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void dropBySizeAndTimeout() {
 		TestPublisher<Integer> tp = TestPublisher.create();
 
@@ -303,7 +303,7 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void gh1194() {
 		StepVerifier.withVirtualTime(() ->
 				Flux.just("1", "not requested", "not requested")
@@ -313,14 +313,14 @@ public class FluxOnBackpressureBufferTimeoutTest implements Consumer<Object> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		Scannable test  = (Scannable) Flux.never().onBackpressureBuffer(Duration.ofSeconds(1), 123, v -> {}, Schedulers.single());
 
 		assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.single());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, null, null, null);
 		BackpressureBufferTimeoutSubscriber<String> test = new BackpressureBufferTimeoutSubscriber<>(actual, Duration.ofSeconds(1), Schedulers.immediate(), 123, v -> {});

@@ -18,7 +18,6 @@ package reactor.core.publisher;
 
 import java.time.Duration;
 import java.util.Collections;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -32,16 +31,15 @@ import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.simple.SimpleConfig;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.Disposable;
 import reactor.core.Fuseable;
 import reactor.core.publisher.MonoMetrics.MicrometerMonoMetricsFuseableSubscriber;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
-import reactor.util.annotation.Nullable;
 
 import static org.assertj.core.api.Assertions.*;
 import static reactor.core.publisher.FluxMetrics.*;
@@ -50,19 +48,19 @@ public class MonoMetricsFuseableTest {
 
 	private MeterRegistry registry;
 
-	@Before
+	@BeforeEach
 	public void setupRegistry() {
 		registry = new SimpleMeterRegistry();
 	}
 
-	@After
+	@AfterEach
 	public void removeRegistry() {
 		registry.close();
 	}
 
 	// === Fuseable-specific tests ===
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void queueClearEmptySizeDelegates() {
 		AssertSubscriber<Integer> testSubscriber = AssertSubscriber.create();
 		MicrometerMonoMetricsFuseableSubscriber<Integer> fuseableSubscriber =
@@ -84,7 +82,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(fuseableSubscriber.size()).as("size after clear").isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void queueClearEmptySizeWhenQueueSubscriptionNull() {
 		AssertSubscriber<Integer> testSubscriber = AssertSubscriber.create();
 		MicrometerMonoMetricsFuseableSubscriber<Integer> fuseableSubscriber =
@@ -128,7 +126,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(nextTimer).as("no onNext delay meter for Mono").isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void queuePollSyncTracksOnComplete() {
 		//prepare registry with mock clock
 		MockClock clock = new MockClock();
@@ -164,7 +162,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(terminationTimer.max(TimeUnit.MILLISECONDS)).as("terminate max delay").isEqualTo(323);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void queuePollError() {
 		//prepare registry with mock clock
 		MockClock clock = new MockClock();
@@ -233,7 +231,7 @@ public class MonoMetricsFuseableTest {
 		assertThat(subRef.get()).isInstanceOf(MicrometerMonoMetricsFuseableSubscriber.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void splitMetricsOnNameFuseable() {
 		final Mono<Integer> unnamedSource = Mono.just(0).map(v -> 100 / v);
 		final Mono<Integer> namedSource = Mono.just(0).map(v -> 100 / v)

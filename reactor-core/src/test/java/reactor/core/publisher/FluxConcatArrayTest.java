@@ -19,7 +19,7 @@ package reactor.core.publisher;
 import java.util.Arrays;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -28,12 +28,14 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxConcatArrayTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void arrayNull() {
-		Flux.concat((Publisher<Object>[]) null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.concat((Publisher<Object>[]) null));
 	}
 
 	final Publisher<Integer> source = Flux.range(1, 3);
@@ -92,7 +94,7 @@ public class FluxConcatArrayTest {
 		  .assertError(NullPointerException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void singleSourceIsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -104,7 +106,7 @@ public class FluxConcatArrayTest {
 		  .assertError(NullPointerException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scalarAndRangeBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -122,7 +124,7 @@ public class FluxConcatArrayTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorDelayed() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -166,7 +168,7 @@ public class FluxConcatArrayTest {
 		    .assertValues(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void pairWise() {
 		Flux<String> f = Flux.concat(Flux.just("test"), Flux.just("test2"))
 		                     .concatWith(Flux.just("test3"));
@@ -182,7 +184,7 @@ public class FluxConcatArrayTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void pairWise2() {
 		Flux<String> f = Mono.just("test")
 		                     .concatWith(Flux.just("test2"));
@@ -226,7 +228,7 @@ public class FluxConcatArrayTest {
 	                .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void startWith(){
 		StepVerifier.create(Flux.just(1, 2, 3).startWith(Arrays.asList(-1, 0)))
 		            .expectNext(-1, 0, 1, 2, 3)
@@ -234,7 +236,7 @@ public class FluxConcatArrayTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@Test
+	@org.junit.jupiter.api.Test
 	public void concatArrayDelayErrorWithFluxError() {
 		StepVerifier.create(
 				Flux.concatDelayError(
@@ -247,7 +249,7 @@ public class FluxConcatArrayTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@Test
+	@org.junit.jupiter.api.Test
 	public void concatArrayDelayErrorWithMonoError() {
 		StepVerifier.create(
 				Flux.concatDelayError(

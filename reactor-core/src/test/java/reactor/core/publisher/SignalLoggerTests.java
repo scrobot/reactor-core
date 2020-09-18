@@ -21,11 +21,10 @@ import java.util.Objects;
 import java.util.logging.Level;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.reactivestreams.Subscription;
 
-import reactor.core.CoreTest;
 import reactor.core.Fuseable;
 import reactor.core.Fuseable.SynchronousSubscription;
 import reactor.core.Scannable;
@@ -130,14 +129,14 @@ public class SignalLoggerTests {
 		assertThat(SignalLogger.subscriptionAsString(null), is("null subscription"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalSubscriptionAsString() {
 		Subscription s = new FluxPeek.PeekSubscriber<>(null, null);
 
 		assertThat(SignalLogger.subscriptionAsString(s), is("FluxPeek.PeekSubscriber"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void synchronousSubscriptionAsString() {
 		SynchronousSubscription<Object> s = new FluxArray.ArraySubscription<>(null, null);
 
@@ -151,7 +150,7 @@ public class SignalLoggerTests {
 		assertThat(SignalLogger.subscriptionAsString(s), is("[Fuseable] Operators.EmptySubscription"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void anonymousSubscriptionAsString() {
 		Subscription s = new Subscription() {
 			@Override
@@ -164,7 +163,7 @@ public class SignalLoggerTests {
 		assertThat(SignalLogger.subscriptionAsString(s), is("SignalLoggerTests$2"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSignalLogger() {
 		Mono<String> source = Mono.just("").map(i -> i);
 		SignalLogger<String> sl = new SignalLogger<>(source, null, Level.INFO, false);
@@ -241,7 +240,7 @@ public class SignalLoggerTests {
 		verifyNoMoreInteractions(mockLogger);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void logErrorUsesDebugWhenFine() {
 		Level level = Level.FINE;
 
@@ -288,7 +287,7 @@ public class SignalLoggerTests {
 		verifyNoMoreInteractions(mockLogger);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxLogWithGivenLogger() {
 		Level level = Level.WARNING;
 

@@ -15,15 +15,15 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class MonoDematerializeTest {
 
 	Signal<Integer> error = Signal.error(new RuntimeException("Forced failure"));
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void singleCompletion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -37,7 +37,7 @@ public class MonoDematerializeTest {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void singleError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -51,7 +51,7 @@ public class MonoDematerializeTest {
 		  .assertNotComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void immediateCompletion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -79,7 +79,7 @@ public class MonoDematerializeTest {
 		  .assertNotComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void completeAfterSingleSignal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -99,7 +99,7 @@ public class MonoDematerializeTest {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorAfterSingleSignal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -113,8 +113,8 @@ public class MonoDematerializeTest {
 		  .assertNotComplete();
 	}
 
-	@Test
-	@Ignore("use virtual time?")
+	@org.junit.jupiter.api.Test
+	@Disabled("use virtual time?")
 	public void neverEnding() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 

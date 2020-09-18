@@ -20,12 +20,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxSkipLastTest extends FluxOperatorTest<String, String> {
 	@Override
@@ -50,15 +52,17 @@ public class FluxSkipLastTest extends FluxOperatorTest<String, String> {
 	}
 
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxSkipLast<>(null, 1);
+		assertThrows(NullPointerException.class, () ->
+				new FluxSkipLast<>(null, 1));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void negativeNumber() {
-		Flux.never()
-		    .skipLast(-1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.never()
+						.skipLast(-1));
 	}
 
 	@Test
@@ -162,7 +166,7 @@ public class FluxSkipLastTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void skipAllBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 

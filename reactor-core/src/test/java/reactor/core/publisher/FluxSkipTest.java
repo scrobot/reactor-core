@@ -20,13 +20,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxSkipTest extends FluxOperatorTest<String, String> {
 
@@ -49,14 +51,16 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 		return Arrays.asList(scenario(f -> f.skip(1)));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxSkip<>(null, 1);
+		assertThrows(NullPointerException.class, () ->
+				new FluxSkip<>(null, 1));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void skipInvalid() {
-		Flux.never().skip(-1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.never().skip(-1));
 	}
 
 	@Test
@@ -72,7 +76,7 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -97,7 +101,7 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void skipAll() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -119,7 +123,7 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void aFluxCanBeSkippedZero(){
 		StepVerifier.create(Flux.just("test", "test2", "test3")
 		                        .skip(0)

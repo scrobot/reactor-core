@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.Scannable;
 
@@ -36,7 +36,7 @@ public class BlockingSingleSubscriberTest {
 		}
 	};
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMain() {
 		Subscription s = Operators.emptySubscription();
 		test.onSubscribe(s);
@@ -48,7 +48,7 @@ public class BlockingSingleSubscriberTest {
 		assertThat(test.scan(Scannable.Attr.PREFETCH)).describedAs("PREFETCH").isEqualTo(Integer.MAX_VALUE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMainTerminated() {
 		test.onComplete();
 
@@ -63,7 +63,7 @@ public class BlockingSingleSubscriberTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMainCancelled() {
 		test.dispose();
 

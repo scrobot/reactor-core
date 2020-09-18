@@ -17,7 +17,7 @@ package reactor.core.publisher;
 
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -25,17 +25,20 @@ import reactor.core.Scannable;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxFirstEmittingTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void arrayNull() {
-		Flux.first((Publisher<Integer>[]) null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.first((Publisher<Integer>[]) null));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void iterableNull() {
-		new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null);
+		assertThrows(NullPointerException.class, () ->
+				new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null));
 	}
 
 	@Test

@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 import reactor.core.Fuseable;
@@ -81,7 +81,7 @@ public class FluxIndexedFuseableTest extends FluxOperatorTest<Integer, Tuple2<Lo
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void defaultFusedBackpressured() {
 		AtomicLong counter = new AtomicLong(4);
 
@@ -125,7 +125,7 @@ public class FluxIndexedFuseableTest extends FluxOperatorTest<Integer, Tuple2<Lo
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void customFused() {
 		AtomicLong counter = new AtomicLong(2);
 		StepVerifier.create(
@@ -143,7 +143,7 @@ public class FluxIndexedFuseableTest extends FluxOperatorTest<Integer, Tuple2<Lo
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void customFusedBackpressured() {
 		AtomicLong counter = new AtomicLong(4);
 
@@ -187,7 +187,7 @@ public class FluxIndexedFuseableTest extends FluxOperatorTest<Integer, Tuple2<Lo
 		assertThat(counter.get()).isEqualTo(1000);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sourceNull() {
 		//noinspection ConstantConditions
 		assertThatNullPointerException()
@@ -218,7 +218,7 @@ public class FluxIndexedFuseableTest extends FluxOperatorTest<Integer, Tuple2<Lo
 		            .verifyErrorMessage("indexMapper returned a null value at raw index 1 for value bar");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void indexMapperThrows() {
 		Flux<String> source = Flux.just("foo", "bar");
 		Flux<Tuple2<Integer, String>> test = new FluxIndexFuseable<>(source,

@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -114,7 +114,7 @@ public class FluxDematerializeTest extends FluxOperatorTest<Signal<String>, Stri
 
 	Signal<Integer> error = Signal.error(new RuntimeException("Forced failure"));
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void singleCompletion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -154,7 +154,7 @@ public class FluxDematerializeTest extends FluxOperatorTest<Signal<String>, Stri
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void immediateError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 

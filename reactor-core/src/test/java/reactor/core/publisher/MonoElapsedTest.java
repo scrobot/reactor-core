@@ -17,7 +17,7 @@ package reactor.core.publisher;
 
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
@@ -42,7 +42,7 @@ public class MonoElapsedTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		MonoElapsed<String> test = new MonoElapsed<>(Mono.empty(), Schedulers.immediate());
 

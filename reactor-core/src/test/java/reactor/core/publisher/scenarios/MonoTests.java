@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 import org.assertj.core.api.Assertions;
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 
 import reactor.core.publisher.Flux;
@@ -46,13 +46,14 @@ import reactor.util.function.Tuples;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Stephane Maldini
  */
 public class MonoTests {
 
-	@After
+	@AfterEach
 	public void resetHooks() {
 		Hooks.resetOnEachOperator();
 		Hooks.resetOnLastOperator();
@@ -134,9 +135,10 @@ public class MonoTests {
 				is("foo"));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void testDoOnEachSignalNullConsumer() {
-		Mono.just(1).doOnEach(null);
+		assertThrows(NullPointerException.class, () ->
+				Mono.just(1).doOnEach(null));
 	}
 
 	@Test

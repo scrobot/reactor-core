@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 
 import reactor.core.Fuseable;
@@ -158,7 +158,7 @@ public class FluxDoFirstTest {
 		assertThat(subRef.get().getClass()).isEqualTo(FluxHide.HideSubscriber.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void performsDirectSubscriberToSource_Fused() {
 		AtomicReference<Subscription> subRef = new AtomicReference<>();
 		Flux<Integer> test = Flux.just(1, 2)

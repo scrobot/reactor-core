@@ -16,7 +16,6 @@
 package reactor.core.publisher;
 
 import java.time.Duration;
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
@@ -24,7 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.atomic.LongAdder;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -36,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoSequenceEqualTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sequenceEquals() {
 		StepVerifier.create(Mono.sequenceEqual(
 						Flux.just("one", "two", "three"),
@@ -45,7 +44,7 @@ public class MonoSequenceEqualTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sequenceLongerLeft() {
 		StepVerifier.create(Mono.sequenceEqual(
 						Flux.just("one", "two", "three", "four"),
@@ -71,7 +70,7 @@ public class MonoSequenceEqualTest {
 		            .verifyError(IllegalStateException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sequenceErrorsRight() {
 		StepVerifier.create(Mono.sequenceEqual(
 						Flux.just("one", "two", "three"),
@@ -87,7 +86,7 @@ public class MonoSequenceEqualTest {
 		            .verifyErrorMessage("left");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sequenceErrorsBothPropagatesLeftErrorWithSmallRequest() {
 		StepVerifier.create(Mono.sequenceEqual(
 						Flux.just("one", "two", "three", "four")
@@ -109,7 +108,7 @@ public class MonoSequenceEqualTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sequenceEmptyRight() {
 		StepVerifier.create(Mono.sequenceEqual(
 				Flux.just("one", "two", "three"),
@@ -127,14 +126,14 @@ public class MonoSequenceEqualTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void equalPredicateFailure() {
 		StepVerifier.create(Mono.sequenceEqual(Mono.just("one"), Mono.just("one"),
 						(s1, s2) -> { throw new IllegalStateException("boom"); }))
 		            .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void largeSequence() {
 		Flux<Integer> source = Flux.range(1, Queues.SMALL_BUFFER_SIZE * 4).subscribeOn(Schedulers.elastic());
 
@@ -144,7 +143,7 @@ public class MonoSequenceEqualTest {
 		            .verify(Duration.ofSeconds(5));
 	}
 
-		@Test
+		@org.junit.jupiter.api.Test
 	public void syncFusedCrash() {
 		Flux<Integer> source = Flux.range(1, 10).map(i -> { throw new IllegalArgumentException("boom"); });
 
@@ -156,7 +155,7 @@ public class MonoSequenceEqualTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void differenceCancelsBothSources() {
 		AtomicBoolean sub1 = new AtomicBoolean();
 		AtomicBoolean sub2 = new AtomicBoolean();
@@ -172,7 +171,7 @@ public class MonoSequenceEqualTest {
 		Assert.assertTrue("right not cancelled", sub2.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancelCancelsBothSources() {
 		AtomicReference<Subscription> sub1 = new AtomicReference<>();
 		AtomicReference<Subscription> sub2 = new AtomicReference<>();
@@ -224,7 +223,7 @@ public class MonoSequenceEqualTest {
 		assertThat(cancel2.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancelCancelsBothSourcesIncludingNever() {
 		AtomicReference<Subscription> sub1 = new AtomicReference<>();
 		AtomicReference<Subscription> sub2 = new AtomicReference<>();
@@ -266,7 +265,7 @@ public class MonoSequenceEqualTest {
 		Assert.assertEquals("right has been subscribed multiple times", 1, innerSub2.intValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		MonoSequenceEqual<Integer> s = new MonoSequenceEqual<>(Mono.just(1), Mono.just(2), (a, b) -> true, 123);
 		assertThat(s.scan(Scannable.Attr.PREFETCH)).isEqualTo(123);
@@ -288,7 +287,7 @@ public class MonoSequenceEqualTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriber() {
 		CoreSubscriber<Boolean>
 				actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);

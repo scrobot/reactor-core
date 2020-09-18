@@ -25,7 +25,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -56,7 +57,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void recursiveCountdownBreadth() {
 		StepVerifier.create(Flux.just(10)
 		                        .expand(countDown))
@@ -71,7 +72,7 @@ public class FluxExpandTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorDepth() {
 		StepVerifier.create(Flux.<Integer>error(new IllegalStateException("boom"))
 				.expandDeep(countDown))
@@ -148,7 +149,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void recursiveCountdownTakeDepth() {
 		StepVerifier.create(Flux.just(10)
 		                        .expandDeep(countDown)
@@ -158,7 +159,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void recursiveCountdownBackpressure() {
 		StepVerifier.create(Flux.just(10)
 		                        .expand(countDown),
@@ -176,7 +177,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void recursiveCountdownBackpressureDepth() {
 		StepVerifier.create(Flux.just(10)
 		                        .expandDeep(countDown),
@@ -194,7 +195,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void expanderThrows() {
 		StepVerifier.create(Flux.just(10)
 		                        .expand(v -> {
@@ -294,7 +295,8 @@ public class FluxExpandTest {
 		);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void depthFirst() {
 		Node root = createTest();
 
@@ -312,7 +314,7 @@ public class FluxExpandTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void depthFirstAsync() {
 		Node root = createTest();
 
@@ -332,7 +334,8 @@ public class FluxExpandTest {
 		            .verify(Duration.ofSeconds(5));
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void breadthFirst() {
 		Node root = createTest();
 
@@ -367,7 +370,7 @@ public class FluxExpandTest {
 		            .verify(Duration.ofSeconds(5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void depthFirstCancel() {
 		final TestPublisher<Integer> pp = TestPublisher.create();
 		final AssertSubscriber<Integer> ts = AssertSubscriber.create();
@@ -425,7 +428,7 @@ public class FluxExpandTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void depthEmitCancelRace() {
 		for (int i = 0; i < 1000; i++) {
 
@@ -462,7 +465,7 @@ public class FluxExpandTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void depthCancelRace2() throws Exception {
 		for (int i = 0; i < 1000; i++) {
 

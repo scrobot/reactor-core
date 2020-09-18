@@ -20,16 +20,19 @@ import java.time.Duration;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class MonoRepeatTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void timesInvalid() {
+		assertThrows(IllegalArgumentException.class, () ->
 		Mono.never()
-		    .repeat(-1);
+		    .repeat(-1));
 	}
 
 	@Test

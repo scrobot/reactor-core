@@ -19,7 +19,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -30,7 +31,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxCancelOnTest {
 
-	@Test(timeout = 3000L)
+	@Test
+	@Timeout(3)
 	public void cancelOnDedicatedScheduler() throws Exception {
 
 		CountDownLatch latch = new CountDownLatch(1);
@@ -61,7 +63,7 @@ public class FluxCancelOnTest {
 		assertThat(((Scannable) flux).scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.elastic());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, null, null, null);
 		FluxCancelOn.CancelSubscriber<String> test = new FluxCancelOn.CancelSubscriber<>(actual, Schedulers.single());

@@ -18,7 +18,7 @@ package reactor.core.publisher;
 
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Disposable;
 import reactor.core.Disposables;
 import reactor.core.scheduler.Schedulers;
@@ -49,7 +49,7 @@ public class OperatorDisposablesTest {
 	}
 	
 	
-	@Test
+	@org.junit.jupiter.api.Test
 	public void singletonIsDisposed() {
 		assertThat(OperatorDisposables.DISPOSED.isDisposed()).isTrue();
 		OperatorDisposables.DISPOSED.dispose();
@@ -84,7 +84,7 @@ public class OperatorDisposablesTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void setReplace() {
 		for (int i = 0; i < 500; i++) {
 
@@ -113,7 +113,7 @@ public class OperatorDisposablesTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void setReplaceNull() {
 		TestDisposable r = new TestDisposable();
 

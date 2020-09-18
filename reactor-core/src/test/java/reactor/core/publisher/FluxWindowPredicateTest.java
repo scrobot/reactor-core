@@ -29,7 +29,7 @@ import java.util.logging.Level;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Disposable;
@@ -88,7 +88,7 @@ public class FluxWindowPredicateTest extends
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1452
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileNotPropagatingCancelToSource_disposeInnerFirst() {
 		final AtomicBoolean beforeWindowWhileStageCancelled = new AtomicBoolean();
 		final AtomicBoolean afterWindowWhileStageCancelled = new AtomicBoolean();
@@ -124,7 +124,7 @@ public class FluxWindowPredicateTest extends
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1452
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileNotPropagatingCancelToSource_withConcat() {
 		// Similar to windowWhileNotPropagatingCancelToSource_disposeOuterFirst
 		final AtomicBoolean beforeWindowWhileStageCancelled = new AtomicBoolean();
@@ -148,7 +148,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(beforeWindowWhileStageCancelled).as("beforeWindowWhileStageCancelled cancelled").isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileNoEmptyWindows() {
 		Flux.just("ALPHA", "#", "BETA", "#")
 		    .windowWhile(s -> !"#".equals(s))
@@ -159,7 +159,7 @@ public class FluxWindowPredicateTest extends
 		    .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowUntilNoEmptyWindows() {
 		Flux.just("ALPHA", "#", "BETA", "#")
 		    .windowUntil("#"::equals)
@@ -170,7 +170,7 @@ public class FluxWindowPredicateTest extends
 		    .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowUntilCutBeforeNoEmptyWindows() {
 		Flux.just("ALPHA", "#", "BETA", "#")
 		    .windowUntil("#"::equals, true)
@@ -182,7 +182,7 @@ public class FluxWindowPredicateTest extends
 		    .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileIntentionallyEmptyWindows() {
 		Flux.just("ALPHA", "#", "BETA", "#", "#")
 		    .windowWhile(s -> !"#".equals(s))
@@ -194,7 +194,7 @@ public class FluxWindowPredicateTest extends
 		    .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowUntilIntentionallyEmptyWindows() {
 		Flux.just("ALPHA", "#", "BETA", "#", "#")
 		    .windowUntil("#"::equals)
@@ -206,7 +206,7 @@ public class FluxWindowPredicateTest extends
 		    .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowUntilCutBeforeIntentionallyEmptyWindows() {
 		Flux.just("ALPHA", "#", "BETA", "#", "#")
 		    .windowUntil("#"::equals, true)
@@ -284,7 +284,7 @@ public class FluxWindowPredicateTest extends
 		);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiUntil() {
 		StepVerifier.create(Flux.just("red", "green", "#", "orange", "blue", "#", "black", "white")
 		                        .windowUntil(color -> color.equals("#"))
@@ -296,7 +296,7 @@ public class FluxWindowPredicateTest extends
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiUntilCutAfter() {
 		StepVerifier.create(Flux.just("red", "green", "#", "orange", "blue", "#", "black", "white")
 		                        .windowUntil(color -> color.equals("#"), false)
@@ -308,7 +308,7 @@ public class FluxWindowPredicateTest extends
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiUntilCutBefore() {
 		StepVerifier.create(Flux.just("red", "green", "#", "orange", "blue", "#", "black", "white")
 		                        .windowUntil(color -> color.equals("#"), true)
@@ -320,7 +320,7 @@ public class FluxWindowPredicateTest extends
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiWhile() {
 		StepVerifier.create(Flux.just("red", "green", "#", "orange", "blue", "#", "black", "white")
 		                        .windowWhile(color -> !color.equals("#"))
@@ -332,7 +332,7 @@ public class FluxWindowPredicateTest extends
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalUntil() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowUntil = new FluxWindowPredicate<>(sp1,
@@ -367,7 +367,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onCompletionBeforeLastBoundaryWindowEmitted() {
 		Flux<Integer> source = Flux.just(1, 2);
 
@@ -399,7 +399,7 @@ public class FluxWindowPredicateTest extends
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mainErrorUntilIsPropagatedToBothWindowAndMain() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowUntil = new FluxWindowPredicate<>(
@@ -425,7 +425,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void predicateErrorUntil() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowUntil = new FluxWindowPredicate<>(
@@ -453,7 +453,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalUntilCutBefore() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowUntilCutBefore = new FluxWindowPredicate<>(sp1,
@@ -484,7 +484,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mainErrorUntilCutBeforeIsPropagatedToBothWindowAndMain() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowUntilCutBefore =
@@ -511,7 +511,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void predicateErrorUntilCutBefore() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowUntilCutBefore =
@@ -545,7 +545,7 @@ public class FluxWindowPredicateTest extends
 				&& expectedMessage.equals(signal.getThrowable().getMessage());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalWhile() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowWhile = new FluxWindowPredicate<>(
@@ -576,7 +576,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalWhileDoesntInitiallyMatch() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowWhile = new FluxWindowPredicate<>(
@@ -614,7 +614,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalWhileDoesntMatch() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowWhile = new FluxWindowPredicate<>(
@@ -649,7 +649,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mainErrorWhileIsPropagatedToBothWindowAndMain() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowWhile = new FluxWindowPredicate<>(
@@ -672,7 +672,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(sp1.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whileStartingSeveralSeparatorsEachCreateEmptyWindow() {
 		StepVerifier.create(Flux.just("#")
 		                        .repeat(9)
@@ -685,7 +685,7 @@ public class FluxWindowPredicateTest extends
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whileOnlySeparatorsGivesSequenceOfWindows() {
 		StepVerifier.create(Flux.just("#")
 		                        .repeat(9)
@@ -696,7 +696,7 @@ public class FluxWindowPredicateTest extends
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void predicateErrorWhile() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxWindowPredicate<Integer> windowWhile = new FluxWindowPredicate<>(
@@ -725,7 +725,7 @@ public class FluxWindowPredicateTest extends
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whileRequestOneByOne() {
 		StepVerifier.create(Flux.just("red", "green", "#", "orange", "blue", "#", "black", "white")
 		                        .hide()
@@ -746,7 +746,7 @@ public class FluxWindowPredicateTest extends
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mismatchAtBeginningUntil() {
 		StepVerifier.create(Flux.just("#", "red", "green")
 		                        .windowUntil(s -> s.equals("#"))
@@ -768,7 +768,7 @@ public class FluxWindowPredicateTest extends
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mismatchAtBeginningWhile() {
 		StepVerifier.create(Flux.just("#", "red", "green")
 		                        .windowWhile(s -> !s.equals("#"))
@@ -779,7 +779,7 @@ public class FluxWindowPredicateTest extends
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void innerCancellationCancelsMainSequence() {
 		StepVerifier.create(Flux.just("red", "green", "#", "black", "white")
 		                        .log()
@@ -790,21 +790,21 @@ public class FluxWindowPredicateTest extends
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void prefetchIntegerMaxIsRequestUnboundedUntil() {
 		TestPublisher<?> tp = TestPublisher.create();
 		tp.flux().windowUntil(s -> true, true, Integer.MAX_VALUE).subscribe();
 		tp.assertMinRequested(Long.MAX_VALUE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void prefetchIntegerMaxIsRequestUnboundedWhile() {
 		TestPublisher<?> tp = TestPublisher.create();
 		tp.flux().windowWhile(s -> true, Integer.MAX_VALUE).subscribe();
 		tp.assertMinRequested(Long.MAX_VALUE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void manualRequestWindowUntilOverRequestingSourceByPrefetch() {
 		AtomicLong req = new AtomicLong();
 		int prefetch = 4;
@@ -828,7 +828,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(req.get()).isEqualTo(8 + prefetch);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void manualRequestWindowWhileOverRequestingSourceByPrefetch() {
 		AtomicLong req = new AtomicLong();
 		int prefetch = 4;
@@ -854,7 +854,7 @@ public class FluxWindowPredicateTest extends
 	}
 
 	// see https://github.com/reactor/reactor-core/issues/477
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileOneByOneStartingDelimiterReplenishes() {
 		AtomicLong req = new AtomicLong();
 		Flux<String> source = Flux.just("#", "1A", "1B", "1C", "#", "2A", "2B", "2C", "2D", "#", "3A").hide();
@@ -885,7 +885,7 @@ public class FluxWindowPredicateTest extends
 	}
 
 	// see https://github.com/reactor/reactor-core/issues/477
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileUnboundedStartingDelimiterReplenishes() {
 		AtomicLong req = new AtomicLong();
 		Flux<String> source = Flux.just("#", "1A", "1B", "1C", "#", "2A", "2B", "2C", "2D", "#", "3A").hide();
@@ -939,7 +939,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(req.get()).isGreaterThanOrEqualTo(13); //11 elements + the prefetch
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnWindowCancel() {
 		List<Object> discardMain = new ArrayList<>();
 		List<Object> discardWindow = new ArrayList<>();
@@ -959,7 +959,7 @@ public class FluxWindowPredicateTest extends
 		assertThat(discardMain).containsExactly(0, 0, 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanMainSubscriber() {
         CoreSubscriber<Flux<Integer>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxWindowPredicate.WindowPredicateMain<Integer> test = new FluxWindowPredicate.WindowPredicateMain<>(actual,

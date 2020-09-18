@@ -28,7 +28,7 @@ import java.util.function.Function;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -47,13 +47,15 @@ import reactor.util.context.Context;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(JUnitParamsRunner.class)
 public class FluxDoOnEachTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullSource() {
-		new FluxDoOnEach<>(null, null);
+		assertThrows(NullPointerException.class, () ->
+				new FluxDoOnEach<>(null, null));
 	}
 
 	private static final String sourceErrorMessage = "boomSource";
@@ -97,7 +99,7 @@ public class FluxDoOnEachTest {
 		};
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@Parameters(method = "sources12Complete")
 	public void normal(Flux<Integer> source) {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
@@ -130,7 +132,7 @@ public class FluxDoOnEachTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1056
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fusion() {
 		AtomicInteger invocationCount = new AtomicInteger();
 
@@ -148,7 +150,7 @@ public class FluxDoOnEachTest {
 		assertThat(invocationCount).as("doOnEach invoked").hasValue(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fusedSync() {
 		AtomicReference<String> onNext = new AtomicReference<>();
 		AtomicReference<Throwable> onError = new AtomicReference<>();
@@ -177,7 +179,7 @@ public class FluxDoOnEachTest {
 		assertThat(onComplete).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fusedSyncCallbackError() {
 		AtomicReference<String> onNext = new AtomicReference<>();
 		AtomicReference<Throwable> onError = new AtomicReference<>();
@@ -237,7 +239,7 @@ public class FluxDoOnEachTest {
 		assertThat(onComplete).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fusedAsyncCallbackTransientError() {
 		AtomicReference<String> onNext = new AtomicReference<>();
 		AtomicReference<Throwable> onError = new AtomicReference<>();
@@ -268,7 +270,7 @@ public class FluxDoOnEachTest {
 		assertThat(onComplete).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fusedAsyncCallbackErrorsOnTerminal() {
 		AtomicReference<String> onNext = new AtomicReference<>();
 		AtomicReference<Throwable> onError = new AtomicReference<>();
@@ -328,7 +330,7 @@ public class FluxDoOnEachTest {
 		assertThat(state.intValue()).isZero();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@Parameters(method = "sourcesEmpty")
 	public void empty(Flux<Integer> source) {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
@@ -392,7 +394,7 @@ public class FluxDoOnEachTest {
 		assertThat(state.intValue()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@Parameters(method = "sources12Complete")
 	public void nextCallbackError(Flux<Integer> source) {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
@@ -442,7 +444,7 @@ public class FluxDoOnEachTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@Parameters(method = "sources12Complete")
 	public void completeCallbackError(Flux<Integer> source) {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
@@ -497,7 +499,7 @@ public class FluxDoOnEachTest {
 		Assert.assertEquals(1, state.intValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void conditionalTryOnNext() {
 		ArrayList<Signal<Boolean>> signals = new ArrayList<>();
 		ConditionalSubscriber<Boolean> actual = new FluxPeekFuseableTest.ConditionalAssertSubscriber<Boolean>() {
@@ -527,7 +529,7 @@ public class FluxDoOnEachTest {
 		assertThat(actualTryNext.get(1)).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void conditionalFuseableTryOnNext() {
 		ArrayList<Signal<Boolean>> signals = new ArrayList<>();
 		FluxPeekFuseableTest.ConditionalAssertSubscriber<Boolean> actual = new FluxPeekFuseableTest.ConditionalAssertSubscriber<Boolean>() {
@@ -557,7 +559,7 @@ public class FluxDoOnEachTest {
 		assertThat(actualTryNext.get(1)).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nextCompleteAndErrorHaveContext() {
 		Context context = Context.of("foo", "bar");
 		List<Signal> signals = new ArrayList<>();
@@ -574,7 +576,7 @@ public class FluxDoOnEachTest {
 				          .isTrue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanSubscriber() {
         CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		FluxDoOnEach<Integer> peek =
@@ -593,7 +595,7 @@ public class FluxDoOnEachTest {
     }
 
     //https://github.com/reactor/reactor-core/issues/1067
-	@Test
+	@org.junit.jupiter.api.Test
 	public void shallExecuteSideEffectsCallback() {
 
 		Flux<Integer> result = Mono.just(Arrays.asList(1, 2))

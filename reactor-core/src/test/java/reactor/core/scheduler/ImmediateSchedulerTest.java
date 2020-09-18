@@ -18,7 +18,7 @@ package reactor.core.scheduler;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.core.Scannable;
 import reactor.core.scheduler.Scheduler.Worker;
@@ -56,7 +56,7 @@ public class ImmediateSchedulerTest extends AbstractSchedulerTest {
 		return false;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void directAndWorkerTimeSchedulingRejected() {
 		Scheduler scheduler = scheduler();
 		Worker worker = scheduler.createWorker();
@@ -80,7 +80,7 @@ public class ImmediateSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanScheduler() {
 		ImmediateScheduler s = (ImmediateScheduler) Schedulers.immediate();
 

@@ -18,7 +18,7 @@ package reactor.core.publisher;
 import java.io.IOException;
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
@@ -48,7 +48,7 @@ public class MonoSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void callableThrows() {
 		StepVerifier.create(Mono.fromCallable(() -> {
 			throw new IOException("forced failure");
@@ -65,7 +65,7 @@ public class MonoSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void callableNullBackpressured() {
 		StepVerifier.create(
 				Mono.fromCallable(() -> null).subscribeOn(Schedulers.single()), 0)
@@ -74,7 +74,7 @@ public class MonoSubscribeOnCallableTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		MonoSubscribeOnCallable<String> test = new MonoSubscribeOnCallable<>(() -> "foo", Schedulers.immediate());
 

@@ -17,7 +17,7 @@
 package reactor.core.publisher;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -26,22 +26,26 @@ import reactor.test.publisher.TestPublisher;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoAnyTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new MonoAny<>(null, v -> true);
+		assertThrows(NullPointerException.class, () ->
+				new MonoAny<>(null, v -> true));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void predicateNull() {
-		new MonoAny<>(null, null);
+		assertThrows(NullPointerException.class, () ->
+				new MonoAny<>(null, null));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void elementNull() {
-		Flux.never().hasElement(null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never().hasElement(null));
 	}
 
 	@Test
@@ -61,7 +65,7 @@ public class MonoAnyTest {
 		            .expectNext(true)
 		            .verifyComplete();
 	}
-	@Test
+	@org.junit.jupiter.api.Test
 	public void error2() {
 		StepVerifier.create(Flux.range(1, 10).hasElement(-4))
 		            .expectNext(false)

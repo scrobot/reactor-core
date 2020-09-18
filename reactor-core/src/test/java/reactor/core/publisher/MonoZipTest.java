@@ -21,7 +21,8 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
@@ -34,7 +35,6 @@ import reactor.util.function.Tuple4;
 import reactor.util.function.Tuple5;
 import reactor.util.function.Tuple6;
 import reactor.util.function.Tuple7;
-import reactor.util.function.Tuple8;
 import reactor.util.function.Tuples;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,7 +47,7 @@ public class MonoZipTest {
 		                      .block());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void allNonEmptyIterable() {
 		assertThat(Mono.zip(Arrays.asList(Mono.just(1), Mono.just(2)),
 				args -> (int) args[0] + (int) args[1])
@@ -92,7 +92,8 @@ public class MonoZipTest {
 		               .block()).isEqualTo(3);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void castCheck() {
 		Mono<String[]> mono = Mono.zip(a -> Arrays.copyOf(a, a.length, String[].class),
 				Mono.just("hello"),
@@ -115,7 +116,7 @@ public class MonoZipTest {
 		               .block()).isEqualTo(3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void someEmpty() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.zip(Mono.delay(Duration.ofMillis(150)).then(), Mono.delay(Duration
@@ -157,7 +158,7 @@ public class MonoZipTest {
 		 .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void pairWise2() {
 		Mono<Tuple2<Tuple2<Integer, String>, String>> f =
 				Mono.zip(Mono.just(1), Mono.just("test"))
@@ -178,7 +179,7 @@ public class MonoZipTest {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void pairWise3() {
 		Mono<Tuple2<Tuple2<Integer, String>, String>> f =
 				Mono.zip(Arrays.asList(Mono.just(1), Mono.just("test")),
@@ -212,7 +213,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenMonoJust3() {
 		MonoProcessor<Tuple3<Integer, Integer, Integer>> mp = MonoProcessor.create();
 		StepVerifier.create(Mono.zip(Mono.just(1), Mono.just(2), Mono.just(3))
@@ -240,7 +241,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenMonoJust5() {
 		MonoProcessor<Tuple5<Integer, Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -257,7 +258,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenMonoJust6() {
 		MonoProcessor<Tuple6<Integer, Integer, Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -275,7 +276,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenMonoJust7() {
 		StepVerifier.create(Mono.zip(Mono.just(1),
 				Mono.just(2),
@@ -351,7 +352,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenDelayMonoJust4() {
 		MonoProcessor<Tuple4<Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -367,7 +368,7 @@ public class MonoZipTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenDelayMonoJust5() {
 		MonoProcessor<Tuple5<Integer, Integer, Integer, Integer, Integer>> mp =
 				MonoProcessor.create();
@@ -455,7 +456,7 @@ public class MonoZipTest {
 		            .verifyErrorMatches(e -> e == boom1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void delayErrorEmptySourceErrorSource() {
 		Mono<String> error = Mono.error(new IllegalStateException("boom"));
 		Mono<String> empty = Mono.empty();
@@ -564,7 +565,7 @@ public class MonoZipTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanWhenInner() {
 		CoreSubscriber<? super String> actual = new LambdaMonoSubscriber<>(null, e ->
 		{}, null, null);

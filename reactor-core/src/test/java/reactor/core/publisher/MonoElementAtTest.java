@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -24,32 +24,38 @@ import reactor.test.publisher.TestPublisher;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoElementAtTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void source1Null() {
-		new MonoElementAt<>(null, 1);
+		assertThrows(NullPointerException.class, () ->
+				new MonoElementAt<>(null, 1));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void source2Null() {
-		new MonoElementAt<>(null, 1, 1);
+		assertThrows(NullPointerException.class, () ->
+				new MonoElementAt<>(null, 1, 1));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void defaultSupplierNull() {
-		Flux.never().elementAt(1, null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never().elementAt(1, null));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
+	@Test
 	public void indexNegative1() {
-		Flux.never().elementAt(-1);
+		assertThrows(IndexOutOfBoundsException.class, () ->
+				Flux.never().elementAt(-1));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
+	@Test
 	public void indexNegative2() {
-		Flux.never().elementAt(-1, 1);
+		assertThrows(IndexOutOfBoundsException.class, () ->
+				Flux.never().elementAt(-1, 1));
 	}
 
 	@Test

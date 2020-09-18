@@ -24,8 +24,8 @@ import java.util.function.Predicate;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import reactor.core.publisher.DirectProcessor;
 import reactor.core.publisher.Flux;
@@ -56,7 +56,7 @@ public class FluxWindowConsistencyTest {
 
 	private AtomicInteger mainTerminated = new AtomicInteger();
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		source = sourceProcessor.doOnNext(i -> sourceCount.incrementAndGet());
 	}
@@ -161,7 +161,7 @@ public class FluxWindowConsistencyTest {
 		assertEquals("Main terminate doesn't match", 0, mainTerminated.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowExactComplete() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(3, 3);
 		subscribe(windows);
@@ -169,7 +169,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(0, 1, 2), Arrays.asList(3, 4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowSkipComplete() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(3, 5);
 		subscribe(windows);
@@ -185,7 +185,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(0, 1, 2, 3, 4), Arrays.asList(3, 4));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowDurationComplete() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(Duration.ofMillis(200));
 		subscribe(windows);
@@ -195,7 +195,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(0, 1, 2), Arrays.asList(3, 4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowTimeoutComplete() throws Exception {
 		Flux<Flux<Integer>> windows = source.windowTimeout(5, Duration.ofMillis(200));
 		subscribe(windows);
@@ -205,7 +205,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(0, 1, 2), Arrays.asList(3, 4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowBoundaryComplete() throws Exception {
 		DirectProcessor<Integer> boundary = DirectProcessor.create();
 		Flux<Flux<Integer>> windows = source.window(boundary);
@@ -216,7 +216,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(0, 1, 2), Arrays.asList(3, 4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowStartEndComplete() throws Exception {
 		DirectProcessor<Integer> start = DirectProcessor.create();
 		DirectProcessor<Integer> end1 = DirectProcessor.create();
@@ -239,7 +239,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(1, 2, 3), Arrays.asList(4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileComplete() throws Exception {
 		Flux<Flux<Integer>> windows = source.windowWhile(i -> i % 3 != 0);
 		subscribe(windows);
@@ -247,7 +247,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(1, 2), Arrays.asList(4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void groupByComplete() throws Exception {
 		Flux<GroupedFlux<Integer, Integer>> windows = source.groupBy(i -> i % 2);
 		subscribeGroups(windows);
@@ -255,7 +255,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainComplete(Arrays.asList(0, 2, 4), Arrays.asList(1, 3, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowExactMainCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(5, 5);
 		subscribe(windows);
@@ -263,7 +263,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancel(true, Arrays.asList(0, 1, 2, 3, 4), Arrays.asList(5, 6, 7, 8, 9));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowSkipMainCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(3, 5);
 		subscribe(windows);
@@ -291,7 +291,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancel(true, Arrays.asList(0, 1, 2, 3, 4));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowTimeoutMainCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.windowTimeout(10, Duration.ofMillis(100));
 		subscribe(windows);
@@ -303,7 +303,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancel(true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowBoundaryMainCancel() throws Exception {
 		DirectProcessor<Integer> boundary = DirectProcessor.create();
 		Flux<Flux<Integer>> windows = source.window(boundary);
@@ -319,7 +319,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancel(true, Arrays.asList(0, 1, 2), Arrays.asList(3, 4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowStartEndMainCancel() throws Exception {
 		DirectProcessor<Integer> start = DirectProcessor.create();
 		DirectProcessor<Integer> end1 = DirectProcessor.create();
@@ -355,7 +355,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancel(true, Arrays.asList(1, 2), Arrays.asList(4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void groupByMainCancel() throws Exception {
 		Flux<GroupedFlux<Integer, Integer>> windows = source.groupBy(i -> i % 2);
 		subscribeGroups(windows);
@@ -371,7 +371,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancelNoNewWindow(2, Arrays.asList(0, 1, 2, 3, 4), Arrays.asList(5, 6, 7, 8, 9));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowSkipMainCancelNoNewWindow() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(2, 5);
 		subscribe(windows);
@@ -379,7 +379,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancelNoNewWindow(1, Arrays.asList(0, 1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowOverlapMainCancelNoNewWindow() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(5, 1);
 		subscribe(windows);
@@ -387,7 +387,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancelNoNewWindow(0, Arrays.asList(0, 1, 2), Arrays.asList(1, 2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowDurationMainCancelNoNewWindow() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(Duration.ofMillis(100));
 		subscribe(windows);
@@ -398,7 +398,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancelNoNewWindow(1, Arrays.asList(0, 1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowTimeoutMainCancelNoNewWindow() throws Exception {
 		Flux<Flux<Integer>> windows = source.windowTimeout(5, Duration.ofMillis(200));
 		subscribe(windows);
@@ -440,7 +440,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancelNoNewWindow(1, Arrays.asList(0, 1, 2, 3));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowUntilMainCancelNoNewWindow() throws Exception {
 		Flux<Flux<Integer>> windows = source.windowUntil(i -> i % 3 == 0);
 		subscribe(windows);
@@ -456,7 +456,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancelNoNewWindow(2, Arrays.asList(0), Arrays.asList(2, 3));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void groupByMainCancelNoNewWindow() throws Exception {
 		Flux<GroupedFlux<Integer, Integer>> windows = source.groupBy(i -> i % 2);
 		subscribeGroups(windows);
@@ -464,7 +464,7 @@ public class FluxWindowConsistencyTest {
 		verifyMainCancelNoNewWindow(0, Arrays.asList(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowExactInnerCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(5, 5);
 		subscribe(windows);
@@ -472,7 +472,7 @@ public class FluxWindowConsistencyTest {
 		verifyInnerCancel(1, i -> i != 7, Arrays.asList(0, 1, 2, 3, 4), Arrays.asList(5, 6));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowSkipInnerCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(2, 5);
 		subscribe(windows);
@@ -480,7 +480,7 @@ public class FluxWindowConsistencyTest {
 		verifyInnerCancel(1, i -> i != 6, Arrays.asList(0, 1), Arrays.asList(5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowOverlapInnerCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(5, 1);
 		subscribe(windows);
@@ -488,7 +488,7 @@ public class FluxWindowConsistencyTest {
 		verifyInnerCancel(0, i -> i != 2, Arrays.asList(0, 1), Arrays.asList(1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowDurationInnerCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.window(Duration.ofMillis(5000));
 		subscribe(windows);
@@ -496,7 +496,7 @@ public class FluxWindowConsistencyTest {
 		verifyInnerCancel(0, i -> i != 2, Arrays.asList(0, 1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowTimeoutInnerCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.windowTimeout(5, Duration.ofMillis(5000));
 		subscribe(windows);
@@ -504,7 +504,7 @@ public class FluxWindowConsistencyTest {
 		verifyInnerCancel(0, i -> i != 2, Arrays.asList(0, 1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowBoundaryInnerCancel() throws Exception {
 		DirectProcessor<Integer> boundaryProcessor = DirectProcessor.create();
 		Flux<Flux<Integer>> windows = source.window(boundaryProcessor);
@@ -533,7 +533,7 @@ public class FluxWindowConsistencyTest {
 		verifyInnerCancel(1, i -> i != 3, Arrays.asList(0), Arrays.asList(1, 2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWhileInnerCancel() throws Exception {
 		Flux<Flux<Integer>> windows = source.windowWhile(i -> i % 3 != 1);
 		subscribe(windows);
@@ -541,7 +541,7 @@ public class FluxWindowConsistencyTest {
 		verifyInnerCancel(1, i -> i != 3, Arrays.asList(0), Arrays.asList(2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void groupByInnerCancel() throws Exception {
 		Flux<GroupedFlux<Integer, Integer>> windows = source.groupBy(i -> i % 2);
 		subscribeGroups(windows);

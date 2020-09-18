@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.*;
 
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.core.publisher.*;
 import reactor.core.scheduler.Scheduler.Worker;
@@ -44,7 +45,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 		return true;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void smokeTestDelay() {
 		for (int i = 0; i < 20; i++) {
 			Scheduler s = Schedulers.newSingle("test");
@@ -77,7 +78,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void smokeTestInterval() {
 		Scheduler s = Schedulers.newSingle("test");
 
@@ -97,7 +98,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void lotsOfTasks() throws Exception {
 	    System.gc();
 	    Thread.sleep(200);
@@ -129,7 +130,7 @@ public class SingleSchedulerTest extends AbstractSchedulerTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanName() {
 		Scheduler withNamedFactory = Schedulers.newSingle("scanName");
 		Scheduler withBasicFactory = Schedulers.newSingle(Thread::new);

@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -57,7 +57,7 @@ public class ParallelGroupTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanInnerGroupRequestNotTrackedWhenParent() {
 		ParallelInnerGroup<Integer> test = new ParallelInnerGroup<>(1023);
 

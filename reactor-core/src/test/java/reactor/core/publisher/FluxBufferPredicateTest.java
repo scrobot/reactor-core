@@ -33,7 +33,7 @@ import java.util.function.Supplier;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
@@ -56,7 +56,7 @@ public class FluxBufferPredicateTest {
 
 	private static final int ROUNDS = 10_000; //increase this number locally if you want better confidence that no race condition occurs
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void normalUntil() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -87,7 +87,7 @@ public class FluxBufferPredicateTest {
 		assertFalse(sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void onCompletionBeforeLastBoundaryBufferEmitted() {
 		Flux<Integer> source = Flux.just(1, 2);
@@ -120,7 +120,7 @@ public class FluxBufferPredicateTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void mainErrorUntil() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -140,7 +140,7 @@ public class FluxBufferPredicateTest {
 		assertFalse(sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void predicateErrorUntil() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -163,7 +163,7 @@ public class FluxBufferPredicateTest {
 					.verify();
 		assertFalse(sp1.hasDownstreams());
 	}
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void normalUntilOther() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -194,7 +194,7 @@ public class FluxBufferPredicateTest {
 		assertFalse(sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void mainErrorUntilOther() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -215,7 +215,7 @@ public class FluxBufferPredicateTest {
 		assertFalse(sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void predicateErrorUntilOther() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -239,7 +239,7 @@ public class FluxBufferPredicateTest {
 		assertFalse(sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void normalWhile() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -328,7 +328,7 @@ public class FluxBufferPredicateTest {
 		assertFalse(sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void mainErrorWhile() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -373,7 +373,7 @@ public class FluxBufferPredicateTest {
 		assertFalse(sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void bufferSupplierThrows() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
@@ -414,7 +414,7 @@ public class FluxBufferPredicateTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferSupplierReturnsNull() {
 		DirectProcessor<Integer> sp1 = DirectProcessor.create();
 		FluxBufferPredicate<Integer, List<Integer>> bufferUntil = new FluxBufferPredicate<>(
@@ -431,7 +431,7 @@ public class FluxBufferPredicateTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void multipleTriggersOfEmptyBufferKeepInitialBuffer() {
 		//this is best demonstrated with bufferWhile:
@@ -514,7 +514,7 @@ public class FluxBufferPredicateTest {
 		assertThat(totalRequest.longValue(), is(12L));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestBoundedSeveralInitial() {
 		LongAdder requestCallCount = new LongAdder();
 		LongAdder totalRequest = new LongAdder();
@@ -599,7 +599,7 @@ public class FluxBufferPredicateTest {
 
 	// the 3 race condition tests below essentially validate that racing request vs onNext
 	// don't lead to backpressure errors.
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestRaceWithOnNext() {
 		AtomicLong requested = new AtomicLong();
 		TestPublisher<Integer> testPublisher = TestPublisher.create();
@@ -630,7 +630,7 @@ public class FluxBufferPredicateTest {
 		Assertions.assertThat(requested).as("total upstream request").hasValue(10 + 1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onNextRaceWithRequest() {
 		AtomicLong requested = new AtomicLong();
 		TestPublisher<Integer> testPublisher = TestPublisher.create();
@@ -661,7 +661,7 @@ public class FluxBufferPredicateTest {
 		Assertions.assertThat(requested).as("total upstream request").hasValue(10 + 1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onNextRaceWithRequestOfTwo() {
 		AtomicLong requested = new AtomicLong();
 		TestPublisher<Integer> testPublisher = TestPublisher.create();
@@ -692,7 +692,7 @@ public class FluxBufferPredicateTest {
 		Assertions.assertThat(requested).as("total upstream request").hasValue(2 * 10 + 1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestRaceWithOnNextLoops() {
 		for (int i = 0; i < ROUNDS; i++) {
 			requestRaceWithOnNext();
@@ -724,7 +724,7 @@ public class FluxBufferPredicateTest {
 		assertThat(totalRequest.longValue(), is(Long.MAX_VALUE)); //also unbounded
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public void requestSwitchingToMaxRequestsSourceOnlyOnceMore() {
 		LongAdder requestCallCount = new LongAdder();
@@ -780,7 +780,7 @@ public class FluxBufferPredicateTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBufferPredicateUntilIncludesBoundaryLast() {
 		String[] colorSeparated = new String[]{"red", "green", "blue", "#", "green", "green", "#", "blue", "cyan"};
 
@@ -814,7 +814,7 @@ public class FluxBufferPredicateTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBufferPredicateUntilCutBeforeIncludesBoundaryFirst() {
 		String[] colorSeparated = new String[]{"red", "green", "blue", "#", "green", "green", "#", "blue", "cyan"};
 
@@ -849,7 +849,7 @@ public class FluxBufferPredicateTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMain() {
 		CoreSubscriber<? super List> actual = new LambdaSubscriber<>(null, e -> {}, null,
 				sub -> sub.request(100));
@@ -899,7 +899,7 @@ public class FluxBufferPredicateTest {
 		            .hasDiscardedExactly(1, 2, 3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnPredicateError() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 				.bufferUntil(i -> { if (i == 3) throw new IllegalStateException("boom"); else return false; }))
@@ -934,7 +934,7 @@ public class FluxBufferPredicateTest {
 		};
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardRaceWithOnNext_bufferAdds() {
 		Predicate<AtomicInteger> predicate = v -> v.get() == 100;
 		FluxBufferPredicate.Mode mode = FluxBufferPredicate.Mode.UNTIL;
@@ -965,7 +965,7 @@ public class FluxBufferPredicateTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardRaceWithOnNext_bufferUntilWithMatch() {
 		Predicate<AtomicInteger> predicate = v -> v.get() == -2;
 		FluxBufferPredicate.Mode mode = FluxBufferPredicate.Mode.UNTIL;
@@ -1062,7 +1062,7 @@ public class FluxBufferPredicateTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1937
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBufferUntilNoExtraRequestFromEmit() {
 		Flux<List<Integer>> numbers = Flux.just(1, 2, 3)
 		                                  .hide()
@@ -1079,7 +1079,7 @@ public class FluxBufferPredicateTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/pull/2027
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBufferUntilNoExtraRequestFromConcurrentEmitAndRequest() {
 		AtomicReference<Throwable> errorOrComplete = new AtomicReference<>();
 		ConcurrentLinkedQueue<List<Integer>> buffers = new ConcurrentLinkedQueue<>();

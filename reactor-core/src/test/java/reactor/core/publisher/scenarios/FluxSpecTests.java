@@ -32,7 +32,8 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import reactor.core.publisher.EmitterProcessor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxProcessor;
@@ -735,7 +736,7 @@ public class FluxSpecTests {
 		assertThat(tap).isEqualTo(-1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxValuesCanBeFiltered() {
 //		"A Flux"s values can be filtered"
 //		given: "a source composable with a filter that rejects odd values"
@@ -774,7 +775,7 @@ public class FluxSpecTests {
 		assertThat(tap.get()).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenMappingFunctionThrowsMappedComposableAcceptsError() {
 //		"When a mapping function throws an exception, the mapped composable accepts the error"
 //		given: "a source composable with a mapping function that throws an error"
@@ -1089,7 +1090,8 @@ public class FluxSpecTests {
 		            .verifyComplete();
 	}
 
-	@Test(timeout = 10000L)
+	@Test
+	@Timeout(10)
 	public void collectFromMultipleThread1() throws Exception {
 		EmitterProcessor<Integer> head = EmitterProcessor.create();
 		AtomicInteger sum = new AtomicInteger();

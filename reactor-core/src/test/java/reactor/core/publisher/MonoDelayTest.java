@@ -19,7 +19,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
 import reactor.core.Scannable;
@@ -78,7 +78,7 @@ public class MonoDelayTest {
 		assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.immediate());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanDelayRunnable() {
 		CoreSubscriber<Long> actual = new LambdaMonoSubscriber<>(null, e -> {
 		}, null, null);

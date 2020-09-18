@@ -19,14 +19,17 @@ package reactor.core.publisher;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxDeferTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void supplierNull() {
-		Flux.<Integer>defer(null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.<Integer>defer(null));
 	}
 
 	@Test

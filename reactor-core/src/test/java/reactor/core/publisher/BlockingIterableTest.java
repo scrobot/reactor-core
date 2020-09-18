@@ -28,7 +28,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.reactivestreams.Subscription;
 import reactor.core.Scannable;
 import reactor.core.Scannable.Attr;
@@ -37,10 +38,12 @@ import reactor.util.concurrent.Queues;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BlockingIterableTest {
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void normal() {
 		List<Integer> values = new ArrayList<>();
 
@@ -52,7 +55,8 @@ public class BlockingIterableTest {
 		Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), values);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void normal2() {
 		Queue<Integer> q = new ArrayBlockingQueue<>(1);
 		List<Integer> values = new ArrayList<>();
@@ -65,7 +69,8 @@ public class BlockingIterableTest {
 		Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), values);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void empty() {
 		List<Integer> values = new ArrayList<>();
 
@@ -76,18 +81,22 @@ public class BlockingIterableTest {
 		Assert.assertEquals(Collections.emptyList(), values);
 	}
 
-	@Test(timeout = 5000, expected = RuntimeException.class)
+	@Test
+	@Timeout(5)
 	public void error() {
 		List<Integer> values = new ArrayList<>();
 
-		for (Integer i : Flux.<Integer>error(new RuntimeException("forced failure")).toIterable()) {
-			values.add(i);
-		}
+		assertThrows(RuntimeException.class, () -> {
+			for (Integer i : Flux.<Integer>error(new RuntimeException("forced failure")).toIterable()) {
+				values.add(i);
+			}
+		});
 
 		Assert.assertEquals(Collections.emptyList(), values);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void toStream() {
 		List<Integer> values = new ArrayList<>();
 
@@ -98,7 +107,8 @@ public class BlockingIterableTest {
 		Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), values);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void streamEmpty() {
 		List<Integer> values = new ArrayList<>();
 
@@ -108,7 +118,8 @@ public class BlockingIterableTest {
 		Assert.assertEquals(Collections.emptyList(), values);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void streamLimit() {
 		List<Integer> values = new ArrayList<>();
 
@@ -120,7 +131,8 @@ public class BlockingIterableTest {
 		Assert.assertEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), values);
 	}
 
-	@Test(timeout = 5000)
+	@Test
+	@Timeout(5)
 	public void streamParallel() {
 		int n = 1_000_000;
 
@@ -223,7 +235,8 @@ public class BlockingIterableTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).describedAs("after CANCELLED").isTrue();
 	}
 
-	@Test(timeout = 1000)
+	@Test
+	@Timeout(1)
 	public void gh841_streamCreate() {
 		Flux<String> source = Flux.<String>create(sink -> {
 			sink.next("a");
@@ -238,7 +251,8 @@ public class BlockingIterableTest {
 				.withMessage("boom");
 	}
 
-	@Test(timeout = 1000)
+	@Test
+	@Timeout(1)
 	public void gh841_streamCreateDeferredError() {
 		Flux<Integer> source = Flux.<Integer>create(sink -> {
 			sink.next(1);
@@ -255,7 +269,8 @@ public class BlockingIterableTest {
 				.withMessage("/ by zero");
 	}
 
-	@Test(timeout = 1000)
+	@Test
+	@Timeout(1)
 	public void gh841_streamFromIterable() {
 		Flux<String> source = Flux.fromIterable(Arrays.asList("a","b"))
 		                          .sort((a, b) -> { throw new IllegalStateException("boom"); });
@@ -266,7 +281,8 @@ public class BlockingIterableTest {
 				.withMessage("boom");
 	}
 
-	@Test(timeout = 1000)
+	@Test
+	@Timeout(1)
 	public void gh841_iteratorFromCreate() {
 		Iterator<String> it = Flux.<String>create(sink -> {
 			sink.next("a");
@@ -281,7 +297,8 @@ public class BlockingIterableTest {
 				.withMessage("boom");
 	}
 
-	@Test(timeout = 1000)
+	@Test
+	@Timeout(1)
 	public void gh841_workaroundFlux() {
 		Flux<String> source = Flux.<String>create(sink -> {
 			sink.next("a");
@@ -298,7 +315,8 @@ public class BlockingIterableTest {
 		            .verify();
 	}
 
-	@Test(timeout = 1000)
+	@Test
+	@Timeout(1)
 	public void gh841_workaroundStream() {
 		Flux<String> source = Flux.<String>create(sink -> {
 			sink.next("a");

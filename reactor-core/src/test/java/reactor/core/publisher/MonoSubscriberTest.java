@@ -22,7 +22,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.core.Fuseable;
 import reactor.core.publisher.Operators.MonoSubscriber;
@@ -37,14 +37,14 @@ import static org.junit.Assert.assertNull;
 
 public class MonoSubscriberTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void queueSubscriptionSyncRejected() {
 		MonoSubscriber<Integer, Integer> ds = new MonoSubscriber<>(new AssertSubscriber<>());
 
 		assertEquals(Fuseable.NONE, ds.requestFusion(Fuseable.SYNC));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void clear() {
 		MonoSubscriber<Integer, Integer> ds = new MonoSubscriber<>(new AssertSubscriber<>());
 
@@ -90,7 +90,7 @@ public class MonoSubscriberTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestCancelRace() {
 		for (int i = 0; i < 5000; i++) {
 			AssertSubscriber<Integer> ts = new AssertSubscriber<>(0L);
@@ -177,7 +177,7 @@ public class MonoSubscriberTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void issue1719() {
 		for (int i = 0; i < 10000; i++) {
 			Map<String, Mono<Integer>> input = new HashMap<>();

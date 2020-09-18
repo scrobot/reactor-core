@@ -16,14 +16,12 @@
 package reactor.core.publisher;
 
 import java.util.NoSuchElementException;
-import java.util.function.Predicate;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
-import reactor.util.function.Tuple3;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,7 +36,7 @@ public class MonoTakeLastOneTest {
 		                                                    .hasMessage("Flux#last() didn't observe any onNext signal"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyCallableThrowsNoSuchElement() {
 		StepVerifier.create(Flux.empty()
 		                        .last())
@@ -127,7 +125,7 @@ public class MonoTakeLastOneTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void defaultUsingZip() {
 
 		UnicastProcessor<String> processor1 = UnicastProcessor.create();
@@ -155,7 +153,7 @@ public class MonoTakeLastOneTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanTakeLastOneSubscriber() {
 		CoreSubscriber<String>
 				actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);

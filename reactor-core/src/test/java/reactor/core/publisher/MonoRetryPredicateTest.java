@@ -18,7 +18,7 @@ package reactor.core.publisher;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 public class MonoRetryPredicateTest {
@@ -43,7 +43,7 @@ public class MonoRetryPredicateTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void twoRetryErrorSupplier() {
 		AtomicInteger i = new AtomicInteger();
 		AtomicBoolean bool = new AtomicBoolean(true);

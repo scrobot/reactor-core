@@ -22,7 +22,7 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import reactor.core.Exceptions;
 import reactor.core.Scannable;
@@ -119,7 +119,7 @@ public class DelegateServiceSchedulerTest extends AbstractSchedulerTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void smokeTestInterval() {
 		Scheduler s = autoCleanup(scheduler());
 
@@ -159,7 +159,7 @@ public class DelegateServiceSchedulerTest extends AbstractSchedulerTest {
 				.isEqualTo("fromExecutorService(anonymousExecutor@" + singleId + ")");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanNameExplicit() {
 		Scheduler fixedThreadPool = autoCleanup(Schedulers.fromExecutorService(Executors.newFixedThreadPool(3), "fixedThreadPool(3)"));
 		Scheduler cachedThreadPool = autoCleanup(Schedulers.fromExecutorService(Executors.newCachedThreadPool(), "cachedThreadPool"));

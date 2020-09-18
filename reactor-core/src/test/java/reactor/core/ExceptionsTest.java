@@ -21,10 +21,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
-import java.util.function.Predicate;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import reactor.core.publisher.Mono;
 import reactor.test.util.RaceTestUtils;
@@ -57,7 +56,7 @@ public class ExceptionsTest {
 		assertTrue(Exceptions.unwrap(w) == w);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void duplicateOnSubscribeReferencesSpec() {
 		IllegalStateException error = duplicateOnSubscribeException();
 		assertThat(error).hasMessageContaining("Rule 2.12");
@@ -71,7 +70,7 @@ public class ExceptionsTest {
 		assertThat(error1).isNotSameAs(error2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorCallbackNotImplementedRejectsNull() {
 		//noinspection ThrowableNotThrown,ConstantConditions
 		assertThatNullPointerException().isThrownBy(() -> Exceptions.errorCallbackNotImplemented(null));
@@ -129,7 +128,7 @@ public class ExceptionsTest {
 		assertThat(Exceptions.isBubbling(bubbling)).as("bubbling").isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void isCancelAndCancelIsBubbling() {
 		Throwable notCancel = new BubblingException("foo");
 		Throwable cancel = new CancelException();
@@ -140,7 +139,7 @@ public class ExceptionsTest {
 		assertThat(Exceptions.isBubbling(cancel)).as("cancel are bubbling").isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nullOrNegativeRequestReferencesSpec() {
 		assertThat(Exceptions.nullOrNegativeRequestException(-3))
 				.hasMessage("Spec. Rule 3.9 - Cannot request a non strictly positive number: -3");
@@ -173,7 +172,7 @@ public class ExceptionsTest {
 				.withCause(expected.getCause());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void throwIfJvmFatal() {
 		VirtualMachineError fatal1 = new VirtualMachineError() {};
 		ThreadDeath fatal2 = new ThreadDeath();
@@ -195,7 +194,7 @@ public class ExceptionsTest {
 				.isSameAs(fatal3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void multipleWithNullVararg() {
 		//noinspection ConstantConditions
 		assertThat(Exceptions.multiple((Throwable[]) null))
@@ -205,7 +204,7 @@ public class ExceptionsTest {
 	            .hasNoSuppressedExceptions();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void multipleWithOneVararg() {
 		IOException e1 = new IOException("boom");
 
@@ -216,7 +215,7 @@ public class ExceptionsTest {
 	            .hasSuppressedException(e1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void multipleWithTwoVararg() {
 		IOException e1 = new IOException("boom");
 		IllegalArgumentException  e2 = new IllegalArgumentException("boom");
@@ -273,13 +272,13 @@ public class ExceptionsTest {
 		assertThat(Exceptions.isMultiple(null)).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void unwrapMultipleNull() {
 		assertThat(Exceptions.unwrapMultiple(null))
 				.isEmpty();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void unwrapMultipleNotComposite() {
 		RuntimeException e1 = Exceptions.failWithCancel();
 		assertThat(Exceptions.unwrapMultiple(e1)).containsExactly(e1);
@@ -289,7 +288,7 @@ public class ExceptionsTest {
 	static final AtomicReferenceFieldUpdater<ExceptionsTest, Throwable> ADD_THROWABLE =
 			AtomicReferenceFieldUpdater.newUpdater(ExceptionsTest.class, Throwable.class, "addThrowable");
 
-	@Before
+	@BeforeEach
 	public void resetAddThrowable() {
 		addThrowable = null;
 	}
@@ -396,7 +395,7 @@ public class ExceptionsTest {
 				.isSameAs(TERMINATED);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void addSuppressedRuntimeToNormal() {
 		RuntimeException original = new RuntimeException("foo");
 		Exception suppressed = new IllegalStateException("boom");
@@ -406,7 +405,7 @@ public class ExceptionsTest {
 				.hasSuppressedException(suppressed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void addSuppressedRuntimeToRejectedInstance() {
 		RuntimeException original = new RejectedExecutionException("foo");
 		Exception suppressed = new IllegalStateException("boom");
@@ -436,7 +435,7 @@ public class ExceptionsTest {
 				.hasSuppressedException(suppressed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void addSuppressedRuntimeToRejectedSingleton2() {
 		RuntimeException original = NOT_TIME_CAPABLE_REJECTED_EXECUTION;
 		Exception suppressed = new IllegalStateException("boom");

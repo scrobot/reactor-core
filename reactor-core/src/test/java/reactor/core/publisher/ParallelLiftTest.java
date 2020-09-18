@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,7 +33,7 @@ public class ParallelLiftTest {
 				.isEqualTo(source.parallelism());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() throws Exception {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelLift<Integer, Integer> test = new ParallelLift<>(source, (sc, su) -> su);

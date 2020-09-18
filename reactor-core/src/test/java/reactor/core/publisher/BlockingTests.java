@@ -26,35 +26,36 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import org.junit.AfterClass;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BlockingTests {
 
 	static Scheduler scheduler;
 	static Scheduler nonBlockingScheduler;
 
-	@BeforeClass
+	@BeforeAll
 	public static void before() {
 		scheduler = Schedulers.fromExecutorService(Executors.newSingleThreadExecutor());
 		nonBlockingScheduler = Schedulers.newSingle("nonBlockingScheduler");
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void after() {
 		scheduler.dispose();
 		nonBlockingScheduler.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void blockingFirst() {
 		Assert.assertEquals((Integer) 1,
 				Flux.range(1, 10)
@@ -62,7 +63,7 @@ public class BlockingTests {
 				    .blockFirst());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void blockingFirst2() {
 		Assert.assertEquals((Integer) 1,
 				Flux.range(1, 10)
@@ -70,13 +71,13 @@ public class BlockingTests {
 				    .blockFirst(Duration.ofSeconds(10)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void blockingFirstTimeout() {
 		assertThat(Flux.empty()
 		               .blockFirst(Duration.ofMillis(1))).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void blockingLast() {
 		Assert.assertEquals((Integer) 10,
 				Flux.range(1, 10)
@@ -84,7 +85,7 @@ public class BlockingTests {
 				    .blockLast());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void blockingLast2() {
 		Assert.assertEquals((Integer) 10,
 				Flux.range(1, 10)
@@ -92,38 +93,42 @@ public class BlockingTests {
 				    .blockLast(Duration.ofSeconds(10)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void blockingLastTimeout() {
 		assertThat(Flux.empty()
 		               .blockLast(Duration.ofMillis(1))).isNull();
 	}
 
-	@Test(expected = RuntimeException.class)
+	@org.junit.jupiter.api.Test
 	public void blockingFirstError() {
-		Flux.error(new RuntimeException("test"))
-		    .publishOn(scheduler)
-		    .blockFirst();
+		assertThrows(RuntimeException.class, () ->
+				Flux.error(new RuntimeException("test"))
+						.publishOn(scheduler)
+						.blockFirst());
 	}
 
-	@Test(expected = RuntimeException.class)
+	@org.junit.jupiter.api.Test
 	public void blockingFirstError2() {
-		Flux.error(new RuntimeException("test"))
-		    .publishOn(scheduler)
-		    .blockFirst(Duration.ofSeconds(1));
+		assertThrows(RuntimeException.class, () ->
+				Flux.error(new RuntimeException("test"))
+						.publishOn(scheduler)
+						.blockFirst(Duration.ofSeconds(1)));
 	}
 
-	@Test(expected = RuntimeException.class)
+	@org.junit.jupiter.api.Test
 	public void blockingLastError() {
-		Flux.defer(() -> Mono.error(new RuntimeException("test")))
-		    .subscribeOn(scheduler)
-		    .blockLast();
+		assertThrows(RuntimeException.class, () ->
+				Flux.defer(() -> Mono.error(new RuntimeException("test")))
+						.subscribeOn(scheduler)
+						.blockLast());
 	}
 
-	@Test(expected = RuntimeException.class)
+	@org.junit.jupiter.api.Test
 	public void blockingLastError2() {
-		Flux.defer(() -> Mono.error(new RuntimeException("test")))
+		assertThrows(RuntimeException.class, () ->
+				Flux.defer(() -> Mono.error(new RuntimeException("test")))
 		    .subscribeOn(scheduler)
-		    .blockLast(Duration.ofSeconds(1));
+		    .blockLast(Duration.ofSeconds(1)));
 	}
 
 	@Test
@@ -193,7 +198,7 @@ public class BlockingTests {
 		    .subscribe(System.out::println);
 	}*/
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxBlockFirstCancelsOnce() {
 		AtomicLong cancelCount = new AtomicLong();
 		Flux.range(1, 10)
@@ -203,7 +208,7 @@ public class BlockingTests {
 		assertThat(cancelCount.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxBlockLastDoesntCancel() {
 		AtomicLong cancelCount = new AtomicLong();
 		Flux.range(1, 10)
@@ -213,7 +218,7 @@ public class BlockingTests {
 		assertThat(cancelCount.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoBlockDoesntCancel() {
 		AtomicLong cancelCount = new AtomicLong();
 		Mono.just("data")
@@ -223,7 +228,7 @@ public class BlockingTests {
 		assertThat(cancelCount.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoBlockOptionalDoesntCancel() {
 		AtomicLong cancelCount = new AtomicLong();
 		Mono.just("data")
@@ -233,7 +238,7 @@ public class BlockingTests {
 		assertThat(cancelCount.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxBlockFirstForbidden() {
 		Function<String, String> badMapper = v -> Flux.just(v).hide()
 		                                              .blockFirst();
@@ -261,7 +266,7 @@ public class BlockingTests {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxBlockLastForbidden() {
 		Function<String, String> badMapper = v -> Flux.just(v).hide()
 		                                              .blockLast();
@@ -289,7 +294,7 @@ public class BlockingTests {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoBlockForbidden() {
 		Function<String, String> badMapper = v -> Mono.just(v).hide()
 		                                              .block();
@@ -317,7 +322,7 @@ public class BlockingTests {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoBlockOptionalForbidden() {
 		Function<String, Optional<String>> badMapper = v -> Mono.just(v).hide()
 		                                                        .blockOptional();
@@ -345,7 +350,7 @@ public class BlockingTests {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxToIterableOkButIterationForbidden() throws InterruptedException {
 		AtomicReference<Iterable<Integer>> ref = new AtomicReference<>();
 		AtomicReference<Throwable> refError = new AtomicReference<>();
@@ -397,7 +402,7 @@ public class BlockingTests {
 		assertThat(assertionRef.get()).as("assertions pass within scheduler").isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxToStreamOkButIterationForbidden() throws InterruptedException {
 		AtomicReference<Stream<Integer>> ref = new AtomicReference<>();
 		AtomicReference<Throwable> refError = new AtomicReference<>();

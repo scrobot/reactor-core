@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Disposable;
@@ -44,7 +44,7 @@ public class FluxWindowTimeoutTest {
 		           .concatMap(Flux::buffer);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void windowWithTimeoutAccumulateOnTimeOrSize() {
 		StepVerifier.withVirtualTime(this::scenario_windowWithTimeoutAccumulateOnTimeOrSize)
 		            .thenAwait(Duration.ofMillis(1500))
@@ -174,7 +174,7 @@ public class FluxWindowTimeoutTest {
 		.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rejectedDuringLifecycle() {
 		AtomicBoolean reject = new AtomicBoolean();
 		Scheduler testScheduler = new Scheduler() {

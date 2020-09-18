@@ -22,34 +22,36 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.CoreSubscriber;
-import reactor.core.Exceptions;
 import reactor.core.Fuseable;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxGenerateTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void stateSupplierNull() {
-		Flux.generate(null, (s, o) -> s, s -> {
-		});
+		assertThrows(NullPointerException.class, () ->
+				Flux.generate(null, (s, o) -> s, s -> {
+				}));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void generatorNull() {
-		Flux.generate(() -> 1, null, s -> {
-		});
+		assertThrows(NullPointerException.class, () ->
+				Flux.generate(() -> 1, null, s -> {
+				}));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void stateConsumerNull() {
-		Flux.generate(() -> 1, (s, o) -> s, null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.generate(() -> 1, (s, o) -> s, null));
 	}
 
 	@Test
@@ -93,7 +95,7 @@ public class FluxGenerateTest {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void generateError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -217,7 +219,7 @@ public class FluxGenerateTest {
 		                                                    .hasMessage("forced failure"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void generatorMultipleOnErrors() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -418,7 +420,7 @@ public class FluxGenerateTest {
         assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextTest() {
 		StepVerifier.create(Flux.generate(s -> s.next(s.currentContext()
 		                                               .get(AtomicInteger.class)

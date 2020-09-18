@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxDelaySequenceTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void delayFirstInterval() {
 		Supplier<Flux<Tuple2<Long, Long>>> test = () -> Flux.interval(Duration.ofMillis(50))
 	                                                    .delaySequence(Duration.ofMillis(500))
@@ -103,7 +103,7 @@ public class FluxDelaySequenceTest {
 		            .verifyComplete();
 	}
 
-	@Ignore("delayElements test for local comparison run")
+	@Disabled("delayElements test for local comparison run")
 	@Test
 	public void delayElements() {
 		Flux<Tuple2<Long, Long>> test = Flux.interval(Duration.ofMillis(50))
@@ -143,7 +143,7 @@ public class FluxDelaySequenceTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyErrorErrorsImmediately() {
 		Flux<Long> source = Flux.error(new IllegalStateException("boom"));
 
@@ -187,7 +187,7 @@ public class FluxDelaySequenceTest {
 		assertThat(subscriber.timeUnit).isSameAs(TimeUnit.MILLISECONDS);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void smallDelayInNanos() {
 		Duration longDelay = Duration.ofMillis(59_999);
 		long expected = longDelay.toNanos();
@@ -198,7 +198,7 @@ public class FluxDelaySequenceTest {
 		assertThat(subscriber.timeUnit).isSameAs(TimeUnit.NANOSECONDS);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onNextAfterCompleteDrops() {
 		TestPublisher<String> testPublisher = TestPublisher.createNoncompliant(
 				TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -214,7 +214,7 @@ public class FluxDelaySequenceTest {
 		            .hasNotDroppedErrors();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onNextAfterErrorDrops() {
 		TestPublisher<String> testPublisher = TestPublisher.createNoncompliant(
 				TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -246,7 +246,7 @@ public class FluxDelaySequenceTest {
 		            .hasNotDroppedErrors();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onErrorAfterCompleteDrops() {
 		TestPublisher<String> testPublisher = TestPublisher.createNoncompliant(
 				TestPublisher.Violation.CLEANUP_ON_TERMINATE);
@@ -262,14 +262,14 @@ public class FluxDelaySequenceTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		FluxDelaySequence<String> test = new FluxDelaySequence<>(Flux.empty(), Duration.ofSeconds(1), Schedulers.immediate());
 
 		assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.immediate());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriber() {
 		Scheduler.Worker worker = Schedulers.immediate().createWorker();
 

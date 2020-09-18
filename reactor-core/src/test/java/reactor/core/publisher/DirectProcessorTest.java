@@ -16,40 +16,45 @@
 package reactor.core.publisher;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 public class DirectProcessorTest {
 
-    @Test(expected = NullPointerException.class)
-    public void onNextNull() {
-	    DirectProcessor.create().onNext(null);
-    }
+	@Test
+	public void onNextNull() {
+		assertThrows(IllegalArgumentException.class, () ->
+				DirectProcessor.create().onNext(null));
+	}
 
-    @Test(expected = NullPointerException.class)
-    public void onErrorNull() {
-	    DirectProcessor.create().onError(null);
-    }
+	@Test
+	public void onErrorNull() {
+		assertThrows(NullPointerException.class, () ->
+				DirectProcessor.create().onError(null));
+	}
 
-    @Test(expected = NullPointerException.class)
-    public void onSubscribeNull() {
-        DirectProcessor.create().onSubscribe(null);
-    }
+	@Test
+	public void onSubscribeNull() {
+		assertThrows(NullPointerException.class, () ->
+				DirectProcessor.create().onSubscribe(null));
+	}
 
-    @Test(expected = NullPointerException.class)
-    public void subscribeNull() {
-	    DirectProcessor.create().subscribe((Subscriber<Object>)null);
-    }
+	@Test
+	public void subscribeNull() {
+		assertThrows(NullPointerException.class, () ->
+				DirectProcessor.create().subscribe((Subscriber<Object>) null));
+	}
 
-    @Test
-    public void normal() {
-        DirectProcessor<Integer> tp = DirectProcessor.create();
+	@Test
+	public void normal() {
+		DirectProcessor<Integer> tp = DirectProcessor.create();
 
 	    StepVerifier.create(tp)
 	                .then(() -> {
@@ -104,7 +109,7 @@ public class DirectProcessorTest {
 	    Assert.assertFalse("Has error?", tp.hasError());
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void notEnoughRequests() {
         DirectProcessor<Integer> tp = DirectProcessor.create();
 
@@ -204,7 +209,7 @@ public class DirectProcessorTest {
           .assertNoError();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void subscriberAlreadyCancelled() {
         AssertSubscriber<Integer> ts = AssertSubscriber.create();
         ts.cancel();

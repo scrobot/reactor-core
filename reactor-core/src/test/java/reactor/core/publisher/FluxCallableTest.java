@@ -17,12 +17,12 @@ package reactor.core.publisher;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxCallableTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void callableReturnsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -34,7 +34,7 @@ public class FluxCallableTest {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -66,7 +66,7 @@ public class FluxCallableTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void callableThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 

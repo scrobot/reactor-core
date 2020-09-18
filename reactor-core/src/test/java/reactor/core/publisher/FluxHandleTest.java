@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -185,7 +185,7 @@ public class FluxHandleTest extends FluxOperatorTest<String, String> {
 		  .assertFusionMode(SYNC);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalAsyncFusion() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 		ts.requestedFusionMode(ASYNC);
@@ -243,7 +243,7 @@ public class FluxHandleTest extends FluxOperatorTest<String, String> {
 		  .assertFusionMode(ASYNC);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorSignal() {
 
 		int data = 1;
@@ -305,7 +305,7 @@ public class FluxHandleTest extends FluxOperatorTest<String, String> {
 		Assert.assertSame(dataInOnOperatorError.get(), data);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void handleBackpressuredBothConditional() {
 		TestPublisher<String> ts = TestPublisher.create();
 
@@ -366,7 +366,7 @@ public class FluxHandleTest extends FluxOperatorTest<String, String> {
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void prematureCompleteFusedSync() {
 		StepVerifier.create(Flux.just("test")
 		                        .as(this::passThrough)
@@ -539,7 +539,7 @@ public class FluxHandleTest extends FluxOperatorTest<String, String> {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorAfterCompleteNormal() {
 		StepVerifier.create(Flux.just(1)
 		                        .hide()
@@ -564,7 +564,7 @@ public class FluxHandleTest extends FluxOperatorTest<String, String> {
 		                                                    .hasMessage("Cannot complete after a complete or error"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nextAfterNextNormal() {
 		StepVerifier.create(Flux.just(1)
 		                        .hide()
@@ -678,7 +678,7 @@ public class FluxHandleTest extends FluxOperatorTest<String, String> {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void completeAfterErrorFused() {
 		StepVerifier.create(Flux.just(1)
 		                        .handle((v, sink) -> {

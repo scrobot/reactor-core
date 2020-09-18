@@ -16,7 +16,7 @@
 
 package reactor.util.function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -143,7 +143,7 @@ public class Tuple7Test {
 		assertThat(full.get(10)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getAllValuesCorrespondToArray() {
 		Object[] array = full.toArray();
 
@@ -152,7 +152,7 @@ public class Tuple7Test {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void equalityOfSameReference() {
 		assertThat(full).isEqualTo(full);
 	}

@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -31,7 +31,7 @@ public class Context3Test {
 
 	Context3 c = new Context3(1, "A", 2, "B", 3, "C");
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void replaceKey1NewContext() throws Exception {
 		Context put = c.put(1, "foo");
 
@@ -57,7 +57,7 @@ public class Context3Test {
 				.containsExactly("A", "foo", "C");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void replaceKey3NewContext() {
 		Context put = c.put(3, "foo");
 
@@ -70,7 +70,7 @@ public class Context3Test {
 				.containsExactly("A", "B", "foo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putDifferentKeyContext4() throws Exception {
 		Context put = c.put(4, "Abis");
 		assertThat(put)
@@ -81,7 +81,7 @@ public class Context3Test {
 				.containsExactly("A", "B", "C", "Abis");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void hasKey() throws Exception {
 		assertThat(c.hasKey(1)).as("hasKey(1)").isTrue();
 		assertThat(c.hasKey(2)).as("hasKey(2)").isTrue();
@@ -89,7 +89,7 @@ public class Context3Test {
 		assertThat(c.hasKey(4)).as("hasKey(4)").isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void removeKeys() {
 		assertThat(c.delete(1))
 				.as("delete(1)")
@@ -115,32 +115,32 @@ public class Context3Test {
 		assertThat(c.delete(4)).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void get() {
 		assertThat((String) c.get(1)).isEqualTo("A");
 		assertThat((String) c.get(2)).isEqualTo("B");
 		assertThat((String) c.get(3)).isEqualTo("C");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getUnknown() throws Exception {
 		assertThatExceptionOfType(NoSuchElementException.class)
 				.isThrownBy(() -> c.get(4))
 				.withMessage("Context does not contain key: 4");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getUnknownWithDefault() throws Exception {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void stream() throws Exception {
 		assertThat(c.stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
 				.hasSize(3)
@@ -148,19 +148,19 @@ public class Context3Test {
 				.containsValues("A", "B", "C");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void string() throws Exception {
 		assertThat(c.toString()).isEqualTo("Context3{1=A, 2=B, 3=C}");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void ofApi() {
 		assertThat(Context.of("test", 12, "value", true, 123, 456L))
 				.isInstanceOf(Context3.class)
 				.hasToString("Context3{test=12, value=true, 123=456}");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putAllOf() {
 		Context m = Context.of("A", 1, "B", 2, "C", 3);
 		Context put = c.putAll(m);
@@ -170,7 +170,7 @@ public class Context3Test {
 				.containsExactlyInAnyOrder(1, 2, 3, "A", "B", "C");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putAllOfEmpty() {
 		Context m = Context.empty();
 		Context put = c.putAll(m);
@@ -178,21 +178,21 @@ public class Context3Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putNonNullWithNull() {
 		Context put = c.putNonNull("putNonNull", null);
 
 		assertThat(put).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 
 		assertThat(put.getOrEmpty("putNonNull")).contains("value");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void size() {
 		assertThat(c.size()).isEqualTo(3);
 	}

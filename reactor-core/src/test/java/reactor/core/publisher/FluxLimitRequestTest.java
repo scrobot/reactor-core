@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxLimitRequestTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiCall() {
 		LongAdder rCount = new LongAdder();
 		final Flux<Integer> source = Flux.range(1, 100)
@@ -49,7 +49,7 @@ public class FluxLimitRequestTest {
 		assertThat(rCount.longValue()).isEqualTo(3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void unboundedDownstreamRequest() {
 		LongAdder rCount = new LongAdder();
 		final Flux<Integer> source = Flux.range(1, 100)
@@ -66,7 +66,7 @@ public class FluxLimitRequestTest {
 				.isEqualTo(3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void boundedDownStreamRequestMatchesCap() {
 		LongAdder rCount = new LongAdder();
 		final Flux<Integer> source = Flux.range(1, 100)
@@ -93,7 +93,7 @@ public class FluxLimitRequestTest {
 				.isEqualTo(10);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void boundedDownStreamRequestOverflowsCap() {
 		List<Long> requests = new ArrayList<>();
 		final Flux<Integer> source = Flux.range(1, 100)
@@ -122,7 +122,7 @@ public class FluxLimitRequestTest {
 				.isEqualTo(10);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void extraneousSmallRequestsNotPropagatedAsZero() {
 		List<Long> requests = new ArrayList<>();
 		final Flux<Integer> source = Flux.range(1, 100)
@@ -144,7 +144,7 @@ public class FluxLimitRequestTest {
 				.containsExactly(8L, 2L, 1L);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void largerSourceCancelled() {
 		AtomicBoolean cancelled = new AtomicBoolean();
 
@@ -159,7 +159,7 @@ public class FluxLimitRequestTest {
 		assertThat(cancelled.get()).as("source is cancelled").isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void takeCancelsOperatorAndSource() {
 		AtomicBoolean sourceCancelled = new AtomicBoolean();
 		AtomicBoolean operatorCancelled = new AtomicBoolean();
@@ -191,7 +191,7 @@ public class FluxLimitRequestTest {
 				.getPrefetch()).isZero();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorAtCapNotPropagated() {
 		TestPublisher<Integer> tp = TestPublisher.create();
 
@@ -231,7 +231,7 @@ public class FluxLimitRequestTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void completeSignalDespiteAllProducedNotPropagated() {
 		TestPublisher<Integer> tp = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 
@@ -241,7 +241,7 @@ public class FluxLimitRequestTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorSignalDespiteAllProducedNotPropagated() {
 		TestPublisher<Integer> tp = TestPublisher.createNoncompliant(TestPublisher.Violation.CLEANUP_ON_TERMINATE);
 
@@ -251,7 +251,7 @@ public class FluxLimitRequestTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		Flux<String> source = Flux.just("foo").map(Function.identity());
 		FluxLimitRequest<String> operator = new FluxLimitRequest<>(source, 123);
@@ -261,7 +261,7 @@ public class FluxLimitRequestTest {
 		assertThat(operator.scan(Scannable.Attr.PREFETCH)).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanInner() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, null, null, null);
 		FluxLimitRequest.FluxLimitRequestSubscriber<String> inner =
@@ -278,7 +278,7 @@ public class FluxLimitRequestTest {
 		assertThat(inner.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void raceRequest() {
 		List<Long> requests = Collections.synchronizedList(new ArrayList<>());
 		final Flux<Integer> flux = Flux.range(1, 1000)

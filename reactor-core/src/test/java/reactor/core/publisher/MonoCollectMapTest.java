@@ -18,7 +18,7 @@ package reactor.core.publisher;
 
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -77,7 +77,7 @@ public class MonoCollectMapTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void collectMapCallable() {
 		StepVerifier.create(Mono.fromCallable(() -> new Pojo("test", 1L))
 		                        .flux()

@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.util.concurrent.Queues;
 
@@ -36,7 +36,7 @@ public class ParallelFlatMapTest {
 				.isEqualTo(source.parallelism());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() throws Exception {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelFlatMap<Integer, Integer> test = new ParallelFlatMap<>(source,

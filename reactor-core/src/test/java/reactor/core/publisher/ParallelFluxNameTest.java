@@ -17,11 +17,10 @@
 package reactor.core.publisher;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
@@ -30,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelFluxNameTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void parallelism() {
 		ParallelFlux<Integer> source = Flux.range(1, 4).parallel(3);
 		ParallelFluxName<Integer> test = new ParallelFluxName<>(source, "foo", null);

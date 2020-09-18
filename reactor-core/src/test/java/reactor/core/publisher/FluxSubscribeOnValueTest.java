@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Level;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
 import reactor.core.Fuseable;
@@ -34,13 +34,13 @@ public class FluxSubscribeOnValueTest {
 
 	ConcurrentMap<Integer, Integer> execs = new ConcurrentHashMap<>();
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void finishedConstantsAreNotSame() {
 		assertThat(FluxSubscribeOnValue.ScheduledScalar.FINISHED)
 				.isNotSameAs(FluxSubscribeOnValue.ScheduledEmpty.FINISHED);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSubscribeOnValueFusion() {
 
 		StepVerifier.create(Flux.range(1, 100)
@@ -75,7 +75,7 @@ public class FluxSubscribeOnValueTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanOperator() {
 		final Flux<Integer> test = Flux.just(1).subscribeOn(Schedulers.immediate());
 

@@ -22,7 +22,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -60,7 +60,7 @@ public class MonoCollectListTest {
 		assertThat(vals).containsExactly(4,3,2,1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void aFluxCanBeSorted3(){
 		StepVerifier.create(Flux.just(43, 32122, 422, 321, 43, 443311)
 		                        .sort(Comparator.reverseOrder()))
@@ -68,7 +68,7 @@ public class MonoCollectListTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void aFluxCanBeSorted4(){
 		StepVerifier.create(Flux.just(43, 32122, 422, 321, 43, 443311)
 		                        .sort())
@@ -76,7 +76,7 @@ public class MonoCollectListTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void collectListOne() {
 		StepVerifier.create(Flux.just(1)
 		                        .collectList())
@@ -94,7 +94,7 @@ public class MonoCollectListTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void collectListCallable() {
 		StepVerifier.create(Mono.fromCallable(() -> 1)
 		                        .flux()
@@ -104,7 +104,7 @@ public class MonoCollectListTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void collectListError() {
 		StepVerifier.create(Flux.error(new Exception("test"))
 		                        .collectList())
@@ -135,7 +135,7 @@ public class MonoCollectListTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1523
-	@Test
+	@org.junit.jupiter.api.Test
 	public void protocolErrorsOnError() {
 		TestPublisher<String> testPublisher = TestPublisher.createNoncompliant(CLEANUP_ON_TERMINATE);
 
@@ -149,7 +149,7 @@ public class MonoCollectListTest {
 		            .hasDroppedErrorOfType(IllegalStateException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanBufferAllSubscriber() {
 		CoreSubscriber<List<String>> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoCollectListSubscriber<String> test = new MonoCollectListSubscriber<>(actual);
@@ -171,7 +171,7 @@ public class MonoCollectListTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnError() {
 		Mono<List<Integer>> test = Flux.range(1, 10)
 		                               .hide()
@@ -187,7 +187,7 @@ public class MonoCollectListTest {
 		            .hasDiscardedExactly(1, 2, 3, 4);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnCancel() {
 		Mono<List<Long>> test = Flux.interval(Duration.ofMillis(100))
 		                            .take(10)
@@ -202,7 +202,7 @@ public class MonoCollectListTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardCancelNextRace() {
 		AtomicInteger doubleDiscardCounter = new AtomicInteger();
 		Context discardingContext = Operators.enableOnDiscard(null, o -> {
@@ -231,7 +231,7 @@ public class MonoCollectListTest {
 		LOGGER.info("discarded twice or more: {}", doubleDiscardCounter.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardCancelCompleteRace() {
 		AtomicInteger doubleDiscardCounter = new AtomicInteger();
 		Context discardingContext = Operators.enableOnDiscard(null, o -> {
@@ -258,7 +258,7 @@ public class MonoCollectListTest {
 		LOGGER.info("discarded twice or more: {}", doubleDiscardCounter.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyCallable() {
 		class EmptyFluxCallable extends Flux<Object> implements Callable<Object> {
 			@Override

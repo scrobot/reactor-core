@@ -17,12 +17,11 @@ package reactor.core.publisher;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class MonoDeferComposeTest {
-    @Test
+    @org.junit.jupiter.api.Test
     public void perTrackable() {
         
         Mono<Integer> source = Mono.just(10).compose(f -> {
@@ -42,7 +41,7 @@ public class MonoDeferComposeTest {
         }
     }
     
-    @Test
+    @org.junit.jupiter.api.Test
     public void composerThrows() {
         Mono<Integer> source = Mono.just(10).compose(f -> {
             throw new RuntimeException("Forced failure");

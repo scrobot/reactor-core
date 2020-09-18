@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -88,7 +88,7 @@ public class Context1Test {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
@@ -112,14 +112,14 @@ public class Context1Test {
 		assertThat(c.getValue()).isEqualTo("A");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void setValue() throws Exception {
 		assertThatExceptionOfType(UnsupportedOperationException.class)
 				.isThrownBy(() -> c.setValue("BOOM"))
 				.withMessage("Does not support in-place update");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void string() throws Exception {
 		assertThat(c.toString()).isEqualTo("Context1{1=A}");
 	}
@@ -155,7 +155,7 @@ public class Context1Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 

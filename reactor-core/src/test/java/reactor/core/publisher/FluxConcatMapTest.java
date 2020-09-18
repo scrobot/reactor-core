@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -143,7 +143,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -170,7 +170,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalBoundary() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -210,7 +210,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalLongRunJust() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -223,7 +223,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalLongRun2() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -250,7 +250,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalLongRunJustBoundary() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -345,7 +345,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void singleSubscriberOnlyBoundary() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -384,7 +384,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		Assert.assertFalse("source2 has subscribers?", source2.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mainErrorsImmediate() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -459,7 +459,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		Assert.assertFalse("source2 has subscribers?", source2.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void innerErrorsImmediate() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -571,7 +571,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		Assert.assertFalse("source2 has subscribers?", source2.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void syncFusionMapToNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -585,7 +585,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertNotComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void syncFusionMapToNullFilter() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -618,7 +618,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertNotComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void asyncFusionMapToNullFilter() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -673,14 +673,14 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void publisherOfPublisher() {
 		StepVerifier.create(Flux.concat(Flux.just(Flux.just(1, 2), Flux.just(3, 4))))
 		            .expectNext(1, 2, 3, 4)
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void publisherOfPublisherDelay() {
 		StepVerifier.create(Flux.concatDelayError(Flux.just(Flux.just(1, 2),
 				Flux.just(3, 4))))
@@ -688,7 +688,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void publisherOfPublisherDelayError() {
 		StepVerifier.create(Flux.concatDelayError(Flux.just(Flux.just(1, 2).concatWith(Flux.error(new Exception("test"))),
 				Flux.just(3, 4))))
@@ -706,7 +706,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void publisherOfPublisherDelayEnd3() {
 		StepVerifier.create(Flux.just(Flux.just(1, 2)
 		                                  .concatWith(Flux.error(new Exception("test"))),
@@ -716,7 +716,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void publisherOfPublisherDelayEndNot3() {
 		StepVerifier.create(Flux.just(Flux.just(1, 2)
 		                                  .concatWith(Flux.error(new Exception("test"))),
@@ -726,7 +726,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void publisherOfPublisherDelayEnd() {
 		StepVerifier.create(Flux.concatDelayError(Flux.just(Flux.just(1, 2),
 				Flux.just(3, 4)), false, 128))
@@ -744,7 +744,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void publisherOfPublisherDelayEnd2() {
 		StepVerifier.create(Flux.concatDelayError(Flux.just(Flux.just(1, 2),
 				Flux.just(3, 4)), true, 128))
@@ -795,7 +795,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.isEqualTo(Long.MAX_VALUE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void prefetchMaxTranslatesToUnboundedRequest2() {
 		AtomicLong requested = new AtomicLong();
 
@@ -811,7 +811,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@Test
+	@org.junit.jupiter.api.Test
 	public void concatDelayErrorWithFluxError() {
 		StepVerifier.create(
 				Flux.concatDelayError(
@@ -837,7 +837,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@Test
+	@org.junit.jupiter.api.Test
 	public void concatMapDelayErrorWithFluxError() {
 		StepVerifier.create(
 				Flux.just(
@@ -850,7 +850,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@Test
+	@org.junit.jupiter.api.Test
 	public void concatMapDelayErrorWithMonoError() {
 		StepVerifier.create(
 				Flux.just(
@@ -937,7 +937,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorModeContinueNullPublisher() {
 		Flux<Integer> test = Flux
 				.just(1, 2)
@@ -953,7 +953,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.hasDroppedErrors(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorModeContinueInternalError() {
 		Flux<Integer> test = Flux
 				.just(1, 2)
@@ -977,7 +977,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.hasDroppedErrors(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorModeContinueInternalErrorHidden() {
 		Flux<Integer> test = Flux
 				.just(1, 2)
@@ -1021,7 +1021,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.hasDroppedErrors(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorModeContinueDelayErrors() {
 		Flux<Integer> test = Flux
 				.just(1, 2)
@@ -1089,7 +1089,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.hasDroppedErrors(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorModeContinueInternalErrorStopStrategyAsync() {
 		Flux<Integer> test = Flux
 				.just(0, 1)
@@ -1106,7 +1106,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.hasDroppedErrors(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorModeContinueInternalErrorMono() {
 		Flux<Integer> test = Flux
 				.just(0, 1)
@@ -1123,7 +1123,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.hasDroppedErrors(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorModeContinueInternalErrorMonoAsync() {
 		Flux<Integer> test = Flux
 				.just(0, 1)
@@ -1140,7 +1140,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 				.hasDroppedErrors(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnNextQueueReject() {
 		List<Object> discarded = new ArrayList<>();
 		AssertSubscriber<Object> discardSubscriber = new AssertSubscriber<>(
@@ -1159,7 +1159,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		assertThat(discarded).containsExactly(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnError() {
 		//also tests WeakScalar
 		StepVerifier.create(Flux.just(1, 2, 3)
@@ -1171,7 +1171,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .hasDiscardedExactly("value1", 2, 3); //"value1" comes from error cancelling the only inner in flight, the 2 other values are still raw in the queue
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnCancel() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatMap(i -> Mono.just("value" + i), 1),
@@ -1190,7 +1190,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .hasDiscardedExactly(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardDelayedOnNextQueueReject() {
 		List<Object> discarded = new ArrayList<>();
 		AssertSubscriber<Object> testSubscriber = new AssertSubscriber<>(
@@ -1208,7 +1208,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		assertThat(discarded).containsExactly(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardDelayedOnCancel() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatMapDelayError(i -> Mono.just("value" + i), 1),
@@ -1218,7 +1218,7 @@ public class FluxConcatMapTest extends FluxOperatorTest<String, String> {
 		            .hasDiscardedExactly(1, 2, 3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardDelayedOnDrainMapperError() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatMapDelayError(i -> { throw new IllegalStateException("boom"); }))

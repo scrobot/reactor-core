@@ -18,7 +18,7 @@ package reactor.core.publisher;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.StepVerifierOptions;
 import reactor.util.context.Context;
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
  */
 public class ContextTests {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextPassing() throws InterruptedException {
 		AtomicReference<Context> innerC = new AtomicReference<>();
 
@@ -67,7 +67,7 @@ public class ContextTests {
 		                 .get("test"), is("baseSubscriber_take_range_innerFlatmap"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextPassing2() throws InterruptedException {
 		AtomicReference<String> innerC = new AtomicReference<>();
 
@@ -92,7 +92,7 @@ public class ContextTests {
 		assertThat(innerC.get(), is("foobar"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextGet() throws InterruptedException {
 
 		StepVerifier.create(Flux.range(1, 1000)
@@ -110,7 +110,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void currentContext() throws InterruptedException {
 		StepVerifier.create(Mono.just("foo")
 		                        .flatMap(d -> Mono.subscriberContext()
@@ -132,7 +132,7 @@ public class ContextTests {
 				            && "Context is empty".equals(t.getMessage()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextGetHide() throws InterruptedException {
 
 		StepVerifier.create(Flux.range(1, 1000)
@@ -152,7 +152,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextGetMono() throws InterruptedException {
 
 		StepVerifier.create(Mono.just(1)
@@ -166,7 +166,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextGetHideMono() throws InterruptedException {
 
 		StepVerifier.create(Mono.just(1)
@@ -193,7 +193,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoSubscriberContextWithMergedEmpty() {
 		StepVerifier.create(
 				Mono.just("foo")
@@ -205,7 +205,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoSubscriberContextWithBothEmpty() {
 		StepVerifier.create(
 				Mono.just("foo")
@@ -229,7 +229,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxSubscriberContextWithMergedEmpty() {
 		StepVerifier.create(
 				Flux.just("foo")
@@ -286,7 +286,7 @@ public class ContextTests {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextNotAccessibleWithEmptySubscriptionOnly() {
 		StepVerifier.create(Flux.empty(), StepVerifierOptions.create().withInitialContext(Context.of("a", "b")))
 		            .expectNoAccessibleContext()

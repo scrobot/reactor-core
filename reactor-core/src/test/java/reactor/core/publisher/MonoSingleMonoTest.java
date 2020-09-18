@@ -2,14 +2,14 @@ package reactor.core.publisher;
 
 import java.util.NoSuchElementException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoSingleMonoTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void callableEmpty() {
 		StepVerifier.create(Mono.empty().single())
 		            .verifyErrorSatisfies(e -> assertThat(e)
@@ -17,7 +17,7 @@ public class MonoSingleMonoTest {
 				            .hasMessage("Source was a (constant) empty"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void callableValued() {
 		StepVerifier.create(Mono.just("foo").single())
 		            .expectNext("foo")
@@ -32,7 +32,7 @@ public class MonoSingleMonoTest {
 				            .hasMessage("Source was empty"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalValued() {
 		StepVerifier.create(Mono.just("foo").hide().single())
 		            .expectNext("foo")

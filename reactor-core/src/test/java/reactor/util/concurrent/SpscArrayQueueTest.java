@@ -1,9 +1,10 @@
 package reactor.util.concurrent;
 
 import java.util.Arrays;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SpscArrayQueueTest {
 
@@ -12,55 +13,62 @@ public class SpscArrayQueueTest {
 		assertThat(Queues.xs().get()).isInstanceOf(SpscArrayQueue.class);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void shouldRejectNullableValues() {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
-		q.offer(null);
+		assertThrows(NullPointerException.class, () ->
+				q.offer(null));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowIteratingWithIterator() {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
 
-		q.iterator();
+		assertThrows(UnsupportedOperationException.class, () ->
+				q.iterator());
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowElementsRemoving() {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
 
 		q.offer(1);
-		q.remove(1);
+		assertThrows(NullPointerException.class, () ->
+				q.remove(1));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowAllElementsRemoving() {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
 
 		q.offer(1);
 		q.offer(2);
-		q.removeAll(Arrays.asList(1,2));
+		assertThrows(NullPointerException.class, () ->
+				q.removeAll(Arrays.asList(1, 2)));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowAllElementsRetaining() {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
 
 		q.offer(1);
 		q.offer(2);
-		q.retainAll(Arrays.asList(1,2));
+		assertThrows(NullPointerException.class, () ->
+				q.retainAll(Arrays.asList(1, 2)));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowAdd() {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
-		q.add(1);
+		assertThrows(UnsupportedOperationException.class, () ->
+				q.add(1));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test
 	public void shouldNotAllowAddAll() {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
-		q.addAll(Arrays.asList(1,2,3));
+		assertThrows(UnsupportedOperationException.class, () ->
+				q.addAll(Arrays.asList(1, 2, 3)));
 	}
 
 	@Test

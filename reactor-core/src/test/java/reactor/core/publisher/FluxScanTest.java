@@ -16,13 +16,12 @@
 
 package reactor.core.publisher;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 
 import reactor.core.CoreSubscriber;
@@ -30,9 +29,9 @@ import reactor.core.Scannable;
 import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 import reactor.test.util.RaceTestUtils;
-import reactor.util.context.Context;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxScanTest extends FluxOperatorTest<String, String> {
 
@@ -60,14 +59,16 @@ public class FluxScanTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxScan<>(null, (a, b) -> a);
+		assertThrows(NullPointerException.class, () ->
+				new FluxScan<>(null, (a, b) -> a));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void accumulatorNull() {
-		Flux.never().scan(null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never().scan(null));
 	}
 
 	@Test

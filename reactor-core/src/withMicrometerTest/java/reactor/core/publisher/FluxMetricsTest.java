@@ -29,9 +29,9 @@ import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -45,17 +45,17 @@ public class FluxMetricsTest {
 
 	private MeterRegistry registry;
 
-	@Before
+	@BeforeEach
 	public void setupRegistry() {
 		registry = new SimpleMeterRegistry();
 	}
 
-	@After
+	@AfterEach
 	public void removeRegistry() {
 		registry.close();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sequenceNameFromScanUnavailable() {
 		Flux<String> delegate = Flux.just("foo");
 		Flux<String> source = new Flux<String>() {
@@ -72,7 +72,7 @@ public class FluxMetricsTest {
 		assertThat(test.name).isEqualTo(REACTOR_DEFAULT_NAME);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sequenceNameFromScannableNoName() {
 		Flux<String> source = Flux.just("foo");
 		FluxMetrics<String> test = new FluxMetrics<>(source, registry);
@@ -92,7 +92,7 @@ public class FluxMetricsTest {
 		assertThat(test.name).isEqualTo("foo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUsesMicrometer() {
 		AtomicReference<Subscription> subRef = new AtomicReference<>();
 
@@ -103,7 +103,7 @@ public class FluxMetricsTest {
 		assertThat(subRef.get()).isInstanceOf(MicrometerFluxMetricsSubscriber.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void splitMetricsOnName() {
 		final Flux<Integer> unnamedSource = Flux.<Integer>error(new ArithmeticException("boom"))
 				.hide();
@@ -139,7 +139,7 @@ public class FluxMetricsTest {
 		assertThat(namedMeter.count()).isOne();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void usesTags() {
 		Flux<Integer> source = Flux.range(1, 8)
 		                           .tag("tag1", "A")
@@ -160,7 +160,7 @@ public class FluxMetricsTest {
 		assertThat(meter.count()).isEqualTo(8L);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onNextTimerCounts() {
 		Flux<Integer> source = Flux.range(1, 123)
 		                           .hide();
@@ -335,7 +335,7 @@ public class FluxMetricsTest {
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void subscribeToCancel() {
 		Flux<Integer> source = Flux.just(1, 0)
 		                           .delayElements(Duration.ofMillis(100))
@@ -390,7 +390,7 @@ public class FluxMetricsTest {
 		assertThat(meter.count()).as("after more subscribe").isEqualTo(3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestTrackingDisabledIfNotNamed() {
 		Flux<Integer> source = Flux.range(1, 10)
 		                           .hide();
@@ -405,7 +405,7 @@ public class FluxMetricsTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestTrackingHasMeterForNamedSequence() {
 		Flux<Integer> source = Flux.range(1, 10)
 		                           .name("foo")
@@ -425,7 +425,7 @@ public class FluxMetricsTest {
 		assertThat(meter).as("tagged find").isNotNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void requestTracking() {
 		BaseSubscriber<Integer> bs = new BaseSubscriber<Integer>() {
 			@Override

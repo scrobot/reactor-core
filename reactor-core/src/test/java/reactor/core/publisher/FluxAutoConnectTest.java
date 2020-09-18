@@ -18,7 +18,7 @@ package reactor.core.publisher;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.core.Disposable;
 import reactor.core.Scannable;
@@ -55,7 +55,7 @@ public class FluxAutoConnectTest {
 		Assert.assertFalse("sp has subscribers?", e.downstreamCount() != 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void connectAfterMany() {
 		EmitterProcessor<Integer> e = EmitterProcessor.create();
 
@@ -80,7 +80,7 @@ public class FluxAutoConnectTest {
 		Assert.assertFalse("sp has subscribers?", e.downstreamCount() != 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMain() {
 		@SuppressWarnings("unchecked")
 		ConnectableFlux<String> source = Mockito.mock(MockUtils.TestScannableConnectableFlux.class);

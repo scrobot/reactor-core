@@ -15,13 +15,13 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxMergeWithTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noStackOverflow() {
 		int n = 5000;
 		
@@ -42,7 +42,7 @@ public class FluxMergeWithTest {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noStackOverflow2() {
 		int n = 5000;
 		
@@ -64,7 +64,7 @@ public class FluxMergeWithTest {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noStackOverflow3() {
 		int n = 5000;
 		

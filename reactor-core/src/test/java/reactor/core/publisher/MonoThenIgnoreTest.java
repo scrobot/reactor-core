@@ -17,7 +17,7 @@ package reactor.core.publisher;
 
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MonoThenIgnoreTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		StepVerifier.create(Mono.just(1)
 		                        .thenEmpty(Flux.empty()))
@@ -41,14 +41,14 @@ public class MonoThenIgnoreTest {
 		    .thenEmpty(Mono.delay(Duration.ofSeconds(123)).then());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal3() {
 		StepVerifier.create(Mono.just(1)
 		                        .then())
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void chained() {
 		StepVerifier.create(Mono.just(0)
 		                        .then(Mono.just(1))
@@ -58,21 +58,21 @@ public class MonoThenIgnoreTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void thenReturn() {
 	    StepVerifier.create(Mono.just(0).thenReturn(2))
                     .expectNext(2)
                     .verifyComplete();
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalTime() {
 		StepVerifier.withVirtualTime(this::scenario)
 		            .thenAwait(Duration.ofSeconds(123))
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancel() {
 		TestPublisher<String> cancelTester = TestPublisher.create();
 
@@ -106,7 +106,7 @@ public class MonoThenIgnoreTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanThenIgnoreInner() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoIgnoreThen.ThenIgnoreMain<String> main = new MonoIgnoreThen.ThenIgnoreMain<>(actual, new Publisher[0], Mono.just("foo"));
@@ -124,7 +124,7 @@ public class MonoThenIgnoreTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/661
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxThenMonoAndShift() {
 		StepVerifier.create(Flux.just("Good Morning", "Hello")
 		                        .then(Mono.just("Good Afternoon"))
@@ -134,7 +134,7 @@ public class MonoThenIgnoreTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/661
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoThenMonoAndShift() {
 		StepVerifier.create(Mono.just("Good Morning")
 		                        .then(Mono.just("Good Afternoon"))

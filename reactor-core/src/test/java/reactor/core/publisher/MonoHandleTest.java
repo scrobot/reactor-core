@@ -15,7 +15,7 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static java.util.Collections.singleton;
@@ -31,7 +31,7 @@ public class MonoHandleTest {
 		    .assertNoError()
 		    .assertComplete();
 	}
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalHide() {
 		Mono.just(1)
 		    .hide()
@@ -42,7 +42,7 @@ public class MonoHandleTest {
 		    .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void filterNullMapResult() {
 
 		Mono.just(1)

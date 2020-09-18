@@ -16,23 +16,27 @@
 package reactor.core.publisher;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.test.subscriber.AssertSubscriber;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class FluxTakeUntilPredicateTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxTakeUntil<>(null, v -> true);
+		assertThrows(NullPointerException.class, () ->
+				new FluxTakeUntil<>(null, v -> true));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void predicateNull() {
-		Flux.never()
-		    .takeUntil(null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never()
+						.takeUntil(null));
 	}
 
 	@Test

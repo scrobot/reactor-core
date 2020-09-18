@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -103,7 +103,7 @@ public class FluxGroupJoinTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal1() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 
@@ -134,7 +134,7 @@ public class FluxGroupJoinTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void leftThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -153,7 +153,7 @@ public class FluxGroupJoinTest {
 		  .assertNoValues();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rightThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -191,7 +191,7 @@ public class FluxGroupJoinTest {
 		  .assertNoValues();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rightDurationThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -210,7 +210,7 @@ public class FluxGroupJoinTest {
 		  .assertNoValues();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void leftDurationSelectorThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -231,7 +231,7 @@ public class FluxGroupJoinTest {
 		  .assertNoValues();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rightDurationSelectorThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 		DirectProcessor<Integer> source1 = DirectProcessor.create();
@@ -274,7 +274,7 @@ public class FluxGroupJoinTest {
 		  .assertNoValues();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanGroupJoinSubscription() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, sub -> sub.request(100));
 		FluxGroupJoin.GroupJoinSubscription<String, String, String, String, String> test =
@@ -303,7 +303,7 @@ public class FluxGroupJoinTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanLeftRightSubscriber() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null,
 				sub -> sub.request(100));
@@ -324,7 +324,7 @@ public class FluxGroupJoinTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanLeftRightEndSubscriber() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null,
 				sub -> sub.request(100));

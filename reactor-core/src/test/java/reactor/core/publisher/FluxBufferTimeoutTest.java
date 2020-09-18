@@ -24,8 +24,8 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
@@ -42,7 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxBufferTimeoutTest {
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		VirtualTimeScheduler.reset();
 	}
@@ -69,7 +69,7 @@ public class FluxBufferTimeoutTest {
 		           .bufferTimeout(5, Duration.ofMillis(2000));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferWithTimeoutAccumulateOnTimeOrSize2() {
 		StepVerifier.withVirtualTime(this::scenario_bufferWithTimeoutAccumulateOnTimeOrSize2)
 		            .thenAwait(Duration.ofMillis(1500))
@@ -138,7 +138,7 @@ public class FluxBufferTimeoutTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		final Flux<List<Integer>> flux = Flux.just(1).bufferTimeout(3, Duration.ofSeconds(1));
 
@@ -146,7 +146,7 @@ public class FluxBufferTimeoutTest {
 		assertThat(((Scannable) flux).scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.parallel());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void shouldShowActualSubscriberDemand() {
 		Subscription[] subscriptionsHolder = new Subscription[1];
 		CoreSubscriber<List<String>> actual = new LambdaSubscriber<>(null, e -> {}, null, s -> subscriptionsHolder[0] = s);
@@ -162,7 +162,7 @@ public class FluxBufferTimeoutTest {
 		assertThat(test.scan(Scannable.Attr.REQUESTED_FROM_DOWNSTREAM)).isEqualTo(15L);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void downstreamDemandShouldBeAbleToDecreaseOnFullBuffer() {
 		Subscription[] subscriptionsHolder = new Subscription[1];
 		CoreSubscriber<List<String>> actual = new LambdaSubscriber<>(null, e -> {}, null, s -> subscriptionsHolder[0] = s);
@@ -202,7 +202,7 @@ public class FluxBufferTimeoutTest {
 		assertThat(test.scan(Scannable.Attr.REQUESTED_FROM_DOWNSTREAM)).isEqualTo(0L);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriberCancelled() {
 		CoreSubscriber<List<String>>
 				actual = new LambdaSubscriber<>(null, e -> {}, null, null);
@@ -218,7 +218,7 @@ public class FluxBufferTimeoutTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void flushShouldNotRaceWithNext() {
 		Set<Integer> seen = new HashSet<>();
 		Consumer<List<Integer>> consumer = integers -> {
@@ -245,7 +245,7 @@ public class FluxBufferTimeoutTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1247
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rejectedOnNextLeadsToOnError() {
 		Scheduler scheduler = Schedulers.newSingle("rejectedOnNextLeadsToOnError");
 		scheduler.dispose();
@@ -294,7 +294,7 @@ public class FluxBufferTimeoutTest {
 		            .hasDiscardedExactly(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void discardOnError() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .concatWith(Mono.error(new IllegalStateException("boom")))

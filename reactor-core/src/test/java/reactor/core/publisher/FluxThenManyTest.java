@@ -16,7 +16,7 @@
 package reactor.core.publisher;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 /**
@@ -24,7 +24,7 @@ import reactor.test.subscriber.AssertSubscriber;
  */
 public class FluxThenManyTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testThenManySameType() throws InterruptedException {
 		Flux<String> test = Flux.just("A", "B")
 		                        .thenMany(Flux.just("C", "D"));
@@ -52,7 +52,7 @@ public class FluxThenManyTest {
 		ts.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testThenManyDifferentType() throws InterruptedException {
 		Flux<String> test = Flux.just(1, 2).thenMany(Flux.just("C", "D"));
 

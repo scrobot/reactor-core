@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
@@ -258,9 +258,10 @@ public class FluxPeekTest extends FluxOperatorTest<String, String> {
 		return combinedScenarios;
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullSource() {
-		new FluxPeek<>(null, null, null, null, null, null, null, null);
+		assertThrows(NullPointerException.class, () ->
+				new FluxPeek<>(null, null, null, null, null, null, null, null));
 	}
 
 	@Test

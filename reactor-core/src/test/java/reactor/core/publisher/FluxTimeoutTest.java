@@ -21,7 +21,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxTimeoutTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void noTimeout() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -227,7 +227,7 @@ public class FluxTimeoutTest {
 		  .assertErrorMessage("forced failure");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void timeoutRequested() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -265,7 +265,7 @@ public class FluxTimeoutTest {
 		           .timeout(Duration.ofMillis(500));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxPropagatesErrorUsingAwait() {
 		StepVerifier.withVirtualTime(this::scenario_timeoutThrown)
 		            .thenAwait(Duration.ofMillis(500))
@@ -301,7 +301,7 @@ public class FluxTimeoutTest {
 		           .timeout(Duration.ofMillis(500), Schedulers.parallel());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxPropagatesErrorUsingAwait3() {
 		StepVerifier.withVirtualTime(this::scenario_timeoutThrown3)
 		            .thenAwait(Duration.ofMillis(500))
@@ -316,7 +316,7 @@ public class FluxTimeoutTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/744
-	@Test
+	@org.junit.jupiter.api.Test
 	public void timeoutDropWhenNoCancelWithoutFallback() {
 		for (int i = 0; i < 50; i++) {
 			StepVerifier.withVirtualTime(
@@ -374,7 +374,7 @@ public class FluxTimeoutTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void timeoutNotDurationMessageFirstTimeout() {
 		StepVerifier.create(Flux.never()
 		                        .timeout(Mono.just("immediate")))

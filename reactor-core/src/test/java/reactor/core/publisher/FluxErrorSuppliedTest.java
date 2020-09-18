@@ -34,7 +34,7 @@ package reactor.core.publisher;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,7 +48,7 @@ public class FluxErrorSuppliedTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void throwOnCall() {
 		assertThatExceptionOfType(IllegalStateException.class)
 				.isThrownBy(() -> new FluxErrorSupplied<>(() -> new IllegalStateException("boom"))

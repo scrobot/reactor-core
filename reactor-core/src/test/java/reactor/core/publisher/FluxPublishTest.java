@@ -24,7 +24,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.reactivestreams.Subscription;
 
 import reactor.core.Disposable;
@@ -38,6 +39,7 @@ import reactor.util.concurrent.Queues;
 import reactor.util.context.Context;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxPublishTest extends FluxOperatorTest<String, String> {
 
@@ -55,10 +57,11 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void failPrefetch(){
-		Flux.never()
-		    .publish( -1);
+	@org.junit.jupiter.api.Test
+	public void failPrefetch() {
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.never()
+						.publish(-1));
 	}
 
 	@Test
@@ -116,7 +119,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		ctb.test();
 	}*/
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		AssertSubscriber<Integer> ts1 = AssertSubscriber.create();
 		AssertSubscriber<Integer> ts2 = AssertSubscriber.create();
@@ -202,7 +205,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalAsyncFused() {
 		AssertSubscriber<Integer> ts1 = AssertSubscriber.create();
 		AssertSubscriber<Integer> ts2 = AssertSubscriber.create();
@@ -304,7 +307,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalSyncFused() {
 		AssertSubscriber<Integer> ts1 = AssertSubscriber.create();
 		AssertSubscriber<Integer> ts2 = AssertSubscriber.create();
@@ -335,7 +338,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalBackpressuredSyncFused() {
 		AssertSubscriber<Integer> ts1 = AssertSubscriber.create(0);
 		AssertSubscriber<Integer> ts2 = AssertSubscriber.create(0);
@@ -391,7 +394,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1302
-	@Test
+	@org.junit.jupiter.api.Test
 	public void boundaryFused() {
 		Flux.range(1, 10000)
 		    .publishOn(Schedulers.single())
@@ -430,7 +433,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		Assert.assertFalse("sp has subscribers?", e.downstreamCount() != 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void disconnectBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -473,7 +476,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		.assertNotComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fusedMapInvalid() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -489,7 +492,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void retry() {
 		DirectProcessor<Integer> dp = DirectProcessor.create();
 		StepVerifier.create(
@@ -515,7 +518,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		dp.onComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void retryWithPublishOn() {
 		DirectProcessor<Integer> dp = DirectProcessor.create();
 		StepVerifier.create(
@@ -550,7 +553,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
         assertThat(test.scan(Scannable.Attr.PREFETCH)).isEqualTo(123);
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanSubscriber() {
         FluxPublish<Integer> main = new FluxPublish<>(Flux.just(1), 123, Queues.unbounded());
         FluxPublish.PublishSubscriber<Integer> test = new FluxPublish.PublishSubscriber<>(789, main);
@@ -575,7 +578,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
         assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanInner() {
 		FluxPublish<Integer> main = new FluxPublish<>(Flux.just(1), 123, Queues.unbounded());
         FluxPublish.PublishSubscriber<Integer> parent = new FluxPublish.PublishSubscriber<>(789, main);
@@ -598,7 +601,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
         assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanPubSubInner() {
 		FluxPublish<Integer> main = new FluxPublish<>(Flux.just(1), 123, Queues.unbounded());
         FluxPublish.PublishSubscriber<Integer> parent = new FluxPublish.PublishSubscriber<>(789, main);
@@ -616,7 +619,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
     }
 
     //see https://github.com/reactor/reactor-core/issues/1290
-    @Test
+    @org.junit.jupiter.api.Test
     public void syncFusionSingle() { //single value in the SYNC fusion
 	    final ConnectableFlux<String> publish = Flux.just("foo")
 	                                 .publish();
@@ -629,7 +632,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
     }
 
     //see https://github.com/reactor/reactor-core/issues/1290
-	@Test
+	@org.junit.jupiter.api.Test
 	public void syncFusionMultiple() { //multiple values in the SYNC fusion
 		final ConnectableFlux<Integer> publish = Flux.range(1, 5)
 		                                             .publish();
@@ -642,7 +645,8 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1528
-	@Test(timeout = 4000)
+	@Test
+	@Timeout(4)
 	public void syncFusionFromInfiniteStream() {
 		final ConnectableFlux<Integer> publish =
 				Flux.fromStream(Stream.iterate(0, i -> i + 1))
@@ -657,7 +661,8 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1528
-	@Test(timeout = 4000)
+	@Test
+	@Timeout(4)
 	public void syncFusionFromInfiniteStreamAndTake() {
 		final Flux<Integer> publish =
 				Flux.fromStream(Stream.iterate(0, i -> i + 1))
@@ -690,7 +695,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void dataDroppedIfAutoconnectZero() {
 		TestPublisher<Integer> publisher = TestPublisher.create();
 		Flux<Integer> flux = publisher.flux().publish().autoConnect(0);
@@ -707,7 +712,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void removeUnknownInnerIgnored() {
 		FluxPublish.PublishSubscriber<Integer> subscriber = new FluxPublish.PublishSubscriber<>(1, null);
 		FluxPublish.PublishInner<Integer> inner = new FluxPublish.PublishInner<>(null);
@@ -723,7 +728,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 		assertThat(subscriber.subscribers).as("post remove inner").isEmpty();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void subscriberContextPropagation() {
 		String key = "key";
 		int expectedValue = 1;

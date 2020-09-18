@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -31,6 +31,8 @@ import reactor.test.StepVerifier;
 import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 import reactor.util.function.Tuples;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxZipIterableTest extends FluxOperatorTest<String, String> {
 
@@ -101,21 +103,24 @@ public class FluxZipIterableTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxZipIterable<>(null, Collections.emptyList(), (a, b) -> a);
+		assertThrows(NullPointerException.class, () ->
+				new FluxZipIterable<>(null, Collections.emptyList(), (a, b) -> a));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void iterableNull() {
-		Flux.never()
-		    .zipWithIterable(null, (a, b) -> a);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never()
+						.zipWithIterable(null, (a, b) -> a));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void zipperNull() {
-		Flux.never()
-		    .zipWithIterable(Collections.emptyList(), null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never()
+						.zipWithIterable(Collections.emptyList(), null));
 	}
 
 	@Test

@@ -36,10 +36,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TestName;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
@@ -70,7 +70,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class GuideTests {
 
-	@Test @SuppressWarnings("unchecked")
+	@Test
+	@SuppressWarnings("unchecked")
 	public void introFutureHell() {
 		CompletableFuture<List<String>> ids = ifhIds(); // <1>
 
@@ -947,7 +948,7 @@ public class GuideTests {
 	@Rule
 	public TestName testName = new TestName();
 
-	@Before
+	@BeforeEach
 	public void populateDebug() {
 		if (testName.getMethodName().equals("debuggingCommonStacktrace")) {
 			toDebug = scatterAndGather(urls());
@@ -958,7 +959,7 @@ public class GuideTests {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void removeHooks() {
 		if (testName.getMethodName().startsWith("debuggingActivated")) {
 			Hooks.resetOnOperatorDebug();

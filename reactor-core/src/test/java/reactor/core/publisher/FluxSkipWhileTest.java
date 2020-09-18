@@ -20,13 +20,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxSkipWhileTest extends FluxOperatorTest<String, String> {
 
@@ -53,15 +55,17 @@ public class FluxSkipWhileTest extends FluxOperatorTest<String, String> {
 	}
 
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxSkipWhile<>(null, v -> true);
+		assertThrows(NullPointerException.class, () ->
+				new FluxSkipWhile<>(null, v -> true));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void predicateNull() {
-		Flux.never()
-		    .skipWhile(null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never()
+						.skipWhile(null));
 	}
 
 	@Test

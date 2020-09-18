@@ -25,13 +25,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 
-import org.assertj.core.api.Assumptions;
-import org.junit.Test;
-import org.reactivestreams.Publisher;
-import reactor.core.CoreSubscriber;
+import org.junit.jupiter.api.Test;
 import reactor.core.Disposable;
-import reactor.core.Fuseable;
-import reactor.core.Scannable;
 import reactor.test.MemoryUtils;
 import reactor.test.StepVerifier;
 import reactor.test.publisher.TestPublisher;
@@ -126,7 +121,7 @@ public class UnicastProcessorTest {
 			assertEquals(onOverflow, processor.onOverflow);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferSizeReactorUnboundedQueue() {
     	UnicastProcessor processor = UnicastProcessor.create(
     			Queues.unbounded(2).get());
@@ -179,7 +174,7 @@ public class UnicastProcessorTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextTest() {
     	UnicastProcessor<Integer> p = UnicastProcessor.create();
     	p.subscriberContext(ctx -> ctx.put("foo", "bar")).subscribe();
@@ -187,7 +182,7 @@ public class UnicastProcessorTest {
     	assertThat(p.sink().currentContext().get("foo").toString()).isEqualTo("bar");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void subscriptionCancelUpdatesDownstreamCount() {
 		UnicastProcessor<String> processor = UnicastProcessor.create();
 

@@ -15,20 +15,24 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoSwitchIfEmptyTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new MonoSwitchIfEmpty<>(null, Mono.never());
+		assertThrows(NullPointerException.class, () ->
+				new MonoSwitchIfEmpty<>(null, Mono.never()));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void otherNull() {
-		Mono.never()
-		    .switchIfEmpty(null);
+		assertThrows(NullPointerException.class, () ->
+				Mono.never()
+						.switchIfEmpty(null));
 	}
 
 	@Test

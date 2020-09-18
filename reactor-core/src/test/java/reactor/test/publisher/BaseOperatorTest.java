@@ -23,9 +23,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -40,7 +40,6 @@ import reactor.core.publisher.ReplayProcessor;
 import reactor.core.publisher.UnicastProcessor;
 import reactor.test.StepVerifier;
 import reactor.util.annotation.Nullable;
-import reactor.util.concurrent.Queues;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static reactor.core.Fuseable.*;
@@ -54,18 +53,18 @@ public abstract class BaseOperatorTest<I, PI extends Publisher<? extends I>, O, 
 
 	boolean defaultEmpty = false;
 
-	@After
+	@AfterEach
 	public void afterScenariosRun(){
 		resetHooks();
 		defaultEmpty = false;
 	}
 
-	@Before
+	@BeforeEach
 	public final void initDefaultScenario() {
 		defaultScenario = defaultScenarioOptions(new OperatorScenario<>(null, null));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public final void cancelOnSubscribe() {
 		defaultEmpty = true;
 		forEachScenario(scenarios_operatorSuccess(), s -> {
@@ -107,7 +106,7 @@ public abstract class BaseOperatorTest<I, PI extends Publisher<? extends I>, O, 
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked")
 	public final void assertPrePostState() {
 		forEachScenario(scenarios_touchAndAssertState(), scenario -> {
@@ -121,7 +120,7 @@ public abstract class BaseOperatorTest<I, PI extends Publisher<? extends I>, O, 
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public final void sequenceOfNextAndComplete() {
 		forEachScenario(scenarios_operatorSuccess(), scenario -> {
 			Consumer<StepVerifier.Step<O>> verifier = scenario.verifier();
@@ -161,7 +160,7 @@ public abstract class BaseOperatorTest<I, PI extends Publisher<? extends I>, O, 
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public final void sequenceOfNextWithCallbackError() {
 		defaultEmpty = true;
 		defaultScenario.producerError(new RuntimeException("test"));
@@ -298,7 +297,7 @@ public abstract class BaseOperatorTest<I, PI extends Publisher<? extends I>, O, 
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public final void sequenceOfNextAndError() {
 		forEachScenario(scenarios_operatorSuccess(), scenario -> {
 		});

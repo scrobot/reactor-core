@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -72,7 +72,7 @@ public class JdkLoggerTest {
 				.isEqualTo("test {} is {}");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void formatNullParamInVararg() {
 		Loggers.JdkLogger jdkLogger= new Loggers.JdkLogger(Mockito.mock(java.util.logging.Logger.class));
 

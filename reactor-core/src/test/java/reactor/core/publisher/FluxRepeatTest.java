@@ -19,16 +19,19 @@ package reactor.core.publisher;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class FluxRepeatTest {
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void timesInvalid() {
-		Flux.never()
-		    .repeat(-1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.never()
+						.repeat(-1));
 	}
 
 	@Test
@@ -67,7 +70,7 @@ public class FluxRepeatTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void twoRepeat() {
 		StepVerifier.create(Flux.range(1, 5)
 		                        .repeat(2))

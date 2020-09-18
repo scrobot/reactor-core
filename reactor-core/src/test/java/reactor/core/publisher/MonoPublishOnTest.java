@@ -26,8 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
@@ -45,7 +45,7 @@ import static reactor.core.scheduler.Schedulers.fromExecutorService;
 
 public class MonoPublishOnTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rejectedExecutionExceptionOnDataSignalExecutor()
 			throws InterruptedException {
 
@@ -156,7 +156,7 @@ public class MonoPublishOnTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rejectedExecutionExceptionOnDataSignalExecutorService()
 			throws InterruptedException {
 
@@ -210,7 +210,7 @@ public class MonoPublishOnTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void rejectedExecutionExceptionOnErrorSignalExecutorService()
 			throws InterruptedException {
 
@@ -268,7 +268,7 @@ public class MonoPublishOnTest {
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	//FIXME the behavior is not failing fast anymore, find original issue and re-evaluate
 	public void rejectedExecutionSubscribeExecutorScheduler() {
 		CountDownLatch latch = new CountDownLatch(1);
@@ -307,8 +307,8 @@ public class MonoPublishOnTest {
 		executor.shutdownNow();
 	}
 
-	@Test
-	@Ignore
+	@org.junit.jupiter.api.Test
+	@Disabled
 	//FIXME the behavior is not failing fast anymore, find original issue and re-evaluate
 	public void rejectedExecutionSubscribeExecutorServiceScheduler() {
 		CountDownLatch latch = new CountDownLatch(1);
@@ -345,14 +345,14 @@ public class MonoPublishOnTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		MonoPublishOn<String> test = new MonoPublishOn<>(Mono.empty(), Schedulers.immediate());
 
 		Assertions.assertThat(test.scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.immediate());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriber() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoPublishOn.PublishOnSubscriber<String> test = new MonoPublishOn.PublishOnSubscriber<>(
@@ -380,7 +380,7 @@ public class MonoPublishOnTest {
 		Assertions.assertThat(test.scan(Scannable.Attr.ERROR)).hasMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void error() {
 		StepVerifier.create(Mono.error(new RuntimeException("forced failure"))
 		                        .publishOn(Schedulers.single()))

@@ -19,14 +19,14 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoToCompletableFutureTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() throws Exception {
 		CompletableFuture<Integer> f = Mono.just(1)
 		                                   .toFuture();
@@ -34,7 +34,7 @@ public class MonoToCompletableFutureTest {
 		assertThat(f.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void error() {
 		CompletableFuture<Integer> f =
 				Mono.<Integer>error(new IllegalStateException("test")).toFuture();

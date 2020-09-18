@@ -19,7 +19,7 @@ package reactor.core.publisher;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.scheduler.VirtualTimeScheduler;
 import reactor.util.function.Tuple2;
@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxCacheTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheFlux() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 
@@ -53,7 +53,7 @@ public class FluxCacheTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheFluxTTL() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 
@@ -77,7 +77,7 @@ public class FluxCacheTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheFluxHistoryTTL() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 
@@ -102,7 +102,7 @@ public class FluxCacheTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheFluxTTL2() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 

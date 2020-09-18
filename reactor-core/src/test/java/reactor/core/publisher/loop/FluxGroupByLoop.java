@@ -15,7 +15,7 @@
  */
 package reactor.core.publisher.loop;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.publisher.FluxGroupByTest;
 
 /**
@@ -25,7 +25,7 @@ public class FluxGroupByLoop {
 
 	final FluxGroupByTest groupByTest = new FluxGroupByTest();
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void twoGroupsLongAsyncMergeHiddenLoop() {
 		for (int i = 0; i < 100; i++) {
 			groupByTest.twoGroupsLongAsyncMergeHidden();

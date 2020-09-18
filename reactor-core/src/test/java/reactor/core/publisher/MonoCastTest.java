@@ -16,21 +16,23 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoCastTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		Mono.just(1)
-		    .cast(null);
+		assertThrows(NullPointerException.class, () ->
+				Mono.just(1).cast(null));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull2() {
-		Mono.just(1)
-		    .ofType(null);
+		assertThrows(NullPointerException.class, () ->
+				Mono.just(1).ofType(null));
 	}
 
 	@Test
@@ -58,7 +60,7 @@ public class MonoCastTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorOfType() {
 		StepVerifier.create(Mono.just(1)
 		                        .ofType(String.class))

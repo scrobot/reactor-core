@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -34,6 +34,7 @@ import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxMapTest extends FluxOperatorTest<String, String> {
 
@@ -63,14 +64,16 @@ public class FluxMapTest extends FluxOperatorTest<String, String> {
 
 	Flux<Integer> just = Flux.just(1);
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullSource() {
-		new FluxMap<Integer, Integer>(null, v -> v);
+		assertThrows(IllegalArgumentException.class, () ->
+				new FluxMap<Integer, Integer>(null, v -> v));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullMapper() {
-		just.map(null);
+		assertThrows(NullPointerException.class, () ->
+				just.map(null));
 	}
 
 	@Test

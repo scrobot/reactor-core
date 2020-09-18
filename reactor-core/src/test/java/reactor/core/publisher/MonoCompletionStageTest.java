@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 
 import reactor.test.StepVerifier;
@@ -50,7 +50,7 @@ public class MonoCompletionStageTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancelFutureImmediatelyCancelledLoop() {
 		for (int i = 0; i < 10000; i++) {
 			CompletableFuture<Integer> future = new CompletableFuture<>();
@@ -91,7 +91,7 @@ public class MonoCompletionStageTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancelFutureTimeoutCancelledLoop() {
 		for (int i = 0; i < 500; i++) {
 			CompletableFuture<Integer> future = new CompletableFuture<>();

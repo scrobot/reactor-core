@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.core.CoreSubscriber;
 import reactor.core.Fuseable;
@@ -25,6 +25,7 @@ import reactor.test.MockUtils;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxRangeTest {
 
@@ -79,14 +80,16 @@ public class FluxRangeTest {
 		  .assertComplete();
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void countIsNegative() {
-		Flux.range(1, -1);
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.range(1, -1));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void rangeOverflow() {
-		Flux.range(2, Integer.MAX_VALUE);
+		assertThrows(IllegalArgumentException.class, () ->
+				Flux.range(2, Integer.MAX_VALUE));
 	}
 
 	@Test

@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import reactor.core.CoreSubscriber;
@@ -35,6 +35,7 @@ import reactor.util.context.Context;
 import reactor.util.function.Tuples;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxIterableTest {
 
@@ -46,9 +47,10 @@ public class FluxIterableTest {
 	                .verifyComplete();
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullIterable() {
-		Flux.never().zipWithIterable(null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.never().zipWithIterable(null));
 	}
 
 	@Test

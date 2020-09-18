@@ -17,27 +17,29 @@
 package reactor.core.publisher;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class FluxTakeWhileTest {
 
-	@Test(expected = NullPointerException.class)
+	@org.junit.jupiter.api.Test
 	public void sourceNull() {
-		new FluxTakeWhile<>(null, v -> true);
+		assertThrows(NullPointerException.class, () -> new FluxTakeWhile<>(null, v -> true));
+
 	}
 
-	@Test(expected = NullPointerException.class)
+	@org.junit.jupiter.api.Test
 	public void predicateNull() {
-		Flux.never()
-		    .takeWhile(null);
+		assertThrows(NullPointerException.class, () -> Flux.never().takeWhile(null));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void takeAll() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -50,7 +52,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void takeAllBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -88,7 +90,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void takeSomeBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -126,7 +128,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void takeNoneBackpressured() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create(0);
 
@@ -145,7 +147,7 @@ public class FluxTakeWhileTest {
 		  .assertNoError();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void predicateThrows() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -162,7 +164,7 @@ public class FluxTakeWhileTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void aFluxCanBeLimitedWhile(){
 		StepVerifier.create(Flux.just("test", "test2", "test3")
 		                        .takeWhile("test"::equals)

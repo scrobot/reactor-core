@@ -16,25 +16,27 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.testng.Assert;
 import reactor.core.Exceptions;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoFilterTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new MonoFilter<Integer>(null, e -> true);
+		assertThrows(NullPointerException.class, () ->
+				new MonoFilter<Integer>(null, e -> true));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void predicateNull() {
-		Mono.never()
-		    .filter(null);
+		assertThrows(NullPointerException.class, () ->
+				Mono.never().filter(null));
 	}
 
 	@Test

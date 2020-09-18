@@ -17,8 +17,7 @@ package reactor.core.publisher;
 
 import java.time.Duration;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -44,7 +43,7 @@ public class FluxElapsedTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanOperator() {
 		Flux<Tuple2<Long, Integer>> test = Flux.just(1).elapsed(Schedulers.single());
 
@@ -52,7 +51,7 @@ public class FluxElapsedTest {
 		assertThat(((Scannable) test).scan(Scannable.Attr.RUN_ON)).isSameAs(Schedulers.single());
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanSubscriber() {
         CoreSubscriber<Tuple2<Long, String>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxElapsed.ElapsedSubscriber<String> test = new FluxElapsed.ElapsedSubscriber<>(actual, Schedulers.single());

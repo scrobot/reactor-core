@@ -31,7 +31,7 @@ import java.util.function.LongConsumer;
 import javax.annotation.Nullable;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -56,9 +56,10 @@ import static reactor.core.scheduler.Schedulers.parallel;
 
 public class FluxPeekFuseableTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullSource() {
-		new FluxPeekFuseable<>(null, null, null, null, null, null, null, null);
+		assertThrows(NullPointerException.class, () ->
+				new FluxPeekFuseable<>(null, null, null, null, null, null, null, null));
 	}
 
 	@Test

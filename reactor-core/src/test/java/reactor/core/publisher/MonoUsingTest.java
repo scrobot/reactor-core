@@ -21,29 +21,33 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.assertj.core.api.Condition;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoUsingTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void resourceSupplierNull() {
-		Mono.using(null, r -> Mono.empty(), r -> {
-		}, false);
+		assertThrows(NullPointerException.class, () ->
+				Mono.using(null, r -> Mono.empty(), r -> {
+				}, false));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceFactoryNull() {
-		Mono.using(() -> 1, null, r -> {
-		}, false);
+		assertThrows(NullPointerException.class, () ->
+				Mono.using(() -> 1, null, r -> {
+				}, false));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void resourceCleanupNull() {
-		Mono.using(() -> 1, r -> Mono.empty(), null, false);
+		assertThrows(NullPointerException.class, () ->
+				Mono.using(() -> 1, r -> Mono.empty(), null, false));
 	}
 
 	@Test

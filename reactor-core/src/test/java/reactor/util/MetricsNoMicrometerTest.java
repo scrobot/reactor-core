@@ -18,9 +18,7 @@ package reactor.util;
 
 import java.util.concurrent.Executors;
 
-import org.assertj.core.api.Assumptions;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -42,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
  */
 public class MetricsNoMicrometerTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void isMicrometerAvailable() {
 		assertThat(Metrics.isInstrumentationAvailable()).isFalse();
 	}
@@ -53,7 +51,7 @@ public class MetricsNoMicrometerTest {
 				.doesNotThrowAnyException();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void FluxMetricsFusedNoOp() {
 		assertThatCode(() -> Flux.just("foo").metrics().blockLast())
 				.doesNotThrowAnyException();
@@ -65,7 +63,7 @@ public class MetricsNoMicrometerTest {
 				.doesNotThrowAnyException();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void MonoMetricsFusedNoOp() {
 		assertThatCode(() -> Mono.just("foo").metrics().block())
 				.doesNotThrowAnyException();

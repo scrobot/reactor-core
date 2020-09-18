@@ -15,20 +15,24 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxSwitchIfEmptyTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceNull() {
-		new FluxSwitchIfEmpty<>(null, Flux.never());
+		assertThrows(NullPointerException.class, () ->
+				new FluxSwitchIfEmpty<>(null, Flux.never()));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void otherNull() {
+		assertThrows(NullPointerException.class, () ->
 		Flux.never()
-		    .switchIfEmpty(null);
+		    .switchIfEmpty(null));
 	}
 
 	@Test

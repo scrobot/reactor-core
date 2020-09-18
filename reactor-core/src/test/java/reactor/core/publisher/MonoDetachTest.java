@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.awaitility.Awaitility;
 import org.awaitility.Duration;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import reactor.test.subscriber.AssertSubscriber;
 
@@ -30,7 +30,7 @@ public class MonoDetachTest {
 
 	Object o;
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void just() throws Exception {
 		o = new Object();
 
@@ -56,7 +56,7 @@ public class MonoDetachTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void error() {
 		AssertSubscriber<Object> ts = new AssertSubscriber<>();
 
@@ -82,7 +82,7 @@ public class MonoDetachTest {
 		ts.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void backpressured() throws Exception {
 		o = new Object();
 
@@ -111,7 +111,7 @@ public class MonoDetachTest {
 		Assert.assertNull("Object retained!", wr.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void justUnsubscribed() throws Exception {
 		o = new Object();
 
@@ -137,7 +137,7 @@ public class MonoDetachTest {
 			});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void deferredUpstreamProducer() {
 		final AtomicReference<Subscriber<? super Object>> subscriber =
 				new AtomicReference<>();

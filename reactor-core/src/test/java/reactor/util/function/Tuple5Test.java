@@ -16,7 +16,7 @@
 
 package reactor.util.function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -26,14 +26,14 @@ public class Tuple5Test {
 
 	private Tuple5<Integer, Integer, Integer, Integer, Integer> full = new Tuple5<>(1, 2, 3, 4, 5);
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nullT5Rejected() {
 		assertThatExceptionOfType(NullPointerException.class)
 				.isThrownBy(() -> new Tuple5<>(1, 2, 3, 4, null))
 				.withMessage("t5");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mapT1() {
 		Tuple5<String, Integer, Integer, Integer, Integer> base =
 				Tuples.of("Foo", 200, 300, 400, 500);
@@ -46,7 +46,7 @@ public class Tuple5Test {
 				                  base.getT5());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mapT2() {
 		Tuple5<Integer, String, Integer, Integer, Integer> base =
 				Tuples.of(100, "Foo", 300, 400, 500);
@@ -59,7 +59,7 @@ public class Tuple5Test {
 				                  base.getT5());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mapT3() {
 		Tuple5<Integer, Integer, String, Integer, Integer> base =
 				Tuples.of(100, 200, "Foo", 400, 500);
@@ -72,7 +72,7 @@ public class Tuple5Test {
 				                  base.getT5());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mapT4() {
 		Tuple5<Integer, Integer, Integer, String, Integer> base =
 				Tuples.of(100, 200, 300, "Foo", 500);
@@ -85,7 +85,7 @@ public class Tuple5Test {
 				                  base.getT5());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mapT5() {
 		Tuple5<Integer, Integer, Integer, Integer, String> base =
 				Tuples.of(100, 200, 300, 400, "Foo");
@@ -98,7 +98,7 @@ public class Tuple5Test {
 				                  3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mapT5Null() {
 		assertThatNullPointerException().isThrownBy(() ->
 				Tuples.of(1, 2, 3, 4, 5)
@@ -106,17 +106,17 @@ public class Tuple5Test {
 		).withMessage("t5");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getNegativeIndex() {
 		assertThat(full.get(-1)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getTooLargeIndex() {
 		assertThat(full.get(10)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getAllValuesCorrespondToArray() {
 		Object[] array = full.toArray();
 
@@ -130,20 +130,20 @@ public class Tuple5Test {
 		assertThat(full).isEqualTo(full);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void equalityOfNullOrWrongClass() {
 		assertThat(full).isNotEqualTo(null)
 		                .isNotEqualTo("foo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void t5Combinations() {
 		assertThat(new Tuple5<>(1, 2, 3, 4, 5))
 				.isNotEqualTo(new Tuple5<>(1, 2, 3, 4, 10))
 				.isEqualTo(new Tuple5<>(1, 2, 3, 4, 5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sanityTestHashcode() {
 		Tuple5<Integer, Integer, Integer, Integer, Integer> same = new Tuple5<>(1, 2, 3, 4, 5);
 		Tuple5<Integer, Integer, Integer, Integer, Integer> different = new Tuple5<>(1, 2, 3, 4, 1);

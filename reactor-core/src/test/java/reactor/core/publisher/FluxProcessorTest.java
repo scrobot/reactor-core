@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import reactor.core.Scannable;
 import reactor.core.scheduler.Scheduler;
@@ -31,24 +31,28 @@ import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxProcessorTest {
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	@SuppressWarnings("unchecked")
-	public void failNullSubscriber(){
-		FluxProcessor.wrap(UnicastProcessor.create(), UnicastProcessor.create())
-	                 .subscribe((Subscriber)null);
+	public void failNullSubscriber() {
+		assertThrows(NullPointerException.class, () ->
+				FluxProcessor.wrap(UnicastProcessor.create(), UnicastProcessor.create())
+						.subscribe((Subscriber) null));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void failNullUpstream(){
-		FluxProcessor.wrap(null, UnicastProcessor.create());
+		assertThrows(NullPointerException.class, () ->
+				FluxProcessor.wrap(null, UnicastProcessor.create()));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void failNullDownstream(){
-		FluxProcessor.wrap(UnicastProcessor.create(), null);
+		assertThrows(NullPointerException.class, () ->
+				FluxProcessor.wrap(UnicastProcessor.create(), null));
 	}
 
 	@Test
@@ -102,7 +106,7 @@ public class FluxProcessorTest {
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorSymmetricBlackboxProcessor(){
 		UnicastProcessor<Integer> upstream = UnicastProcessor.create();
 		FluxProcessor<Integer, Integer> processor =

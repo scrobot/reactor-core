@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.IntStream;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
@@ -50,7 +50,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxCreateTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normalBuffered() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 		Flux<Integer> source = Flux.<Signal<Integer>>create(e -> {
@@ -67,7 +67,7 @@ public class FluxCreateTest {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void gh613() {
 		AtomicBoolean cancelled = new AtomicBoolean();
 		AtomicBoolean completed = new AtomicBoolean();
@@ -112,7 +112,7 @@ public class FluxCreateTest {
 		assertThat(i.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateBuffered() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -135,7 +135,7 @@ public class FluxCreateTest {
 		assertThat(onCancel.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateBuffered2() {
 		AtomicInteger cancellation = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -154,7 +154,7 @@ public class FluxCreateTest {
 		assertThat(onCancel.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateBufferedError() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -178,7 +178,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateBufferedEmpty() {
 		Flux<String> created = Flux.create(FluxSink::complete);
 
@@ -216,7 +216,7 @@ public class FluxCreateTest {
 		assertThat(cancel1.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateBufferedCancelled() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -292,7 +292,7 @@ public class FluxCreateTest {
 		assertThat(onCancel.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoFirstCancelThenOnCancel() {
 		AtomicInteger onCancel = new AtomicInteger();
 		AtomicReference<FluxSink<Object>> sink = new AtomicReference<>();
@@ -318,7 +318,7 @@ public class FluxCreateTest {
 		assertThat(onDispose.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateBufferedBackpressured() {
 		Flux<String> created = Flux.create(s -> {
 			assertThat(s.requestedFromDownstream()).isEqualTo(1);
@@ -336,7 +336,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxPush() {
 		Flux<String> created = Flux.push(s -> {
 			s.next("test1");
@@ -352,7 +352,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateSerialized() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -380,7 +380,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateSerializedError() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -394,7 +394,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateSerializedError2() {
 		Flux<String> created = Flux.create(s -> {
 			s.error(new Exception("test"));
@@ -414,7 +414,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateSerializedCancelled() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -437,7 +437,7 @@ public class FluxCreateTest {
 		assertThat(onCancel.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateSerializedBackpressured() {
 		Flux<String> created = Flux.create(s -> {
 			assertThat(s.requestedFromDownstream()).isEqualTo(1);
@@ -455,7 +455,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateSerializedConcurrent() {
 		Scheduler.Worker w1 = Schedulers.elastic().createWorker();
 		Scheduler.Worker w2 = Schedulers.elastic().createWorker();
@@ -511,7 +511,7 @@ public class FluxCreateTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateLatest() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -527,7 +527,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateLatest2(){
 		StepVerifier.create(Flux.create(s -> {
 			s.next("test1");
@@ -553,7 +553,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateLatestError2() {
 		Flux<String> created = Flux.create(s -> {
 			s.error(new Exception("test"));
@@ -563,7 +563,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateLatestEmpty() {
 		Flux<String> created =
 				Flux.create(FluxSink::complete, FluxSink.OverflowStrategy.LATEST);
@@ -634,7 +634,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateDrop2(){
 		StepVerifier.create(Flux.create(s -> {
 			s.next("test1");
@@ -646,7 +646,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateDropError() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -660,7 +660,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateDropError2() {
 		Flux<String> created = Flux.create(s -> {
 			s.error(new Exception("test"));
@@ -670,7 +670,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateDropEmpty() {
 		Flux<String> created =
 				Flux.create(FluxSink::complete, FluxSink.OverflowStrategy.DROP);
@@ -679,7 +679,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateDropCancelled() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -724,7 +724,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateError() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -740,7 +740,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateError2(){
 		StepVerifier.create(Flux.create(s -> {
 			s.next("test1");
@@ -752,7 +752,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateErrorError() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -766,7 +766,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateErrorError2() {
 		Flux<String> created = Flux.create(s -> {
 			s.error(new Exception("test"));
@@ -776,7 +776,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateErrorEmpty() {
 		Flux<String> created =
 				Flux.create(FluxSink::complete, FluxSink.OverflowStrategy.ERROR);
@@ -785,7 +785,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateErrorCancelled() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -813,7 +813,7 @@ public class FluxCreateTest {
 		assertThat(onCancel.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateErrorBackpressured() {
 		Flux<String> created = Flux.create(s -> {
 			assertThat(s.requestedFromDownstream()).isEqualTo(1);
@@ -858,7 +858,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateIgnoreError() {
 		Flux<String> created = Flux.create(s -> {
 			s.next("test1");
@@ -872,7 +872,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateIgnoreError2() {
 		Flux<String> created = Flux.create(s -> {
 			s.error(new Exception("test"));
@@ -882,7 +882,7 @@ public class FluxCreateTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateIgnoreEmpty() {
 		Flux<String> created =
 				Flux.create(FluxSink::complete, FluxSink.OverflowStrategy.IGNORE);
@@ -891,7 +891,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateIgnoreCancelled() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -919,7 +919,7 @@ public class FluxCreateTest {
 		assertThat(onCancel.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateIgnoreBackpressured() {
 		Flux<String> created = Flux.create(s -> {
 			assertThat(s.requestedFromDownstream()).isEqualTo(1);
@@ -972,7 +972,7 @@ public class FluxCreateTest {
 		assertThat(onRequest.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateGenerateOnRequest() {
 		AtomicInteger index = new AtomicInteger(1);
 		Flux<Integer> created = Flux.create(s -> {
@@ -994,7 +994,7 @@ public class FluxCreateTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateOnRequestSingleThread() {
 		for (OverflowStrategy overflowStrategy : OverflowStrategy.values()) {
 			testFluxCreateOnRequestSingleThread(overflowStrategy);
@@ -1050,7 +1050,7 @@ public class FluxCreateTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxCreateOnRequestMultipleThreadsFastProducer() {
 		for (OverflowStrategy overflowStrategy : OverflowStrategy.values()) {
 			testFluxCreateOnRequestMultipleThreads(overflowStrategy, false);
@@ -1196,7 +1196,7 @@ public class FluxCreateTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanBufferAsyncSink() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		BufferAsyncSink<String> test = new BufferAsyncSink<>(actual, 123);
@@ -1212,7 +1212,7 @@ public class FluxCreateTest {
 		assertThat(test.scan(Scannable.Attr.ERROR)).hasMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanLatestAsyncSink() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		LatestAsyncSink<String> test = new LatestAsyncSink<>(actual);
@@ -1229,7 +1229,7 @@ public class FluxCreateTest {
 		assertThat(test.scan(Scannable.Attr.ERROR)).hasMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSerializedSink() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		FluxCreate.BaseSink<String> decorated = new LatestAsyncSink<>(actual);
@@ -1253,7 +1253,7 @@ public class FluxCreateTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextTest() {
 		StepVerifier.create(Flux.create(s -> IntStream.range(0, 10).forEach(i -> s.next(s
 				.currentContext()
@@ -1266,7 +1266,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextTestPush() {
 		StepVerifier.create(Flux.push(s -> IntStream.range(0, 10).forEach(i -> s.next(s
 				.currentContext()
@@ -1279,7 +1279,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferSinkToString() {
 		StepVerifier.create(Flux.create(sink -> {
 			sink.next(sink.toString());
@@ -1296,7 +1296,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void dropSinkToString() {
 		StepVerifier.create(Flux.create(sink -> {
 			sink.next(sink.toString());
@@ -1313,7 +1313,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void ignoreSinkToString() {
 		StepVerifier.create(Flux.create(sink -> {
 			sink.next(sink.toString());
@@ -1330,7 +1330,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorSinkToString() {
 		StepVerifier.create(Flux.create(sink -> {
 			sink.next(sink.toString());
@@ -1364,7 +1364,7 @@ public class FluxCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bufferSinkRaceNextCancel() {
 		AtomicInteger discarded = new AtomicInteger();
 		final Context context = Operators.discardLocalAdapter(String.class, s -> discarded.incrementAndGet()).apply(Context.empty());
@@ -1402,7 +1402,7 @@ public class FluxCreateTest {
 		assertThat(failed).as("failed").isZero();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void latestSinkRaceNextCancel() {
 		AtomicInteger discarded = new AtomicInteger();
 		final Context context = Operators.discardLocalAdapter(String.class, s -> discarded.incrementAndGet()).apply(Context.empty());
@@ -1440,7 +1440,7 @@ public class FluxCreateTest {
 		assertThat(failed).as("failed").isZero();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void serializedBufferSinkRaceNextCancel() {
 		AtomicInteger discarded = new AtomicInteger();
 		final Context context = Operators.discardLocalAdapter(String.class, s -> discarded.incrementAndGet()).apply(Context.empty());
@@ -1466,7 +1466,7 @@ public class FluxCreateTest {
 		assertThat(discarded).as("discarded").hasValue(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void serializedBufferSinkRaceNextCancel_loop() {
 		int failed = 0;
 		for (int i = 0; i < 10_000; i++) {

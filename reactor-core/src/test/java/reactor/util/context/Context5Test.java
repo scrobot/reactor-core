@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -243,7 +243,7 @@ public class Context5Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 

@@ -19,7 +19,7 @@ package reactor.core.publisher;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.publisher.TestPublisher;
 import reactor.test.scheduler.VirtualTimeScheduler;
@@ -45,7 +45,7 @@ public class MonoTakeUntilOtherTest {
 				.withMessage("other");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void neverSourceIsCancelled() {
 		AtomicReference<SignalType> signal = new AtomicReference<>();
 
@@ -59,7 +59,7 @@ public class MonoTakeUntilOtherTest {
 		assertThat(signal.get()).isEqualTo(SignalType.CANCEL);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void disposeCancelsBoth() {
 		AtomicReference<SignalType> s1 = new AtomicReference<>();
 		AtomicReference<SignalType> s2 = new AtomicReference<>();
@@ -75,7 +75,7 @@ public class MonoTakeUntilOtherTest {
 		assertThat(s2.get()).isEqualTo(SignalType.CANCEL);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiTakeShortcircuits() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(200))
@@ -96,7 +96,7 @@ public class MonoTakeUntilOtherTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiTakeValuedBeforeDuration() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(100))
@@ -107,7 +107,7 @@ public class MonoTakeUntilOtherTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiTakeErrorBeforeDuration() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(100))
@@ -118,7 +118,7 @@ public class MonoTakeUntilOtherTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiTakeCompleteBeforeDuration() {
 		StepVerifier.withVirtualTime(() ->
 				Mono.delay(Duration.ofMillis(100))
@@ -144,7 +144,7 @@ public class MonoTakeUntilOtherTest {
 		other.assertCancelled();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void apiTakeUntilOtherValuedBeforeOther() {
 		TestPublisher<String> other = TestPublisher.create();
 

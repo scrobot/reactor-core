@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -31,7 +31,7 @@ public class Context2Test {
 
 	Context2 c = new Context2(1, "A", 2, "B");
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void replaceKey1NewContext() throws Exception {
 		Context put = c.put(1, "foo");
 
@@ -44,7 +44,7 @@ public class Context2Test {
 				.containsExactly("foo", "B");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void replaceKey2NewContext() {
 		Context put = c.put(2, "foo");
 
@@ -57,7 +57,7 @@ public class Context2Test {
 				.containsExactly("A", "foo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putDifferentKeyContext3() throws Exception {
 		Context put = c.put(3, "Abis");
 		assertThat(put)
@@ -68,14 +68,14 @@ public class Context2Test {
 				.containsExactly("A", "B", "Abis");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void hasKey() throws Exception {
 		assertThat(c.hasKey(1)).as("hasKey(1)").isTrue();
 		assertThat(c.hasKey(2)).as("hasKey(2)").isTrue();
 		assertThat(c.hasKey(3)).as("hasKey(3)").isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void removeKeys() {
 		assertThat(c.delete(1))
 				.as("delete(1)")
@@ -92,7 +92,7 @@ public class Context2Test {
 		assertThat(c.delete(3)).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void get() {
 		assertThat((String) c.get(1)).isEqualTo("A");
 		assertThat((String) c.get(2)).isEqualTo("B");
@@ -105,18 +105,18 @@ public class Context2Test {
 				.withMessage("Context does not contain key: 3");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getUnknownWithDefault() throws Exception {
 		assertThat(c.getOrDefault("peeka", "boo")).isEqualTo("boo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getUnknownWithDefaultNull() throws Exception {
 		Object def = null;
 		assertThat(c.getOrDefault("peeka", def)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void stream() throws Exception {
 		assertThat(c.stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
 				.hasSize(2)
@@ -129,14 +129,14 @@ public class Context2Test {
 		assertThat(c.toString()).isEqualTo("Context2{1=A, 2=B}");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void ofApi() {
 		assertThat(Context.of("test", 12, "value", true))
 				.isInstanceOf(Context2.class)
 				.hasToString("Context2{test=12, value=true}");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putAllOf() {
 		Context m = Context.of("A", 1, "B", 2, "C", 3);
 		Context put = c.putAll(m);
@@ -153,21 +153,21 @@ public class Context2Test {
 		assertThat(put).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putNonNullWithNull() {
 		Context put = c.putNonNull("putNonNull", null);
 
 		assertThat(put).isSameAs(c);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void putNonNullWithValue() {
 		Context put = c.putNonNull("putNonNull", "value");
 
 		assertThat(put.getOrEmpty("putNonNull")).contains("value");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void size() {
 		assertThat(c.size()).isEqualTo(2);
 	}

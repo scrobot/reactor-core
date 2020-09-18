@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FluxFilterWhenTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		StepVerifier.withVirtualTime(() -> Flux.range(1, 10)
 		                                       .filterWhen(v -> Mono.just(v % 2 == 0)
@@ -99,7 +99,7 @@ public class FluxFilterWhenTest {
 				.verifyError(IllegalStateException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void backpressureExactlyOne() {
 		StepVerifier.create(Flux.just(1)
 		                        .filterWhen(v -> Mono.just(true)), 1L)
@@ -251,7 +251,7 @@ public class FluxFilterWhenTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancel() {
 		final EmitterProcessor<Boolean> pp = EmitterProcessor.create();
 
@@ -262,7 +262,7 @@ public class FluxFilterWhenTest {
 		assertThat(pp.hasDownstreams()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void innerFluxCancelled() {
 		AtomicInteger cancelCount = new AtomicInteger();
 
@@ -377,7 +377,7 @@ public class FluxFilterWhenTest {
 	}
 
 	//TODO introspect errors (but is difficult due to Exceptions.terminate)
-	@Test
+	@org.junit.jupiter.api.Test
 	public void introspectionCancel() {
 		AtomicReference<Scannable> scannable = new AtomicReference<>();
 
@@ -398,7 +398,7 @@ public class FluxFilterWhenTest {
 		assertThat(scannable.get().scan(Scannable.Attr.CANCELLED)).isEqualTo(true);
 	}
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void scanSubscriber() {
         CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxFilterWhen.FluxFilterWhenSubscriber<String> test = new FluxFilterWhen.FluxFilterWhenSubscriber<>(actual, t -> Mono.just(true), 789);

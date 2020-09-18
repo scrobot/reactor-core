@@ -18,14 +18,13 @@ package reactor.core.publisher;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -39,7 +38,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class FluxMergeOrderedTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void reorderingAPI() {
 		Flux<Integer> test = Flux.mergeOrdered(Comparator.naturalOrder(),
 				Flux.just(1, 3, 5, 7),
@@ -62,7 +61,7 @@ public class FluxMergeOrderedTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void reorderingAPINaturalOrder() {
 		Flux<Integer> test = Flux.mergeOrdered(Flux.just(1, 3, 5, 7), Flux.just(2, 4, 6, 8, 10));
 
@@ -73,7 +72,7 @@ public class FluxMergeOrderedTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void reorderingAPISmallRequest() {
 		Flux<Integer> test = Flux.mergeOrdered(Comparator.naturalOrder(),
 				Flux.just(1, 3, 5, 7),
@@ -87,7 +86,7 @@ public class FluxMergeOrderedTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void reorderingAPIZeroOrOneSource() {
 		Flux<Integer> expectedZero = Flux.empty();
 		Flux<Integer> testZero = Flux.mergeOrdered(Comparator.naturalOrder());
@@ -125,7 +124,7 @@ public class FluxMergeOrderedTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mergeOrderedWithCombinesComparators() {
 		Comparator<Person> nameComparator = Comparator.comparing(Person::getName);
 		Comparator<User> loginComparator = Comparator.comparing(User::getLogin).reversed();
@@ -155,7 +154,7 @@ public class FluxMergeOrderedTest {
 				.isSameAs(comparator);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mergeOrderedWithDoesntCombineNaturalOrder() {
 		final Flux<String> flux = Flux.just("AAAAA", "BBBB")
 		                              .mergeOrderedWith(Flux.just("DD", "CCC"), Comparator.naturalOrder())
@@ -167,7 +166,7 @@ public class FluxMergeOrderedTest {
 				.isSameAs(Comparator.naturalOrder());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void considersOnlyLatestElementInEachSource() {
 		final Flux<String> flux = Flux.mergeOrdered(Comparator.comparingInt(String::length),
 				Flux.just("AAAAA", "BBBB"),
@@ -182,7 +181,7 @@ public class FluxMergeOrderedTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void reorderingByIndex() {
 		List<Mono<Tuple2<Long, Integer>>> sourceList = Flux.range(1, 10)
 		                                                   .index()
@@ -204,7 +203,7 @@ public class FluxMergeOrderedTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void reorderingByIndexWithDelays() {
 		List<Mono<Tuple2<Long, Integer>>> sourceList = Flux.range(1, 10)
 		                                                   .index()
@@ -238,14 +237,14 @@ public class FluxMergeOrderedTest {
 				.withMessage("prefetch > 0 required but it was 0");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void prefetchNegative() {
 		assertThatIllegalArgumentException()
 				.isThrownBy(() -> new FluxMergeOrdered<Integer>(-1, Queues.small(), Comparator.naturalOrder()))
 				.withMessage("prefetch > 0 required but it was -1");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getPrefetch() {
 		FluxMergeOrdered<Integer> fmo = new FluxMergeOrdered<Integer>(123,
 				Queues.small(), Comparator.naturalOrder());
@@ -253,7 +252,7 @@ public class FluxMergeOrderedTest {
 		assertThat(fmo.getPrefetch()).isEqualTo(123);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nullSources() {
 		assertThatNullPointerException()
 				.isThrownBy(() -> new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -261,7 +260,7 @@ public class FluxMergeOrderedTest {
 				.withMessage("sources must be non-null");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mergeAdditionalSource() {
 		Comparator<Integer> originalComparator = Comparator.naturalOrder();
 		@SuppressWarnings("unchecked")
@@ -302,7 +301,7 @@ public class FluxMergeOrderedTest {
 		assertThat(fmo.scan(Scannable.Attr.BUFFERED)).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMain() {
 		CoreSubscriber<? super Integer> actual = new LambdaSubscriber<>(null, null, null, null);
 
@@ -330,7 +329,7 @@ public class FluxMergeOrderedTest {
 		assertThat(test.scan(Scannable.Attr.NAME)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanInner() {
 		CoreSubscriber<? super Integer> actual = new LambdaSubscriber<>(null, null, null, null);
 		FluxMergeOrdered.MergeOrderedMainProducer<Integer> main =
@@ -358,7 +357,7 @@ public class FluxMergeOrderedTest {
 		assertThat(test.scan(Scannable.Attr.NAME)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mainSubscribersDifferentCountInners() {
 		CoreSubscriber<? super Integer> actual = new LambdaSubscriber<>(null, null, null, null);
 
@@ -374,7 +373,7 @@ public class FluxMergeOrderedTest {
 				.withMessage("must subscribe with 4 sources");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void innerRequestAmountIgnoredAssumedOne() {
 		CoreSubscriber<? super Integer> actual = new LambdaSubscriber<>(null, null, null, null);
 		FluxMergeOrdered.MergeOrderedMainProducer<Integer> main =
@@ -410,7 +409,7 @@ public class FluxMergeOrderedTest {
 		                     .hasValue(test.prefetch + test.limit);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void normal1() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -420,7 +419,7 @@ public class FluxMergeOrderedTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void normal2() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -450,7 +449,7 @@ public class FluxMergeOrderedTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void normal1Hidden() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -470,7 +469,7 @@ public class FluxMergeOrderedTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void normal3Hidden() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -480,7 +479,7 @@ public class FluxMergeOrderedTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void normal4Hidden() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -501,7 +500,7 @@ public class FluxMergeOrderedTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void backpressure2() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -512,7 +511,7 @@ public class FluxMergeOrderedTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void backpressure3() {
 		new FluxMergeOrdered<>(1, Queues.small(), Comparator.naturalOrder(),
@@ -523,7 +522,7 @@ public class FluxMergeOrderedTest {
 				.verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void take() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -545,7 +544,7 @@ public class FluxMergeOrderedTest {
 				.verifyError(IOException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void firstErrorsBackpressuredDelayed() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -557,7 +556,7 @@ public class FluxMergeOrderedTest {
 				.verifyError(IOException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void secondErrorsDelayed() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -569,7 +568,7 @@ public class FluxMergeOrderedTest {
 				.verifyError(IOException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void secondErrorsBackpressuredDelayed() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -582,7 +581,7 @@ public class FluxMergeOrderedTest {
 				.verifyError(IOException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void bothErrorDelayed() {
 		IOException firstError = new IOException("first");
 		IOException secondError = new IOException("second");
@@ -596,7 +595,7 @@ public class FluxMergeOrderedTest {
 				.hasNotDroppedErrors();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void never() {
 		new FluxMergeOrdered<Integer>(2, Queues.small(), Comparator.naturalOrder(),
 				Flux.never(), Flux.never())
@@ -616,7 +615,7 @@ public class FluxMergeOrderedTest {
 				.verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void fusedThrowsInPostEmissionCheckDelayed() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),
@@ -628,7 +627,7 @@ public class FluxMergeOrderedTest {
 				.verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void nullSecond() {
 		FluxMergeOrdered<Integer> test = new FluxMergeOrdered<>(2, Queues.small(),
@@ -639,7 +638,7 @@ public class FluxMergeOrderedTest {
 		                                .withMessage("subscribed with a null source: sources[1]");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void nullFirst() {
 		FluxMergeOrdered<Integer> test = new FluxMergeOrdered<>(2, Queues.small(),
@@ -650,7 +649,7 @@ public class FluxMergeOrderedTest {
 		                                .withMessage("subscribed with a null source: sources[0]");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void comparatorThrows() {
 		new FluxMergeOrdered<>(2, Queues.small(),
@@ -660,7 +659,7 @@ public class FluxMergeOrderedTest {
 				.verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unchecked") //safe varargs
 	public void naturalOrder() {
 		new FluxMergeOrdered<>(2, Queues.small(), Comparator.naturalOrder(),

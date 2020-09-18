@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -140,7 +140,7 @@ public class FluxSwitchMapTest {
 		  .assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void switchRegularQueue() {
 		Flux<String> source = Flux.just("a", "bb", "ccc");
 		FluxSwitchMap<String, Integer> test = new FluxSwitchMap<>(
@@ -206,7 +206,7 @@ public class FluxSwitchMapTest {
 		  .assertNotComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void innerError() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -233,7 +233,7 @@ public class FluxSwitchMapTest {
 		Assert.assertFalse("sp2 has subscribers?", sp2.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mapperThrows() {
 		AssertSubscriber<Object> ts = AssertSubscriber.create();
 

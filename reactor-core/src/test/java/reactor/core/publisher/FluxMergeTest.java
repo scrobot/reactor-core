@@ -19,7 +19,7 @@ package reactor.core.publisher;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
@@ -30,7 +30,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class FluxMergeTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -52,7 +52,7 @@ public class FluxMergeTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mergeWithNoStackoverflow() {
 		int n = 5000;
 
@@ -79,7 +79,7 @@ public class FluxMergeTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mergeOne(){
 		StepVerifier.create(Flux.merge(Flux.just(1)))
 		            .expectNext(1)
@@ -96,7 +96,7 @@ public class FluxMergeTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mergePublisherPublisher2(){
 		StepVerifier.create(Flux.merge(Flux.just(Flux.just(1, 2), Flux.just(3, 4)), 1))
 	                .expectNext(1, 2, 3, 4)
@@ -123,7 +123,7 @@ public class FluxMergeTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/936
-	@Test
+	@org.junit.jupiter.api.Test
 	public void delayErrorWithFluxError() {
 		StepVerifier.create(
 				Flux.mergeDelayError(32, Flux.just(1, 2),
@@ -147,7 +147,7 @@ public class FluxMergeTest {
 		            .verifyErrorMessage("test");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		@SuppressWarnings("unchecked")
 		Publisher<String>[] sources = new Publisher[0];

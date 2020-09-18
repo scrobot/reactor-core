@@ -18,7 +18,7 @@ package reactor.core.publisher;
 import java.time.Duration;
 import java.util.concurrent.TimeoutException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
@@ -90,7 +90,7 @@ public class MonoTimeoutTest {
 		return Mono.<Integer>never().timeout(Duration.ofMillis(500), Mono.just(-5));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void timeoutCanBeBoundWithCallback() {
 		StepVerifier.withVirtualTime(this::scenario_timeoutCanBeBoundWithCallback)
 		            .thenAwait(Duration.ofMillis(500))
@@ -123,7 +123,7 @@ public class MonoTimeoutTest {
 		            .verifyError(TimeoutException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void timeoutDurationMessageDefault() {
 		StepVerifier.withVirtualTime(() -> Mono.never()
 		                                       .timeout(Duration.ofHours(1)))

@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Disposables.ListCompositeDisposable;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.FakeDisposable;
@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class ListCompositeDisposableTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void isDisposed() throws Exception {
 		Disposable.Composite cd = new ListCompositeDisposable();
 
@@ -55,7 +55,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d.isDisposed()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void addAll() throws Exception {
 		FakeDisposable d1 = new FakeDisposable();
 		FakeDisposable d2 = new FakeDisposable();
@@ -110,7 +110,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d1.disposed).isEqualTo(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void removeNonexistant() throws Exception {
 		FakeDisposable d = new FakeDisposable();
 		Disposable.Composite cd = new ListCompositeDisposable();
@@ -120,7 +120,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d.isDisposed()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void addAfterDispose() throws Exception {
 		FakeDisposable d = new FakeDisposable();
 		Disposable.Composite cd = new ListCompositeDisposable();
@@ -168,7 +168,7 @@ public class ListCompositeDisposableTest {
 		assertThat(d.disposed).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void singleErrorDuringDisposal() {
 		Disposable bad = () -> {
 			throw new IllegalStateException("boom");
@@ -220,7 +220,7 @@ public class ListCompositeDisposableTest {
 		assertThat(list).hasSize(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void disposeConcurrent() {
 		for (int i = 0; i < 500; i++) {
 			final Disposable d1 = new FakeDisposable();
@@ -230,7 +230,7 @@ public class ListCompositeDisposableTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void removeConcurrent() {
 		for (int i = 0; i < 500; i++) {
 			final Disposable d1 = new FakeDisposable();

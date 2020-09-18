@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -35,7 +35,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MonoCreateTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void createStreamFromMonoCreate() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -50,14 +50,14 @@ public class MonoCreateTest {
 		assertThat(onCancel.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void createStreamFromMonoCreateHide() {
 		StepVerifier.create(Mono.create(s -> s.success("test1")).hide())
 		            .expectNext("test1")
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void createStreamFromMonoCreateError() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -71,7 +71,7 @@ public class MonoCreateTest {
 		assertThat(onCancel.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cancellation() {
 		AtomicInteger onDispose = new AtomicInteger();
 		AtomicInteger onCancel = new AtomicInteger();
@@ -87,7 +87,7 @@ public class MonoCreateTest {
 		assertThat(onCancel.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoCreateDisposables() {
 		AtomicInteger dispose1 = new AtomicInteger();
 		AtomicInteger dispose2 = new AtomicInteger();
@@ -125,7 +125,7 @@ public class MonoCreateTest {
 		assertThat(cancelled.get()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoCreateCancelOnNext() {
 		AtomicInteger onCancel = new AtomicInteger();
 		AtomicInteger onDispose = new AtomicInteger();
@@ -172,14 +172,14 @@ public class MonoCreateTest {
 		assertThat(onDispose.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void createStreamFromMonoCreate2() {
 		StepVerifier.create(Mono.create(MonoSink::success)
 		                        .publishOn(Schedulers.parallel()))
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void monoCreateOnRequest() {
 		Mono<Integer> created = Mono.create(s -> {
 			s.onRequest(n -> s.success(5));
@@ -194,7 +194,7 @@ public class MonoCreateTest {
 					.verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiEmptySuccessAfterEmptySuccessIsIgnored() {
 		Mono<String> secondIsEmptySuccess = Mono.create(sink -> {
 			sink.success();
@@ -216,7 +216,7 @@ public class MonoCreateTest {
 	                .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiErrorAfterEmptySuccessBubblesAndDrops() {
 		Mono<String> secondIsError = Mono.create(sink -> {
 			sink.success();
@@ -229,7 +229,7 @@ public class MonoCreateTest {
 		            .hasOperatorErrorWithMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiEmptySuccessAfterSuccessIsIgnored() {
 		Mono<String> secondIsEmptySuccess = Mono.create(sink -> {
 			sink.success("foo");
@@ -241,7 +241,7 @@ public class MonoCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiSuccessAfterSuccessIsIgnored() {
 		Mono<String> secondIsValuedSuccess = Mono.create(sink -> {
 			sink.success("foo");
@@ -253,7 +253,7 @@ public class MonoCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiErrorAfterSuccessBubblesAndDrops() {
 		Mono<String> secondIsError = Mono.create(sink -> {
 			sink.success("foo");
@@ -267,7 +267,7 @@ public class MonoCreateTest {
 		            .hasOperatorErrorWithMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiEmptySuccessAfterErrorIsIgnored() {
 		Mono<String> secondIsEmptySuccess = Mono.create(sink -> {
 			sink.error(new IllegalArgumentException("boom"));
@@ -278,7 +278,7 @@ public class MonoCreateTest {
 	                .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiSuccessAfterErrorIsIgnored() {
 		Mono<String> secondIsValuedSuccess = Mono.create(sink -> {
 			sink.error(new IllegalArgumentException("boom"));
@@ -289,7 +289,7 @@ public class MonoCreateTest {
 	                .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkApiErrorAfterErrorBubblesAndDrops() {
 		Mono<String> secondIsError = Mono.create(sink -> {
 			sink.error(new IllegalArgumentException("boom1"));
@@ -315,7 +315,7 @@ public class MonoCreateTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanDefaultMonoSink() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoCreate.DefaultMonoSink<String> test = new MonoCreate.DefaultMonoSink<>(actual);
@@ -328,7 +328,7 @@ public class MonoCreateTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanDefaultMonoSinkCancelTerminates() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		MonoCreate.DefaultMonoSink<String> test = new MonoCreate.DefaultMonoSink<>(actual);
@@ -340,7 +340,7 @@ public class MonoCreateTest {
 		assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void ensuresElementsIsDiscarded() {
 		for (int i = 0; i < 10000; i++) {
 			final ArrayList<Object> collector = new ArrayList<>();
@@ -365,7 +365,7 @@ public class MonoCreateTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextTest() {
 		StepVerifier.create(Mono.create(s -> s.success(s.currentContext()
 		                                                .get(AtomicInteger.class)
@@ -376,7 +376,7 @@ public class MonoCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sinkToString() {
 		StepVerifier.create(Mono.create(sink -> sink.success(sink.toString())))
 		            .expectNext("MonoSink")
@@ -390,7 +390,7 @@ public class MonoCreateTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void onRequestDeferred() {
 		StepVerifier.create(Mono.create(sink -> sink.onRequest(sink::success)), 0)
 		            .expectSubscription()

@@ -23,10 +23,10 @@ import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TestName;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
@@ -58,7 +58,7 @@ public class RejectedExecutionTest {
 	private ConcurrentLinkedQueue<Long> onOperatorErrorData = new ConcurrentLinkedQueue<>();
 	private ConcurrentLinkedQueue<Throwable> onSchedulerHandleError = new ConcurrentLinkedQueue<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		scheduler = new BoundedScheduler(Schedulers.newSingle("bounded-single"));
 		Hooks.onNextDropped(o -> onNextDropped.add(o));
@@ -75,7 +75,7 @@ public class RejectedExecutionTest {
 		Schedulers.onHandleError((thread, t) -> onSchedulerHandleError.add(t));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		scheduler.dispose();
 		Hooks.resetOnNextDropped();

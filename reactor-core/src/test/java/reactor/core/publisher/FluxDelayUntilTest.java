@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.Disposable;
@@ -57,7 +57,7 @@ public class FluxDelayUntilTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFlux2DoesntReorderViaDelays() {
 		StepVerifier.withVirtualTime(() ->
 				Flux.just(100, 200, 300)
@@ -98,7 +98,7 @@ public class FluxDelayUntilTest {
 		assertThat(triggerCancelled.get()).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void triggerSequenceHasSingleValueNotCancelled() {
 		AtomicBoolean triggerCancelled = new AtomicBoolean();
 		StepVerifier.create(Flux.just("foo")
@@ -121,7 +121,7 @@ public class FluxDelayUntilTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sourceHasError() {
 		StepVerifier.create(Flux.<String>error(new IllegalStateException("boom"))
 				.delayUntil(a -> Mono.just("foo")))
@@ -207,7 +207,7 @@ public class FluxDelayUntilTest {
 		assertThat(error.get()).isNull(); //would be a NPE if trigger array wasn't pre-initialized
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void isAlias() {
 		assertThat(Flux.range(1, 10).delayUntil(a -> Mono.empty()))
 				.isInstanceOf(FluxConcatMap.class);

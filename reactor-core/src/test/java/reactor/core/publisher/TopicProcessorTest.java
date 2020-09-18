@@ -24,7 +24,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -274,23 +275,27 @@ public class TopicProcessorTest {
 
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void failNullBufferSize() {
-		TopicProcessor.builder().name("test").bufferSize(0);
+		assertThrows(IllegalArgumentException.class, () ->
+				TopicProcessor.builder().name("test").bufferSize(0));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void failNonPowerOfTwo() {
-		TopicProcessor.builder().name("test").bufferSize(3);
+		assertThrows(IllegalArgumentException.class, () ->
+				TopicProcessor.builder().name("test").bufferSize(3));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void failNegativeBufferSize() {
-		TopicProcessor.builder().name("test").bufferSize(-1);
+		assertThrows(IllegalArgumentException.class, () ->
+				TopicProcessor.builder().name("test").bufferSize(-1));
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/445
-	@Test(timeout = 5_000)
+	@Test
+	@Timeout(5)
 	public void testBufferSize1Shared() throws Exception {
 		TopicProcessor<String> broadcast = TopicProcessor.<String>builder()
 				.name("share-name")
@@ -319,7 +324,8 @@ public class TopicProcessorTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/445
-	@Test(timeout = 5_000)
+	@Test
+	@Timeout(5)
 	public void testBufferSize1Created() throws Exception {
 		TopicProcessor<String> broadcast = TopicProcessor.<String>builder().name("share-name").bufferSize(1).autoCancel(true).build();
 

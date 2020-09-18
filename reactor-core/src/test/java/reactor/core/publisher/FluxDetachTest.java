@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.awaitility.Awaitility;
 import org.awaitility.Duration;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -100,7 +100,7 @@ public class FluxDetachTest {
 		ts.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void backpressured() throws Exception {
 		o = new Object();
 
@@ -130,7 +130,7 @@ public class FluxDetachTest {
 		Assert.assertNull("Object retained!", wr.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void justUnsubscribed() throws Exception {
 		o = new Object();
 
@@ -202,7 +202,7 @@ public class FluxDetachTest {
 		assertThat(test.scan(Scannable.Attr.PARENT)).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanSubscriberCancelled() {
 		CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
 		FluxDetach.DetachSubscriber<String> test = new FluxDetach.DetachSubscriber<>(actual);

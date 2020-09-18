@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Disposable;
 import reactor.core.Scannable;
 import reactor.core.scheduler.Schedulers;
@@ -56,7 +56,7 @@ public class FluxRefCountGraceTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1385
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sizeOneCanRetry() {
 		AtomicInteger subCount = new AtomicInteger();
 
@@ -82,7 +82,7 @@ public class FluxRefCountGraceTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1385
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sizeOneCanRepeat() {
 		AtomicInteger subCount = new AtomicInteger();
 
@@ -110,7 +110,7 @@ public class FluxRefCountGraceTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1260
-	@Test
+	@org.junit.jupiter.api.Test
 	public void raceSubscribeAndCancel() {
 		final Flux<String> testFlux = Flux.<String>create(fluxSink -> fluxSink.next("Test").complete())
 				.replay(1)
@@ -138,7 +138,7 @@ public class FluxRefCountGraceTest {
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/1260
-	@Test
+	@org.junit.jupiter.api.Test
 	public void raceSubscribeAndCancelNoTimeout() {
 		final Flux<String> testFlux = Flux.<String>create(fluxSink -> fluxSink.next("Test").complete())
 				.replay(1)
@@ -165,7 +165,7 @@ public class FluxRefCountGraceTest {
 		assertThat(signalCount2).as("signalCount2").hasValue(100_000);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void error() {
 		StepVerifier.create(Flux.error(new IllegalStateException("boom"))
 		                        .publish()
@@ -173,7 +173,7 @@ public class FluxRefCountGraceTest {
 		            .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void upstreamCompletes() {
 		Flux<Integer> p = Flux.range(1, 5).publish().refCount(1, Duration.ofMillis(100));
 
@@ -192,7 +192,7 @@ public class FluxRefCountGraceTest {
 		.assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void upstreamCompletesTwoSubscribers() {
 		Flux<Integer> p = Flux.range(1, 5).publish().refCount(2, Duration.ofMillis(100));
 
@@ -208,7 +208,7 @@ public class FluxRefCountGraceTest {
 		ts2.assertValues(1, 2, 3, 4, 5);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void subscribersComeAndGoBelowThreshold() {
 		Flux<Integer> p = Flux.range(1, 5).publish().refCount(2, Duration.ofMillis(500));
 
@@ -231,7 +231,7 @@ public class FluxRefCountGraceTest {
 		ts2.assertValues(1, 2, 3, 4, 5);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFusion() {
 		StepVerifier.create(Flux.just(1, 2, 3)
 		                        .replay()
@@ -242,7 +242,7 @@ public class FluxRefCountGraceTest {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void doesntDisconnectAfterRefCountZeroAndQuickResubscribe()
 			throws InterruptedException {
 		AtomicLong subscriptionCount = new AtomicLong();
@@ -291,7 +291,7 @@ public class FluxRefCountGraceTest {
 		assertThat(termination.get()).isEqualTo(SignalType.ON_COMPLETE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void doesDisconnectAfterRefCountZeroAndSlowResubscribe()
 			throws InterruptedException {
 		AtomicLong subscriptionCount = new AtomicLong();
@@ -340,7 +340,7 @@ public class FluxRefCountGraceTest {
 		assertThat(termination.get()).isEqualTo(SignalType.ON_COMPLETE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void shouldNotRetainSubscriptionToSourceWhenComplete() throws Exception {
 		VirtualTimeScheduler scheduler = VirtualTimeScheduler.create();
 		Duration gracePeriod = Duration.ofMillis(10);
@@ -362,7 +362,7 @@ public class FluxRefCountGraceTest {
 		s.assertValueCount(1).assertNoError().assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanMain() {
 		ConnectableFlux<Integer> parent = Flux.just(10).publish();
 		FluxRefCountGrace<Integer> test = new FluxRefCountGrace<Integer>(parent, 17, Duration.ofSeconds(1), Schedulers.single());

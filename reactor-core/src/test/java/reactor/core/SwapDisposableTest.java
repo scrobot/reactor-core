@@ -20,8 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -37,7 +38,7 @@ public class SwapDisposableTest {
 
 	private Disposables.SwapDisposable sequentialDisposable;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		sequentialDisposable = new Disposables.SwapDisposable();
 	}
@@ -47,7 +48,7 @@ public class SwapDisposableTest {
 		sequentialDisposable.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void getDisposableShouldReturnset() {
 		final Disposable underlying = mock(Disposable.class);
 		sequentialDisposable.update(underlying);
@@ -58,7 +59,7 @@ public class SwapDisposableTest {
 		assertThat(sequentialDisposable.get()).isSameAs(another);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void notDisposedWhenReplaced() {
 		final Disposable underlying = mock(Disposable.class);
 		sequentialDisposable.update(underlying);
@@ -81,7 +82,7 @@ public class SwapDisposableTest {
 		verifyNoMoreInteractions(underlying);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void settingSameDisposableTwiceDoesUnsubscribeIt() {
 		Disposable underlying = mock(Disposable.class);
 		sequentialDisposable.update(underlying);
@@ -98,7 +99,7 @@ public class SwapDisposableTest {
 		verify(underlying).dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void replacingFirstUnderlyingCausesUnsubscription() {
 		Disposable first = mock(Disposable.class);
 		sequentialDisposable.update(first);
@@ -107,7 +108,7 @@ public class SwapDisposableTest {
 		verify(first).dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void whenUnsubscribingSecondUnderlyingUnsubscribed() {
 		Disposable first = mock(Disposable.class);
 		sequentialDisposable.update(first);
@@ -117,7 +118,7 @@ public class SwapDisposableTest {
 		verify(second).dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void settingUnderlyingWhenUnsubscribedCausesImmediateUnsubscription() {
 		sequentialDisposable.dispose();
 		Disposable underlying = mock(Disposable.class);
@@ -125,7 +126,8 @@ public class SwapDisposableTest {
 		verify(underlying).dispose();
 	}
 
-	@Test(timeout = 1000)
+	@Test
+	@Timeout(1)
 	public void settingUnderlyingWhenUnsubscribedCausesImmediateUnsubscriptionConcurrently()
 			throws InterruptedException {
 		final Disposable firstSet = mock(Disposable.class);
@@ -164,7 +166,7 @@ public class SwapDisposableTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void concurrentSetDisposableShouldNotInterleave()
 			throws InterruptedException {
 		final int count = 10;

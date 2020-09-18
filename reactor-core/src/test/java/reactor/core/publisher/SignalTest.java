@@ -15,7 +15,7 @@
  */
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.test.StepVerifier;
 import reactor.util.context.Context;
@@ -154,7 +154,7 @@ public class SignalTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void subscribeStateWithContext(){
 		Context context = Context.of("foo", "bar");
 		Signal<Integer> s = Signal.subscribe(Operators.emptySubscription(), context);
@@ -188,7 +188,7 @@ public class SignalTest {
 		            .thenCancel()
 		            .verify();
 	}
-	@Test
+	@org.junit.jupiter.api.Test
 	public void completeState(){
 		Signal<Integer> s = Signal.complete();
 
@@ -289,7 +289,7 @@ public class SignalTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void subscribeState(){
 		Signal<Integer> s = Signal.subscribe(Operators.emptySubscription());
 
@@ -355,7 +355,7 @@ public class SignalTest {
 		})).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void equalsIgnoresContext() {
 		Signal<String> next1 = Signal.next("foo");
 		Signal<String> next2 = Signal.next("foo", Context.of("bar", "baz"));

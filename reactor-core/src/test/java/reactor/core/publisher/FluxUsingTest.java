@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
@@ -36,6 +36,7 @@ import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxUsingTest extends FluxOperatorTest<String, String> {
 
@@ -89,21 +90,24 @@ public class FluxUsingTest extends FluxOperatorTest<String, String> {
 		);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void resourceSupplierNull() {
-		Flux.using(null, r -> Flux.empty(), r -> {
-		}, false);
+		assertThrows(NullPointerException.class, () ->
+				Flux.using(null, r -> Flux.empty(), r -> {
+				}, false));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void sourceFactoryNull() {
-		Flux.using(() -> 1, null, r -> {
-		}, false);
+		assertThrows(NullPointerException.class, () ->
+				Flux.using(() -> 1, null, r -> {
+				}, false));
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void resourceCleanupNull() {
-		Flux.using(() -> 1, r -> Flux.empty(), null, false);
+		assertThrows(NullPointerException.class, () ->
+				Flux.using(() -> 1, r -> Flux.empty(), null, false));
 	}
 
 	@Test

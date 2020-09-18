@@ -17,11 +17,11 @@ package reactor.core.publisher;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxDeferComposeTest {
-    @Test
+    @org.junit.jupiter.api.Test
     public void perSubscriberState() {
         
         Flux<Integer> source = Flux.just(10).compose(f -> {
@@ -41,7 +41,7 @@ public class FluxDeferComposeTest {
         }
     }
     
-    @Test
+    @org.junit.jupiter.api.Test
     public void composerThrows() {
         Flux<Integer> source = Flux.just(10).compose(f -> {
             throw new RuntimeException("Forced failure");

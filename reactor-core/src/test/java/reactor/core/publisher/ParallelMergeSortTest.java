@@ -18,7 +18,7 @@ package reactor.core.publisher;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParallelMergeSortTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanOperator() {
 		ParallelFlux<List<Integer>> source = Flux.just(500, 300).buffer(1).parallel(10);
 		ParallelMergeSort<Integer> test = new ParallelMergeSort<>(source, Integer::compareTo);
@@ -62,7 +62,7 @@ public class ParallelMergeSortTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanInnerSubscriber() {
 		CoreSubscriber<Integer> mainActual = new LambdaSubscriber<>(null, e -> { }, null, null);
 		MergeSortMain<Integer> main = new MergeSortMain<>(mainActual, 2, Integer::compareTo);

@@ -19,14 +19,12 @@ package reactor.core.publisher;
 import java.time.Duration;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
-import reactor.core.Disposable;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 
@@ -97,14 +95,14 @@ public class MonoDelayUntilTest {
 		            .verifyComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sourceHasError() {
 		StepVerifier.create(Mono.<String>error(new IllegalStateException("boom"))
 				.delayUntil(a -> Mono.just("foo")))
 		            .verifyErrorMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void triggerHasError() {
 		StepVerifier.create(Mono.just("foo")
 		                        .delayUntil(a -> Mono.<String>error(new IllegalStateException("boom"))))
@@ -228,7 +226,7 @@ public class MonoDelayUntilTest {
 		assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void scanTrigger() {
 		CoreSubscriber<String> actual = new LambdaMonoSubscriber<>(null, e -> {}, null, null);
 		@SuppressWarnings("unchecked")

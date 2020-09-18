@@ -23,26 +23,29 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxStreamTest {
 
 	final List<Integer> source = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
 	@SuppressWarnings("ConstantConditions")
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullStream() {
-		Flux.fromStream((Stream<?>) null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.fromStream((Stream<?>) null));
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void nullSupplier() {
-		Flux.fromStream((Supplier<Stream<?>>) null);
+		assertThrows(NullPointerException.class, () ->
+				Flux.fromStream((Supplier<Stream<?>>) null));
 	}
 
 	@Test
@@ -122,7 +125,7 @@ public class FluxStreamTest {
 		  .assertError(IllegalStateException.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void streamConsumedBySubscription() {
 		Stream<Integer> stream = source.stream();
 		Flux<Integer> flux = Flux.fromStream(stream);
@@ -292,7 +295,7 @@ public class FluxStreamTest {
 		            .hasDroppedErrorWithMessage("boom");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void streamClosedOnCancelConditional() {
 		AtomicInteger closed = new AtomicInteger();
 		Stream<String> source = Stream.of("foo", "bar", "baz")
@@ -335,7 +338,7 @@ public class FluxStreamTest {
 		assertThat(closed.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void streamClosedOnCompletionSlowPathConditional() {
 		AtomicInteger closed = new AtomicInteger();
 		Stream<String> source = Stream.of("foo", "bar", "baz")

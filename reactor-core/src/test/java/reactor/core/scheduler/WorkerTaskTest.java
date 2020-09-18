@@ -24,7 +24,7 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Disposable;
 import reactor.core.Disposables;
 import reactor.test.util.RaceTestUtils;
@@ -36,7 +36,7 @@ public class WorkerTaskTest {
 
 	private static final int RACE_DEFAULT_LOOPS = 2500;
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void dispose() {
 		Disposable.Composite set = Disposables.composite();
 		WorkerTask run = new WorkerTask(() -> {}, set);
@@ -49,7 +49,7 @@ public class WorkerTaskTest {
 		assertThat(run.isDisposed()).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void disposeRun() {
 		Disposable.Composite set = Disposables.composite();
 		WorkerTask run = new WorkerTask(() -> {}, set);
@@ -63,7 +63,7 @@ public class WorkerTaskTest {
 		assertThat(run.isDisposed()).isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void setFutureCancelRace() {
 		for (int i = 0; i < RACE_DEFAULT_LOOPS; i++) {
 			Disposable.Composite set = Disposables.composite();
@@ -195,7 +195,7 @@ public class WorkerTaskTest {
 		run.call();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void withParentDisposed() {
 		WorkerTask run = new WorkerTask(() -> {}, Disposables.composite());
 		run.dispose();
@@ -210,7 +210,7 @@ public class WorkerTaskTest {
 		run.call();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void withFutureDisposed2() {
 		WorkerTask run = new WorkerTask(() -> {}, null);
 		run.dispose();
@@ -218,7 +218,7 @@ public class WorkerTaskTest {
 		run.call();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void withFutureDisposed3() {
 		WorkerTask run = new WorkerTask(() -> {}, null);
 		run.dispose();
@@ -227,7 +227,7 @@ public class WorkerTaskTest {
 		run.call();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void runFuture() {
 		for (int i = 0; i < RACE_DEFAULT_LOOPS; i++) {
 			Disposable.Composite set = Disposables.composite();
@@ -245,7 +245,7 @@ public class WorkerTaskTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void syncWorkerCancelRace() {
 		for (int i = 0; i < RACE_DEFAULT_LOOPS; i++) {
 			final Disposable.Composite set = Disposables.composite();
@@ -314,7 +314,7 @@ public class WorkerTaskTest {
 		assertThat((Future<?>) WorkerTask.FUTURE.get(run)).isEqualTo(WorkerTask.SYNC_CANCELLED);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void asyncDisposeIdempotent() {
 		final WorkerTask run = new WorkerTask(() -> {}, null);
 

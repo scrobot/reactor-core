@@ -29,9 +29,9 @@ import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Disposable;
@@ -47,12 +47,12 @@ public class MonoMetricsTest {
 
 	private MeterRegistry registry;
 
-	@Before
+	@BeforeEach
 	public void setupRegistry() {
 		registry = new SimpleMeterRegistry();
 	}
 
-	@After
+	@AfterEach
 	public void removeRegistry() {
 		registry.close();
 	}
@@ -94,7 +94,7 @@ public class MonoMetricsTest {
 		assertThat(test.name).isEqualTo("foo");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUsesMicrometer() {
 		AtomicReference<Subscription> subRef = new AtomicReference<>();
 
@@ -312,7 +312,7 @@ public class MonoMetricsTest {
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void subscribeToCancel() throws InterruptedException {
 		Mono<Long> source = Mono.delay(Duration.ofMillis(200))
 		                           .hide();
@@ -347,7 +347,7 @@ public class MonoMetricsTest {
 		});
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void countsSubscriptions() {
 		Mono<Integer> source = Mono.just(1)
 		                           .hide();

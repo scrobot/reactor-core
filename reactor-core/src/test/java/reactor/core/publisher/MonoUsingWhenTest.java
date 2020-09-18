@@ -21,7 +21,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Disposable;
@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 public class MonoUsingWhenTest {
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nullResourcePublisherRejected() {
 		assertThatNullPointerException()
 				.isThrownBy(() -> Mono.usingWhen(null,
@@ -48,7 +48,7 @@ public class MonoUsingWhenTest {
 				.withNoCause();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyResourcePublisherDoesntApplyCallback() {
 		AtomicBoolean commitDone = new AtomicBoolean();
 		AtomicBoolean rollbackDone = new AtomicBoolean();
@@ -65,7 +65,7 @@ public class MonoUsingWhenTest {
 		assertThat(rollbackDone).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyResourceCallableDoesntApplyCallback() {
 		AtomicBoolean commitDone = new AtomicBoolean();
 		AtomicBoolean rollbackDone = new AtomicBoolean();
@@ -104,7 +104,7 @@ public class MonoUsingWhenTest {
 		assertThat(rollbackDone).isFalse();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorResourceCallableDoesntApplyCallback() {
 		AtomicBoolean commitDone = new AtomicBoolean();
 		AtomicBoolean rollbackDone = new AtomicBoolean();
@@ -152,7 +152,7 @@ public class MonoUsingWhenTest {
 		testPublisher.assertCancelled();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void secondResourceInPublisherIsDropped() {
 		AtomicBoolean commitDone = new AtomicBoolean();
 		AtomicBoolean rollbackDone = new AtomicBoolean();
@@ -178,7 +178,7 @@ public class MonoUsingWhenTest {
 		testPublisher.assertCancelled();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void fluxResourcePublisherIsCancelled() {
 		AtomicBoolean cancelled = new AtomicBoolean();
 		AtomicBoolean commitDone = new AtomicBoolean();
@@ -287,7 +287,7 @@ public class MonoUsingWhenTest {
 		assertThat(resourceCancelled).as("resource cancelled").isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void blockOnNeverResourceCanBeCancelled() throws InterruptedException {
 		CountDownLatch latch = new CountDownLatch(1);
 		Disposable disposable = Mono.usingWhen(Mono.<String>never(),
@@ -307,7 +307,7 @@ public class MonoUsingWhenTest {
 				.as("terminates after dispose").isTrue();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void failToGenerateClosureAppliesRollback() {
 		FluxUsingWhenTest.TestResource testResource = new FluxUsingWhenTest.TestResource();
 
@@ -325,7 +325,7 @@ public class MonoUsingWhenTest {
 		testResource.rollbackProbe.assertWasSubscribed();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nullClosureAppliesRollback() {
 		FluxUsingWhenTest.TestResource testResource = new FluxUsingWhenTest.TestResource();
 

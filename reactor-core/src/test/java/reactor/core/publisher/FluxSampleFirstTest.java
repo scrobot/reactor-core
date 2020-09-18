@@ -20,7 +20,7 @@ import java.time.Duration;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
@@ -144,7 +144,7 @@ public class FluxSampleFirstTest {
 		Assert.assertFalse("sp1 has subscribers?", sp1.hasDownstreams());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void throttlerReturnsNull() {
 		AssertSubscriber<Integer> ts = AssertSubscriber.create();
 
@@ -197,7 +197,7 @@ public class FluxSampleFirstTest {
         Assertions.assertThat(test.scan(Scannable.Attr.CANCELLED)).isTrue();
     }
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanOtherSubscriber() {
 		CoreSubscriber<Integer> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxSampleFirst.SampleFirstMain<Integer, Integer> main =

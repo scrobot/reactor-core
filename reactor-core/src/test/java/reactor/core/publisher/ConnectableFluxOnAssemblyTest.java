@@ -16,7 +16,7 @@
 
 package reactor.core.publisher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import reactor.core.Scannable;
 import reactor.core.publisher.FluxOnAssembly.AssemblySnapshot;
 
@@ -45,7 +45,7 @@ public class ConnectableFluxOnAssemblyTest {
 		assertThat(test.scan(Scannable.Attr.PARENT)).as("PARENT").isSameAs(source);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void stepNameAndToString() {
 		AssemblySnapshot stacktrace = new AssemblySnapshot(null, Traces.callSiteSupplierFactory.get());
 		ConnectableFluxOnAssembly<?> test = new ConnectableFluxOnAssembly<>(Flux.empty().publish(), stacktrace);

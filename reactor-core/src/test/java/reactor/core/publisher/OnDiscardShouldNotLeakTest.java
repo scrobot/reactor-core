@@ -24,9 +24,9 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.assertj.core.api.Assumptions;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.reactivestreams.Publisher;
@@ -103,7 +103,7 @@ public class OnDiscardShouldNotLeakTest {
 	private Scheduler scheduler;
 	private MemoryUtils.OffHeapDetector tracker;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		scheduler = Schedulers.newParallel(discardScenario.scenarioDescription + "DiscardScheduler", discardScenario.subscriptionsNumber + 1);
 		scheduler.start();
@@ -114,7 +114,7 @@ public class OnDiscardShouldNotLeakTest {
 		Hooks.onOperatorError((e, v) -> null);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		Hooks.resetOnNextDropped();
 		Hooks.resetOnErrorDropped();
@@ -328,7 +328,7 @@ public class OnDiscardShouldNotLeakTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOnComplete() {
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
 		for (int i = 0; i < 10000; i++) {
@@ -375,7 +375,7 @@ public class OnDiscardShouldNotLeakTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOnError() {
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
 		for (int i = 0; i < 10000; i++) {

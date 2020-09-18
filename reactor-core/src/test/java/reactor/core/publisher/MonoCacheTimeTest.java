@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import reactor.core.Disposable;
 import reactor.core.scheduler.Schedulers;
@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheDependingOnSignal() throws InterruptedException {
 		AtomicInteger count = new AtomicInteger();
 
@@ -78,7 +78,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(count).hasValue(3);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheDependingOnValueAndError() throws InterruptedException {
 		AtomicInteger count = new AtomicInteger();
 
@@ -131,7 +131,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(onEmptyTtl).as("onEmpty TTL generations").hasValue(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void cacheDependingOnEmpty() throws InterruptedException {
 		AtomicInteger count = new AtomicInteger();
 
@@ -183,7 +183,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(onEmptyTtl).as("onEmpty TTL generations").hasValue(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nextTtlGeneratorFailure() {
 		Mono<Integer> cached = new MonoCacheTime<>(Mono.just(0),
 				v -> Duration.ofMillis(400 / v),
@@ -200,7 +200,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		            .hasNotDroppedErrors();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyTtlGeneratorFailure() {
 		Mono<Integer> cached = new MonoCacheTime<>(Mono.empty(),
 				Duration::ofSeconds,
@@ -218,7 +218,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		            .hasNotDroppedErrors();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorTtlGeneratorFailure() {
 		Throwable exception = new IllegalArgumentException("foo");
 		Mono<Integer> cached = new MonoCacheTime<>(Mono.error(exception),
@@ -237,7 +237,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		            .hasNotDroppedErrors();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nextTtlGeneratorTransientFailure() {
 		AtomicInteger count = new AtomicInteger();
 
@@ -270,7 +270,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		                 .hasValue(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyTtlGeneratorTransientFailure() {
 		AtomicInteger count = new AtomicInteger();
 
@@ -337,7 +337,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		                 .hasValue(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nextTtlGeneratorTransientFailureCheckHooks() {
 		AtomicInteger count = new AtomicInteger();
 
@@ -374,7 +374,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		                 .hasValue(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void emptyTtlGeneratorTransientFailureCheckHooks() {
 		AtomicInteger count = new AtomicInteger();
 
@@ -410,7 +410,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		                 .hasValue(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void errorTtlGeneratorTransientFailureCheckHooks() {
 		Throwable exception = new IllegalArgumentException("foo");
 		AtomicInteger count = new AtomicInteger();
@@ -449,7 +449,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		                 .hasValue(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void transientErrorWithZeroTtlIsNotCached() {
 		IllegalStateException exception = new IllegalStateException("boom");
 		AtomicInteger count = new AtomicInteger();
@@ -490,7 +490,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		return Collections.singletonList(scenario(f -> f.cache(Duration.ofMillis(100))));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void expireAfterTtlNormal() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 		AtomicInteger subCount = new AtomicInteger();
@@ -515,7 +515,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(subCount.get()).isEqualTo(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void doesntResubscribeNormal() {
 		AtomicInteger subCount = new AtomicInteger();
 		Mono<Integer> source = Mono.defer(() -> Mono.just(subCount.incrementAndGet()));
@@ -538,7 +538,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 	}
 
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void expireAfterTtlConditional() {
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
 		AtomicInteger subCount = new AtomicInteger();
@@ -564,7 +564,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(subCount.get()).isEqualTo(2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void doesntResubscribeConditional() {
 		AtomicInteger subCount = new AtomicInteger();
 		Mono<Integer> source = Mono.defer(() -> Mono.just(subCount.incrementAndGet()));
@@ -587,7 +587,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(subCount.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void totalCancelDoesntCancelSource() {
 		AtomicInteger cancelled = new AtomicInteger();
 		Mono<Object> cached = Mono.never()
@@ -603,7 +603,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(cancelled.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void totalCancelCanResubscribe() {
 		AtomicInteger cancelled = new AtomicInteger();
 		AtomicInteger subscribed = new AtomicInteger();
@@ -631,7 +631,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(subscribed.get()).isEqualTo(1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void partialCancelDoesntCancelSource() {
 		AtomicInteger cancelled = new AtomicInteger();
 		Mono<Object> cached = Mono.never()
@@ -646,7 +646,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(cancelled.get()).isEqualTo(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void raceSubscribeAndCache() {
 		AtomicInteger count = new AtomicInteger();
 		Mono<Integer> source = Mono.fromCallable(count::getAndIncrement);
@@ -665,7 +665,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(count.get()).isEqualTo(500);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sourceCachedNoCoordinatorLeak() {
 		TestPublisher<Integer> source = TestPublisher.create();
 		MonoCacheTime<Integer> cached = new MonoCacheTime<>(source.mono(), Duration.ofSeconds(2),
@@ -681,7 +681,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(refCoordinator.get()).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void coordinatorReachableThroughCacheInnerSubscriptionsOnly() throws InterruptedException {
 		TestPublisher<Integer> source = TestPublisher.create();
 
@@ -704,7 +704,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(refCoordinator.get()).isInstanceOf(MonoCacheTime.CoordinatorSubscriber.class);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void coordinatorCacheInnerDisposedOrNoReferenceNoLeak() throws InterruptedException {
 		TestPublisher<Integer> source = TestPublisher.create();
 
@@ -728,7 +728,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(refCoordinator.get()).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void coordinatorNoReferenceNoLeak() throws InterruptedException {
 		TestPublisher<Integer> source = TestPublisher.create();
 
@@ -751,7 +751,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(refCoordinator.get()).isNull();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void contextFromFirstSubscriberCached() {
 		AtomicInteger contextFillCount = new AtomicInteger();
 		VirtualTimeScheduler vts = VirtualTimeScheduler.create();
@@ -784,7 +784,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		vts.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void longMaxDurationSchedulesNothing() {
 		AtomicInteger source = new AtomicInteger();
 		Mono<Integer> sourceMono = Mono.fromCallable(source::incrementAndGet);
@@ -803,7 +803,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(virtualTimeScheduler.getScheduledTaskCount()).isZero().as("post repeat scheduled count");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void nonZeroDurationSchedulesSomething() {
 		AtomicInteger source = new AtomicInteger();
 		Mono<Integer> sourceMono = Mono.fromCallable(source::incrementAndGet);
@@ -819,7 +819,7 @@ public class MonoCacheTimeTest extends MonoOperatorTest<String, String> {
 		assertThat(virtualTimeScheduler.getScheduledTaskCount()).isOne().as("once cached scheduled count");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void zeroDurationSchedulesNothing() {
 		AtomicInteger source = new AtomicInteger();
 		Mono<Integer> sourceMono = Mono.fromCallable(source::incrementAndGet);

@@ -22,9 +22,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import reactor.core.CoreSubscriber;
 import reactor.core.publisher.EmitterProcessor;
@@ -50,13 +50,13 @@ public class CombinationTests {
 	private FluxProcessor<SensorData, SensorData> sensorEven;
 	private FluxProcessor<SensorData, SensorData> sensorOdd;
 
-	@Before
+	@BeforeEach
 	public void before() {
 		sensorEven();
 		sensorOdd();
 	}
 
-	@After
+	@AfterEach
 	public void then() {
 		if (sensorEven != null) {
 			sensorEven.onComplete();
@@ -140,7 +140,7 @@ public class CombinationTests {
 		}
 	}*/
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void sampleConcatTest() throws Exception {
 		int elements = 40;
 
@@ -297,7 +297,7 @@ public class CombinationTests {
 	ReplayProcessor<Long>  emitter1;
 	ReplayProcessor<Long>  emitter2;
 
-	@Before
+	@BeforeEach
 	public void anotherBefore() {
 		ts = AssertSubscriber.create();
 		emitter1 = ReplayProcessor.create();
@@ -320,7 +320,7 @@ public class CombinationTests {
 		ts.assertValues(1L, 2L, 3L, 4L).assertComplete();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void mergeWithNoInterleave() throws Exception{
 		Flux.concat(emitter1.log("test1"), emitter2.log("test2")).log().subscribe(ts);
 		emitValues();

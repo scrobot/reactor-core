@@ -20,10 +20,10 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.core.scheduler.Scheduler;
@@ -37,17 +37,17 @@ public class FluxIntervalTest {
 
 	Scheduler exec;
 
-	@Before
+	@BeforeEach
 	public void before() {
 		exec = Schedulers.newSingle("interval-test");
 	}
 
-	@After
+	@AfterEach
 	public void after() {
 		exec.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal() {
 		try {
 			AssertSubscriber<Long> ts = AssertSubscriber.create();
@@ -89,7 +89,7 @@ public class FluxIntervalTest {
 		                                        .flatMapMany(Flux::fromIterable))).log();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void flatMap() throws Exception {
 		StepVerifier.withVirtualTime(this::flatMapScenario)
 		            .thenAwait(Duration.ofSeconds(3))
@@ -103,7 +103,7 @@ public class FluxIntervalTest {
 		return Flux.interval(Duration.ofMillis(500));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal2() {
 		StepVerifier.withVirtualTime(this::scenario2)
 		            .thenAwait(Duration.ofMillis(5_000))
@@ -116,7 +116,7 @@ public class FluxIntervalTest {
 		return Flux.interval(Duration.ofMillis(500), Duration.ofMillis(1000));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal3() {
 		StepVerifier.withVirtualTime(this::scenario3)
 		            .thenAwait(Duration.ofMillis(1500))
@@ -131,7 +131,7 @@ public class FluxIntervalTest {
 		return Flux.interval(Duration.ofMillis(500), Duration.ofMillis(1000));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void normal4() {
 		StepVerifier.withVirtualTime(this::scenario4)
 		            .thenAwait(Duration.ofMillis(1500))
@@ -142,7 +142,7 @@ public class FluxIntervalTest {
 		            .verify();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void scanIntervalRunnable() {
 		Scheduler.Worker worker = Schedulers.single().createWorker();
 
@@ -161,7 +161,7 @@ public class FluxIntervalTest {
 		}
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void scanOperator() {
 	    final Flux<Long> interval = Flux.interval(Duration.ofSeconds(1));
 
@@ -180,7 +180,7 @@ public class FluxIntervalTest {
 		            .verifyErrorMessage("Could not emit tick 32 due to lack of requests (interval doesn't support small downstream requests that replenish slower than the ticks)");
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
 	public void shouldBeAbleToScheduleIntervalsWithLowGranularity() {
 		StepVerifier.create(Flux.interval(Duration.ofNanos(1)))
 		            .expectSubscription()
