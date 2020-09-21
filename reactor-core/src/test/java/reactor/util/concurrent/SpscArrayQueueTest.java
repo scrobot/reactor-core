@@ -33,7 +33,7 @@ public class SpscArrayQueueTest {
 		SpscArrayQueue<Object> q = new SpscArrayQueue<>(32);
 
 		q.offer(1);
-		assertThrows(NullPointerException.class, () ->
+		assertThrows(UnsupportedOperationException.class, () ->
 				q.remove(1));
 	}
 
@@ -43,7 +43,7 @@ public class SpscArrayQueueTest {
 
 		q.offer(1);
 		q.offer(2);
-		assertThrows(NullPointerException.class, () ->
+		assertThrows(UnsupportedOperationException.class, () ->
 				q.removeAll(Arrays.asList(1, 2)));
 	}
 
@@ -53,7 +53,7 @@ public class SpscArrayQueueTest {
 
 		q.offer(1);
 		q.offer(2);
-		assertThrows(NullPointerException.class, () ->
+		assertThrows(UnsupportedOperationException.class, () ->
 				q.retainAll(Arrays.asList(1, 2)));
 	}
 
