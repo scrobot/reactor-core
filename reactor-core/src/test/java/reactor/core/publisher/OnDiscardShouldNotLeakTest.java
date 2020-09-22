@@ -24,6 +24,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import org.assertj.core.api.Assumptions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.reactivestreams.Publisher;
@@ -100,32 +102,38 @@ public class OnDiscardShouldNotLeakTest {
 	private Scheduler scheduler;
 	private MemoryUtils.OffHeapDetector tracker;
 
-	private void setUp(boolean conditional, boolean fused, DiscardScenario discardScenario) {
+	private void installScheduler(boolean conditional, boolean fused, DiscardScenario discardScenario) {
 		this.conditional = conditional;
 		this.fused = fused;
 		this.discardScenario = discardScenario;
 
 		scheduler = Schedulers.newParallel(discardScenario.scenarioDescription + "DiscardScheduler", discardScenario.subscriptionsNumber + 1);
 		scheduler.start();
+	}
 
+	@BeforeEach
+	private void setUp() {
 		tracker = new MemoryUtils.OffHeapDetector();
 		Hooks.onNextDropped(Tracked::safeRelease);
 		Hooks.onErrorDropped(e -> {});
 		Hooks.onOperatorError((e, v) -> null);
 	}
 
+	@AfterEach
 	private void tearDown() {
 		Hooks.resetOnNextDropped();
 		Hooks.resetOnErrorDropped();
 		Hooks.resetOnNextError();
 		Hooks.resetOnOperatorError();
-		scheduler.dispose();
+		if (scheduler != null) {
+			scheduler.dispose();
+		}
 	}
 
 	@ParameterizedTest
 	@MethodSource("data")
 	public void ensureMultipleSubscribersSupportWithNoLeaksWhenRacingCancelAndOnNextAndRequest(boolean conditional, boolean fused, DiscardScenario discardScenario) {
-		setUp(conditional, fused, discardScenario);
+		installScheduler(conditional, fused, discardScenario);
 
 		int subscriptionsNumber = discardScenario.subscriptionsNumber;
 		for (int i = 0; i < 10000; i++) {
@@ -199,17 +207,16 @@ public class OnDiscardShouldNotLeakTest {
 
 			tracker.assertNoLeaks();
 		}
-
-		tearDown();
 	}
 
 	@ParameterizedTest
 	@MethodSource("data")
 	public void ensureMultipleSubscribersSupportWithNoLeaksWhenPopulatedQueueRacingCancelAndOnNextAndRequest(boolean conditional, boolean fused, DiscardScenario discardScenario) {
-		setUp(conditional, fused, discardScenario);
+		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isGreaterThan(1);
+
+		installScheduler(conditional, fused, discardScenario);
 
 		int subscriptionsNumber = discardScenario.subscriptionsNumber;
-		Assumptions.assumeThat(subscriptionsNumber).isGreaterThan(1);
 
 		for (int i = 0; i < 10000; i++) {
 			tracker.reset();
@@ -277,16 +284,15 @@ public class OnDiscardShouldNotLeakTest {
 
 			tracker.assertNoLeaks();
 		}
-
-		tearDown();
 	}
 
 	@ParameterizedTest
 	@MethodSource("data")
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOnNext(boolean conditional, boolean fused, DiscardScenario discardScenario) {
-		setUp(conditional, fused, discardScenario);
-
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
+
+		installScheduler(conditional, fused, discardScenario);
+
 		for (int i = 0; i < 10000; i++) {
 			tracker.reset();
 			TestPublisher<Tracked> testPublisher = TestPublisher.createNoncompliant(
@@ -332,16 +338,15 @@ public class OnDiscardShouldNotLeakTest {
 
 			tracker.assertNoLeaks();
 		}
-
-		tearDown();
 	}
 
 	@ParameterizedTest
 	@MethodSource("data")
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOnComplete(boolean conditional, boolean fused, DiscardScenario discardScenario) {
-		setUp(conditional, fused, discardScenario);
-
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
+
+		installScheduler(conditional, fused, discardScenario);
+
 		for (int i = 0; i < 10000; i++) {
 			tracker.reset();
 			TestPublisher<Tracked> testPublisher = TestPublisher.createNoncompliant(
@@ -384,16 +389,15 @@ public class OnDiscardShouldNotLeakTest {
 
 			tracker.assertNoLeaks();
 		}
-
-		tearDown();
 	}
 
 	@ParameterizedTest
 	@MethodSource("data")
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOnError(boolean conditional, boolean fused, DiscardScenario discardScenario) {
-		setUp(conditional, fused, discardScenario);
-
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
+
+		installScheduler(conditional, fused, discardScenario);
+
 		for (int i = 0; i < 10000; i++) {
 			tracker.reset();
 			TestPublisher<Tracked> testPublisher = TestPublisher.createNoncompliant(
@@ -441,15 +445,15 @@ public class OnDiscardShouldNotLeakTest {
 
 			tracker.assertNoLeaks();
 		}
-		tearDown();
 	}
 
 	@ParameterizedTest
 	@MethodSource("data")
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndOverflowError(boolean conditional, boolean fused, DiscardScenario discardScenario) {
-		setUp(conditional, fused, discardScenario);
-
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
+
+		installScheduler(conditional, fused, discardScenario);
+
 		for (int i = 0; i < 10000; i++) {
 			tracker.reset();
 			TestPublisher<Tracked> testPublisher = TestPublisher.createNoncompliant(
@@ -503,16 +507,15 @@ public class OnDiscardShouldNotLeakTest {
 
 			tracker.assertNoLeaks();
 		}
-
-		tearDown();
 	}
 
 	@ParameterizedTest
 	@MethodSource("data")
 	public void ensureNoLeaksPopulatedQueueAndRacingCancelAndRequest(boolean conditional, boolean fused, DiscardScenario discardScenario) {
-		setUp(conditional, fused, discardScenario);
-
 		Assumptions.assumeThat(discardScenario.subscriptionsNumber).isOne();
+
+		installScheduler(conditional, fused, discardScenario);
+
 		for (int i = 0; i < 10000; i++) {
 			tracker.reset();
 			TestPublisher<Tracked> testPublisher = TestPublisher.createNoncompliant(
@@ -556,8 +559,6 @@ public class OnDiscardShouldNotLeakTest {
 
 			tracker.assertNoLeaks();
 		}
-		
-		tearDown();
 	}
 
 	static class DiscardScenario {
@@ -588,12 +589,6 @@ public class OnDiscardShouldNotLeakTest {
 
 		private final BiFunction<TestPublisher<Tracked>, TestPublisher<Tracked>[], Publisher<Tracked>>
 				publisherProducer;
-
-		DiscardScenario(String description, int subscriptionsNumber, Function<TestPublisher<Tracked>, Publisher<Tracked>> simplePublisherProducer) {
-			this.scenarioDescription = description;
-			this.subscriptionsNumber = subscriptionsNumber;
-			this.publisherProducer = (main, others) -> simplePublisherProducer.apply(main);
-		}
 
 		DiscardScenario(String description, int subscriptionsNumber, BiFunction<TestPublisher<Tracked>, TestPublisher<Tracked>[], Publisher<Tracked>> publisherProducer) {
 			this.scenarioDescription = description;

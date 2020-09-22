@@ -25,9 +25,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.TestInfo;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
 import reactor.core.Disposable;
@@ -45,8 +44,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RejectedExecutionTest {
 
-	@Rule
-	public TestName testName = new TestName();
+	private TestInfo testInfo;
 
 	private BoundedScheduler scheduler;
 
@@ -57,6 +55,10 @@ public class RejectedExecutionTest {
 	private ConcurrentLinkedQueue<Throwable> onOperatorError = new ConcurrentLinkedQueue<>();
 	private ConcurrentLinkedQueue<Long> onOperatorErrorData = new ConcurrentLinkedQueue<>();
 	private ConcurrentLinkedQueue<Throwable> onSchedulerHandleError = new ConcurrentLinkedQueue<>();
+
+	public RejectedExecutionTest(TestInfo testInfo) {
+		this.testInfo = testInfo;
+	}
 
 	@BeforeEach
 	public void setUp() {
@@ -297,7 +299,7 @@ public class RejectedExecutionTest {
 						"Data dropped from onOperatorError should always be >= 1");
 
 		if (!onOperatorErrorData.isEmpty()) {
-			System.out.println(testName.getMethodName() + " legitimately has data dropped from onOperatorError: " + onOperatorErrorData);
+			System.out.println(testInfo.getDisplayName() + " legitimately has data dropped from onOperatorError: " + onOperatorErrorData);
 		}
 	}
 
@@ -331,7 +333,7 @@ public class RejectedExecutionTest {
 						"Data dropped from onOperatorError should always be >= elementCount");
 
 		if (!onOperatorErrorData.isEmpty()) {
-			System.out.println(testName.getMethodName() + " legitimately has data dropped from onOperatorError: " + onOperatorErrorData);
+			System.out.println(testInfo.getDisplayName() + " legitimately has data dropped from onOperatorError: " + onOperatorErrorData);
 		}
 
 	}

@@ -163,7 +163,7 @@ public class BaseSubscriberTest {
 						checkFinally.set(type);
 					}
 				}));
-		Assertions.assertThat(checkFinally.get()).isEqualTo(SignalType.ON_ERROR);
+		Assertions.assertThat(checkFinally.get()).isNull();
 		Assertions.assertThat(error.get()).isNull();
 	}
 
