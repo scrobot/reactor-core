@@ -161,7 +161,7 @@ public class FluxIntervalTest {
 		}
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void scanOperator() {
 	    final Flux<Long> interval = Flux.interval(Duration.ofSeconds(1));
 
@@ -180,7 +180,7 @@ public class FluxIntervalTest {
 		            .verifyErrorMessage("Could not emit tick 32 due to lack of requests (interval doesn't support small downstream requests that replenish slower than the ticks)");
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
 	public void shouldBeAbleToScheduleIntervalsWithLowGranularity() {
 		StepVerifier.create(Flux.interval(Duration.ofNanos(1)))
 		            .expectSubscription()

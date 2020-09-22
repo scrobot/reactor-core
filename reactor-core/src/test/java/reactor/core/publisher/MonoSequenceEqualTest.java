@@ -143,7 +143,7 @@ public class MonoSequenceEqualTest {
 		            .verify(Duration.ofSeconds(5));
 	}
 
-		@org.junit.jupiter.api.Test
+	@Test
 	public void syncFusedCrash() {
 		Flux<Integer> source = Flux.range(1, 10).map(i -> { throw new IllegalArgumentException("boom"); });
 

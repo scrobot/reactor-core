@@ -162,7 +162,7 @@ public class FluxMaterializeTest
 		            .verifyComplete();
 	}
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void scanSubscriber() {
         CoreSubscriber<Signal<String>> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxMaterialize.MaterializeSubscriber<String> test = new FluxMaterialize.MaterializeSubscriber<String>(actual);

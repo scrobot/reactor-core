@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class FluxDeferComposeTest {
-    @org.junit.jupiter.api.Test
+    @Test
     public void perSubscriberState() {
         
         Flux<Integer> source = Flux.just(10).compose(f -> {
@@ -41,7 +41,7 @@ public class FluxDeferComposeTest {
         }
     }
     
-    @org.junit.jupiter.api.Test
+    @Test
     public void composerThrows() {
         Flux<Integer> source = Flux.just(10).compose(f -> {
             throw new RuntimeException("Forced failure");

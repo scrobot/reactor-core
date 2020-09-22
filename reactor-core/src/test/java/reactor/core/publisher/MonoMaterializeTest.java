@@ -39,7 +39,7 @@ public class MonoMaterializeTest {
         .assertComplete();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void errorOnlyBackpressured() {
         AssertSubscriber<Signal<Integer>> ts = AssertSubscriber.create(0L);
 

@@ -398,7 +398,7 @@ public class FluxFilterWhenTest {
 		assertThat(scannable.get().scan(Scannable.Attr.CANCELLED)).isEqualTo(true);
 	}
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void scanSubscriber() {
         CoreSubscriber<String> actual = new LambdaSubscriber<>(null, e -> {}, null, null);
         FluxFilterWhen.FluxFilterWhenSubscriber<String> test = new FluxFilterWhen.FluxFilterWhenSubscriber<>(actual, t -> Mono.just(true), 789);

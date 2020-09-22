@@ -109,7 +109,7 @@ public class DirectProcessorTest {
 	    Assert.assertFalse("Has error?", tp.hasError());
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void notEnoughRequests() {
         DirectProcessor<Integer> tp = DirectProcessor.create();
 
@@ -209,7 +209,7 @@ public class DirectProcessorTest {
           .assertNoError();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void subscriberAlreadyCancelled() {
         AssertSubscriber<Integer> ts = AssertSubscriber.create();
         ts.cancel();

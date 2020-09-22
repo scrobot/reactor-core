@@ -64,7 +64,7 @@ public class TimedSchedulerTest extends AbstractSchedulerTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void massCancel() throws InterruptedException {
         Scheduler timer = Schedulers.newSingle("test-timer");
         

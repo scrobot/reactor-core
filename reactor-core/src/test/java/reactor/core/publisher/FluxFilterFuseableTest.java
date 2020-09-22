@@ -64,7 +64,7 @@ public class FluxFilterFuseableTest extends FluxOperatorTest<String, String> {
         assertThat(test.scan(Scannable.Attr.TERMINATED)).isTrue();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void failureStrategyResumeSyncFused() {
         Hooks.onNextError(OnNextFailureStrategy.RESUME_DROP);
         try {

@@ -619,7 +619,7 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
     }
 
     //see https://github.com/reactor/reactor-core/issues/1290
-    @org.junit.jupiter.api.Test
+    @Test
     public void syncFusionSingle() { //single value in the SYNC fusion
 	    final ConnectableFlux<String> publish = Flux.just("foo")
 	                                 .publish();

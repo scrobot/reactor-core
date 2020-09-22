@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
 public class MonoDeferComposeTest {
-    @org.junit.jupiter.api.Test
+    @Test
     public void perTrackable() {
         
         Mono<Integer> source = Mono.just(10).compose(f -> {
@@ -41,7 +41,7 @@ public class MonoDeferComposeTest {
         }
     }
     
-    @org.junit.jupiter.api.Test
+    @Test
     public void composerThrows() {
         Mono<Integer> source = Mono.just(10).compose(f -> {
             throw new RuntimeException("Forced failure");
