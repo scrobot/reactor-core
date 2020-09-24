@@ -30,8 +30,9 @@ public class MonoErrorTest {
 
 	@Test
 	public void onMonoRejectedThrowOnBlock() {
-		assertThrows(Exception.class, () ->
-				Mono.error(new Exception("test"))
-						.block());
+		assertThrows(Exception.class, () -> {
+			Mono.error(new Exception("test"))
+					.block();
+		});
 	}
 }

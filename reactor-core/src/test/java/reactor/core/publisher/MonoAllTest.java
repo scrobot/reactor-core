@@ -30,14 +30,16 @@ public class MonoAllTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoAll<>(null, v -> true));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoAll<>(null, v -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoAll<>(null, null));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoAll<>(null, null);
+		});
 	}
 
 	@Test

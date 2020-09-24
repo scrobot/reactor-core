@@ -38,21 +38,24 @@ public class FluxProcessorTest {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void failNullSubscriber() {
-		assertThrows(NullPointerException.class, () ->
-				FluxProcessor.wrap(UnicastProcessor.create(), UnicastProcessor.create())
-						.subscribe((Subscriber) null));
+		assertThrows(NullPointerException.class, () -> {
+			FluxProcessor.wrap(UnicastProcessor.create(), UnicastProcessor.create())
+					.subscribe((Subscriber) null);
+		});
 	}
 
 	@Test
-	public void failNullUpstream(){
-		assertThrows(NullPointerException.class, () ->
-				FluxProcessor.wrap(null, UnicastProcessor.create()));
+	public void failNullUpstream() {
+		assertThrows(NullPointerException.class, () -> {
+			FluxProcessor.wrap(null, UnicastProcessor.create());
+		});
 	}
 
 	@Test
-	public void failNullDownstream(){
-		assertThrows(NullPointerException.class, () ->
-				FluxProcessor.wrap(UnicastProcessor.create(), null));
+	public void failNullDownstream() {
+		assertThrows(NullPointerException.class, () -> {
+			FluxProcessor.wrap(UnicastProcessor.create(), null);
+		});
 	}
 
 	@Test

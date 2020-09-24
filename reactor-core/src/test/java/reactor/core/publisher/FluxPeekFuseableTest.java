@@ -58,8 +58,9 @@ public class FluxPeekFuseableTest {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxPeekFuseable<>(null, null, null, null, null, null, null, null));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxPeekFuseable<>(null, null, null, null, null, null, null, null);
+		});
 	}
 
 	@Test

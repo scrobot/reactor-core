@@ -116,10 +116,11 @@ public class FluxPublishMulticastTest extends FluxOperatorTest<String, String> {
 	}
 
 	@Test
-	public void failPrefetch(){
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never()
-						.publish(f -> f, -1));
+	public void failPrefetch() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never()
+					.publish(f -> f, -1);
+		});
 	}
 
 	@Test

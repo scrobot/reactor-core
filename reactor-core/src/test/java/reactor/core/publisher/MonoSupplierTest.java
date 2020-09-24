@@ -92,10 +92,10 @@ public class MonoSupplierTest {
 
 	@Test
 	public void onMonoErrorSupplierOnBlock() {
-		assertThrows(RuntimeException.class, () ->
-				Mono.fromSupplier(() -> {
-					throw new RuntimeException("test");
-				}).block()
-		);
+		assertThrows(RuntimeException.class, () -> {
+			Mono.fromSupplier(() -> {
+				throw new RuntimeException("test");
+			}).block();
+		});
 	}
 }

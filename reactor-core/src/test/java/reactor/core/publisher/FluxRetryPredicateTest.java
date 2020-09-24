@@ -32,15 +32,17 @@ public class FluxRetryPredicateTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxRetryPredicate<>(null, e -> true));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxRetryPredicate<>(null, e -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never()
-						.retry(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never()
+					.retry(null);
+		});
 	}
 
 	@Test

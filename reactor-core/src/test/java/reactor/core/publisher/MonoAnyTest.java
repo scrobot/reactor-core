@@ -32,20 +32,23 @@ public class MonoAnyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoAny<>(null, v -> true));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoAny<>(null, v -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoAny<>(null, null));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoAny<>(null, null);
+		});
 	}
 
 	@Test
 	public void elementNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().hasElement(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().hasElement(null);
+		});
 	}
 
 	@Test

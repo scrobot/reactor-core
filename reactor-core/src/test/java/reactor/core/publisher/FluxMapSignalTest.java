@@ -32,9 +32,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class FluxMapSignalTest extends FluxOperatorTest<String, String> {
 
 	@Test
-	public void allNull(){
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never().flatMap(null, null, null));
+	public void allNull() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never().flatMap(null, null, null);
+		});
 	}
 
 	@Override

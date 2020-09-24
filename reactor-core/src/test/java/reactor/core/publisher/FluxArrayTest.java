@@ -31,8 +31,9 @@ public class FluxArrayTest {
 
 	@Test
 	public void arrayNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.fromArray((Integer[]) null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.fromArray((Integer[]) null);
+		});
 	}
 
 	@Test

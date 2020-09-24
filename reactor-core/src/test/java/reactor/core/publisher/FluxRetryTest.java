@@ -29,14 +29,16 @@ public class FluxRetryTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxRetry<>(null, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxRetry<>(null, 1);
+		});
 	}
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never().retry(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never().retry(-1);
+		});
 	}
 
 	@Test

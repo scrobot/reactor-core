@@ -99,26 +99,30 @@ public class FluxBufferTest extends FluxOperatorTest<String, List<String>> {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxBuffer<>(null, 1, ArrayList::new));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxBuffer<>(null, 1, ArrayList::new);
+		});
 	}
 
 	@Test
 	public void supplierNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().buffer(1, 1, null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().buffer(1, 1, null);
+		});
 	}
 
 	@Test
 	public void sizeZero() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never().buffer(0, 1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never().buffer(0, 1);
+		});
 	}
 
 	@Test
 	public void skipZero() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never().buffer(1, 0));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never().buffer(1, 0);
+		});
 	}
 
 	@Test

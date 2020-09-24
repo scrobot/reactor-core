@@ -17,15 +17,17 @@ public class MpscLinkedQueueTest {
 	@Test
 	public void shouldRejectNullableValues() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
-		assertThrows(NullPointerException.class, () ->
-				q.offer(null));
+		assertThrows(NullPointerException.class, () -> {
+			q.offer(null);
+		});
 	}
 
 	@Test
 	public void shouldRejectNullableValuesForTest() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
-		assertThrows(NullPointerException.class, () ->
-				q.test(null, null));
+		assertThrows(NullPointerException.class, () -> {
+			q.test(null, null);
+		});
 	}
 
 	@Test
@@ -42,8 +44,9 @@ public class MpscLinkedQueueTest {
 	public void shouldNotAllowIteratingWithIterator() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
 
-		assertThrows(UnsupportedOperationException.class, () ->
-				q.iterator());
+		assertThrows(UnsupportedOperationException.class, () -> {
+			q.iterator();
+		});
 	}
 
 	@Test
@@ -51,8 +54,9 @@ public class MpscLinkedQueueTest {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
 
 		q.offer(1);
-		assertThrows(UnsupportedOperationException.class, () ->
-				q.remove(1));
+		assertThrows(UnsupportedOperationException.class, () -> {
+			q.remove(1);
+		});
 	}
 
 	@Test

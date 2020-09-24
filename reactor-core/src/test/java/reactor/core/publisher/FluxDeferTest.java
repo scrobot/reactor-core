@@ -28,8 +28,9 @@ public class FluxDeferTest {
 
 	@Test
 	public void supplierNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.<Integer>defer(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.<Integer>defer(null);
+		});
 	}
 
 	@Test

@@ -30,32 +30,37 @@ public class MonoElementAtTest {
 
 	@Test
 	public void source1Null() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoElementAt<>(null, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoElementAt<>(null, 1);
+		});
 	}
 
 	@Test
 	public void source2Null() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoElementAt<>(null, 1, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoElementAt<>(null, 1, 1);
+		});
 	}
 
 	@Test
 	public void defaultSupplierNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().elementAt(1, null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().elementAt(1, null);
+		});
 	}
 
 	@Test
 	public void indexNegative1() {
-		assertThrows(IndexOutOfBoundsException.class, () ->
-				Flux.never().elementAt(-1));
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			Flux.never().elementAt(-1);
+		});
 	}
 
 	@Test
 	public void indexNegative2() {
-		assertThrows(IndexOutOfBoundsException.class, () ->
-				Flux.never().elementAt(-1, 1));
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			Flux.never().elementAt(-1, 1);
+		});
 	}
 
 	@Test

@@ -32,22 +32,25 @@ public class FluxWithLatestFromTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxWithLatestFrom<>(null, Flux.never(), (a, b) -> a));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxWithLatestFrom<>(null, Flux.never(), (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never()
-						.withLatestFrom(null, (a, b) -> a));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never()
+					.withLatestFrom(null, (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void combinerNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never()
-						.withLatestFrom(Flux.never(), null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never()
+					.withLatestFrom(Flux.never(), null);
+		});
 	}
 
 	@Test

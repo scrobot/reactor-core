@@ -28,14 +28,16 @@ public class MonoRetryTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoRetry<>(null, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoRetry<>(null, 1);
+		});
 	}
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Mono.never().retry(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Mono.never().retry(-1);
+		});
 	}
 
 	@Test

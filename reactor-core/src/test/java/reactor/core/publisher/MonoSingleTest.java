@@ -31,14 +31,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MonoSingleTest {
 	@Test
 	public void source1Null() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoSingle<>(null, 1, false));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoSingle<>(null, 1, false);
+		});
 	}
 
 	@Test
 	public void defaultSupplierNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().single(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().single(null);
+		});
 	}
 
 

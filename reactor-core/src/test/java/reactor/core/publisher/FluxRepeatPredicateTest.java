@@ -30,9 +30,10 @@ public class FluxRepeatPredicateTest {
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never()
-						.repeat(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never()
+					.repeat(null);
+		});
 	}
 
 	@Test

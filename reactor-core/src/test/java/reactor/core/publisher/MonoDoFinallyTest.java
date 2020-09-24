@@ -148,8 +148,9 @@ public class MonoDoFinallyTest implements Consumer<SignalType> {
 
 	@Test
 	public void nullCallback() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.just(1).doFinally(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.just(1).doFinally(null);
+		});
 	}
 
 	@Test

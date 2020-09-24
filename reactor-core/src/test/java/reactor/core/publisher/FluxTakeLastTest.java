@@ -29,14 +29,16 @@ public class FluxTakeLastTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxTakeLast<>(null, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxTakeLast<>(null, 1);
+		});
 	}
 
 	@Test
 	public void negativeNumber() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never().takeLast(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never().takeLast(-1);
+		});
 	}
 
 	@Test

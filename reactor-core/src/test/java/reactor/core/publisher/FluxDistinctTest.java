@@ -89,40 +89,46 @@ public class FluxDistinctTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDistinct<>(null, k -> k, HashSet::new, HashSet::add, HashSet::clear));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDistinct<>(null, k -> k, HashSet::new, HashSet::add, HashSet::clear);
+		});
 	}
 
 	@Test
 	public void keyExtractorNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().distinct(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().distinct(null);
+		});
 	}
 
 	@Test
 	public void collectionSupplierNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDistinct<>(Flux.never(), k -> k, null, (c, k) -> true, c -> {
-				}));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDistinct<>(Flux.never(), k -> k, null, (c, k) -> true, c -> {
+			});
+		});
 	}
 
 	@Test
 	public void collectionSupplierNullFuseable() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDistinctFuseable<>(Flux.never(), k -> k, null, (c, k) -> true, c -> {
-				}));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDistinctFuseable<>(Flux.never(), k -> k, null, (c, k) -> true, c -> {
+			});
+		});
 	}
 
 	@Test
 	public void distinctPredicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDistinct<>(Flux.never(), k -> k, HashSet::new, null, HashSet::clear));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDistinct<>(Flux.never(), k -> k, HashSet::new, null, HashSet::clear);
+		});
 	}
 
 	@Test
 	public void cleanupNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDistinct<>(Flux.never(), k -> k, HashSet::new, HashSet::add, null));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDistinct<>(Flux.never(), k -> k, HashSet::new, HashSet::add, null);
+		});
 	}
 
 	@Test

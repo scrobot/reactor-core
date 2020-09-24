@@ -30,13 +30,17 @@ public class FluxTakeWhileTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> new FluxTakeWhile<>(null, v -> true));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxTakeWhile<>(null, v -> true);
+		});
 
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () -> Flux.never().takeWhile(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().takeWhile(null);
+		});
 	}
 
 	@Test

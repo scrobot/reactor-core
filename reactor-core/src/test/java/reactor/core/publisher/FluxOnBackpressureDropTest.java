@@ -35,21 +35,24 @@ public class FluxOnBackpressureDropTest {
 
 	@Test
 	public void source1Null() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxOnBackpressureDrop<>(null));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxOnBackpressureDrop<>(null);
+		});
 	}
 
 	@Test
 	public void source2Null() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxOnBackpressureDrop<>(null, v -> {
-				}));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxOnBackpressureDrop<>(null, v -> {
+			});
+		});
 	}
 
 	@Test
 	public void onDropNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().onBackpressureDrop(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().onBackpressureDrop(null);
+		});
 	}
 
 	@Test

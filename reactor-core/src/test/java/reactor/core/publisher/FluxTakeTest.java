@@ -41,22 +41,25 @@ public class FluxTakeTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxTake<>(null, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxTake<>(null, 1);
+		});
 	}
 
 	@Test
 	public void numberIsInvalid() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never()
-						.take(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never()
+					.take(-1);
+		});
 	}
 
 	@Test
 	public void numberIsInvalidFused() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.just(1)
-						.take(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.just(1)
+					.take(-1);
+		});
 	}
 
 	@Test

@@ -47,22 +47,25 @@ public class MonoCollectTest {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoCollect<>(null, () -> 1, (a, b) -> {
-				}));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoCollect<>(null, () -> 1, (a, b) -> {
+			});
+		});
 	}
 
 	@Test
 	public void nullSupplier() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().collect(null, (a, b) -> {
-				}));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().collect(null, (a, b) -> {
+			});
+		});
 	}
 
 	@Test
 	public void nullAction() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().collect(() -> 1, null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().collect(() -> 1, null);
+		});
 	}
 
 	@Test

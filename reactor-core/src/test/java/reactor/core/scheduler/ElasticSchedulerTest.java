@@ -43,14 +43,16 @@ public class ElasticSchedulerTest extends AbstractSchedulerTest {
 
 	@Test
 	public void unsupportedStart() {
-		assertThrows(UnsupportedOperationException.class, () ->
-				Schedulers.elastic().start());
+		assertThrows(UnsupportedOperationException.class, () -> {
+			Schedulers.elastic().start();
+		});
 	}
 
 	@Test
 	public void negativeTime() throws Exception {
-		assertThrows(IllegalArgumentException.class, () ->
-				Schedulers.newElastic("test", -1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Schedulers.newElastic("test", -1);
+		});
 	}
 
 	@Override

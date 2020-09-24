@@ -29,14 +29,16 @@ public class FluxDefaultIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDefaultIfEmpty<>(null, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDefaultIfEmpty<>(null, 1);
+		});
 	}
 
 	@Test
 	public void valueNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().defaultIfEmpty(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().defaultIfEmpty(null);
+		});
 	}
 
 	@Test

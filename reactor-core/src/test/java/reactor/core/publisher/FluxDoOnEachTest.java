@@ -52,8 +52,9 @@ public class FluxDoOnEachTest {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDoOnEach<>(null, null));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDoOnEach<>(null, null);
+		});
 	}
 
 	private static final String sourceErrorMessage = "boomSource";

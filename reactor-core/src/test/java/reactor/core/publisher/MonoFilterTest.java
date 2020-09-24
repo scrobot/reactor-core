@@ -29,14 +29,16 @@ public class MonoFilterTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoFilter<Integer>(null, e -> true));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoFilter<Integer>(null, e -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.never().filter(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.never().filter(null);
+		});
 	}
 
 	@Test

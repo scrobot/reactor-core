@@ -30,26 +30,30 @@ public class DirectProcessorTest {
 
 	@Test
 	public void onNextNull() {
-		assertThrows(NullPointerException.class, () ->
-				DirectProcessor.create().onNext(null));
+		assertThrows(NullPointerException.class, () -> {
+			DirectProcessor.create().onNext(null);
+		});
 	}
 
 	@Test
 	public void onErrorNull() {
-		assertThrows(NullPointerException.class, () ->
-				DirectProcessor.create().onError(null));
+		assertThrows(NullPointerException.class, () -> {
+			DirectProcessor.create().onError(null);
+		});
 	}
 
 	@Test
 	public void onSubscribeNull() {
-		assertThrows(NullPointerException.class, () ->
-				DirectProcessor.create().onSubscribe(null));
+		assertThrows(NullPointerException.class, () -> {
+			DirectProcessor.create().onSubscribe(null);
+		});
 	}
 
 	@Test
 	public void subscribeNull() {
-		assertThrows(NullPointerException.class, () ->
-				DirectProcessor.create().subscribe((Subscriber<Object>) null));
+		assertThrows(NullPointerException.class, () -> {
+			DirectProcessor.create().subscribe((Subscriber<Object>) null);
+		});
 	}
 
 	@Test

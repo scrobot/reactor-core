@@ -283,8 +283,9 @@ public class FluxTests extends AbstractReactorTest {
 
 	@Test
 	public void testDoOnEachSignalNullConsumer() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.just(1).doOnEach(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.just(1).doOnEach(null);
+		});
 	}
 
 	@Test

@@ -222,26 +222,30 @@ public class EmitterProcessorTest {
 
 	@Test
 	public void onNextNull() {
-		assertThrows(NullPointerException.class, () ->
-				EmitterProcessor.create().onNext(null));
+		assertThrows(NullPointerException.class, () -> {
+			EmitterProcessor.create().onNext(null);
+		});
 	}
 
 	@Test
 	public void onErrorNull() {
-		assertThrows(NullPointerException.class, () ->
-				EmitterProcessor.create().onError(null));
+		assertThrows(NullPointerException.class, () -> {
+			EmitterProcessor.create().onError(null);
+		});
 	}
 
 	@Test
 	public void onSubscribeNull() {
-		assertThrows(NullPointerException.class, () ->
-				EmitterProcessor.create().onSubscribe(null));
+		assertThrows(NullPointerException.class, () -> {
+			EmitterProcessor.create().onSubscribe(null);
+		});
 	}
 
 	@Test
 	public void subscribeNull() {
-		assertThrows(NullPointerException.class, () ->
-				EmitterProcessor.create().subscribe((Subscriber<Object>) null));
+		assertThrows(NullPointerException.class, () -> {
+			EmitterProcessor.create().subscribe((Subscriber<Object>) null);
+		});
 	}
 
 	@Test
@@ -383,20 +387,23 @@ public class EmitterProcessorTest {
 
 	@Test
 	public void failNullBufferSize() {
-		assertThrows(IllegalArgumentException.class, () ->
-				EmitterProcessor.create(0));
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmitterProcessor.create(0);
+		});
 	}
 
 	@Test
 	public void failNullNext() {
-		assertThrows(NullPointerException.class, () ->
-				EmitterProcessor.create().onNext(null));
+		assertThrows(NullPointerException.class, () -> {
+			EmitterProcessor.create().onNext(null);
+		});
 	}
 
 	@Test
 	public void failNullError() {
-		assertThrows(NullPointerException.class, () ->
-				EmitterProcessor.create().onError(null));
+		assertThrows(NullPointerException.class, () -> {
+			EmitterProcessor.create().onError(null);
+		});
 	}
 
 	@Test
@@ -437,8 +444,9 @@ public class EmitterProcessorTest {
 
 	@Test
 	public void failNegativeBufferSize() {
-		assertThrows(IllegalArgumentException.class, () ->
-				EmitterProcessor.create(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			EmitterProcessor.create(-1);
+		});
 	}
 
 	static final List<String> DATA     = new ArrayList<>();

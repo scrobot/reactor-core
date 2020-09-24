@@ -24,15 +24,17 @@ public class MonoSwitchIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoSwitchIfEmpty<>(null, Mono.never()));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoSwitchIfEmpty<>(null, Mono.never());
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.never()
-						.switchIfEmpty(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.never()
+					.switchIfEmpty(null);
+		});
 	}
 
 	@Test

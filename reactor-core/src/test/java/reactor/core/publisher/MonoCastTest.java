@@ -25,14 +25,16 @@ public class MonoCastTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.just(1).cast(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.just(1).cast(null);
+		});
 	}
 
 	@Test
 	public void sourceNull2() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.just(1).ofType(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.just(1).ofType(null);
+		});
 	}
 
 	@Test

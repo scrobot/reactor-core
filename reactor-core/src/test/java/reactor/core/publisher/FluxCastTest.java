@@ -25,16 +25,18 @@ public class FluxCastTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.just(1)
-						.cast(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.just(1)
+					.cast(null);
+		});
 	}
 
 	@Test
 	public void sourceNull2() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.just(1)
-						.ofType(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.just(1)
+					.ofType(null);
+		});
 	}
 
 	@Test

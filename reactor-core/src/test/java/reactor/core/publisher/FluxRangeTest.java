@@ -82,14 +82,16 @@ public class FluxRangeTest {
 
 	@Test
 	public void countIsNegative() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.range(1, -1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.range(1, -1);
+		});
 	}
 
 	@Test
 	public void rangeOverflow() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.range(2, Integer.MAX_VALUE));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.range(2, Integer.MAX_VALUE);
+		});
 	}
 
 	@Test

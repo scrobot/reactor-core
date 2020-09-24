@@ -75,15 +75,17 @@ public class FluxFilterTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxFilter<Integer>(null, e -> true));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxFilter<Integer>(null, e -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never()
-						.filter(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never()
+					.filter(null);
+		});
 	}
 
 	@Test

@@ -34,14 +34,16 @@ public class FluxSampleTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxSample<>(null, Flux.never()));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxSample<>(null, Flux.never());
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().sample((Publisher<Object>) null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().sample((Publisher<Object>) null);
+		});
 	}
 
 	void sample(boolean complete, boolean which) {

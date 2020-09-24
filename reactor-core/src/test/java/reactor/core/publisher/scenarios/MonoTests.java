@@ -137,8 +137,9 @@ public class MonoTests {
 
 	@Test
 	public void testDoOnEachSignalNullConsumer() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.just(1).doOnEach(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.just(1).doOnEach(null);
+		});
 	}
 
 	@Test

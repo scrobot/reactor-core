@@ -34,8 +34,9 @@ public class FluxConcatArrayTest {
 
 	@Test
 	public void arrayNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.concat((Publisher<Object>[]) null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.concat((Publisher<Object>[]) null);
+		});
 	}
 
 	final Publisher<Integer> source = Flux.range(1, 3);

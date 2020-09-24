@@ -38,8 +38,9 @@ public class MonoRunnableTest {
 
 	@Test
 	public void nullValue() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoRunnable<>(null));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoRunnable<>(null);
+		});
 	}
 
 	@Test

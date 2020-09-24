@@ -420,14 +420,16 @@ public class FluxMergeSequentialTest {
 
 	@Test
 	public void testInvalidCapacityHint() {
-		assertThrows(IllegalArgumentException.class, () ->
-			Flux.just(1).flatMapSequential(toJust, 0, Queues.SMALL_BUFFER_SIZE));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.just(1).flatMapSequential(toJust, 0, Queues.SMALL_BUFFER_SIZE);
+		});
 	}
 
 	@Test
 	public void testInvalidMaxConcurrent() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.just(1).flatMapSequential(toJust, Queues.SMALL_BUFFER_SIZE, 0));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.just(1).flatMapSequential(toJust, Queues.SMALL_BUFFER_SIZE, 0);
+		});
 	}
 
 	@Test

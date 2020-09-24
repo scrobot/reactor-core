@@ -229,8 +229,9 @@ public class MonoProcessorTest {
 	public void MonoProcessorRejectedSubscribeCallbackNull() {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
-		assertThrows(NullPointerException.class, () ->
-				mp.subscribe((Subscriber<String>) null));
+		assertThrows(NullPointerException.class, () -> {
+			mp.subscribe((Subscriber<String>) null);
+		});
 	}
 
 	@Test
@@ -353,8 +354,9 @@ public class MonoProcessorTest {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
 		mp.onError(new Exception("test"));
-		assertThrows(Exception.class, () ->
-				mp.onError(new Exception("test")));
+		assertThrows(Exception.class, () -> {
+			mp.onError(new Exception("test"));
+		});
 	}
 
 	@Test
@@ -362,8 +364,9 @@ public class MonoProcessorTest {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
 		mp.onNext("test");
-		assertThrows(Exception.class, () ->
-				mp.onError(new Exception("test")));
+		assertThrows(Exception.class, () -> {
+			mp.onError(new Exception("test"));
+		});
 	}
 
 	@Test

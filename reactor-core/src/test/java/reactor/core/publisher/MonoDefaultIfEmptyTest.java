@@ -26,14 +26,16 @@ public class MonoDefaultIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoDefaultIfEmpty<>(null, 1));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoDefaultIfEmpty<>(null, 1);
+		});
 	}
 
 	@Test
 	public void valueNull() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.never().defaultIfEmpty(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.never().defaultIfEmpty(null);
+		});
 	}
 
 	@Test

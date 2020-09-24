@@ -36,9 +36,10 @@ public class MonoCallableTest {
 
     @Test
     public void nullCallable() {
-        assertThrows(NullPointerException.class, () ->
-                Mono.<Integer>fromCallable(null));
-    }
+		assertThrows(NullPointerException.class, () -> {
+			Mono.<Integer>fromCallable(null);
+		});
+	}
 
     @Test
     public void callableReturnsNull() {
@@ -118,12 +119,12 @@ public class MonoCallableTest {
 
     @Test
     public void onMonoErrorCallableOnBlock() {
-        assertThrows(RuntimeException.class, () ->
-                Mono.fromCallable(() -> {
-                    throw new Exception("test");
-                }).block()
-        );
-    }
+		assertThrows(RuntimeException.class, () -> {
+			Mono.fromCallable(() -> {
+				throw new Exception("test");
+			}).block();
+		});
+	}
 
     @Test
     public void delegateCall() throws Exception {

@@ -34,8 +34,9 @@ public class MonoHasElementsTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoHasElements<>(null));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoHasElements<>(null);
+		});
 	}
 
 	@Test

@@ -30,8 +30,9 @@ public class FluxOnBackpressureLatestTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxOnBackpressureLatest<>(null));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxOnBackpressureLatest<>(null);
+		});
 	}
 
 	@Test

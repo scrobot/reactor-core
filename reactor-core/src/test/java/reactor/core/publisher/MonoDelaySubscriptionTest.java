@@ -29,14 +29,16 @@ public class MonoDelaySubscriptionTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoDelaySubscription<>(null, Mono.never()));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoDelaySubscription<>(null, Mono.never());
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.never().delaySubscription((Publisher<?>) null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.never().delaySubscription((Publisher<?>) null);
+		});
 	}
 
 	@Test

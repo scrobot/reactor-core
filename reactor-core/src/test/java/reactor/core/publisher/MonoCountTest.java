@@ -29,8 +29,9 @@ public class MonoCountTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoCount<>(null));
+		assertThrows(NullPointerException.class, () -> {
+			new MonoCount<>(null);
+		});
 	}
 
 	public void normal() {

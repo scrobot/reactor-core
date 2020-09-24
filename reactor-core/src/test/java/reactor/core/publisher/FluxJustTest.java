@@ -32,9 +32,10 @@ public class FluxJustTest {
 
     @Test
     public void nullValue() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.just((Integer) null));
-    }
+		assertThrows(NullPointerException.class, () -> {
+			Flux.just((Integer) null);
+		});
+	}
 
     @Test
     @SuppressWarnings("unchecked")

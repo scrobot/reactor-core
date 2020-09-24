@@ -44,9 +44,10 @@ public class FluxOnBackpressureBufferTest
 		extends FluxOperatorTest<String, String> {
 
 	@Test
-	public void failNegativeHistory(){
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never().onBackpressureBuffer(-1));
+	public void failNegativeHistory() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never().onBackpressureBuffer(-1);
+		});
 	}
 
 	@Override

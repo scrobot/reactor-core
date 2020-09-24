@@ -27,9 +27,10 @@ public class MonoRepeatPredicateTest {
 	//these tests essentially cover the API and its escape hatches
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				Mono.never()
-						.repeat(null));
+		assertThrows(NullPointerException.class, () -> {
+			Mono.never()
+					.repeat(null);
+		});
 	}
 
 	@Test

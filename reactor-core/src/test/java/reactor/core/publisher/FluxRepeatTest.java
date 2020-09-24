@@ -29,9 +29,10 @@ public class FluxRepeatTest {
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never()
-						.repeat(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never()
+					.repeat(-1);
+		});
 	}
 
 	@Test

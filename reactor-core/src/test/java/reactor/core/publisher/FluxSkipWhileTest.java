@@ -57,15 +57,17 @@ public class FluxSkipWhileTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxSkipWhile<>(null, v -> true));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxSkipWhile<>(null, v -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never()
-						.skipWhile(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never()
+					.skipWhile(null);
+		});
 	}
 
 	@Test

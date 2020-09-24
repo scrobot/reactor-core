@@ -603,14 +603,16 @@ public class ReplayProcessorTest {
 
 	@Test
 	public void failNegativeBufferSizeBounded() {
-		assertThrows(IllegalArgumentException.class, () ->
-				ReplayProcessor.create(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			ReplayProcessor.create(-1);
+		});
 	}
 
 	@Test
 	public void failNegativeBufferBoundedAndTimed() {
-		assertThrows(IllegalArgumentException.class, () ->
-				ReplayProcessor.createSizeAndTimeout(-1, Duration.ofSeconds(1)));
+		assertThrows(IllegalArgumentException.class, () -> {
+			ReplayProcessor.createSizeAndTimeout(-1, Duration.ofSeconds(1));
+		});
 	}
 
 	@Test

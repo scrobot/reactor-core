@@ -33,14 +33,16 @@ public class FluxDelaySubscriptionTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxDelaySubscription<>(null, Flux.never()));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxDelaySubscription<>(null, Flux.never());
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().delaySubscription((Publisher<?>) null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().delaySubscription((Publisher<?>) null);
+		});
 	}
 
 	@Test

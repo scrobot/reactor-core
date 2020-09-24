@@ -140,10 +140,11 @@ public class FluxFlattenIterableTest extends FluxOperatorTest<String, String> {
 	}
 
 	@Test
-	public void failPrefetch(){
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.never()
-						.flatMapIterable(t -> null, -1));
+	public void failPrefetch() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.never()
+					.flatMapIterable(t -> null, -1);
+		});
 	}
 
 	@Test

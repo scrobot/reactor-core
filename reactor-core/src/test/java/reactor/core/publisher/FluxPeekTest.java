@@ -260,8 +260,9 @@ public class FluxPeekTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxPeek<>(null, null, null, null, null, null, null, null));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxPeek<>(null, null, null, null, null, null, null, null);
+		});
 	}
 
 	@Test

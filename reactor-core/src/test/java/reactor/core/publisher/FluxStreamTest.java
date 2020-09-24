@@ -37,15 +37,17 @@ public class FluxStreamTest {
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	public void nullStream() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.fromStream((Stream<?>) null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.fromStream((Stream<?>) null);
+		});
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	public void nullSupplier() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.fromStream((Supplier<Stream<?>>) null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.fromStream((Supplier<Stream<?>>) null);
+		});
 	}
 
 	@Test

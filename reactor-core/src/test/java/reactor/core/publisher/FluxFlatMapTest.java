@@ -493,16 +493,18 @@ public class FluxFlatMapTest {
 
 	@Test
 	public void failMaxConcurrency() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.just(1, 2, 3)
-						.flatMap(Flux::just, -1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.just(1, 2, 3)
+					.flatMap(Flux::just, -1);
+		});
 	}
 
 	@Test
 	public void failPrefetch() {
-		assertThrows(IllegalArgumentException.class, () ->
-				Flux.just(1, 2, 3)
-						.flatMap(Flux::just, 128, -1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Flux.just(1, 2, 3)
+					.flatMap(Flux::just, 128, -1);
+		});
 	}
 
 	@Test

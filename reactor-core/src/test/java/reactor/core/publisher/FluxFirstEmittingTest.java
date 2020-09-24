@@ -31,14 +31,16 @@ public class FluxFirstEmittingTest {
 
 	@Test
 	public void arrayNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.first((Publisher<Integer>[]) null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.first((Publisher<Integer>[]) null);
+		});
 	}
 
 	@Test
 	public void iterableNull() {
-		assertThrows(NullPointerException.class, () ->
-				new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null));
+		assertThrows(NullPointerException.class, () -> {
+			new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null);
+		});
 	}
 
 	@Test

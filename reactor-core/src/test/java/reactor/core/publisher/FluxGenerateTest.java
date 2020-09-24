@@ -36,22 +36,25 @@ public class FluxGenerateTest {
 
 	@Test
 	public void stateSupplierNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.generate(null, (s, o) -> s, s -> {
-				}));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.generate(null, (s, o) -> s, s -> {
+			});
+		});
 	}
 
 	@Test
 	public void generatorNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.generate(() -> 1, null, s -> {
-				}));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.generate(() -> 1, null, s -> {
+			});
+		});
 	}
 
 	@Test
 	public void stateConsumerNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.generate(() -> 1, (s, o) -> s, null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.generate(() -> 1, (s, o) -> s, null);
+		});
 	}
 
 	@Test

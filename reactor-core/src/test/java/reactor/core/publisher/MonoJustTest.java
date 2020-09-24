@@ -31,9 +31,10 @@ public class MonoJustTest {
 
     @Test
     public void nullValue() {
-		assertThrows(NullPointerException.class, () ->
-				new MonoJust<Integer>(null));
-    }
+		assertThrows(NullPointerException.class, () -> {
+			new MonoJust<Integer>(null);
+		});
+	}
 
     @Test
     public void valueSame() {

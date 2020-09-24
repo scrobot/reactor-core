@@ -49,8 +49,9 @@ public class FluxIterableTest {
 
 	@Test
 	public void nullIterable() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never().zipWithIterable(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never().zipWithIterable(null);
+		});
 	}
 
 	@Test

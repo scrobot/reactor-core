@@ -30,9 +30,10 @@ public class MonoRepeatTest {
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(IllegalArgumentException.class, () ->
-		Mono.never()
-		    .repeat(-1));
+		assertThrows(IllegalArgumentException.class, () -> {
+			Mono.never()
+					.repeat(-1);
+		});
 	}
 
 	@Test

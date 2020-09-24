@@ -40,9 +40,10 @@ public class FluxRepeatWhenTest {
 
 	@Test
 	public void whenFactoryNull() {
-		assertThrows(NullPointerException.class, () ->
-				Flux.never()
-						.repeatWhen(null));
+		assertThrows(NullPointerException.class, () -> {
+			Flux.never()
+					.repeatWhen(null);
+		});
 	}
 
 	@Test
