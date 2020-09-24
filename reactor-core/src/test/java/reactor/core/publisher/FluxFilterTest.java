@@ -38,7 +38,7 @@ import reactor.test.subscriber.AssertSubscriber;
 import reactor.util.context.Context;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxFilterTest extends FluxOperatorTest<String, String> {
 
@@ -75,17 +75,19 @@ public class FluxFilterTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxFilter<Integer>(null, e -> true);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxFilter<Integer>(null, e -> true);
+				});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never()
-					.filter(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.filter(null);
+				});
 	}
 
 	@Test

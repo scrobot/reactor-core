@@ -23,22 +23,24 @@ import reactor.core.Scannable;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxDefaultIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxDefaultIfEmpty<>(null, 1);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxDefaultIfEmpty<>(null, 1);
+				});
 	}
 
 	@Test
 	public void valueNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().defaultIfEmpty(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().defaultIfEmpty(null);
+				});
 	}
 
 	@Test

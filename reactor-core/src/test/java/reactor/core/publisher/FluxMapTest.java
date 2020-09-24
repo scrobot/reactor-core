@@ -28,13 +28,13 @@ import org.reactivestreams.Subscription;
 import reactor.core.CoreSubscriber;
 import reactor.core.Fuseable;
 import reactor.core.Scannable;
-import reactor.test.StepVerifier;
 import reactor.test.MockUtils;
+import reactor.test.StepVerifier;
 import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxMapTest extends FluxOperatorTest<String, String> {
 
@@ -66,16 +66,18 @@ public class FluxMapTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxMap<Integer, Integer>(null, v -> v);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxMap<Integer, Integer>(null, v -> v);
+				});
 	}
 
 	@Test
 	public void nullMapper() {
-		assertThrows(NullPointerException.class, () -> {
-			just.map(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					just.map(null);
+				});
 	}
 
 	@Test

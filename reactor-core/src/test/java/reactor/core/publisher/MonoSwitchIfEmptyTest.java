@@ -18,23 +18,25 @@ package reactor.core.publisher;
 import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoSwitchIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoSwitchIfEmpty<>(null, Mono.never());
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoSwitchIfEmpty<>(null, Mono.never());
+				});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.never()
-					.switchIfEmpty(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.never()
+							.switchIfEmpty(null);
+				});
 	}
 
 	@Test

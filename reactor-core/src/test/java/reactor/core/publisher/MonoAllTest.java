@@ -24,22 +24,24 @@ import reactor.core.Scannable;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoAllTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoAll<>(null, v -> true);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoAll<>(null, v -> true);
+				});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoAll<>(null, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoAll<>(null, null);
+				});
 	}
 
 	@Test

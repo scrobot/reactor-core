@@ -24,43 +24,48 @@ import reactor.test.publisher.TestPublisher;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoElementAtTest {
 
 	@Test
 	public void source1Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoElementAt<>(null, 1);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoElementAt<>(null, 1);
+				});
 	}
 
 	@Test
 	public void source2Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoElementAt<>(null, 1, 1);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoElementAt<>(null, 1, 1);
+				});
 	}
 
 	@Test
 	public void defaultSupplierNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().elementAt(1, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().elementAt(1, null);
+				});
 	}
 
 	@Test
 	public void indexNegative1() {
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			Flux.never().elementAt(-1);
-		});
+		assertThatExceptionOfType(IndexOutOfBoundsException.class)
+				.isThrownBy(() -> {
+					Flux.never().elementAt(-1);
+				});
 	}
 
 	@Test
 	public void indexNegative2() {
-		assertThrows(IndexOutOfBoundsException.class, () -> {
-			Flux.never().elementAt(-1, 1);
-		});
+		assertThatExceptionOfType(IndexOutOfBoundsException.class)
+				.isThrownBy(() -> {
+					Flux.never().elementAt(-1, 1);
+				});
 	}
 
 	@Test

@@ -22,22 +22,24 @@ import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoRetryTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoRetry<>(null, 1);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoRetry<>(null, 1);
+				});
 	}
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Mono.never().retry(-1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Mono.never().retry(-1);
+				});
 	}
 
 	@Test

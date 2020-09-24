@@ -17,8 +17,8 @@ package reactor.core.publisher;
 
 import java.time.Duration;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
@@ -31,7 +31,7 @@ import reactor.test.scheduler.VirtualTimeScheduler;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class ReplayProcessorTest {
 
@@ -603,16 +603,18 @@ public class ReplayProcessorTest {
 
 	@Test
 	public void failNegativeBufferSizeBounded() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			ReplayProcessor.create(-1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					ReplayProcessor.create(-1);
+				});
 	}
 
 	@Test
 	public void failNegativeBufferBoundedAndTimed() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			ReplayProcessor.createSizeAndTimeout(-1, Duration.ofSeconds(1));
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					ReplayProcessor.createSizeAndTimeout(-1, Duration.ofSeconds(1));
+				});
 	}
 
 	@Test

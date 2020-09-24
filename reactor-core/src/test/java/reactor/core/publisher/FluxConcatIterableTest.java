@@ -22,15 +22,16 @@ import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxConcatIterableTest {
 
 	@Test
 	public void arrayNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.concat((Iterable<? extends Publisher<?>>) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.concat((Iterable<? extends Publisher<?>>) null);
+				});
 	}
 
 	final Publisher<Integer> source = Flux.range(1, 3);

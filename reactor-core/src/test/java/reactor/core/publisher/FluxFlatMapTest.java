@@ -31,7 +31,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscription;
-
 import reactor.core.CoreSubscriber;
 import reactor.core.Exceptions;
 import reactor.core.Fuseable;
@@ -45,7 +44,7 @@ import reactor.test.util.RaceTestUtils;
 import reactor.util.concurrent.Queues;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxFlatMapTest {
 
@@ -493,18 +492,20 @@ public class FluxFlatMapTest {
 
 	@Test
 	public void failMaxConcurrency() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.just(1, 2, 3)
-					.flatMap(Flux::just, -1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.just(1, 2, 3)
+							.flatMap(Flux::just, -1);
+				});
 	}
 
 	@Test
 	public void failPrefetch() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.just(1, 2, 3)
-					.flatMap(Flux::just, 128, -1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.just(1, 2, 3)
+							.flatMap(Flux::just, 128, -1);
+				});
 	}
 
 	@Test

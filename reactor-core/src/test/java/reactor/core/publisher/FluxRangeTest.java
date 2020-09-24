@@ -25,6 +25,7 @@ import reactor.test.MockUtils;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxRangeTest {
@@ -82,16 +83,18 @@ public class FluxRangeTest {
 
 	@Test
 	public void countIsNegative() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.range(1, -1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.range(1, -1);
+				});
 	}
 
 	@Test
 	public void rangeOverflow() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.range(2, Integer.MAX_VALUE);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.range(2, Integer.MAX_VALUE);
+				});
 	}
 
 	@Test

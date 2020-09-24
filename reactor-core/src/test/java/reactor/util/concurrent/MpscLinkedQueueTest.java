@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MpscLinkedQueueTest {
 
@@ -17,17 +17,19 @@ public class MpscLinkedQueueTest {
 	@Test
 	public void shouldRejectNullableValues() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
-		assertThrows(NullPointerException.class, () -> {
-			q.offer(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					q.offer(null);
+				});
 	}
 
 	@Test
 	public void shouldRejectNullableValuesForTest() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
-		assertThrows(NullPointerException.class, () -> {
-			q.test(null, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					q.test(null, null);
+				});
 	}
 
 	@Test
@@ -44,9 +46,10 @@ public class MpscLinkedQueueTest {
 	public void shouldNotAllowIteratingWithIterator() {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
 
-		assertThrows(UnsupportedOperationException.class, () -> {
-			q.iterator();
-		});
+		assertThatExceptionOfType(UnsupportedOperationException.class)
+				.isThrownBy(() -> {
+					q.iterator();
+				});
 	}
 
 	@Test
@@ -54,9 +57,10 @@ public class MpscLinkedQueueTest {
 		MpscLinkedQueue<Object> q = new MpscLinkedQueue<>();
 
 		q.offer(1);
-		assertThrows(UnsupportedOperationException.class, () -> {
-			q.remove(1);
-		});
+		assertThatExceptionOfType(UnsupportedOperationException.class)
+				.isThrownBy(() -> {
+					q.remove(1);
+				});
 	}
 
 	@Test

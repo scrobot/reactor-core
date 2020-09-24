@@ -38,8 +38,8 @@ import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Fail.fail;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static reactor.core.publisher.Flux.range;
 import static reactor.core.publisher.Flux.zip;
 
@@ -117,10 +117,11 @@ public class FluxPublishMulticastTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void failPrefetch() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never()
-					.publish(f -> f, -1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.publish(f -> f, -1);
+				});
 	}
 
 	@Test

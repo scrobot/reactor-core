@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 import reactor.test.publisher.MonoOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoMapTest extends MonoOperatorTest<String, String> {
 
@@ -44,16 +44,18 @@ public class MonoMapTest extends MonoOperatorTest<String, String> {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoMap<Integer, Integer>(null, v -> v);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoMap<Integer, Integer>(null, v -> v);
+				});
 	}
 
 	@Test
 	public void nullMapper() {
-		assertThrows(NullPointerException.class, () -> {
-			just.map(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					just.map(null);
+				});
 	}
 
 	@Test

@@ -36,9 +36,8 @@ import reactor.core.Scannable.Attr;
 import reactor.test.StepVerifier;
 import reactor.util.concurrent.Queues;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class BlockingIterableTest {
 
@@ -86,11 +85,12 @@ public class BlockingIterableTest {
 	public void error() {
 		List<Integer> values = new ArrayList<>();
 
-		assertThrows(RuntimeException.class, () -> {
-			for (Integer i : Flux.<Integer>error(new RuntimeException("forced failure")).toIterable()) {
-				values.add(i);
-			}
-		});
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					for (Integer i : Flux.<Integer>error(new RuntimeException("forced failure")).toIterable()) {
+						values.add(i);
+					}
+				});
 
 		Assert.assertEquals(Collections.emptyList(), values);
 	}

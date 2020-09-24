@@ -28,22 +28,24 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxSampleTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxSample<>(null, Flux.never());
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxSample<>(null, Flux.never());
+				});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().sample((Publisher<Object>) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().sample((Publisher<Object>) null);
+				});
 	}
 
 	void sample(boolean complete, boolean which) {

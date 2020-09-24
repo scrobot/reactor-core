@@ -28,15 +28,16 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxConcatArrayTest {
 
 	@Test
 	public void arrayNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.concat((Publisher<Object>[]) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.concat((Publisher<Object>[]) null);
+				});
 	}
 
 	final Publisher<Integer> source = Flux.range(1, 3);

@@ -27,15 +27,16 @@ import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxMapSignalTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void allNull() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never().flatMap(null, null, null);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never().flatMap(null, null, null);
+				});
 	}
 
 	@Override

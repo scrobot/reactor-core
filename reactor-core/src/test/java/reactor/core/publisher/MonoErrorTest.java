@@ -18,7 +18,7 @@ package reactor.core.publisher;
 import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoErrorTest {
 
@@ -30,9 +30,10 @@ public class MonoErrorTest {
 
 	@Test
 	public void onMonoRejectedThrowOnBlock() {
-		assertThrows(Exception.class, () -> {
-			Mono.error(new Exception("test"))
-					.block();
-		});
+		assertThatExceptionOfType(Exception.class)
+				.isThrownBy(() -> {
+					Mono.error(new Exception("test"))
+							.block();
+				});
 	}
 }

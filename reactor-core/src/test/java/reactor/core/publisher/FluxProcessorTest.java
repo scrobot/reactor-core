@@ -31,31 +31,34 @@ import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxProcessorTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
 	public void failNullSubscriber() {
-		assertThrows(NullPointerException.class, () -> {
-			FluxProcessor.wrap(UnicastProcessor.create(), UnicastProcessor.create())
-					.subscribe((Subscriber) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					FluxProcessor.wrap(UnicastProcessor.create(), UnicastProcessor.create())
+							.subscribe((Subscriber) null);
+				});
 	}
 
 	@Test
 	public void failNullUpstream() {
-		assertThrows(NullPointerException.class, () -> {
-			FluxProcessor.wrap(null, UnicastProcessor.create());
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					FluxProcessor.wrap(null, UnicastProcessor.create());
+				});
 	}
 
 	@Test
 	public void failNullDownstream() {
-		assertThrows(NullPointerException.class, () -> {
-			FluxProcessor.wrap(UnicastProcessor.create(), null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					FluxProcessor.wrap(UnicastProcessor.create(), null);
+				});
 	}
 
 	@Test

@@ -27,22 +27,24 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxDelaySubscriptionTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxDelaySubscription<>(null, Flux.never());
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxDelaySubscription<>(null, Flux.never());
+				});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().delaySubscription((Publisher<?>) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().delaySubscription((Publisher<?>) null);
+				});
 	}
 
 	@Test

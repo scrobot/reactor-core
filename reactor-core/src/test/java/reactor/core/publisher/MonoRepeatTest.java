@@ -24,16 +24,17 @@ import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoRepeatTest {
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Mono.never()
-					.repeat(-1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Mono.never()
+							.repeat(-1);
+				});
 	}
 
 	@Test

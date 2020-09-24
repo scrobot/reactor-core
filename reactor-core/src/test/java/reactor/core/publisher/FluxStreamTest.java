@@ -28,7 +28,7 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxStreamTest {
 
@@ -37,17 +37,19 @@ public class FluxStreamTest {
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	public void nullStream() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.fromStream((Stream<?>) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.fromStream((Stream<?>) null);
+				});
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	public void nullSupplier() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.fromStream((Supplier<Stream<?>>) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.fromStream((Supplier<Stream<?>>) null);
+				});
 	}
 
 	@Test

@@ -128,10 +128,11 @@ public class MonoProcessorTest {
 
 	@Test
 	public void MonoProcessorResultNotAvailable() {
-		assertThrows(IllegalStateException.class, () -> {
-			MonoProcessor<String> mp = MonoProcessor.create();
-			mp.block(Duration.ofMillis(1));
-		});
+		Assertions.assertThatExceptionOfType(IllegalStateException.class)
+				.isThrownBy(() -> {
+					MonoProcessor<String> mp = MonoProcessor.create();
+					mp.block(Duration.ofMillis(1));
+				});
 	}
 
 	@Test
@@ -229,9 +230,10 @@ public class MonoProcessorTest {
 	public void MonoProcessorRejectedSubscribeCallbackNull() {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
-		assertThrows(NullPointerException.class, () -> {
-			mp.subscribe((Subscriber<String>) null);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					mp.subscribe((Subscriber<String>) null);
+				});
 	}
 
 	@Test
@@ -354,9 +356,10 @@ public class MonoProcessorTest {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
 		mp.onError(new Exception("test"));
-		assertThrows(Exception.class, () -> {
-			mp.onError(new Exception("test"));
-		});
+		Assertions.assertThatExceptionOfType(Exception.class)
+				.isThrownBy(() -> {
+					mp.onError(new Exception("test"));
+				});
 	}
 
 	@Test
@@ -364,9 +367,10 @@ public class MonoProcessorTest {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
 		mp.onNext("test");
-		assertThrows(Exception.class, () -> {
-			mp.onError(new Exception("test"));
-		});
+		Assertions.assertThatExceptionOfType(Exception.class)
+				.isThrownBy(() -> {
+					mp.onError(new Exception("test"));
+				});
 	}
 
 	@Test

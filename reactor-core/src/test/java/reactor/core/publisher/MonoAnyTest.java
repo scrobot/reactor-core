@@ -26,29 +26,32 @@ import reactor.test.publisher.TestPublisher;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoAnyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoAny<>(null, v -> true);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoAny<>(null, v -> true);
+				});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoAny<>(null, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoAny<>(null, null);
+				});
 	}
 
 	@Test
 	public void elementNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().hasElement(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().hasElement(null);
+				});
 	}
 
 	@Test

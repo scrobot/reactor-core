@@ -18,23 +18,25 @@ package reactor.core.publisher;
 import org.junit.jupiter.api.Test;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxSwitchIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxSwitchIfEmpty<>(null, Flux.never());
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxSwitchIfEmpty<>(null, Flux.never());
+				});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never()
-					.switchIfEmpty(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.switchIfEmpty(null);
+				});
 	}
 
 	@Test

@@ -26,15 +26,16 @@ import reactor.core.Scannable;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxJustTest {
 
     @Test
     public void nullValue() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.just((Integer) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.just((Integer) null);
+				});
 	}
 
     @Test

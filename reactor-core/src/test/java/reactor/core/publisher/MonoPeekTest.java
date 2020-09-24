@@ -25,7 +25,6 @@ import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoPeekTest {
 
@@ -152,10 +151,11 @@ public class MonoPeekTest {
 	@Test
 	public void onMonoSuccessNullDoOnSuccess() {
 		Mono<String> mp = Mono.just("test");
-		assertThrows(NullPointerException.class, () -> {
-			mp.doOnSuccess(null)
-					.subscribe();
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					mp.doOnSuccess(null)
+							.subscribe();
+				});
 	}
 
 	@Test

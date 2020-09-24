@@ -277,23 +277,26 @@ public class TopicProcessorTest {
 
 	@Test
 	public void failNullBufferSize() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			TopicProcessor.builder().name("test").bufferSize(0);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					TopicProcessor.builder().name("test").bufferSize(0);
+				});
 	}
 
 	@Test
 	public void failNonPowerOfTwo() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			TopicProcessor.builder().name("test").bufferSize(3);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					TopicProcessor.builder().name("test").bufferSize(3);
+				});
 	}
 
 	@Test
 	public void failNegativeBufferSize() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			TopicProcessor.builder().name("test").bufferSize(-1);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					TopicProcessor.builder().name("test").bufferSize(-1);
+				});
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/445

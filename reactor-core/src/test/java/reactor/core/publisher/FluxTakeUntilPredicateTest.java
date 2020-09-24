@@ -28,17 +28,19 @@ public class FluxTakeUntilPredicateTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxTakeUntil<>(null, v -> true);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxTakeUntil<>(null, v -> true);
+				});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never()
-					.takeUntil(null);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.takeUntil(null);
+				});
 	}
 
 	@Test

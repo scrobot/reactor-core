@@ -23,7 +23,7 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoSupplierTest {
 
@@ -92,10 +92,11 @@ public class MonoSupplierTest {
 
 	@Test
 	public void onMonoErrorSupplierOnBlock() {
-		assertThrows(RuntimeException.class, () -> {
-			Mono.fromSupplier(() -> {
-				throw new RuntimeException("test");
-			}).block();
-		});
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					Mono.fromSupplier(() -> {
+						throw new RuntimeException("test");
+					}).block();
+				});
 	}
 }

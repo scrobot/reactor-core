@@ -43,9 +43,9 @@ import reactor.test.subscriber.AssertSubscriber;
 import reactor.util.concurrent.Queues;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxMergeSequentialTest {
 
@@ -420,16 +420,18 @@ public class FluxMergeSequentialTest {
 
 	@Test
 	public void testInvalidCapacityHint() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.just(1).flatMapSequential(toJust, 0, Queues.SMALL_BUFFER_SIZE);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.just(1).flatMapSequential(toJust, 0, Queues.SMALL_BUFFER_SIZE);
+				});
 	}
 
 	@Test
 	public void testInvalidMaxConcurrent() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.just(1).flatMapSequential(toJust, Queues.SMALL_BUFFER_SIZE, 0);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.just(1).flatMapSequential(toJust, Queues.SMALL_BUFFER_SIZE, 0);
+				});
 	}
 
 	@Test

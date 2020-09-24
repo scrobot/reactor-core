@@ -34,16 +34,17 @@ import reactor.util.context.Context;
 import reactor.util.function.Tuples;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxRepeatWhenTest {
 
 	@Test
 	public void whenFactoryNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never()
-					.repeatWhen(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.repeatWhen(null);
+				});
 	}
 
 	@Test

@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import reactor.core.CoreSubscriber;
 import reactor.core.Fuseable;
 import reactor.core.Scannable;
@@ -35,7 +34,7 @@ import reactor.util.context.Context;
 import reactor.util.function.Tuples;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxIterableTest {
 
@@ -49,9 +48,10 @@ public class FluxIterableTest {
 
 	@Test
 	public void nullIterable() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().zipWithIterable(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().zipWithIterable(null);
+				});
 	}
 
 	@Test

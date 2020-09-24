@@ -26,31 +26,34 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoUsingTest {
 
 	@Test
 	public void resourceSupplierNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.using(null, r -> Mono.empty(), r -> {
-			}, false);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.using(null, r -> Mono.empty(), r -> {
+					}, false);
+				});
 	}
 
 	@Test
 	public void sourceFactoryNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.using(() -> 1, null, r -> {
-			}, false);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.using(() -> 1, null, r -> {
+					}, false);
+				});
 	}
 
 	@Test
 	public void resourceCleanupNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.using(() -> 1, r -> Mono.empty(), null, false);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.using(() -> 1, r -> Mono.empty(), null, false);
+				});
 	}
 
 	@Test

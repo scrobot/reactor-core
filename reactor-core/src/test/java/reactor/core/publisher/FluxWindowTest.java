@@ -80,61 +80,69 @@ public class FluxWindowTest extends FluxOperatorTest<String, Flux<String>> {
 
 	@Test
 	public void source1Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxWindow<>(null, 1, pqs);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxWindow<>(null, 1, pqs);
+				});
 	}
 
 	@Test
 	public void source2Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxWindow<>(null, 1, 2, pqs, oqs);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxWindow<>(null, 1, 2, pqs, oqs);
+				});
 	}
 
 	@Test
 	public void processorQueue1Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxWindow<>(Flux.never(), 1, null);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxWindow<>(Flux.never(), 1, null);
+				});
 	}
 
 	@Test
 	public void processorQueue2Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxWindow<>(Flux.never(), 1, 1, null, oqs);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxWindow<>(Flux.never(), 1, 1, null, oqs);
+				});
 	}
 
 	@Test
 	public void overflowQueueNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxWindow<>(Flux.never(), 1, 1, pqs, null);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxWindow<>(Flux.never(), 1, 1, pqs, null);
+				});
 	}
 
 	@Test
 	public void size1Invalid() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never()
-					.window(0);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.window(0);
+				});
 	}
 
 	@Test
 	public void size2Invalid() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never()
-					.window(0, 2);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.window(0, 2);
+				});
 	}
 
 	@Test
 	public void skipInvalid() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never()
-					.window(1, 0);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.window(1, 0);
+				});
 	}
 
 	static <T> AssertSubscriber<T> toList(Publisher<T> windows) {

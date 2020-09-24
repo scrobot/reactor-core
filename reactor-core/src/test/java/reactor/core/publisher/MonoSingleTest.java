@@ -26,21 +26,23 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoSingleTest {
 	@Test
 	public void source1Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoSingle<>(null, 1, false);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoSingle<>(null, 1, false);
+				});
 	}
 
 	@Test
 	public void defaultSupplierNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().single(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().single(null);
+				});
 	}
 
 

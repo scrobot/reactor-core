@@ -603,23 +603,26 @@ public class WorkQueueProcessorTest {
 
 	@Test
 	public void failNonPowerOfTwo() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			WorkQueueProcessor.builder().name("test").bufferSize(3);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					WorkQueueProcessor.builder().name("test").bufferSize(3);
+				});
 	}
 
 	@Test
 	public void failNullBufferSize() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			WorkQueueProcessor.builder().name("test").bufferSize(0);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					WorkQueueProcessor.builder().name("test").bufferSize(0);
+				});
 	}
 
 	@Test
 	public void failNegativeBufferSize() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			WorkQueueProcessor.builder().name("test").bufferSize(-1);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					WorkQueueProcessor.builder().name("test").bufferSize(-1);
+				});
 	}
 
 

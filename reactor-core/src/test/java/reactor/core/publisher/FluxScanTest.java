@@ -61,16 +61,18 @@ public class FluxScanTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxScan<>(null, (a, b) -> a);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxScan<>(null, (a, b) -> a);
+				});
 	}
 
 	@Test
 	public void accumulatorNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().scan(null);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().scan(null);
+				});
 	}
 
 	@Test

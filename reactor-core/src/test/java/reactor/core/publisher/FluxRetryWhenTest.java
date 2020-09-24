@@ -56,16 +56,18 @@ public class FluxRetryWhenTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxRetryWhen<>(null, v -> v);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxRetryWhen<>(null, v -> v);
+				});
 	}
 
 	@Test
 	public void whenFactoryNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().retryWhen(null);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().retryWhen(null);
+				});
 	}
 
 	@Test

@@ -24,21 +24,20 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
-
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoCallableTest {
 
     @Test
     public void nullCallable() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.<Integer>fromCallable(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.<Integer>fromCallable(null);
+				});
 	}
 
     @Test
@@ -119,11 +118,12 @@ public class MonoCallableTest {
 
     @Test
     public void onMonoErrorCallableOnBlock() {
-		assertThrows(RuntimeException.class, () -> {
-			Mono.fromCallable(() -> {
-				throw new Exception("test");
-			}).block();
-		});
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					Mono.fromCallable(() -> {
+						throw new Exception("test");
+					}).block();
+				});
 	}
 
     @Test

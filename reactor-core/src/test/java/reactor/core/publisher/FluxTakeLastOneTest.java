@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxTakeLastOneTest {
@@ -43,11 +44,12 @@ public class FluxTakeLastOneTest {
 
 	@Test
 	public void illegal() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			StepVerifier.create(Flux.empty()
-					.takeLast(-1))
-					.verifyComplete();
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					StepVerifier.create(Flux.empty()
+							.takeLast(-1))
+							.verifyComplete();
+				});
 	}
 
 	@Test

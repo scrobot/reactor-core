@@ -20,22 +20,24 @@ import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoDefaultIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoDefaultIfEmpty<>(null, 1);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoDefaultIfEmpty<>(null, 1);
+				});
 	}
 
 	@Test
 	public void valueNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.never().defaultIfEmpty(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.never().defaultIfEmpty(null);
+				});
 	}
 
 	@Test

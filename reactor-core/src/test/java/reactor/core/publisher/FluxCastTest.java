@@ -19,24 +19,26 @@ package reactor.core.publisher;
 import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxCastTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.just(1)
-					.cast(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.just(1)
+							.cast(null);
+				});
 	}
 
 	@Test
 	public void sourceNull2() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.just(1)
-					.ofType(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.just(1)
+							.ofType(null);
+				});
 	}
 
 	@Test

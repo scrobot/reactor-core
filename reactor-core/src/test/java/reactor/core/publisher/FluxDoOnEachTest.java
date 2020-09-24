@@ -45,16 +45,17 @@ import reactor.test.subscriber.AssertSubscriber;
 import reactor.util.context.Context;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxDoOnEachTest {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxDoOnEach<>(null, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxDoOnEach<>(null, null);
+				});
 	}
 
 	private static final String sourceErrorMessage = "boomSource";

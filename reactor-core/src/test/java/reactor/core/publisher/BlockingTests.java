@@ -35,8 +35,10 @@ import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 
 public class BlockingTests {
 
@@ -101,38 +103,42 @@ public class BlockingTests {
 
 	@Test
 	public void blockingFirstError() {
-		assertThrows(RuntimeException.class, () -> {
-			Flux.error(new RuntimeException("test"))
-					.publishOn(scheduler)
-					.blockFirst();
-		});
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					Flux.error(new RuntimeException("test"))
+							.publishOn(scheduler)
+							.blockFirst();
+				});
 	}
 
 	@Test
 	public void blockingFirstError2() {
-		assertThrows(RuntimeException.class, () -> {
-			Flux.error(new RuntimeException("test"))
-					.publishOn(scheduler)
-					.blockFirst(Duration.ofSeconds(1));
-		});
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					Flux.error(new RuntimeException("test"))
+							.publishOn(scheduler)
+							.blockFirst(Duration.ofSeconds(1));
+				});
 	}
 
 	@Test
 	public void blockingLastError() {
-		assertThrows(RuntimeException.class, () -> {
-			Flux.defer(() -> Mono.error(new RuntimeException("test")))
-					.subscribeOn(scheduler)
-					.blockLast();
-		});
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					Flux.defer(() -> Mono.error(new RuntimeException("test")))
+							.subscribeOn(scheduler)
+							.blockLast();
+				});
 	}
 
 	@Test
 	public void blockingLastError2() {
-		assertThrows(RuntimeException.class, () -> {
-			Flux.defer(() -> Mono.error(new RuntimeException("test")))
-					.subscribeOn(scheduler)
-					.blockLast(Duration.ofSeconds(1));
-		});
+		assertThatExceptionOfType(RuntimeException.class)
+				.isThrownBy(() -> {
+					Flux.defer(() -> Mono.error(new RuntimeException("test")))
+							.subscribeOn(scheduler)
+							.blockLast(Duration.ofSeconds(1));
+				});
 	}
 
 	@Test

@@ -29,30 +29,33 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxOnBackpressureDropTest {
 
 	@Test
 	public void source1Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxOnBackpressureDrop<>(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxOnBackpressureDrop<>(null);
+				});
 	}
 
 	@Test
 	public void source2Null() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxOnBackpressureDrop<>(null, v -> {
-			});
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxOnBackpressureDrop<>(null, v -> {
+					});
+				});
 	}
 
 	@Test
 	public void onDropNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().onBackpressureDrop(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().onBackpressureDrop(null);
+				});
 	}
 
 	@Test

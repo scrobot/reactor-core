@@ -23,22 +23,24 @@ import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxRetryTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxRetry<>(null, 1);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxRetry<>(null, 1);
+				});
 	}
 
 	@Test
 	public void timesInvalid() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never().retry(-1);
-		});
+		assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never().retry(-1);
+				});
 	}
 
 	@Test

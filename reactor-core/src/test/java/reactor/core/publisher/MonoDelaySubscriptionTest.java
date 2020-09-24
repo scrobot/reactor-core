@@ -23,22 +23,24 @@ import org.reactivestreams.Publisher;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoDelaySubscriptionTest {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoDelaySubscription<>(null, Mono.never());
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoDelaySubscription<>(null, Mono.never());
+				});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.never().delaySubscription((Publisher<?>) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.never().delaySubscription((Publisher<?>) null);
+				});
 	}
 
 	@Test

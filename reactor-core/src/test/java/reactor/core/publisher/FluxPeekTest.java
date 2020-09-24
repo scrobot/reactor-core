@@ -38,8 +38,14 @@ import reactor.util.concurrent.Queues;
 
 import static java.lang.Thread.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static reactor.core.scheduler.Schedulers.parallel;
 
 public class FluxPeekTest extends FluxOperatorTest<String, String> {
@@ -260,9 +266,10 @@ public class FluxPeekTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void nullSource() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxPeek<>(null, null, null, null, null, null, null, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxPeek<>(null, null, null, null, null, null, null, null);
+				});
 	}
 
 	@Test

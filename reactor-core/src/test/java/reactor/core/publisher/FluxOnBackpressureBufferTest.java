@@ -45,9 +45,10 @@ public class FluxOnBackpressureBufferTest
 
 	@Test
 	public void failNegativeHistory() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never().onBackpressureBuffer(-1);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never().onBackpressureBuffer(-1);
+				});
 	}
 
 	@Override

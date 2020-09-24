@@ -19,18 +19,19 @@ package reactor.core.publisher;
 import org.junit.jupiter.api.Test;
 import reactor.test.StepVerifier;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MonoRepeatPredicateTest {
 
 	//these tests essentially cover the API and its escape hatches
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.never()
-					.repeat(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.never()
+							.repeat(null);
+				});
 	}
 
 	@Test

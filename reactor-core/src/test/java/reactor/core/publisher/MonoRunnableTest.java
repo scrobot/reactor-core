@@ -26,21 +26,21 @@ import org.assertj.core.data.Offset;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
-
 import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoRunnableTest {
 
 	@Test
 	public void nullValue() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoRunnable<>(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoRunnable<>(null);
+				});
 	}
 
 	@Test

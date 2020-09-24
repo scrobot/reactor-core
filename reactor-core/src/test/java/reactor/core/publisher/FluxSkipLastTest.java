@@ -54,17 +54,19 @@ public class FluxSkipLastTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxSkipLast<>(null, 1);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxSkipLast<>(null, 1);
+				});
 	}
 
 	@Test
 	public void negativeNumber() {
-		assertThrows(IllegalArgumentException.class, () -> {
-			Flux.never()
-					.skipLast(-1);
-		});
+		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+				.isThrownBy(() -> {
+					Flux.never()
+							.skipLast(-1);
+				});
 	}
 
 	@Test

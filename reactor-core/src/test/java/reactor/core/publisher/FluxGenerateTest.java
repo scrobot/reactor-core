@@ -30,31 +30,34 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxGenerateTest {
 
 	@Test
 	public void stateSupplierNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.generate(null, (s, o) -> s, s -> {
-			});
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.generate(null, (s, o) -> s, s -> {
+					});
+				});
 	}
 
 	@Test
 	public void generatorNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.generate(() -> 1, null, s -> {
-			});
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.generate(() -> 1, null, s -> {
+					});
+				});
 	}
 
 	@Test
 	public void stateConsumerNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.generate(() -> 1, (s, o) -> s, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.generate(() -> 1, (s, o) -> s, null);
+				});
 	}
 
 	@Test

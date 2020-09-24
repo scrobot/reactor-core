@@ -25,22 +25,24 @@ import reactor.core.Scannable;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxFirstEmittingTest {
 
 	@Test
 	public void arrayNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.first((Publisher<Integer>[]) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.first((Publisher<Integer>[]) null);
+				});
 	}
 
 	@Test
 	public void iterableNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null);
+				});
 	}
 
 	@Test

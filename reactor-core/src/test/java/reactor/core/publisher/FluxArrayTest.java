@@ -25,15 +25,16 @@ import reactor.test.MockUtils;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxArrayTest {
 
 	@Test
 	public void arrayNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.fromArray((Integer[]) null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.fromArray((Integer[]) null);
+				});
 	}
 
 	@Test

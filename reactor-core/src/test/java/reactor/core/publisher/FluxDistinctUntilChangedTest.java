@@ -41,8 +41,8 @@ import reactor.test.publisher.FluxOperatorTest;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.awaitility.Awaitility.await;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxDistinctUntilChangedTest extends FluxOperatorTest<String, String> {
 
@@ -67,23 +67,26 @@ public class FluxDistinctUntilChangedTest extends FluxOperatorTest<String, Strin
 
 	@Test
 	public void sourceNull() {
-		assertThrows(NullPointerException.class, () -> {
-			new FluxDistinctUntilChanged<>(null, v -> v, (k1, k2) -> true);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new FluxDistinctUntilChanged<>(null, v -> v, (k1, k2) -> true);
+				});
 	}
 
 	@Test
 	public void keyExtractorNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().distinctUntilChanged(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().distinctUntilChanged(null);
+				});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThrows(NullPointerException.class, () -> {
-			Flux.never().distinctUntilChanged(v -> v, null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Flux.never().distinctUntilChanged(v -> v, null);
+				});
 	}
 
 	@Test

@@ -25,15 +25,16 @@ import reactor.test.StepVerifier;
 import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class MonoJustTest {
 
     @Test
     public void nullValue() {
-		assertThrows(NullPointerException.class, () -> {
-			new MonoJust<Integer>(null);
-		});
+		assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					new MonoJust<Integer>(null);
+				});
 	}
 
     @Test

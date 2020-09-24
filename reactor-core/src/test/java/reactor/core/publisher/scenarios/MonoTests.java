@@ -137,9 +137,10 @@ public class MonoTests {
 
 	@Test
 	public void testDoOnEachSignalNullConsumer() {
-		assertThrows(NullPointerException.class, () -> {
-			Mono.just(1).doOnEach(null);
-		});
+		Assertions.assertThatExceptionOfType(NullPointerException.class)
+				.isThrownBy(() -> {
+					Mono.just(1).doOnEach(null);
+				});
 	}
 
 	@Test
