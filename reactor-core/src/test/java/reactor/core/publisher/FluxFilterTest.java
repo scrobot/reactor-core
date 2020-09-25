@@ -75,19 +75,17 @@ public class FluxFilterTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxFilter<Integer>(null, e -> true);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxFilter<Integer>(null, e -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.filter(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.filter(null);
+		});
 	}
 
 	@Test

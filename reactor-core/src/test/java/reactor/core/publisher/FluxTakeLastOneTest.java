@@ -44,12 +44,11 @@ public class FluxTakeLastOneTest {
 
 	@Test
 	public void illegal() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					StepVerifier.create(Flux.empty()
-							.takeLast(-1))
-							.verifyComplete();
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			StepVerifier.create(Flux.empty()
+					.takeLast(-1))
+					.verifyComplete();
+		});
 	}
 
 	@Test

@@ -30,11 +30,10 @@ public class FluxRepeatTest {
 
 	@Test
 	public void timesInvalid() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.repeat(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never()
+					.repeat(-1);
+		});
 	}
 
 	@Test

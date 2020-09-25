@@ -92,28 +92,25 @@ public class FluxUsingTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void resourceSupplierNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.using(null, r -> Flux.empty(), r -> {
-					}, false);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.using(null, r -> Flux.empty(), r -> {
+			}, false);
+		});
 	}
 
 	@Test
 	public void sourceFactoryNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.using(() -> 1, null, r -> {
-					}, false);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.using(() -> 1, null, r -> {
+			}, false);
+		});
 	}
 
 	@Test
 	public void resourceCleanupNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.using(() -> 1, r -> Flux.empty(), null, false);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.using(() -> 1, r -> Flux.empty(), null, false);
+		});
 	}
 
 	@Test

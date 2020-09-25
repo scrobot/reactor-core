@@ -603,26 +603,23 @@ public class WorkQueueProcessorTest {
 
 	@Test
 	public void failNonPowerOfTwo() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					WorkQueueProcessor.builder().name("test").bufferSize(3);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			WorkQueueProcessor.builder().name("test").bufferSize(3);
+		});
 	}
 
 	@Test
 	public void failNullBufferSize() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					WorkQueueProcessor.builder().name("test").bufferSize(0);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			WorkQueueProcessor.builder().name("test").bufferSize(0);
+		});
 	}
 
 	@Test
 	public void failNegativeBufferSize() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					WorkQueueProcessor.builder().name("test").bufferSize(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			WorkQueueProcessor.builder().name("test").bufferSize(-1);
+		});
 	}
 
 
@@ -1056,13 +1053,11 @@ public class WorkQueueProcessorTest {
 	public void customRequestTaskThreadRejectsNull() {
 		ExecutorService customTaskExecutor = null;
 
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-		          .isThrownBy(() -> new WorkQueueProcessor<>(
-				          Thread::new,
-				          Executors.newCachedThreadPool(),
-				          customTaskExecutor,
-				          8, WaitStrategy.liteBlocking(), true, true)
-		          );
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new WorkQueueProcessor<>(
+				Thread::new,
+				Executors.newCachedThreadPool(),
+				customTaskExecutor,
+				8, WaitStrategy.liteBlocking(), true, true));
 	}
 
 	@Test

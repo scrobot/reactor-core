@@ -185,11 +185,10 @@ public class FluxPublishOnTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void failPrefetch() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.range(1, 10)
-							.publishOn(Schedulers.immediate(), -1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.range(1, 10)
+					.publishOn(Schedulers.immediate(), -1);
+		});
 	}
 
 	@Test

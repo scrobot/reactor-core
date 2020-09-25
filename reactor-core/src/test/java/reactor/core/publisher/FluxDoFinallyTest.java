@@ -322,10 +322,9 @@ public class FluxDoFinallyTest implements Consumer<SignalType> {
 
 	@Test
 	public void nullCallback() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.just(1).doFinally(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.just(1).doFinally(null);
+		});
 	}
 
 	@Test

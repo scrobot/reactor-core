@@ -48,10 +48,9 @@ public class FluxIterableTest {
 
 	@Test
 	public void nullIterable() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().zipWithIterable(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().zipWithIterable(null);
+		});
 	}
 
 	@Test

@@ -31,18 +31,16 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class MonoSingleTest {
 	@Test
 	public void source1Null() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoSingle<>(null, 1, false);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoSingle<>(null, 1, false);
+		});
 	}
 
 	@Test
 	public void defaultSupplierNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().single(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().single(null);
+		});
 	}
 
 

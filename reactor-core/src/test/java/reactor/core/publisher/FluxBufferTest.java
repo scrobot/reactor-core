@@ -99,34 +99,30 @@ public class FluxBufferTest extends FluxOperatorTest<String, List<String>> {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxBuffer<>(null, 1, ArrayList::new);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxBuffer<>(null, 1, ArrayList::new);
+		});
 	}
 
 	@Test
 	public void supplierNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().buffer(1, 1, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().buffer(1, 1, null);
+		});
 	}
 
 	@Test
 	public void sizeZero() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never().buffer(0, 1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never().buffer(0, 1);
+		});
 	}
 
 	@Test
 	public void skipZero() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never().buffer(1, 0);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never().buffer(1, 0);
+		});
 	}
 
 	@Test

@@ -29,18 +29,16 @@ public class MonoFilterTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoFilter<Integer>(null, e -> true);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoFilter<Integer>(null, e -> true);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.never().filter(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Mono.never().filter(null);
+		});
 	}
 
 	@Test

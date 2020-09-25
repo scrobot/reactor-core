@@ -67,26 +67,23 @@ public class FluxDistinctUntilChangedTest extends FluxOperatorTest<String, Strin
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxDistinctUntilChanged<>(null, v -> v, (k1, k2) -> true);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxDistinctUntilChanged<>(null, v -> v, (k1, k2) -> true);
+		});
 	}
 
 	@Test
 	public void keyExtractorNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().distinctUntilChanged(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().distinctUntilChanged(null);
+		});
 	}
 
 	@Test
 	public void predicateNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().distinctUntilChanged(v -> v, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().distinctUntilChanged(v -> v, null);
+		});
 	}
 
 	@Test

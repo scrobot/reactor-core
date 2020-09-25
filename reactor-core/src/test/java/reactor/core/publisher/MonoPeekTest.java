@@ -151,11 +151,10 @@ public class MonoPeekTest {
 	@Test
 	public void onMonoSuccessNullDoOnSuccess() {
 		Mono<String> mp = Mono.just("test");
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					mp.doOnSuccess(null)
-							.subscribe();
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			mp.doOnSuccess(null)
+					.subscribe();
+		});
 	}
 
 	@Test

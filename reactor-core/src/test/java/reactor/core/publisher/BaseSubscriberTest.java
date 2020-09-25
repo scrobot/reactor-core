@@ -142,30 +142,29 @@ public class BaseSubscriberTest {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicReference<SignalType> checkFinally = new AtomicReference<>();
 
-		assertThatExceptionOfType(OutOfMemoryError.class)
-				.isThrownBy(() -> {
-					flux.subscribe(new BaseSubscriber<String>() {
-						@Override
-						protected void hookOnSubscribe(Subscription subscription) {
-							throw new OutOfMemoryError("boom");
-						}
+		assertThatExceptionOfType(OutOfMemoryError.class).isThrownBy(() -> {
+			flux.subscribe(new BaseSubscriber<String>() {
+				@Override
+				protected void hookOnSubscribe(Subscription subscription) {
+					throw new OutOfMemoryError("boom");
+				}
 
-						@Override
-						protected void hookOnNext(String value) {
-							//NO-OP
-						}
+				@Override
+				protected void hookOnNext(String value) {
+					//NO-OP
+				}
 
-						@Override
-						protected void hookOnError(Throwable throwable) {
-							error.set(throwable);
-						}
+				@Override
+				protected void hookOnError(Throwable throwable) {
+					error.set(throwable);
+				}
 
-						@Override
-						protected void hookFinally(SignalType type) {
-							checkFinally.set(type);
-						}
-					});
-				});
+				@Override
+				protected void hookFinally(SignalType type) {
+					checkFinally.set(type);
+				}
+			});
+		});
 		Assertions.assertThat(checkFinally.get()).isNull();
 		Assertions.assertThat(error.get()).isNull();
 	}

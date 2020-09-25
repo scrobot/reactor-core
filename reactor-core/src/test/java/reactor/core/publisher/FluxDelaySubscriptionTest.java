@@ -33,18 +33,16 @@ public class FluxDelaySubscriptionTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxDelaySubscription<>(null, Flux.never());
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxDelaySubscription<>(null, Flux.never());
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().delaySubscription((Publisher<?>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().delaySubscription((Publisher<?>) null);
+		});
 	}
 
 	@Test

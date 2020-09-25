@@ -26,18 +26,16 @@ public class MonoDefaultIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoDefaultIfEmpty<>(null, 1);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoDefaultIfEmpty<>(null, 1);
+		});
 	}
 
 	@Test
 	public void valueNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.never().defaultIfEmpty(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Mono.never().defaultIfEmpty(null);
+		});
 	}
 
 	@Test

@@ -29,10 +29,9 @@ public class MonoCountTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoCount<>(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoCount<>(null);
+		});
 	}
 
 	public void normal() {

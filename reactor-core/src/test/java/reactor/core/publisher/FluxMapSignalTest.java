@@ -33,10 +33,9 @@ public class FluxMapSignalTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void allNull() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never().flatMap(null, null, null);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never().flatMap(null, null, null);
+		});
 	}
 
 	@Override

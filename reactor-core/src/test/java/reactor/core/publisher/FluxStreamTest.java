@@ -37,19 +37,17 @@ public class FluxStreamTest {
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	public void nullStream() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.fromStream((Stream<?>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.fromStream((Stream<?>) null);
+		});
 	}
 
 	@SuppressWarnings("ConstantConditions")
 	@Test
 	public void nullSupplier() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.fromStream((Supplier<Stream<?>>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.fromStream((Supplier<Stream<?>>) null);
+		});
 	}
 
 	@Test

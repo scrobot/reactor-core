@@ -31,18 +31,16 @@ public class FluxFirstEmittingTest {
 
 	@Test
 	public void arrayNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.first((Publisher<Integer>[]) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.first((Publisher<Integer>[]) null);
+		});
 	}
 
 	@Test
 	public void iterableNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxFirstEmitting<>((Iterable<Publisher<Integer>>) null);
+		});
 	}
 
 	@Test

@@ -44,18 +44,16 @@ public class MonoMapTest extends MonoOperatorTest<String, String> {
 
 	@Test
 	public void nullSource() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoMap<Integer, Integer>(null, v -> v);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoMap<Integer, Integer>(null, v -> v);
+		});
 	}
 
 	@Test
 	public void nullMapper() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					just.map(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			just.map(null);
+		});
 	}
 
 	@Test

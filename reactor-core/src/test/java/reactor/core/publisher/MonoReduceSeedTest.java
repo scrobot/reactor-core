@@ -58,28 +58,25 @@ public class MonoReduceSeedTest extends ReduceOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoReduceSeed<>(null, () -> 1, (a, b) -> (Integer) b);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoReduceSeed<>(null, () -> 1, (a, b) -> (Integer) b);
+		});
 	}
 
 	@Test
 	public void supplierNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.reduceWith(null, (a, b) -> b);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.reduceWith(null, (a, b) -> b);
+		});
 	}
 
 	@Test
 	public void accumulatorNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.reduceWith(() -> 1, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.reduceWith(() -> 1, null);
+		});
 	}
 
 	@Test

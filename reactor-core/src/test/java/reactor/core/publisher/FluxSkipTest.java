@@ -53,18 +53,16 @@ public class FluxSkipTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxSkip<>(null, 1);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxSkip<>(null, 1);
+		});
 	}
 
 	@Test
 	public void skipInvalid() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never().skip(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never().skip(-1);
+		});
 	}
 
 	@Test

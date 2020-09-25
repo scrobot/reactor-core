@@ -226,34 +226,30 @@ public class EmitterProcessorTest {
 
 	@Test
 	public void onNextNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create().onNext(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			EmitterProcessor.create().onNext(null);
+		});
 	}
 
 	@Test
 	public void onErrorNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create().onError(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			EmitterProcessor.create().onError(null);
+		});
 	}
 
 	@Test
 	public void onSubscribeNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create().onSubscribe(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			EmitterProcessor.create().onSubscribe(null);
+		});
 	}
 
 	@Test
 	public void subscribeNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create().subscribe((Subscriber<Object>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			EmitterProcessor.create().subscribe((Subscriber<Object>) null);
+		});
 	}
 
 	@Test
@@ -395,26 +391,23 @@ public class EmitterProcessorTest {
 
 	@Test
 	public void failNullBufferSize() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create(0);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			EmitterProcessor.create(0);
+		});
 	}
 
 	@Test
 	public void failNullNext() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create().onNext(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			EmitterProcessor.create().onNext(null);
+		});
 	}
 
 	@Test
 	public void failNullError() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create().onError(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			EmitterProcessor.create().onError(null);
+		});
 	}
 
 	@Test
@@ -455,10 +448,9 @@ public class EmitterProcessorTest {
 
 	@Test
 	public void failNegativeBufferSize() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					EmitterProcessor.create(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			EmitterProcessor.create(-1);
+		});
 	}
 
 	static final List<String> DATA     = new ArrayList<>();

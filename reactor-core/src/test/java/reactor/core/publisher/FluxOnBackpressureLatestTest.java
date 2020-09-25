@@ -30,10 +30,9 @@ public class FluxOnBackpressureLatestTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxOnBackpressureLatest<>(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxOnBackpressureLatest<>(null);
+		});
 	}
 
 	@Test

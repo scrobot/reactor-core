@@ -24,41 +24,36 @@ import reactor.test.subscriber.AssertSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 public class DirectProcessorTest {
 
 	@Test
 	public void onNextNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					DirectProcessor.create().onNext(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			DirectProcessor.create().onNext(null);
+		});
 	}
 
 	@Test
 	public void onErrorNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					DirectProcessor.create().onError(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			DirectProcessor.create().onError(null);
+		});
 	}
 
 	@Test
 	public void onSubscribeNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					DirectProcessor.create().onSubscribe(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			DirectProcessor.create().onSubscribe(null);
+		});
 	}
 
 	@Test
 	public void subscribeNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					DirectProcessor.create().subscribe((Subscriber<Object>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			DirectProcessor.create().subscribe((Subscriber<Object>) null);
+		});
 	}
 
 	@Test

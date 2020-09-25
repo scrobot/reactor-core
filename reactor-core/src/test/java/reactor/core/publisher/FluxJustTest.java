@@ -32,10 +32,9 @@ public class FluxJustTest {
 
     @Test
     public void nullValue() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.just((Integer) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.just((Integer) null);
+		});
 	}
 
     @Test

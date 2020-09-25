@@ -29,18 +29,16 @@ public class FluxRetryTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxRetry<>(null, 1);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxRetry<>(null, 1);
+		});
 	}
 
 	@Test
 	public void timesInvalid() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never().retry(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never().retry(-1);
+		});
 	}
 
 	@Test

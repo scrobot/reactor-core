@@ -328,12 +328,11 @@ public class ParallelFluxTest {
 
 	@Test
 	public void testDoOnEachSignalNullConsumer() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.just(1)
-							.parallel()
-							.doOnEach(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.just(1)
+					.parallel()
+					.doOnEach(null);
+		});
 	}
 
 	@Test

@@ -31,10 +31,9 @@ public class MonoJustTest {
 
     @Test
     public void nullValue() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoJust<Integer>(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoJust<Integer>(null);
+		});
 	}
 
     @Test

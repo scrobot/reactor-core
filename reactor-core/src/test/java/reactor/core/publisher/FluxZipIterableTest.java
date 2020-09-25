@@ -105,28 +105,25 @@ public class FluxZipIterableTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxZipIterable<>(null, Collections.emptyList(), (a, b) -> a);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxZipIterable<>(null, Collections.emptyList(), (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void iterableNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.zipWithIterable(null, (a, b) -> a);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.zipWithIterable(null, (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void zipperNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.zipWithIterable(Collections.emptyList(), null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.zipWithIterable(Collections.emptyList(), null);
+		});
 	}
 
 	@Test

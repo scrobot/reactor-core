@@ -34,18 +34,16 @@ public class FluxSampleTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxSample<>(null, Flux.never());
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxSample<>(null, Flux.never());
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().sample((Publisher<Object>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().sample((Publisher<Object>) null);
+		});
 	}
 
 	void sample(boolean complete, boolean which) {

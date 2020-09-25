@@ -30,42 +30,37 @@ public class MonoElementAtTest {
 
 	@Test
 	public void source1Null() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoElementAt<>(null, 1);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoElementAt<>(null, 1);
+		});
 	}
 
 	@Test
 	public void source2Null() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoElementAt<>(null, 1, 1);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoElementAt<>(null, 1, 1);
+		});
 	}
 
 	@Test
 	public void defaultSupplierNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().elementAt(1, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().elementAt(1, null);
+		});
 	}
 
 	@Test
 	public void indexNegative1() {
-		assertThatExceptionOfType(IndexOutOfBoundsException.class)
-				.isThrownBy(() -> {
-					Flux.never().elementAt(-1);
-				});
+		assertThatExceptionOfType(IndexOutOfBoundsException.class).isThrownBy(() -> {
+			Flux.never().elementAt(-1);
+		});
 	}
 
 	@Test
 	public void indexNegative2() {
-		assertThatExceptionOfType(IndexOutOfBoundsException.class)
-				.isThrownBy(() -> {
-					Flux.never().elementAt(-1, 1);
-				});
+		assertThatExceptionOfType(IndexOutOfBoundsException.class).isThrownBy(() -> {
+			Flux.never().elementAt(-1, 1);
+		});
 	}
 
 	@Test

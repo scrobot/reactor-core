@@ -28,10 +28,9 @@ public class FluxConcatIterableTest {
 
 	@Test
 	public void arrayNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.concat((Iterable<? extends Publisher<?>>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.concat((Iterable<? extends Publisher<?>>) null);
+		});
 	}
 
 	final Publisher<Integer> source = Flux.range(1, 3);

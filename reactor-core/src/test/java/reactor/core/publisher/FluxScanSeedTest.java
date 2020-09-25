@@ -79,28 +79,25 @@ public class FluxScanSeedTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void sourceNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxScanSeed<>(null, () -> 1, (a, b) -> a);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxScanSeed<>(null, () -> 1, (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void initialValueNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.scan(null, (a, b) -> a);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.scan(null, (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void accumulatorNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.scan(1, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.scan(1, null);
+		});
 	}
 
 	@Test

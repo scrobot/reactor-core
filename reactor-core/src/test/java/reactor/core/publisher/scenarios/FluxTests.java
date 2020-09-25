@@ -283,10 +283,9 @@ public class FluxTests extends AbstractReactorTest {
 
 	@Test
 	public void testDoOnEachSignalNullConsumer() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.just(1).doOnEach(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.just(1).doOnEach(null);
+		});
 	}
 
 	@Test

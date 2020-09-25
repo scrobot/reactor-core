@@ -58,11 +58,10 @@ public class FluxPublishTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void failPrefetch() {
-		assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.publish(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never()
+					.publish(-1);
+		});
 	}
 
 	@Test

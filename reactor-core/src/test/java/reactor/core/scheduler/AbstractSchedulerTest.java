@@ -257,7 +257,8 @@ public abstract class AbstractSchedulerTest {
 
 			if (!shouldCheckDirectTimeScheduling()) {
 				assertThatExceptionOfType(RejectedExecutionException.class)
-						.isThrownBy(() -> s.schedule(() -> { }, 10, TimeUnit.MILLISECONDS))
+						.isThrownBy(() -> s.schedule(() -> {
+						}, 10, TimeUnit.MILLISECONDS))
 						.as("Scheduler marked as not supporting time scheduling")
 						.isSameAs(Exceptions.failWithRejectedNotTimeCapable());
 				return;
@@ -286,8 +287,8 @@ public abstract class AbstractSchedulerTest {
 			s.dispose();
 			assertThat(s.isDisposed()).isTrue();
 
-			assertThatExceptionOfType(RejectedExecutionException.class)
-					.isThrownBy(() -> s.schedule(() -> { }));
+			assertThatExceptionOfType(RejectedExecutionException.class).isThrownBy(() -> s.schedule(() -> {
+			}));
 		}
 		finally {
 			s.dispose();
@@ -354,7 +355,8 @@ public abstract class AbstractSchedulerTest {
 
 			if (!shouldCheckDirectTimeScheduling()) {
 				assertThatExceptionOfType(RejectedExecutionException.class)
-						.isThrownBy(() -> s.schedule(() -> { }, 10, TimeUnit.MILLISECONDS))
+						.isThrownBy(() -> s.schedule(() -> {
+						}, 10, TimeUnit.MILLISECONDS))
 						.as("Scheduler marked as not supporting time scheduling")
 						.isSameAs(Exceptions.failWithRejectedNotTimeCapable());
 				return;
@@ -386,8 +388,8 @@ public abstract class AbstractSchedulerTest {
 			s.dispose();
 			assertThat(s.isDisposed()).isTrue();
 
-			assertThatExceptionOfType(RejectedExecutionException.class)
-					.isThrownBy(() -> s.schedule(() -> { }));
+			assertThatExceptionOfType(RejectedExecutionException.class).isThrownBy(() -> s.schedule(() -> {
+			}));
 		}
 		finally {
 			s.dispose();

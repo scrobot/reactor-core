@@ -34,10 +34,9 @@ public class FluxConcatArrayTest {
 
 	@Test
 	public void arrayNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.concat((Publisher<Object>[]) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.concat((Publisher<Object>[]) null);
+		});
 	}
 
 	final Publisher<Integer> source = Flux.range(1, 3);

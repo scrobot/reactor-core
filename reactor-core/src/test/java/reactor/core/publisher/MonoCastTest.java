@@ -25,18 +25,16 @@ public class MonoCastTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.just(1).cast(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Mono.just(1).cast(null);
+		});
 	}
 
 	@Test
 	public void sourceNull2() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.just(1).ofType(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Mono.just(1).ofType(null);
+		});
 	}
 
 	@Test

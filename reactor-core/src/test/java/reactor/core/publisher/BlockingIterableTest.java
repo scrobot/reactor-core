@@ -85,12 +85,11 @@ public class BlockingIterableTest {
 	public void error() {
 		List<Integer> values = new ArrayList<>();
 
-		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> {
-					for (Integer i : Flux.<Integer>error(new RuntimeException("forced failure")).toIterable()) {
-						values.add(i);
-					}
-				});
+		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+			for (Integer i : Flux.<Integer>error(new RuntimeException("forced failure")).toIterable()) {
+				values.add(i);
+			}
+		});
 
 		Assert.assertEquals(Collections.emptyList(), values);
 	}

@@ -28,10 +28,9 @@ public class FluxDeferTest {
 
 	@Test
 	public void supplierNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.<Integer>defer(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.<Integer>defer(null);
+		});
 	}
 
 	@Test

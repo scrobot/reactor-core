@@ -81,22 +81,21 @@ public class MonoProcessorTest {
 
 		future.completeExceptionally(new IllegalStateException());
 
-		assertThatExceptionOfType(IllegalStateException.class)
-				.isThrownBy(data::block);
+		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(data::block);
 
 		future = null;
 		source = null;
 		System.gc();
 
 		int cycles;
-		for (cycles = 10; cycles > 0 ; cycles--) {
+		for (cycles = 10; cycles > 0; cycles--) {
 			if (refFuture.get() == null) break;
 			Thread.sleep(100);
 		}
 
 		assertThat(refFuture.get()).isNull();
 		assertThat(cycles).isNotZero()
-		                  .isPositive();
+				.isPositive();
 	}
 
 	@Test
@@ -128,11 +127,10 @@ public class MonoProcessorTest {
 
 	@Test
 	public void MonoProcessorResultNotAvailable() {
-		Assertions.assertThatExceptionOfType(IllegalStateException.class)
-				.isThrownBy(() -> {
-					MonoProcessor<String> mp = MonoProcessor.create();
-					mp.block(Duration.ofMillis(1));
-				});
+		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> {
+			MonoProcessor<String> mp = MonoProcessor.create();
+			mp.block(Duration.ofMillis(1));
+		});
 	}
 
 	@Test
@@ -230,10 +228,9 @@ public class MonoProcessorTest {
 	public void MonoProcessorRejectedSubscribeCallbackNull() {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					mp.subscribe((Subscriber<String>) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			mp.subscribe((Subscriber<String>) null);
+		});
 	}
 
 	@Test
@@ -356,10 +353,9 @@ public class MonoProcessorTest {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
 		mp.onError(new Exception("test"));
-		Assertions.assertThatExceptionOfType(Exception.class)
-				.isThrownBy(() -> {
-					mp.onError(new Exception("test"));
-				});
+		assertThatExceptionOfType(Exception.class).isThrownBy(() -> {
+			mp.onError(new Exception("test"));
+		});
 	}
 
 	@Test
@@ -367,10 +363,9 @@ public class MonoProcessorTest {
 		MonoProcessor<String> mp = MonoProcessor.create();
 
 		mp.onNext("test");
-		Assertions.assertThatExceptionOfType(Exception.class)
-				.isThrownBy(() -> {
-					mp.onError(new Exception("test"));
-				});
+		assertThatExceptionOfType(Exception.class).isThrownBy(() -> {
+			mp.onError(new Exception("test"));
+		});
 	}
 
 	@Test

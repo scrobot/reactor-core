@@ -29,18 +29,16 @@ public class FluxDefaultIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxDefaultIfEmpty<>(null, 1);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxDefaultIfEmpty<>(null, 1);
+		});
 	}
 
 	@Test
 	public void valueNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().defaultIfEmpty(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().defaultIfEmpty(null);
+		});
 	}
 
 	@Test

@@ -32,19 +32,17 @@ public class FluxTakeUntilOtherTest {
 
 	@Test
 	public void nullSource() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxTakeUntilOther<>(null, Flux.never());
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxTakeUntilOther<>(null, Flux.never());
+		});
 	}
 
 	@Test
 	public void nullOther() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.takeUntilOther(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.takeUntilOther(null);
+		});
 	}
 
 	@Test

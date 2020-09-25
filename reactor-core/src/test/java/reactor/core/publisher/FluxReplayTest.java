@@ -66,20 +66,18 @@ public class FluxReplayTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void failPrefetch() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.replay(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never()
+					.replay(-1);
+		});
 	}
 
 	@Test
 	public void failTime() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.replay(Duration.ofDays(-1));
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.never()
+					.replay(Duration.ofDays(-1));
+		});
 	}
 
 	VirtualTimeScheduler vts;

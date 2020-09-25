@@ -73,19 +73,17 @@ public class FluxSkipUntilOtherTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void nullSource() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxSkipUntilOther<>(null, Flux.never());
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxSkipUntilOther<>(null, Flux.never());
+		});
 	}
 
 	@Test
 	public void nullOther() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.skipUntilOther(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.skipUntilOther(null);
+		});
 	}
 
 	@Test

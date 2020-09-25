@@ -31,10 +31,9 @@ public class FluxArrayTest {
 
 	@Test
 	public void arrayNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.fromArray((Integer[]) null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.fromArray((Integer[]) null);
+		});
 	}
 
 	@Test

@@ -34,11 +34,10 @@ public class MonoCallableTest {
 
     @Test
     public void nullCallable() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.<Integer>fromCallable(null);
-				});
-	}
+        assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+            Mono.<Integer>fromCallable(null);
+        });
+    }
 
     @Test
     public void callableReturnsNull() {
@@ -118,13 +117,12 @@ public class MonoCallableTest {
 
     @Test
     public void onMonoErrorCallableOnBlock() {
-		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> {
-					Mono.fromCallable(() -> {
-						throw new Exception("test");
-					}).block();
-				});
-	}
+        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+            Mono.fromCallable(() -> {
+                throw new Exception("test");
+            }).block();
+        });
+    }
 
     @Test
     public void delegateCall() throws Exception {

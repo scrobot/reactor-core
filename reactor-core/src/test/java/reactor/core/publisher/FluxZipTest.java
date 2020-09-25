@@ -611,18 +611,16 @@ public class FluxZipTest extends FluxOperatorTest<String, String> {
 
 	@Test
 	public void failPrefetch() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.zip(obj -> 0, -1, Flux.just(1), Flux.just(2));
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.zip(obj -> 0, -1, Flux.just(1), Flux.just(2));
+		});
 	}
 
 	@Test
 	public void failPrefetchIterable() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Flux.zip(Arrays.asList(Flux.just(1), Flux.just(2)), -1, obj -> 0);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Flux.zip(Arrays.asList(Flux.just(1), Flux.just(2)), -1, obj -> 0);
+		});
 	}
 
 	@Test

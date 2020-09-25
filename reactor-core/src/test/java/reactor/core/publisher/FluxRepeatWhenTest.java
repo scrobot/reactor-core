@@ -40,11 +40,10 @@ public class FluxRepeatWhenTest {
 
 	@Test
 	public void whenFactoryNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.repeatWhen(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.repeatWhen(null);
+		});
 	}
 
 	@Test

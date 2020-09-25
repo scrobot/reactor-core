@@ -36,28 +36,25 @@ public class FluxGenerateTest {
 
 	@Test
 	public void stateSupplierNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.generate(null, (s, o) -> s, s -> {
-					});
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.generate(null, (s, o) -> s, s -> {
+			});
+		});
 	}
 
 	@Test
 	public void generatorNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.generate(() -> 1, null, s -> {
-					});
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.generate(() -> 1, null, s -> {
+			});
+		});
 	}
 
 	@Test
 	public void stateConsumerNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.generate(() -> 1, (s, o) -> s, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.generate(() -> 1, (s, o) -> s, null);
+		});
 	}
 
 	@Test

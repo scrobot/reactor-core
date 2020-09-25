@@ -277,26 +277,23 @@ public class TopicProcessorTest {
 
 	@Test
 	public void failNullBufferSize() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					TopicProcessor.builder().name("test").bufferSize(0);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			TopicProcessor.builder().name("test").bufferSize(0);
+		});
 	}
 
 	@Test
 	public void failNonPowerOfTwo() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					TopicProcessor.builder().name("test").bufferSize(3);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			TopicProcessor.builder().name("test").bufferSize(3);
+		});
 	}
 
 	@Test
 	public void failNegativeBufferSize() {
-		Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					TopicProcessor.builder().name("test").bufferSize(-1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			TopicProcessor.builder().name("test").bufferSize(-1);
+		});
 	}
 
 	//see https://github.com/reactor/reactor-core/issues/445
@@ -444,13 +441,11 @@ public class TopicProcessorTest {
 	public void customRequestTaskThreadRejectsNull() {
 		ExecutorService customTaskExecutor = null;
 
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-		          .isThrownBy(() -> new TopicProcessor<>(
-				          Thread::new,
-				          Executors.newCachedThreadPool(),
-				          customTaskExecutor,
-				          8, WaitStrategy.liteBlocking(), true, true, Object::new)
-		          );
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new TopicProcessor<>(
+				Thread::new,
+				Executors.newCachedThreadPool(),
+				customTaskExecutor,
+				8, WaitStrategy.liteBlocking(), true, true, Object::new));
 	}
 
 

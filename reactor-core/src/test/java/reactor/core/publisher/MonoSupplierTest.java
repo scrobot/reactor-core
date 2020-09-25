@@ -92,11 +92,10 @@ public class MonoSupplierTest {
 
 	@Test
 	public void onMonoErrorSupplierOnBlock() {
-		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> {
-					Mono.fromSupplier(() -> {
-						throw new RuntimeException("test");
-					}).block();
-				});
+		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+			Mono.fromSupplier(() -> {
+				throw new RuntimeException("test");
+			}).block();
+		});
 	}
 }

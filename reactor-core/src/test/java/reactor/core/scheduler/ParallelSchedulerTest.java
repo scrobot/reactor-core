@@ -43,10 +43,9 @@ public class ParallelSchedulerTest extends AbstractSchedulerTest {
 
 	@Test
 	public void negativeParallelism() throws Exception {
-		org.assertj.core.api.Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Schedulers.newParallel("test", -1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Schedulers.newParallel("test", -1);
+		});
 	}
 
 	@Override

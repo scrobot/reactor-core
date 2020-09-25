@@ -32,28 +32,25 @@ public class FluxWithLatestFromTest {
 
 	@Test
 	public void sourceNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxWithLatestFrom<>(null, Flux.never(), (a, b) -> a);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxWithLatestFrom<>(null, Flux.never(), (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.withLatestFrom(null, (a, b) -> a);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.withLatestFrom(null, (a, b) -> a);
+		});
 	}
 
 	@Test
 	public void combinerNull() {
-		Assertions.assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.withLatestFrom(Flux.never(), null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.withLatestFrom(Flux.never(), null);
+		});
 	}
 
 	@Test

@@ -63,10 +63,9 @@ public class FluxPeekFuseableTest {
 
 	@Test
 	public void nullSource() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxPeekFuseable<>(null, null, null, null, null, null, null, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxPeekFuseable<>(null, null, null, null, null, null, null, null);
+		});
 	}
 
 	@Test

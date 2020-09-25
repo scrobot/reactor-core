@@ -43,18 +43,16 @@ public class ElasticSchedulerTest extends AbstractSchedulerTest {
 
 	@Test
 	public void unsupportedStart() {
-		org.assertj.core.api.Assertions.assertThatExceptionOfType(UnsupportedOperationException.class)
-				.isThrownBy(() -> {
-					Schedulers.elastic().start();
-				});
+		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> {
+			Schedulers.elastic().start();
+		});
 	}
 
 	@Test
 	public void negativeTime() throws Exception {
-		org.assertj.core.api.Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-				.isThrownBy(() -> {
-					Schedulers.newElastic("test", -1);
-				});
+		assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
+			Schedulers.newElastic("test", -1);
+		});
 	}
 
 	@Override

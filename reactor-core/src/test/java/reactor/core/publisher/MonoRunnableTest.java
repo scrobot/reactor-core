@@ -37,10 +37,9 @@ public class MonoRunnableTest {
 
 	@Test
 	public void nullValue() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoRunnable<>(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoRunnable<>(null);
+		});
 	}
 
 	@Test

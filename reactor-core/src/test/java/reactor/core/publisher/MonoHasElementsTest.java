@@ -34,10 +34,9 @@ public class MonoHasElementsTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoHasElements<>(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoHasElements<>(null);
+		});
 	}
 
 	@Test

@@ -24,19 +24,17 @@ public class FluxSwitchIfEmptyTest {
 
 	@Test
 	public void sourceNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxSwitchIfEmpty<>(null, Flux.never());
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxSwitchIfEmpty<>(null, Flux.never());
+		});
 	}
 
 	@Test
 	public void otherNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never()
-							.switchIfEmpty(null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never()
+					.switchIfEmpty(null);
+		});
 	}
 
 	@Test

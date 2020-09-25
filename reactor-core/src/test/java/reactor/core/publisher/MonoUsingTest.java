@@ -32,28 +32,25 @@ public class MonoUsingTest {
 
 	@Test
 	public void resourceSupplierNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.using(null, r -> Mono.empty(), r -> {
-					}, false);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Mono.using(null, r -> Mono.empty(), r -> {
+			}, false);
+		});
 	}
 
 	@Test
 	public void sourceFactoryNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.using(() -> 1, null, r -> {
-					}, false);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Mono.using(() -> 1, null, r -> {
+			}, false);
+		});
 	}
 
 	@Test
 	public void resourceCleanupNull() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Mono.using(() -> 1, r -> Mono.empty(), null, false);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Mono.using(() -> 1, r -> Mono.empty(), null, false);
+		});
 	}
 
 	@Test

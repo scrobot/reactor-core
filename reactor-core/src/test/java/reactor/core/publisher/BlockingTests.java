@@ -103,42 +103,38 @@ public class BlockingTests {
 
 	@Test
 	public void blockingFirstError() {
-		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> {
-					Flux.error(new RuntimeException("test"))
-							.publishOn(scheduler)
-							.blockFirst();
-				});
+		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+			Flux.error(new RuntimeException("test"))
+					.publishOn(scheduler)
+					.blockFirst();
+		});
 	}
 
 	@Test
 	public void blockingFirstError2() {
-		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> {
-					Flux.error(new RuntimeException("test"))
-							.publishOn(scheduler)
-							.blockFirst(Duration.ofSeconds(1));
-				});
+		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+			Flux.error(new RuntimeException("test"))
+					.publishOn(scheduler)
+					.blockFirst(Duration.ofSeconds(1));
+		});
 	}
 
 	@Test
 	public void blockingLastError() {
-		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> {
-					Flux.defer(() -> Mono.error(new RuntimeException("test")))
-							.subscribeOn(scheduler)
-							.blockLast();
-				});
+		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+			Flux.defer(() -> Mono.error(new RuntimeException("test")))
+					.subscribeOn(scheduler)
+					.blockLast();
+		});
 	}
 
 	@Test
 	public void blockingLastError2() {
-		assertThatExceptionOfType(RuntimeException.class)
-				.isThrownBy(() -> {
-					Flux.defer(() -> Mono.error(new RuntimeException("test")))
-							.subscribeOn(scheduler)
-							.blockLast(Duration.ofSeconds(1));
-				});
+		assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+			Flux.defer(() -> Mono.error(new RuntimeException("test")))
+					.subscribeOn(scheduler)
+					.blockLast(Duration.ofSeconds(1));
+		});
 	}
 
 	@Test

@@ -47,28 +47,25 @@ public class MonoCollectTest {
 
 	@Test
 	public void nullSource() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new MonoCollect<>(null, () -> 1, (a, b) -> {
-					});
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new MonoCollect<>(null, () -> 1, (a, b) -> {
+			});
+		});
 	}
 
 	@Test
 	public void nullSupplier() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().collect(null, (a, b) -> {
-					});
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().collect(null, (a, b) -> {
+			});
+		});
 	}
 
 	@Test
 	public void nullAction() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					Flux.never().collect(() -> 1, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			Flux.never().collect(() -> 1, null);
+		});
 	}
 
 	@Test

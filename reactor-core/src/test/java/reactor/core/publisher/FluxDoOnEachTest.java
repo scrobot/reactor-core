@@ -52,10 +52,9 @@ public class FluxDoOnEachTest {
 
 	@Test
 	public void nullSource() {
-		assertThatExceptionOfType(NullPointerException.class)
-				.isThrownBy(() -> {
-					new FluxDoOnEach<>(null, null);
-				});
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new FluxDoOnEach<>(null, null);
+		});
 	}
 
 	private static final String sourceErrorMessage = "boomSource";
