@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.test.StepVerifier;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;

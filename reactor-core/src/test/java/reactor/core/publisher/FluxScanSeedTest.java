@@ -23,7 +23,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Subscription;
-
 import reactor.core.CoreSubscriber;
 import reactor.core.Scannable;
 import reactor.test.publisher.FluxOperatorTest;
@@ -31,7 +30,7 @@ import reactor.test.subscriber.AssertSubscriber;
 import reactor.test.util.RaceTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class FluxScanSeedTest extends FluxOperatorTest<String, String> {
 

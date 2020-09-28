@@ -31,6 +31,7 @@ import reactor.core.Exceptions;
 import reactor.core.Scannable;
 import reactor.test.StepVerifier;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -477,7 +478,7 @@ public class FluxDoFinallyTest implements Consumer<SignalType> {
 	public void gh951_withoutDoOnError() {
 		List<String> events = new ArrayList<>();
 
-		Assertions.assertThatExceptionOfType(UnsupportedOperationException.class)
+		assertThatExceptionOfType(UnsupportedOperationException.class)
 		          .isThrownBy(Mono.just(true)
 		                          .map(this::throwError)
 		                          .doFinally(any -> events.add("doFinally " + any.toString()))

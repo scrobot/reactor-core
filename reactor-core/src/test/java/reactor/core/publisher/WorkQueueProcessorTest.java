@@ -55,6 +55,7 @@ import reactor.util.annotation.Nullable;
 import reactor.util.concurrent.Queues;
 import reactor.util.concurrent.WaitStrategy;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static reactor.util.concurrent.WaitStrategy.liteBlocking;
@@ -1053,11 +1054,13 @@ public class WorkQueueProcessorTest {
 	public void customRequestTaskThreadRejectsNull() {
 		ExecutorService customTaskExecutor = null;
 
-		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> new WorkQueueProcessor<>(
-				Thread::new,
-				Executors.newCachedThreadPool(),
-				customTaskExecutor,
-				8, WaitStrategy.liteBlocking(), true, true));
+		assertThatExceptionOfType(NullPointerException.class).isThrownBy(() -> {
+			new WorkQueueProcessor<>(
+					Thread::new,
+					Executors.newCachedThreadPool(),
+					customTaskExecutor,
+					8, WaitStrategy.liteBlocking(), true, true);
+		});
 	}
 
 	@Test

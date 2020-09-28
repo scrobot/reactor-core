@@ -40,6 +40,7 @@ import reactor.util.function.Tuple7;
 import reactor.util.function.Tuples;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxZipTest extends FluxOperatorTest<String, String> {

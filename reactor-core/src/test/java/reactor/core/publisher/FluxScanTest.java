@@ -31,6 +31,7 @@ import reactor.test.subscriber.AssertSubscriber;
 import reactor.test.util.RaceTestUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FluxScanTest extends FluxOperatorTest<String, String> {
