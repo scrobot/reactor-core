@@ -149,11 +149,11 @@ for each new subscription).
 
 On the opposite, `share()` and `replay(...)` can be used to turn a cold publisher into
 a hot one (at least once a first subscription has happened). Both of these also have
-`Sink` equivalents in the `Sinks` class, which allow programmatically
+`Sinks.Many` equivalents in the `Sinks` class, which allow programmatically
 feeding the sequence.
 
 Consider two examples, one that demonstrates a cold Flux and the other that makes use of the
-`Sink` to simulate a hot Flux. The following code shows the first example:
+`Sinks` to simulate a hot Flux. The following code shows the first example:
 
 ====
 [source,java]
