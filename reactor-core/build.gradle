@@ -139,7 +139,6 @@ task japicmp(type: JapicmpTask) {
 
 //complements the javadoc.gradle common configuration
 javadoc {
-	options.addBooleanOption('nodeprecated', true)
 	options.overview = "$rootDir/docs/api/overview.html"
 
 	doLast {
