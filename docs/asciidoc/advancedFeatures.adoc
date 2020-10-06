@@ -193,21 +193,21 @@ Compare the first example to the second example, shown in the following code:
 ====
 [source,java]
 ----
-Sink<String> hotSource = Sinks.many().multicast().onBackpressureError();
+Sinks.Many<String> hotSource = Sinks.many().unsafe().multicast().directBestEffort();
 
 Flux<String> hotFlux = hotSource.asFlux().map(String::toUpperCase);
 
-
 hotFlux.subscribe(d -> System.out.println("Subscriber 1 to Hot Source: "+d));
 
-hotSource.next("blue")
-         .next("green");
+hotSource.emitNext("blue", FAIL_FAST);
+//note: orThrow is an alternative to emitNext+Sinks.EmitFailureHandler.FAIL_FAST above, suitable for tests
+hotSource.tryEmitNext("green").orThrow();
 
 hotFlux.subscribe(d -> System.out.println("Subscriber 2 to Hot Source: "+d));
 
-hotSource.next("orange")
-         .next("purple")
-         .complete();
+hotSource.emitNext("orange", FAIL_FAST);
+hotSource.emitNext("purple", FAIL_FAST);
+hotSource.emitComplete(FAIL_FAST);
 ----
 ====
 
