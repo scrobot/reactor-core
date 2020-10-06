@@ -201,8 +201,8 @@ public final class Sinks {
 	 * A handler supporting the emit API (eg. {@link Many#emitNext(Object, EmitFailureHandler)}),
 	 * checking non-successful emission results from underlying {@link Many#tryEmitNext(Object) tryEmit}
 	 * API calls to decide whether or not such calls should be retried.
-	 * Other than instructing to retry, the handler are allowed to have side effects
-	 * like parking the current thread for longer retry loops. They don't however influence the
+	 * Other than instructing to retry, the handlers are allowed to have side effects
+	 * like parking the current thread for longer retry loops. They don't, however, influence the
 	 * exact action taken by the emit API implementations when the handler doesn't allow
 	 * the retry to occur.
 	 *
